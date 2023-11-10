@@ -1,25 +1,10 @@
+import Header from "./components/Header";
+
 function App() {
   return (
     <div>
       {/* Header */}
-      <header id="header">
-        <nav className="left">
-          <a href="#menu">
-            <span>Menu</span>
-          </a>
-        </nav>
-        <a href="index.html" className="logo">
-          Grouman
-        </a>
-        <nav className="right">
-          <a href="#" className="button alt">
-            Log in
-          </a>
-          <a href="#" className="button alt">
-            Register
-          </a>
-        </nav>
-      </header>
+      <Header />
       {/* Menu */}
       <nav id="menu">
         <ul className="links">
@@ -429,7 +414,7 @@ function App() {
               </div>
             </div>
           </div> 
-          
+
           {/* Generic */}
           <section id="main" className="wrapper"><div className="inner">
           <header className="align-center"><h1>Generic Page</h1>
