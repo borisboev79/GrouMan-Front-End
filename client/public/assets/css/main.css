@@ -2,6 +2,7 @@
 @import url(font-awesome.min.css);
 @import "https://fonts.googleapis.com/css?family=Montserrat:700|Open+Sans:300,400|Pacifico";
 
+
 /* Reset */
 
 html,
@@ -3093,8 +3094,10 @@ body {
 #banner h1 {
   font-size: 3em;
   color: #ffffff;
-  text-shadow: -1px -1px 1px rgb(17, 20, 111), 1px -1px 1px rgb(17, 20, 111),
-    -1px 1px 1px rgb(17, 20, 111), 1px 1px 1px rgb(17, 20, 111);
+  text-shadow: -1px -1px 40px rgba(0, 0, 0, 0.2),
+  				1px -1px 40px rgba(0, 0, 0, 0.2),
+			    -1px 1px 40px rgba(0, 0, 0, 0.2),
+			     1px 1px 40px rgba(0, 0, 0, 0.2);
   line-height: 1em;
   margin: 0 0 0.5em 0;
   padding: 0;

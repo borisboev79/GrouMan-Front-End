@@ -1,4 +1,6 @@
 import Header from "./components/Header";
+import Menu from "./components/Menu";
+import Banner from "./components/Banner";
 
 function App() {
   return (
@@ -6,44 +8,9 @@ function App() {
       {/* Header */}
       <Header />
       {/* Menu */}
-      <nav id="menu">
-        <ul className="links">
-          <li>
-            <a href="index.html">Home</a>
-          </li>
-          <li>
-            <a href="generic.html">Generic</a>
-          </li>
-          <li>
-            <a href="elements.html">Elements</a>
-          </li>
-        </ul>
-        <ul className="actions vertical">
-          <li>
-            <a href="#" className="button fit">
-              Login
-            </a>
-          </li>
-        </ul>
-      </nav>
+     <Menu />
       {/* Banner */}
-      <section id="banner">
-        <div className="content">
-          <h1>Cruise Group Manager</h1>
-          <p>
-            Welcome to our cruise group managing app.
-            <br />
-            You must register to add or edit groups.
-          </p>
-          <ul className="actions">
-            <li>
-              <a href="#one" className="button scrolly">
-                Show All Groups
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+     <Banner />
       {/* One */}
       <section id="one" className="wrapper">
         <div className="inner flex flex-3">
@@ -143,7 +110,7 @@ function App() {
           </div>
         </div>
       </section>
- 
+      {/* Elements */}
       <section id="main" className="wrapper"><div className="inner">
             <header className="align-center"><h1>Elements</h1>
               <p>Aliquam erat volutpat nam dui </p>
