@@ -1,4 +1,8 @@
-import styles from './One.module.css'
+import one from './One.module.css'
+import shared from './Shared.module.css'
+
+const styles = {...shared, ...one}
+
 export default function One() {
     return(
         <section className={[styles.one, styles.wrapper].join(' ')}>
@@ -14,7 +18,7 @@ export default function One() {
             </div>
           </div>
           <div className={[styles.flexItem, styles.image, styles.fit, styles.round].join(' ')}>
-            <img src="images/pic02.jpg" alt="" width={330} height={330} />
+            <img src="images/pic01.jpg" alt="" width={330} height={330} />
           </div>
           <div className={[styles.flexItem, styles.right].join(' ')}>
             <div>

@@ -26,7 +26,7 @@ function App() {
 
       {/* <Two /> */}
 
-      {/* <Miscellaneous /> */}
+      <Miscellaneous />
 
       {/* Footer */}
       <Footer />

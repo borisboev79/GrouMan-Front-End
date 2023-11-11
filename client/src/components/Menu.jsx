@@ -1,9 +1,11 @@
 import styles from "./Menu.module.css";
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 
 export default function Menu() {
   return (
     <nav className={styles.menu}>
+      
+      <Link className={styles.close} to='/' style={{color: 'white'}} ></Link>
       <ul className={styles.links}>
         <li>
           <a href="index.html">Home</a>
