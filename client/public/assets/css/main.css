@@ -2560,7 +2560,7 @@ button,
   -webkit-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
   -ms-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
   transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-  background-color: #4666f5;
+  background-color: #25a2c3;
   border-radius: 4px;
   border: 0;
   color: #ffffff;
@@ -2589,7 +2589,7 @@ input[type="reset"]:active,
 input[type="button"]:active,
 button:active,
 .button:active {
-  background-color: #4666f5;
+  background-color: #25a2c3;
 }
 
 input[type="submit"].icon,
@@ -2795,7 +2795,7 @@ button:disabled,
 }
 
 .wrapper.style1 {
-  background: #4666f5;
+  background: #25a2c3;
   color: #fcdcd6;
 }
 
