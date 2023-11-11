@@ -1,20 +1,19 @@
-import styles from './Header.module.css'
+import styles from './Navbar.module.css'
+import { Link } from 'react-router-dom'
 
-export default function Header() {
+export default function Navbar() {
     return(
         <header className={styles.header}>
         <nav className={styles.left}>
-          <a href="#menu">
-            <span>Menu</span>
-          </a>
+          <Link className={styles.menuBurger} to='/menu'></Link>  
         </nav>
         <a href="index.html" className={styles.logo}>
           Grouman
         </a>
         <nav className={styles.right}>
-          <a href="#" className={[styles.button, styles.alt].join(' ')}>
+          <Link to="/login" className={[styles.button, styles.alt].join(' ')}>
             Log in
-          </a>
+          </Link>
           <a href="#" className={[styles.button, styles.alt].join(' ')}>
             Register
           </a>

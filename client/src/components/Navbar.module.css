@@ -57,7 +57,7 @@ body {
     display: inline-block;
   }
   
-  .header nav a[href="#menu"] {
+  .header nav .menuBurger {
     text-decoration: none;
     -webkit-tap-highlight-color: transparent;
     font-size: 2em;
@@ -65,7 +65,7 @@ body {
     z-index: 10005;
   }
   
-  .header nav a[href="#menu"]:before {
+  .header nav .menuBurger:before {
     content: "";
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
@@ -75,11 +75,11 @@ body {
     text-transform: none !important;
   }
   
-  .header nav a[href="#menu"] span {
+  .header nav .menuBurger span {
     display: none;
   }
   
-  .header nav a[href="#menu"]:before {
+  .header nav .menuBurger:before {
     margin: 0 0.5em 0 0;
   }
 
@@ -208,7 +208,7 @@ button:disabled,
       text-align: center;
     }
   
-    .header nav a[href="#menu"] {
+    .header nav .menuBurger {
       font-size: 1.5em;
     }
   
