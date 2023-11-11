@@ -1,40 +1,29 @@
+import styles from './One.module.css'
 export default function One() {
     return(
-        <section id="one" className="wrapper">
-        <div className="inner flex flex-3">
-          <div className="flex-item left">
+        <section className={[styles.one, styles.wrapper].join(' ')}>
+        <div className={[styles.inner, styles.flex, styles.flex3].join(' ')}>
+          <div className={[styles.flexItem, styles.left].join(' ')}>
             <div>
-              <h3>Magna ultricies</h3>
-              <p>
-                Morbi in sem quis dui plalorem ipsum
-                <br /> euismod in, pharetra sed ultricies.
-              </p>
+              <h3>Create Groups</h3>
+              <p>Only admins can create groups. Ask your branch manager.</p>
             </div>
             <div>
-              <h3>Ipsum adipiscing lorem</h3>
-              <p>
-                Tristique yonve cursus jam nulla quam
-                <br /> loreipsu gravida adipiscing lorem
-              </p>
+              <h3>Add, Edit, Remove Passengers</h3>
+              <p>Register, so you can work with cruise groups.</p>
             </div>
           </div>
-          <div className="flex-item image fit round">
-            <img src="images/pic01.jpg" alt="" width={330} height={330} />
+          <div className={[styles.flexItem, styles.image, styles.fit, styles.round].join(' ')}>
+            <img src="images/pic02.jpg" alt="" width={330} height={330} />
           </div>
-          <div className="flex-item right">
+          <div className={[styles.flexItem, styles.right].join(' ')}>
             <div>
-              <h3>Tempus nullam</h3>
-              <p>
-                Sed adipiscing ornare risus. Morbi estes
-                <br /> blandit sit et amet, sagittis magna.
-              </p>
+              <h3>Tour Leaders</h3>
+              <p>Apply to lead a group. It's fun, it's free travel and you get paid.</p>
             </div>
             <div>
-              <h3>Suscipit nibh dolore</h3>
-              <p>
-                Pellentesque egestas sem. Suspendisse
-                <br /> modo ullamcorper feugiat lorem.
-              </p>
+              <h3>Access everywhere</h3>
+              <p>Grouman lets you work from virtually everywhere. Any mobile phone or laptop will do.</p>
             </div>
           </div>
         </div>

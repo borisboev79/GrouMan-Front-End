@@ -22,7 +22,7 @@ body {
   }
   
   .header .logo {
-    color: #5ea5f6;
+    color: #25a2c3;
     font-family: "Pacifico", cursive;
     font-size: 2.5em;
     letter-spacing: 2px;
@@ -119,39 +119,6 @@ button:active,
 .button:active {
   background-color: #4666f5;
 }
-
-
-/* button.icon,
-.button.icon {
-  padding-left: 1.35em;
-}
-
-button.icon:before,
-.button.icon:before {
-  margin-right: 0.5em;
-}
-
-
-button.fit,
-.button.fit {
-  display: block;
-  margin: 0 0 1em 0;
-  width: 100%;
-}
-
-
-button.small,
-.button.small {
-  font-size: 0.8em;
-}
-
-input[type="submit"].big,
-input[type="reset"].big,
-input[type="button"].big,
-button.big,
-.button.big {
-  font-size: 1.35em;
-} */
 
 
 button.alt,

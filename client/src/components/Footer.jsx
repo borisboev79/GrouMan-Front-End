@@ -1,10 +1,12 @@
+import styles from './Footer.module.css'
+
 export default function Footer() {
     return(
         <>
-        <footer id="footer">
-        <div className="inner">
+        <footer className={styles.footer}>
+        <div className={styles.inner}>
           <h2>Get In Touch</h2>
-          <ul className="actions">
+          <ul className={styles.actions}>
             <li>
               <span className="icon fa-phone" /> <a href="#">(000) 000-0000</a>
             </li>
@@ -19,7 +21,7 @@ export default function Footer() {
           </ul>
         </div>
       </footer>
-      <div className="copyright">
+      <div className={styles.copyright}>
         Powered by: <a href="https://templated.co/">TEMPLATED</a>.
       </div>
       </>
