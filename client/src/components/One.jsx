@@ -1,7 +1,4 @@
-import one from './One.module.css'
-import shared from './Shared.module.css'
-
-const styles = {...shared, ...one}
+import styles from './One.module.css'
 
 export default function One() {
     return(

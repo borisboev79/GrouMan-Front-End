@@ -1,6 +1,5 @@
 import Navbar from "./components/Navbar";
 import Menu from "./components/Menu";
-
 import Groups from "./components/Groups";
 import Miscellaneous from "./components/Miscellaneous";
 import One from "./components/One";

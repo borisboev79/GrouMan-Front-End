@@ -1,0 +1,34 @@
+{
+    "07f260f4-466c-4607-9a33-f7273b24f1b4": {
+      "_id": "07f260f4-466c-4607-9a33-f7273b24f1b4",
+      "groupName": "Норвежки фиорди",
+      "itinerary": "Копенхаген, Ставангер, Берген, Осло",
+      "duration": "7",
+      "priceFrom": "1199",
+      "startDate": "2024-07-07T07:22:00.358Z",
+      "endDate": "2024-07-14T07:22:00.358Z",
+      "imageUrl": "https://crusit.bg/assets/upload/6/58035/455x300_oferta-kruiz-pateshestvie-do-kraya-na-evropa.jpg"
+    
+    },
+    "bdabf5e9-23be-40a1-9f14-9117b6702a9d": {
+      "_id": "bdabf5e9-23be-40a1-9f14-9117b6702a9d",
+      "groupName": "Красотата на Персийския залив",
+      "itinerary": "Дубай, Абу Даби, Доха, Бахрейн",
+      "duration": "5",
+      "priceFrom": "749",
+      "startDate": "2024-02-02T07:22:00.358Z",
+      "endDate": "2024-02-07T07:22:00.358Z",
+      "imageUrl": "https://crusit.bg/assets/upload/6/59844/455x300_oferta-kruiz-zimnoto-slantse-na-persiyskia-zaliv.jpg" 
+      
+    },
+    "7b3143e1-d6df-4e67-bd7e-5f8b03f2fd3f": {
+      "_id": "7b3143e1-d6df-4e67-bd7e-5f8b03f2fd3f",
+      "groupName": "Вечният бестселър за Великден",
+      "itinerary": "Атина, Миконос, Крит, Санторини",
+      "duration": "4",
+      "priceFrom": "599",
+      "startDate": "2024-05-02T07:22:00.358Z",
+      "endDate": "2024-05-06T07:22:00.358Z",
+      "imageUrl": "https://crusit.bg/assets/upload/3/28384/455x300_oferta-kruiz-velikdenski-all-inclusive-kruiz-do-santorini-s-transport-i-vodach-gr2020easter.jpg"
+    }
+  }
