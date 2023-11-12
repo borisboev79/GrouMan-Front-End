@@ -11,7 +11,7 @@ export default function Menu() {
           <a href="index.html">Home</a>
         </li>
         <li>
-          <a href="generic.html">Generic</a>
+          <Link to="/groups">Groups</Link>
         </li>
         <li>
           <a href="elements.html">Elements</a>

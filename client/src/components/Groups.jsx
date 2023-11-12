@@ -24,59 +24,21 @@ export default function Groups() {
       <div className={[styles.inner, styles.flex, styles.flex3].join(" ")}>
 
       
-        {groups.map((group) => {
+        {groups.map((group) => 
           <GroupCard
             key={group._id}
             _id={group._id}
             name={group.groupName}
             itinerary={group.itinerary}
+            duration={group.duration}
             from={group.startDate}
             to={group.endDate}
             imageUrl={group.imageUrl}
-          />;
-        })}
+            price={group.priceFrom}
+          />
+        )}
        
 
-        <GroupCard name="name" _id="1" itinerary="test test" duration="7" />
-
-        {/* Card volcano */}
-
-        <div className={[styles.flexItem, styles.box].join(" ")}>
-          <div className={[styles.image, styles.fit].join(" ")}>
-            <img src="images/pic03.jpg" alt="" width={418} height={200} />
-          </div>
-          <div className={styles.content}>
-            <h3>Adipiscing</h3>
-            <p>
-              Morbi in sem quis dui placerat Pellentesque odio nisi, euismod
-              pharetra lorem ipsum.
-            </p>
-            <button
-              className={[styles.fit, styles.small].join(" ")}
-              onClick={detailsClickHandler}
-            >
-              Details
-            </button>
-          </div>
-        </div>
-
-        {/* Card stairs */}
-
-        <div className={[styles.flexItem, styles.box].join(" ")}>
-          <div className={[styles.image, styles.fit].join(" ")}>
-            <img src="images/pic04.jpg" alt="" width={418} height={200} />
-          </div>
-          <div className={styles.content}>
-            <h3>Malesuada</h3>
-            <p>
-              Nam dui mi, tincidunt quis, accu an porttitor, facilisis luctus
-              que metus vulputate sem magna.
-            </p>
-            <button className={[styles.fit, styles.small].join(" ")}>
-              Details
-            </button>
-          </div>
-        </div>
       </div>
     </section>
   );

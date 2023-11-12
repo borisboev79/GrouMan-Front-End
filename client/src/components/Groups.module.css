@@ -2095,6 +2095,7 @@ header h6 + p {
   display: -webkit-flex;
   display: -ms-flex;
   display: flex;
+  gap: 2em;
   -moz-flex-wrap: nowrap;
   -webkit-flex-wrap: nowrap;
   -ms-flex-wrap: nowrap;
