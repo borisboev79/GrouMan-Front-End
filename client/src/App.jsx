@@ -14,7 +14,7 @@ function App() {
     <div>
       <Navbar />
       <Routes>
-        <Route path="/menu" element={<Menu />} />
+        <Route path="/menu"  element={<Menu />} />
         <Route path="/login" element={<LoginForm />} />
         <Route path="/groups" element={<Groups />} />
       </Routes>
@@ -25,7 +25,7 @@ function App() {
 
       {/* <Two /> */}
 
-      <Miscellaneous />
+      {/* <Miscellaneous /> */}
 
       {/* Footer */}
       <Footer />
