@@ -17,15 +17,15 @@ function App() {
         <Route path="/menu"  element={<Menu />} />
         <Route path="/login" element={<LoginForm />} />
         <Route path="/groups" element={<Groups />} />
+        <Route path="/home" element={<Banner />} />
+        <Route path="/misc" element={<Miscellaneous />} />
       </Routes>
 
-      <Banner />
+      {/* <Banner /> */}
 
       <One />
 
       {/* <Two /> */}
-
-      {/* <Miscellaneous /> */}
 
       {/* Footer */}
       <Footer />

@@ -8,13 +8,13 @@ export default function Menu() {
       <Link className={styles.close} to='/' style={{color: 'white'}} ></Link>
       <ul className={styles.links}>
         <li>
-          <a href="index.html">Home</a>
+          <Link to="/home">Home</Link>
         </li>
         <li>
           <Link to="/groups">Groups</Link>
         </li>
         <li>
-          <a href="elements.html">Elements</a>
+          <Link to="/misc">Element library</Link>
         </li>
       </ul>
       <ul className={[styles.actions, styles.vertical].join(' ')}>
