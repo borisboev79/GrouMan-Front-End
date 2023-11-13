@@ -20,7 +20,9 @@
     visibility: visible;
     width: 20em;
     z-index: 10002;
+      
   }
+
   
   .menu > ul {
     margin: 0 0 1em 0;

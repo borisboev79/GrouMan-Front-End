@@ -14,6 +14,7 @@ function App() {
   return (
     <div>
       <Navbar />
+
       <Routes>
         <Route path="/menu"  element={<Menu />} />
         <Route path="/login" element={<LoginForm />} />
@@ -23,7 +24,7 @@ function App() {
         <Route path="/groups/add" element={<AddGroup />} />
       </Routes>
 
-      {/* <Banner /> */}
+      {/* <Menu /> */}
 
       <One />
 
