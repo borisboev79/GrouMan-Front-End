@@ -8,23 +8,31 @@ import Banner from "./components/Banner";
 import Footer from "./components/Footer";
 import LoginForm from "./components/LoginForm";
 import { Routes, Route } from "react-router-dom";
+import { useState } from "react";
 import AddGroup from "./components/AddGroup";
 
 function App() {
+  const [showMenu, setShowMenu] = useState(false);
+
+  const showMenuHandler = () => {
+         setShowMenu(true); 
+  };
+
+  const closeMenuHandler = () => {
+    setShowMenu(false);
+  }
+
   return (
     <div>
-      <Navbar />
-
+      <Navbar toggle={showMenuHandler}/>
+      {showMenu && <Menu toggle={closeMenuHandler} />}
       <Routes>
-        <Route path="/menu"  element={<Menu />} />
         <Route path="/login" element={<LoginForm />} />
         <Route path="/groups" element={<Groups />} />
         <Route path="/home" element={<Banner />} />
         <Route path="/misc" element={<Miscellaneous />} />
         <Route path="/groups/add" element={<AddGroup />} />
       </Routes>
-
-      {/* <Menu /> */}
 
       <One />
 

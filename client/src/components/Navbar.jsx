@@ -1,12 +1,12 @@
 import styles from './Navbar.module.css'
 import { Link } from 'react-router-dom'
 
-export default function Navbar() {
+export default function Navbar({toggle,}) {
     return(
         <header className={styles.header}>
         <nav className={styles.left}>
-          
-          <Link className={styles.menuBurger} to='/menu'></Link>  
+
+          <Link className={styles.menuBurger} onClick={toggle}/>  
         </nav>
         <a href="index.html" className={styles.logo}>
           Grouman

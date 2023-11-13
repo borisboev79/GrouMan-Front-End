@@ -12,7 +12,7 @@ export default function Groups() {
       .getAllGroups()
       .then((result) => setGroups(result))
       .catch((err) => console.log(err));
-      console.log('fetching')
+    console.log("fetching");
   }, []);
 
   const detailsClickHandler = () => {
@@ -20,26 +20,24 @@ export default function Groups() {
   };
 
   return (
-    <section className={[styles.three, styles.wrapper].join(" ")}>
-      <div className={[styles.inner, styles.flex, styles.flex3].join(" ")}>
-
-      
-        {groups.map((group) => 
-          <GroupCard
-            key={group._id}
-            _id={group._id}
-            name={group.groupName}
-            itinerary={group.itinerary}
-            duration={group.duration}
-            from={group.startDate}
-            to={group.endDate}
-            imageUrl={group.imageUrl}
-            price={group.priceFrom}
-          />
-        )}
-       
-
-      </div>
-    </section>
+    <>
+      <section className={[styles.three, styles.wrapper].join(" ")}>
+        <div className={[styles.inner, styles.flex, styles.flex3].join(" ")}>
+          {groups.map((group) => (
+            <GroupCard
+              key={group._id}
+              _id={group._id}
+              name={group.groupName}
+              itinerary={group.itinerary}
+              duration={group.duration}
+              from={group.startDate}
+              to={group.endDate}
+              imageUrl={group.imageUrl}
+              price={group.priceFrom}
+            />
+          ))}
+        </div>
+      </section>
+    </>
   );
 }

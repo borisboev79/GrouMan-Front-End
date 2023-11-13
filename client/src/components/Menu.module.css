@@ -23,6 +23,27 @@
       
   }
 
+  .overlay {
+    position: absolute;
+    min-width: 20%;
+    top: 0;
+    left: 20em;
+    height: 100%;
+    right: 0;
+    bottom: 0;
+    z-index: 10001;
+  }
+  
+  .backdrop {
+    background-color: rgba(0, 0, 0, 0.75);
+    height: 100vh;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 20;
+  }
+
   
   .menu > ul {
     margin: 0 0 1em 0;
