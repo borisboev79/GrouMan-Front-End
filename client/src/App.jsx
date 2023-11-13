@@ -8,6 +8,7 @@ import Banner from "./components/Banner";
 import Footer from "./components/Footer";
 import LoginForm from "./components/LoginForm";
 import { Routes, Route } from "react-router-dom";
+import AddGroup from "./components/AddGroup";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/groups" element={<Groups />} />
         <Route path="/home" element={<Banner />} />
         <Route path="/misc" element={<Miscellaneous />} />
+        <Route path="/groups/add" element={<AddGroup />} />
       </Routes>
 
       {/* <Banner /> */}

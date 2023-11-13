@@ -9,3 +9,18 @@ export const getAllGroups = async () => {
   
   return groups;
 };
+
+export const add = async (groupData) => {
+  const response = await fetch(`${baseUrl}/add`, {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json'
+    },
+    body: JSON.stringify(groupData)
+  });
+
+  const result = await response.json();
+
+  return result;
+}
+

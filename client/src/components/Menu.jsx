@@ -16,6 +16,9 @@ export default function Menu() {
         <li>
           <Link to="/misc">Element library</Link>
         </li>
+        <li>
+          <Link to="/groups/add">Add Group</Link>
+        </li>
       </ul>
       <ul className={[styles.actions, styles.vertical].join(' ')}>
         <li>
