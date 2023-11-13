@@ -8,7 +8,7 @@ export default function Navbar({toggle,}) {
 
           <Link className={styles.menuBurger} onClick={toggle}/>  
         </nav>
-        <a href="index.html" className={styles.logo}>
+        <a href="/home" className={styles.logo}>
           Grouman
         </a>
         <nav className={styles.right}>
