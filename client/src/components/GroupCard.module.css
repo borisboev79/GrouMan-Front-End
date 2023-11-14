@@ -2089,7 +2089,7 @@ header h6 + p {
 
 .flex {
   display: -ms-flexbox;
-  -ms-flex-wrap: nowrap;
+  -ms-flex-wrap: wrap;
   -ms-flex-pack: justify;
   -ms-flex-align: stretch;
   display: -moz-flex;
@@ -2097,10 +2097,10 @@ header h6 + p {
   display: -ms-flex;
   display: flex;
   
-  -moz-flex-wrap: nowrap;
-  -webkit-flex-wrap: nowrap;
-  -ms-flex-wrap: nowrap;
-  flex-wrap: nowrap;
+  -moz-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
   -moz-justify-content: space-between;
   -webkit-justify-content: space-between;
   -ms-justify-content: space-between;
@@ -2191,6 +2191,12 @@ header h6 + p {
   }
 }
 
+.card {
+  max-width: 33%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
 
 
 /* Button */

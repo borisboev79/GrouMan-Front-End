@@ -28,6 +28,7 @@ export default function Groups() {
               key={group._id}
               _id={group._id}
               name={group.groupName}
+              transportation={group.transportation}
               itinerary={group.itinerary}
               duration={group.duration}
               from={group.startDate}

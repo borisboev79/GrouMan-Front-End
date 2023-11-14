@@ -5,6 +5,7 @@
       "itinerary": "Копенхаген, Ставангер, Берген, Осло",
       "duration": "7",
       "priceFrom": "1199",
+      "transportation": "Bus",
       "startDate": "2024-07-07T07:22:00.358Z",
       "endDate": "2024-07-14T07:22:00.358Z",
       "imageUrl": "https://crusit.bg/assets/upload/6/58035/455x300_oferta-kruiz-pateshestvie-do-kraya-na-evropa.jpg"
@@ -16,6 +17,7 @@
       "itinerary": "Дубай, Абу Даби, Доха, Бахрейн",
       "duration": "5",
       "priceFrom": "749",
+      "transportation": "Car",
       "startDate": "2024-02-02T07:22:00.358Z",
       "endDate": "2024-02-07T07:22:00.358Z",
       "imageUrl": "https://crusit.bg/assets/upload/6/59844/455x300_oferta-kruiz-zimnoto-slantse-na-persiyskia-zaliv.jpg" 
@@ -27,6 +29,7 @@
       "itinerary": "Атина, Миконос, Крит, Санторини",
       "duration": "4",
       "priceFrom": "599",
+      "transportation": "Flight",
       "startDate": "2024-05-02T07:22:00.358Z",
       "endDate": "2024-05-06T07:22:00.358Z",
       "imageUrl": "https://crusit.bg/assets/upload/3/28384/455x300_oferta-kruiz-velikdenski-all-inclusive-kruiz-do-santorini-s-transport-i-vodach-gr2020easter.jpg"

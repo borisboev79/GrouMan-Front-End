@@ -1,20 +1,37 @@
-import { add } from "../services/groupService";
+import * as groupService from "../services/groupService";
+import { Form, useNavigate } from "react-router-dom";
 import styles from "./AddGroup.module.css";
 
 export default function AddGroup() {
+    const navigate = useNavigate();
+
+    const addGroupSubmitHandler = async (e) => {
+        e.preventDefault();
+
+        const groupData = Object.fromEntries(new FormData(e.currentTarget));
+
+        try {
+            await groupService.add(groupData);
+
+            navigate('/groups'); 
+        } catch (err) {
+            console.log(err);
+        }
+
+    }
   return (
     <div className={styles.addForm}>
       <h3>Add New Cruise Group</h3>
-      <form method="post" action="#">
+      <form onSubmit={addGroupSubmitHandler}>
         <div className="row uniform">
           <div className="6u 12u$(xsmall)">
-            <label htmlFor="name">Group name:</label>
+            <label htmlFor="groupName">Group name:</label>
             <input
               type="text"
-              name="name"
-              id="name"
-              defaultValue
-              placeholder="Name"
+              name="groupName"
+              id="groupName"
+              defaultValue=''
+              placeholder="Group name"
             />
             <div
               data-lastpass-icon-root="true"
@@ -32,7 +49,7 @@ export default function AddGroup() {
               type="text"
               name="itinerary"
               id="itinerary"
-              defaultValue
+              defaultValue=''
               placeholder="Itinerary"
             />
             <div
@@ -45,45 +62,7 @@ export default function AddGroup() {
               }}
             />
           </div>
-          <div className="6u 12u$(xsmall)">
-            <label htmlFor="from">Departure:</label>
-            <input
-              type="date"
-              name="from"
-              id="from"
-              defaultValue
-              placeholder="from"
-            />
-            <div
-              data-lastpass-icon-root="true"
-              style={{
-                position: "relative !important",
-                height: "0px !important",
-                width: "0px !important",
-                float: "left !important",
-              }}
-            />
-          </div>
-          <div className="6u 12u$(xsmall)">
-            <label htmlFor="to">Return:</label>
-            <input
-              type="date"
-              name="to"
-              id="to"
-              defaultValue
-              placeholder="to"
-            />
-            <div
-              data-lastpass-icon-root="true"
-              style={{
-                position: "relative !important",
-                height: "0px !important",
-                width: "0px !important",
-                float: "left !important",
-              }}
-            />
-          </div>
-          <div className="2u 12u$(xsmall)">
+          <div className="3u 12u$(xsmall)">
             <label htmlFor="duration">Duration:</label>
             <input
               type="number"
@@ -102,30 +81,89 @@ export default function AddGroup() {
               }}
             />
           </div>
-          <div className="10u 12u$(xsmall)">
-            <label htmlFor="itinerary">ImageUrl</label>
+          <div className="3u 12u$(xsmall)">
+            <label htmlFor="priceFrom">Price from:</label>
             <input
-              type="text"
-              name="itinerary"
-              id="itinerary"
-              defaultValue
-              placeholder="Itinerary"
-            /></div>
-          {/* Break */}
-          <div className="12u$">
+              type="number"
+              name="priceFrom"
+              id="priceFrom"
+              defaultValue="Price €"
+              placeholder="Price €"
+            />
+            <div
+              data-lastpass-icon-root="true"
+              style={{
+                position: "relative !important",
+                height: "0px !important",
+                width: "0px !important",
+                float: "left !important",
+              }}
+            />
+          </div>
+           {/* Transprtation */}
+           <div className="6u$">
             <div className="select-wrapper">
-              <select name="category" id="category">
-                <option value>- Transport -</option>
-                <option value={1}>Flight</option>
-                <option value={1}>Bus</option>
-                <option value={1}>Car</option>
+                <label htmlFor="transportation">Transportation:</label>
+              <select name="transportation" id="transportation">
+                <option value>- Choose Transport -</option>
+                <option value={'Fight'}>Flight</option>
+                <option value={'Bus'}>Bus</option>
+                <option value={'Car'}>Car</option>
               
               </select>
             </div>
           </div>
-          {/* Break */}
         
-          {/* Break */}
+          
+          <div className="6u 12u$(xsmall)">
+            <label htmlFor="startDate">Departure:</label>
+            <input
+              type="date"
+              name="startDate"
+              id="startDate"
+              defaultValue=''
+              placeholder="From"
+            />
+            <div
+              data-lastpass-icon-root="true"
+              style={{
+                position: "relative !important",
+                height: "0px !important",
+                width: "0px !important",
+                float: "left !important",
+              }}
+            />
+          </div>
+          <div className="6u 12u$(xsmall)">
+            <label htmlFor="endDate">Return:</label>
+            <input
+              type="date"
+              name="endDate"
+              id="endDate"
+              defaultValue
+              placeholder="To"
+            />
+            <div
+              data-lastpass-icon-root="true"
+              style={{
+                position: "relative !important",
+                height: "0px !important",
+                width: "0px !important",
+                float: "left !important",
+              }}
+            />
+          </div>
+          
+          <div className="12u 12u$(xsmall)">
+            <label htmlFor="imageUrl">ImageUrl</label>
+            <input
+              type="text"
+              name="imageUrl"
+              id="imageUrl"
+              defaultValue=""
+              placeholder="Paste Image URL here"
+            /></div>
+            {/* Break */}
           <div className="12u$">
             <ul className="actions">
               <li>
@@ -136,6 +174,7 @@ export default function AddGroup() {
               </li>
             </ul>
           </div>
+         
         </div>
       </form>
      
