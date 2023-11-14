@@ -31,7 +31,7 @@
 
 }
 
-.box div {
+.box .content div {
   margin: 1em 0;
 }
 
@@ -39,6 +39,7 @@
 margin: 0;
  
 }
+
 
 
 .box.alt {
@@ -74,9 +75,9 @@ margin: 0;
 
 .flexItem {
   display: flex;
-  flex-direction: column;
-  flex: 0 2 30%;
-  justify-content: stretch;
+  flex-flow: column wrap;
+  flex: 0 6 30%;
+  align-content:;
   
   
  
@@ -178,6 +179,7 @@ button,
   text-decoration: none;
   white-space: nowrap;
   text-transform: uppercase;
+  ;
 }
 
 
@@ -280,6 +282,8 @@ button:disabled,
   cursor: default;
   opacity: 0.25;
 }
+
+
 
 .price {
   margin-top: 1em;
