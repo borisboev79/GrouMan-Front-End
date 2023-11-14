@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 
 export default function Navbar({toggle,}) {
     return(
+      <>
         <header className={styles.header}>
         <nav className={styles.left}>
 
@@ -20,5 +21,6 @@ export default function Navbar({toggle,}) {
           </a>
         </nav>
       </header>
+      </>
     );
 };

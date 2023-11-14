@@ -2088,7 +2088,7 @@ header h6 + p {
 
 .flex {
   display: -ms-flexbox;
-  -ms-flex-wrap: nowrap;
+  -ms-flex-wrap: wrap;
   -ms-flex-pack: justify;
   -ms-flex-align: stretch;
   display: -moz-flex;
@@ -2096,18 +2096,19 @@ header h6 + p {
   display: -ms-flex;
   display: flex;
   gap: 2em;
-  -moz-flex-wrap: nowrap;
-  -webkit-flex-wrap: nowrap;
-  -ms-flex-wrap: nowrap;
-  flex-wrap: nowrap;
+  -moz-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
   -moz-justify-content: space-between;
   -webkit-justify-content: space-between;
   -ms-justify-content: space-between;
-  justify-content: space-between;
+  justify-content:center;
   -moz-align-items: stretch;
   -webkit-align-items: stretch;
   -ms-align-items: stretch;
-  align-items: stretch;
+  align-items:stretch;
+  
 }
 
 .flex.flex3 .flexItem {
@@ -2117,10 +2118,11 @@ header h6 + p {
   -webkit-flex-basis: 30%;
   -ms-flex-basis: 30%;
   flex-basis: 30%;
+  
 }
 
 .flex.flex3 .flexItem.left {
-  text-align: right;
+  text-align: left;
 }
 
 @media screen and (max-width: 980px) {
