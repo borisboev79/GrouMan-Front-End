@@ -1,4 +1,3 @@
-
 /* Box */
 
 .box {
@@ -6,7 +5,6 @@
   border: solid 1px #dee1e3;
   margin-bottom: 2em;
   overflow: hidden;
-  
 }
 
 .box > :last-child,
@@ -19,29 +17,6 @@
   margin: 0;
 }
 
-.box .content {
-  padding: 1.5em;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: stretch;
- 
-
-
-
-}
-
-.box .content div {
-  margin: 1em 0;
-}
-
-.box .content p {
-margin: 0;
- 
-}
-
-
-
 .box.alt {
   border: 0;
   border-radius: 0;
@@ -51,38 +26,65 @@ margin: 0;
 /* Image */
 
 .image {
-    border: 0;
-    display: inline-block;
-    position: relative;
-  }
-  
-  .image img {
-    display: block;
-  }
-  
-  .image.fit {
-    display: block;
-    margin: 0 0 2em 0;
-    width: 100%;
-  }
-  
+  border: 0;
+  display: inline-block;
+  position: relative;
+}
 
+.image img {
+  display: block;
+}
 
+.image.fit {
+  display: block;
+  margin: 0 0 2em 0;
+  width: 100%;
+}
 
 /* Flex */
-
-
 
 .flexItem {
   display: flex;
   flex-flow: column wrap;
-  flex: 0 6 30%;
-  align-content:;
-  
-  
- 
+  flex: 0 1 30%;
+  justify-content: space-between;
 }
 
+.flexItem h3 {
+  margin-top: 1em;
+  text-align: center;
+}
+
+.flexItem > *:not(.image) {
+  padding: 0 1.5em;
+}
+
+.content {
+  padding: 1.5em;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+}
+
+.content > *,
+.flexItem > *:not(h3) {
+  margin: 0;
+  text-align: center;
+}
+
+.price {
+  margin-top: 1em;
+  font-size: 1.2em;
+  text-align: center;
+}
+
+.priceTag {
+  color: #25a2c3;
+}
+
+.btnContainer {
+  padding: 2em;
+}
 
 @media screen and (max-width: 980px) {
   .flex {
@@ -92,71 +94,11 @@ margin: 0;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
   }
-
-  .flex.flex3 .flexItem {
-    -ms-flex-preferred-size: 100%;
-    -moz-flex-basis: 100%;
-    -webkit-flex-basis: 100%;
-    -ms-flex-basis: 100%;
-    flex-basis: 100%;
-  }
-
-  .flex.flex3 .flexItem.left {
-    text-align: right;
-  }
 }
-
-/* Wrapper */
-
-.wrapper {
-  padding: 6em 0 4em 0;
-}
-
-.wrapper h1,
-.wrapper h2,
-.wrapper h3,
-.wrapper h4,
-.wrapper h5 {
-  color: #25a2c3;
-}
-
-.wrapper.style1 {
-  background: #25a2c3;
-  color: #fcdcd6;
-}
-
-.wrapper.style1 h1,
-.wrapper.style1 h2,
-.wrapper.style1 h3,
-.wrapper.style1 h4,
-.wrapper.style1 h5 {
-  color: #fff;
-}
-
-.wrapper.style1 cite.author {
-  color: #fff;
-}
-
-@media screen and (max-width: 980px) {
-  .wrapper {
-    padding: 3em 0 1em 0;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .wrapper {
-    padding: 2em 0 0.1em 0;
-  }
-}
-
-
-
 
 /* Button */
 
-
-button,
-.button {
+button {
   -moz-appearance: none;
   -webkit-appearance: none;
   -ms-appearance: none;
@@ -179,103 +121,28 @@ button,
   text-decoration: none;
   white-space: nowrap;
   text-transform: uppercase;
-  ;
 }
 
-
-button:hover,
-.button:hover {
+button:hover {
   background-color: #76caf7;
   color: white;
 }
 
-
-button:active,
-.button:active {
+button:active {
   background-color: #25a2c3;
 }
 
-
-button.icon,
-.button.icon {
-  padding-left: 1.35em;
-}
-
-
-button.icon:before,
-.button.icon:before {
-  margin-right: 0.5em;
-}
-
-
-button.fit,
-.button.fit {
+button.fit {
   display: block;
   margin: 0 0 1em 0;
   width: 100%;
 }
 
-
-button.small,
-.button.small {
+button.small {
   font-size: 0.8em;
 }
 
-
-button.big,
-.button.big {
-  font-size: 1.35em;
-}
-
-
-button.alt,
-.button.alt {
-  background-color: transparent;
-  box-shadow: inset 0 0 0 1px #dee1e3;
-  color: #727a82 !important;
-}
-
-
-button.alt:hover,
-.button.alt:hover {
-  
-  background-color: #25a2c3;
-}
-
-
-button.alt:active,
-.button.alt:active {
-  background-color: rgba(144, 144, 144, 0.2);
-}
-
-button.alt.icon:before,
-.button.alt.icon:before {
-  color: #bbb;
-}
-
-
-button.special,
-.button.special {
-  background-color: #25a2c3;
-  color: #ffffff !important;
-}
-
-button.special:hover,
-.button.special:hover {
-  background-color: #2bb3d7;
-}
-
-
-button.special:active,
-.button.special:active {
-  background-color: #2190ae;
-}
-
-
-button.disabled,
-button:disabled,
-.button.disabled,
-.button:disabled {
+button.disabled {
   background-color: #767d85 !important;
   box-shadow: inset 0 -0.15em 0 0 rgba(0, 0, 0, 0.15);
   color: #fff !important;
@@ -283,33 +150,14 @@ button:disabled,
   opacity: 0.25;
 }
 
-
-
-.price {
-  margin-top: 1em;
-  font-size: 1.2em;
-  text-align: center;
-
-}
-
-.priceTag {
-  color: #25a2c3;
-}
-
-
-
 @media screen and (max-width: 480px) {
-  input[type="submit"],
-  input[type="reset"],
-  input[type="button"],
-  button,
-  .button {
+  button {
     padding: 0;
   }
 }
 
 @media screen and (max-width: 980px) {
-    .three {
-      text-align: center;
-    }
+  .three {
+    text-align: center;
   }
+}

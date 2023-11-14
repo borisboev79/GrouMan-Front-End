@@ -17,21 +17,23 @@ export default function GroupCard({
       <div className={[styles.image, styles.fit].join(" ")}>
         <img src={imageUrl} alt={_id} width={418} height={200} />
       </div>
+      <h3>{name}</h3>{" "}
       <div>
-        <h3>{name}</h3>
-        <div className={styles.cardContent}>
-          <p>
-            <b>Transportation: </b>
-            {transportation}
-          </p>
-          <p>
-            <b>Itinerary: </b>
-            {itinerary}
-          </p>
-          <p>
-            <b>Duration: {duration}</b> дни
-          </p>
-        </div>
+        <p>
+          <b>Transportation: </b>
+          {transportation}
+        </p>
+      </div>
+      <div>
+        <p>
+          <b>Itinerary: </b>
+          {itinerary}
+        </p>
+        <p>
+          <b>Duration: {duration}</b> дни
+        </p>
+      </div>
+      <div className={styles.content}>
         <p>
           <b>Начална дата: </b>
           {dateFormatter.formatDate(from)}
@@ -42,9 +44,12 @@ export default function GroupCard({
         <p className={styles.price}>
           от<b className={styles.priceTag}> €{price}</b>
         </p>
-           <button className={[styles.fit, styles.small].join(" ")}>Details</button>
+        <div className={styles.btnContainer}>
+          <button className={[styles.fit, styles.small].join(" ")}>
+            Details
+          </button>
+        </div>
       </div>
-   
     </div>
   );
 }
