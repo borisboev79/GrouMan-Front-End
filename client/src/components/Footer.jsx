@@ -5,24 +5,24 @@ export default function Footer() {
         <>
         <footer className={styles.footer}>
         <div className={styles.inner}>
-          <h2>Get In Touch</h2>
+          <h2>For Assistance</h2>
           <ul className={styles.actions}>
             <li>
-              <span className="icon fa-phone" /> <a href="#">(000) 000-0000</a>
+              <span className="icon fa-phone" /> <a href="#">(+359) 888-9876543</a>
             </li>
             <li>
               <span className="icon fa-envelope" />{" "}
-              <a href="#">information@untitled.tld</a>
+              <a href="#">boris.boev@grouman.bg</a>
             </li>
             <li>
-              <span className="icon fa-map-marker" /> 123 Somewhere Road,
-              Nashville, TN 00000
+              <span className="icon fa-map-marker" /> Sofia 1164, Bulgaria 2000 Building
+        
             </li>
           </ul>
         </div>
       </footer>
       <div className={styles.copyright}>
-        Powered by: <a href="https://templated.co/">TEMPLATED</a>.
+        <p>Design by: Boris Boev & TEMPLATED November 2023 &copy;</p>
       </div>
       </>
     )
