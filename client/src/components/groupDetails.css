@@ -1533,7 +1533,8 @@
     padding-top: 0;
   }
   
-  ul.icons {
+  ul.icons,
+  ul.alt {
     cursor: default;
     list-style: none;
     padding-left: 0;
@@ -1544,24 +1545,31 @@
     padding: 0 1em 0 0;
   }
   
-  ul.icons li:last-child {
+  ul.icons li:last-child,
+  ul.alt li:last-child {
     padding-right: 0;
   }
   
-  ul.icons li .icon:before {
+  ul.icons li .icon:before,
+  ul.alt li .icon:before {
     font-size: 2em;
+    fill:#25a2c3
   }
+
+
   
   ul.actions {
     cursor: default;
     list-style: none;
-    padding-left: 0;
+    padding-left: 25%;
+
   }
   
   ul.actions li {
     display: inline-block;
     padding: 0 1em 0 0;
     vertical-align: middle;
+    margin: 0 auto;
   }
   
   ul.actions li:last-child {
@@ -1935,6 +1943,11 @@
   .wrapper.style1 h4,
   .wrapper.style1 h5 {
     color: #fff;
+  }
+
+  h4 {
+    display: inline;
+    color: #25a2c3;
   }
   
   .wrapper.style1 cite.author {

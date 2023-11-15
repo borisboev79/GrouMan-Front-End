@@ -35,7 +35,7 @@ function App() {
         <Route path="/home" element={<Banner />} />
         <Route path="/misc" element={<Miscellaneous />} />
         <Route path="/groups/add" element={<AddGroup />} />
-        <Route path="/groups/:id" element={<GroupDetails />} />
+        <Route path="/groups/:groupId" element={<GroupDetails />} />
       </Routes>
 
       <One />

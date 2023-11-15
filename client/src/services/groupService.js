@@ -16,3 +16,9 @@ export const add = async (groupData) => {
   return result;
 };
 
+export const getOne = async (groupId) => {
+  const result = await request.get(`${baseUrl}/${groupId}`, );
+
+  return result;
+}
+

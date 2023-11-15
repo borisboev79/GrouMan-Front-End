@@ -14,11 +14,6 @@ export default function GroupCard({
   price,
 }) {
 
-  const detailsClickHandler = (groupId) => {
-      <Link to="/groups/details" />
-  }
-
-
   return (
     <div className={[styles.flexItem, styles.box].join(" ")}>
       <div className={[styles.image, styles.fit].join(" ")}>
@@ -52,9 +47,9 @@ export default function GroupCard({
           от<b className={styles.priceTag}> €{price}</b>
         </p>
         <div className={styles.btnContainer}>
-          <button className={[styles.fit, styles.small].join(" ")} onClick={detailsClickHandler({_id})}>
+          <Link className={[styles.button, styles.fit, styles.small].join(" ")} to={`/groups/${_id}`}>
             Details
-          </button>
+          </Link>
         </div>
       </div>
     </div>
