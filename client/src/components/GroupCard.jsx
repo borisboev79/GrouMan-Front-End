@@ -1,5 +1,6 @@
 import * as dateFormatter from "../utils/dateUtils";
 import styles from "./GroupCard.module.css";
+import { Link } from 'react-router-dom';
 
 export default function GroupCard({
   _id,
@@ -12,6 +13,12 @@ export default function GroupCard({
   imageUrl,
   price,
 }) {
+
+  const detailsClickHandler = () => {
+      <Link to="/groups/details" />
+  }
+
+
   return (
     <div className={[styles.flexItem, styles.box].join(" ")}>
       <div className={[styles.image, styles.fit].join(" ")}>
@@ -45,7 +52,7 @@ export default function GroupCard({
           от<b className={styles.priceTag}> €{price}</b>
         </p>
         <div className={styles.btnContainer}>
-          <button className={[styles.fit, styles.small].join(" ")}>
+          <button className={[styles.fit, styles.small].join(" ")} onClick={detailsClickHandler}>
             Details
           </button>
         </div>

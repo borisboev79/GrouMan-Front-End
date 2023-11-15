@@ -15,9 +15,6 @@ export default function Groups() {
     console.log("fetching");
   }, []);
 
-  const detailsClickHandler = () => {
-    groupService.getAllGroups();
-  };
 
   return (
     <>

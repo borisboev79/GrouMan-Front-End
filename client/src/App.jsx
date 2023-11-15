@@ -10,6 +10,7 @@ import LoginForm from "./components/LoginForm";
 import { Routes, Route } from "react-router-dom";
 import { useState } from "react";
 import AddGroup from "./components/AddGroup";
+import GroupDetails from "./components/GroupDetails";
 
 function App() {
   const [showMenu, setShowMenu] = useState(false);
@@ -32,6 +33,7 @@ function App() {
         <Route path="/home" element={<Banner />} />
         <Route path="/misc" element={<Miscellaneous />} />
         <Route path="/groups/add" element={<AddGroup />} />
+        <Route path="/groups/details" element={<GroupDetails />} />
       </Routes>
 
       <One />
