@@ -23,6 +23,8 @@ function App() {
     setShowMenu(false);
   }
 
+
+
   return (
     <div>
       <Navbar toggle={showMenuHandler}/>
@@ -33,7 +35,7 @@ function App() {
         <Route path="/home" element={<Banner />} />
         <Route path="/misc" element={<Miscellaneous />} />
         <Route path="/groups/add" element={<AddGroup />} />
-        <Route path="/groups/details" element={<GroupDetails />} />
+        <Route path="/groups/:id" element={<GroupDetails />} />
       </Routes>
 
       <One />
