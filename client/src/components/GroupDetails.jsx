@@ -1,6 +1,6 @@
 import "./groupDetails.css";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import * as groupService from "../services/groupService";
 import * as formatter from "../utils/dateUtils";
 
@@ -115,13 +115,13 @@ export default function GroupDetails() {
                
                 <li>
                   <a href="#" className="button">
-                    Default
+                    Add Passenger
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="button alt">
-                    Alternate
-                  </a>
+                  <Link to="/groups" className="button alt">
+                    Back to all groups
+                  </Link>
                 </li>
               </ul>
               </div>
