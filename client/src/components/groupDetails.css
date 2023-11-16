@@ -172,7 +172,7 @@
 
 .image.left,
 .image.right {
-  max-width: 50%;
+  max-width: 45%;
 }
 
 .image.left img,
@@ -206,6 +206,26 @@ ul.alt {
   padding-left: 0;
 }
 
+ul.alt .price{
+ 
+  border-right: 1px solid rgba(89, 78, 78, 0.4);
+  margin-right: 0.5em;
+  padding-right: 0.5em;
+
+}
+
+ul.alt .price > * {
+  color:#25a2c3;
+  font-size: 1.1em;
+}
+
+ul.alt .price:nth-child(3){
+  border: none;
+  margin-right: 0;
+
+
+}
+
 ul.alt li {
   border-top: solid 1px #dee1e3;
   padding: 0.5em 0;
@@ -213,8 +233,8 @@ ul.alt li {
 
 ul.alt li:first-child {
   border-top: 0;
-  padding-top: 0;
-}
+  padding-top: 0;}
+ 
 
 ul.icons,
 ul.alt {
@@ -256,30 +276,7 @@ ul.actions li:last-child {
   padding-right: 0;
 }
 
-ul.actions.small li {
-  padding: 0 0.5em 0 0;
-}
 
-ul.actions.vertical li {
-  display: block;
-  padding: 1em 0 0 0;
-}
-
-ul.actions.vertical li:first-child {
-  padding-top: 0;
-}
-
-ul.actions.vertical li > * {
-  margin-bottom: 0;
-}
-
-ul.actions.vertical.small li {
-  padding: 0.5em 0 0 0;
-}
-
-ul.actions.vertical.small li:first-child {
-  padding-top: 0;
-}
 
 ul.actions.fit {
   display: table;
@@ -340,6 +337,7 @@ ul.actions.fit.small li {
     padding-top: 0;
   }
 }
+
 
 /* Table */
 

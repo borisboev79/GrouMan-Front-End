@@ -18,46 +18,57 @@ export default function GroupDetails() {
         <div className="inner">
           <div className="12u">
             <h2 id="content">{group.groupName}</h2>
-           
-              <span className="image left">
-                <img
-                  src={group.imageUrl}
-                  alt={group.groupName}
-                  width={430}
-                  height={330}
-                />
-              </span>
-              <ul className="alt">
-                <li>
-                    Ship: <h4>MSC Grandiosa</h4>
-                </li>
-                <li>Itinerary: <b>{group.itinerary}</b></li>
-                <li>Transportation: <a href="#" className="icon fa-plane"></a> </li>
-                <li>
-                  Duration: <b>{group.duration}</b> days
-                </li>
-                <li>
-                  Departure date: <b>{formatter.formatDate(group.startDate)}</b>
-                </li>
-                <li>
-                  Return date: <b>{formatter.formatDate(group.endDate)}</b>
-                </li>
-                <li>
-                    Free capacity: <b>{group.priceFrom}</b>
-                </li>
-               </ul>
 
-      
+            <span className="image left">
+              <img
+                src={group.imageUrl}
+                alt={group.groupName}
+                width={430}
+                height={330}
+              />
+            </span>
+            <ul className="alt">
+              <li>
+                Ship: <h4>MSC Grandiosa</h4>
+              </li>
+              <li>
+                Itinerary: <b>{group.itinerary}</b>
+              </li>
+              <li>
+                Transportation: <a href="#" className="icon fa-plane"></a>{" "}
+              </li>
+              <li>
+                Duration: <b>{group.duration}</b> days
+              </li>
+              <li>
+                Departure date: <b>{formatter.formatDate(group.startDate)}</b>
+              </li>
+              <li>
+                Return date: <b>{formatter.formatDate(group.endDate)}</b>
+              </li>
+              <li>
+                Free capacity: <b>{group.capacity}</b>
+              </li>
+              <li>
+                <span className="price">
+                  Inside cabins: <b>€ {group.insidePrice}</b>
+                </span>
+                <span className="price">
+                  Outside cabins: <b>€ {group.outsidePrice}</b>
+                </span>
+                <span className="price">
+                  Balcony cabins: <b>€ {group.balconyPrice}</b>
+                </span>
+              </li>
+            </ul>
           </div>
-        
+
           <div className="row">
-                      
-           
             <div className="6u$ 12u$(small)"></div>
           </div>
           <hr className="major" />
           {/* Elements */}
-         
+
           <div className="row 200%">
             <div className="12u">
               {/* Table */}
@@ -110,9 +121,8 @@ export default function GroupDetails() {
 
             <div className="12u">
               {/* Buttons */}
-   
+
               <ul className="actions">
-               
                 <li>
                   <a href="#" className="button">
                     Add Passenger
@@ -124,7 +134,7 @@ export default function GroupDetails() {
                   </Link>
                 </li>
               </ul>
-              </div>
+            </div>
           </div>
         </div>
       </section>

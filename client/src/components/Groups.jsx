@@ -31,7 +31,11 @@ export default function Groups() {
               from={group.startDate}
               to={group.endDate}
               imageUrl={group.imageUrl}
-              price={group.priceFrom}
+              capacity={group.capacity}
+              inside={group.insidePrice}
+              outside={group.outsidePrice}
+              balcony={group.balconyPrice}
+
             />
           ))}
         </div>

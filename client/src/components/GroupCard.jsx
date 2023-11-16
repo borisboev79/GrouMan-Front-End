@@ -11,7 +11,7 @@ export default function GroupCard({
   to,
   duration,
   imageUrl,
-  price,
+  capacity,
 }) {
 
   return (
@@ -44,7 +44,7 @@ export default function GroupCard({
           <b>Крайна дата: </b> {dateFormatter.formatDate(to)}
         </p>
         <p className={styles.price}>
-          от<b className={styles.priceTag}> €{price}</b>
+          <b className={styles.priceTag}> {capacity}</b> passengers
         </p>
         <div className={styles.btnContainer}>
           <Link className={[styles.button, styles.fit, styles.small].join(" ")} to={`/groups/${_id}`}>
