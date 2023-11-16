@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 export default function GroupCard({
   _id,
   name,
-  transportation,
+  ship,
   itinerary,
   from,
   to,
@@ -19,11 +19,11 @@ export default function GroupCard({
       <div className={[styles.image, styles.fit].join(" ")}>
         <img src={imageUrl} alt={_id} width={418} height={200} />
       </div>
-      <h3>{name}</h3>{" "}
+      <h3>{name}</h3>
       <div>
         <p>
-          <b>Transportation: </b>
-          {transportation}
+          <b>Ship: </b>
+          {ship}
         </p>
       </div>
       <div>

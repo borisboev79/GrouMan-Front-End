@@ -25,16 +25,13 @@ export default function Groups() {
               key={group._id}
               _id={group._id}
               name={group.groupName}
-              transportation={group.transportation}
+              ship={group.ship}
               itinerary={group.itinerary}
               duration={group.duration}
               from={group.startDate}
               to={group.endDate}
               imageUrl={group.imageUrl}
               capacity={group.capacity}
-              inside={group.insidePrice}
-              outside={group.outsidePrice}
-              balcony={group.balconyPrice}
 
             />
           ))}

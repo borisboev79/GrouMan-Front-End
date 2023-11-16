@@ -29,7 +29,7 @@ export default function GroupDetails() {
             </span>
             <ul className="alt">
               <li>
-                Ship: <h4>MSC Grandiosa</h4>
+                Ship: <h4>{group.ship}</h4>
               </li>
               <li>
                 Itinerary: <b>{group.itinerary}</b>
