@@ -11,10 +11,12 @@ export default function GroupDetails() {
 
   useEffect(() => {
     groupService.getOne(groupId)
-    .then(setGroup)
-    .then(() => {setTransport(group.transportation)})
-.then(console.log(transport));
+    .then(setGroup);
   }, [groupId]);
+
+  useEffect(() => {
+    setTransport(group.transportation)
+  },[group]);
 
   
 
