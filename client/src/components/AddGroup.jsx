@@ -43,7 +43,27 @@ export default function AddGroup() {
               }}
             />
           </div>
-          <div className="6u 12u$(xsmall)">
+          <div className="6u 6u$(xsmall)">
+            <label htmlFor="ship">Ship name:</label>
+            <input
+              type="text"
+              name="ship"
+              id="ship"
+              defaultValue=''
+              placeholder="Ship name"
+            />
+            <div
+              data-lastpass-icon-root="true"
+              style={{
+                position: "relative !important",
+                height: "0px !important",
+                width: "0px !important",
+                float: "left !important",
+              }}
+            />
+          </div>
+
+          <div className="12u 12u$(xsmall)">
             <label htmlFor="itinerary">Itinerary</label>
             <input
               type="text"
@@ -82,13 +102,13 @@ export default function AddGroup() {
             />
           </div>
           <div className="3u 12u$(xsmall)">
-            <label htmlFor="priceFrom">Price from:</label>
+            <label htmlFor="capacity">Group size:</label>
             <input
               type="number"
-              name="priceFrom"
-              id="priceFrom"
-              defaultValue="Price €"
-              placeholder="Price €"
+              name="capacity"
+              id="capacity"
+              defaultValue="Size"
+              placeholder="Size"
             />
             <div
               data-lastpass-icon-root="true"
@@ -142,6 +162,65 @@ export default function AddGroup() {
               id="endDate"
               defaultValue
               placeholder="To"
+            />
+            <div
+              data-lastpass-icon-root="true"
+              style={{
+                position: "relative !important",
+                height: "0px !important",
+                width: "0px !important",
+                float: "left !important",
+              }}
+            />
+          </div>
+          <div className="4u 12u$(xsmall)">
+            <label htmlFor="insidePrice">Inside Cabin Price:</label>
+            <input
+              type="number"
+              name="insidePrice"
+              id="insidePrice"
+              defaultValue
+              placeholder="Price in €"
+            />
+            <div
+              data-lastpass-icon-root="true"
+              style={{
+                position: "relative !important",
+                height: "0px !important",
+                width: "0px !important",
+                float: "left !important",
+              }}
+            />
+          </div>
+
+          <div className="4u 12u$(xsmall)">
+            <label htmlFor="outsidePrice">Outside Cabin Price:</label>
+            <input
+              type="number"
+              name="outsidePrice"
+              id="outsidePrice"
+              defaultValue
+              placeholder="Price in €"
+            />
+            <div
+              data-lastpass-icon-root="true"
+              style={{
+                position: "relative !important",
+                height: "0px !important",
+                width: "0px !important",
+                float: "left !important",
+              }}
+            />
+          </div>
+
+          <div className="4u 12u$(xsmall)">
+            <label htmlFor="balconyPrice">Balcony Cabin Price:</label>
+            <input
+              type="number"
+              name="balconyPrice"
+              id="balconyPrice"
+              defaultValue
+              placeholder="Price in €"
             />
             <div
               data-lastpass-icon-root="true"
