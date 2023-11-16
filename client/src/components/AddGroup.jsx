@@ -126,9 +126,9 @@ export default function AddGroup() {
                 <label htmlFor="transportation">Transportation:</label>
               <select name="transportation" id="transportation">
                 <option value>- Choose Transport -</option>
-                <option value={'Fight'}>Flight</option>
-                <option value={'Bus'}>Bus</option>
-                <option value={'Car'}>Car</option>
+                <option value={'plane'}>Flight</option>
+                <option value={'bus'}>Bus</option>
+                <option value={'car'}>Car</option>
               
               </select>
             </div>

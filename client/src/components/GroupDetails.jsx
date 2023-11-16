@@ -6,11 +6,17 @@ import * as formatter from "../utils/dateUtils";
 
 export default function GroupDetails() {
   const [group, setGroup] = useState({});
+  const [transport, setTransport] = useState("");
   const { groupId } = useParams();
 
   useEffect(() => {
-    groupService.getOne(groupId).then(setGroup);
+    groupService.getOne(groupId)
+    .then(setGroup)
+    .then(() => {setTransport(group.transportation)})
+.then(console.log(transport));
   }, [groupId]);
+
+  
 
   return (
     <>
@@ -35,7 +41,7 @@ export default function GroupDetails() {
                 Itinerary: <b>{group.itinerary}</b>
               </li>
               <li>
-                Transportation: <a href="#" className="icon fa-plane"></a>{" "}
+                Transportation: <a href="#" className={`icon fa-${transport}`}></a>
               </li>
               <li>
                 Duration: <b>{group.duration}</b> days
@@ -140,4 +146,6 @@ export default function GroupDetails() {
       </section>
     </>
   );
+
+
 }
