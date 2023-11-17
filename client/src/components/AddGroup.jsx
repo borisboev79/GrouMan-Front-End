@@ -1,44 +1,80 @@
 import * as groupService from "../services/groupService";
 import { Form, useNavigate } from "react-router-dom";
 import styles from "./AddGroup.module.css";
-import { useState, useEffect, useRef } from 'react-router-dom';
+import { useState, useEffect, useRef } from "react-router-dom";
 
-
-  const formInitialState = {
-      groupName: "",
-      ship: "",
-      itinerary: "",
-      duration: "",
-      capacity: "",
-      startDate: "",
-      endDate: "",
-      insidePrice: "",
-      outsidePrice: "",
-      balconyPrice: "",
-      imageUril: "",
-
-    };
-
+const formInitialState = {
+  groupName: "",
+  ship: "",
+  itinerary: "",
+  duration: "",
+  capacity: "",
+  startDate: "",
+  endDate: "",
+  insidePrice: "",
+  outsidePrice: "",
+  balconyPrice: "",
+  imageUril: "",
+};
 
 export default function AddGroup({ formRef }) {
+  const groupNameInputRef = useRef();
+  const isMountedRef = useRef(false);
 
-  
-    const navigate = useNavigate();
+  const [formValues, setFormValues] = useState(formInitialState);
 
-    const addGroupSubmitHandler = async (e) => {
-        e.preventDefault();
+  const [numberError, setNumberError] = useState("");
 
-        const groupData = Object.fromEntries(new FormData(e.currentTarget));
+  useEffect(() => {
+    groupNameInputRef.current.focus();
+  }, []);
 
-        try {
-            await groupService.add(groupData);
-
-            navigate('/groups'); 
-        } catch (err) {
-            console.log(err);
-        }
-
+  useEffect(() => {
+    if (!isMountedRef.current) {
+      isMountedRef.current = true;
+      return;
     }
+
+    console.log('Form is updated')
+
+  }, [formValues]);
+
+
+  const changeHandler = (e) => {
+    let value = "";
+
+    switch (e.target.type) {
+      case "number":
+        value = Number(e.target.value);
+        break;
+      case "checkbox":
+        value = e.target.checked;
+        break;
+      default:
+        value = e.target.value;
+        break;
+    }
+
+    
+
+
+
+
+  const navigate = useNavigate();
+
+  const addGroupSubmitHandler = async (e) => {
+    e.preventDefault();
+
+    const groupData = Object.fromEntries(new FormData(e.currentTarget));
+
+    try {
+      await groupService.add(groupData);
+
+      navigate("/groups");
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <div className={styles.addForm}>
       <h3>Add New Cruise Group</h3>
@@ -50,7 +86,7 @@ export default function AddGroup({ formRef }) {
               type="text"
               name="groupName"
               id="groupName"
-              defaultValue=''
+              defaultValue=""
               placeholder="Group name"
             />
             <div
@@ -69,7 +105,7 @@ export default function AddGroup({ formRef }) {
               type="text"
               name="ship"
               id="ship"
-              defaultValue=''
+              defaultValue=""
               placeholder="Ship name"
             />
             <div
@@ -89,7 +125,7 @@ export default function AddGroup({ formRef }) {
               type="text"
               name="itinerary"
               id="itinerary"
-              defaultValue=''
+              defaultValue=""
               placeholder="Itinerary"
             />
             <div
@@ -140,28 +176,26 @@ export default function AddGroup({ formRef }) {
               }}
             />
           </div>
-           {/* Transprtation */}
-           <div className="6u$">
+          {/* Transprtation */}
+          <div className="6u$">
             <div className="select-wrapper">
-                <label htmlFor="transportation">Transportation:</label>
+              <label htmlFor="transportation">Transportation:</label>
               <select name="transportation" id="transportation">
                 <option value>- Choose Transport -</option>
-                <option value={'plane'}>Flight</option>
-                <option value={'bus'}>Bus</option>
-                <option value={'car'}>Car</option>
-              
+                <option value={"plane"}>Flight</option>
+                <option value={"bus"}>Bus</option>
+                <option value={"car"}>Car</option>
               </select>
             </div>
           </div>
-        
-          
+
           <div className="6u 12u$(xsmall)">
             <label htmlFor="startDate">Departure:</label>
             <input
               type="date"
               name="startDate"
               id="startDate"
-              defaultValue=''
+              defaultValue=""
               placeholder="From"
             />
             <div
@@ -252,7 +286,7 @@ export default function AddGroup({ formRef }) {
               }}
             />
           </div>
-          
+
           <div className="12u 12u$(xsmall)">
             <label htmlFor="imageUrl">ImageUrl</label>
             <input
@@ -261,8 +295,9 @@ export default function AddGroup({ formRef }) {
               id="imageUrl"
               defaultValue=""
               placeholder="Paste Image URL here"
-            /></div>
-            {/* Break */}
+            />
+          </div>
+          {/* Break */}
           <div className="12u$">
             <ul className="actions">
               <li>
@@ -273,10 +308,8 @@ export default function AddGroup({ formRef }) {
               </li>
             </ul>
           </div>
-         
         </div>
       </form>
-     
     </div>
   );
 }
