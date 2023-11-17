@@ -20,10 +20,9 @@ const formInitialState = {
 export default function AddGroup({ formRef }) {
   const groupNameInputRef = useRef();
   const isMountedRef = useRef(false);
-
   const [formValues, setFormValues] = useState(formInitialState);
-
-  const [numberError, setNumberError] = useState("");
+  const [priceError, setPriceError] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     groupNameInputRef.current.focus();
@@ -35,10 +34,8 @@ export default function AddGroup({ formRef }) {
       return;
     }
 
-    console.log('Form is updated')
-
+    console.log("Form is updated");
   }, [formValues]);
-
 
   const changeHandler = (e) => {
     let value = "";
@@ -54,13 +51,33 @@ export default function AddGroup({ formRef }) {
         value = e.target.value;
         break;
     }
+  };
 
-    
+  setFormValues((state) => ({
+    ...state,
+    [e.target.name]: value,
+  }));
+
+  const resetFormHandler = () => {
+    setFormValues(formInitialState);
+  };
+
+  
+
+  const priceValidator = () => {
+
+    if(formValues.insidePrice < 0 || formValues.outsidePrice < 0 || formValues.balconyPrice < 0) {
+        setPriceError('Price must be positive. Just like you :)');
+
+
+    }else {
+        setPriceError('');
+    }
+  }
+  
 
 
 
-
-  const navigate = useNavigate();
 
   const addGroupSubmitHandler = async (e) => {
     e.preventDefault();
@@ -69,7 +86,7 @@ export default function AddGroup({ formRef }) {
 
     try {
       await groupService.add(groupData);
-
+      resetFormHandler(formInitialState);
       navigate("/groups");
     } catch (err) {
       console.log(err);
