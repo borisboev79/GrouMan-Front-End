@@ -1,8 +1,28 @@
 import * as groupService from "../services/groupService";
 import { Form, useNavigate } from "react-router-dom";
 import styles from "./AddGroup.module.css";
+import { useState, useEffect, useRef } from 'react-router-dom';
 
-export default function AddGroup() {
+
+  const formInitialState = {
+      groupName: "",
+      ship: "",
+      itinerary: "",
+      duration: "",
+      capacity: "",
+      startDate: "",
+      endDate: "",
+      insidePrice: "",
+      outsidePrice: "",
+      balconyPrice: "",
+      imageUril: "",
+
+    };
+
+
+export default function AddGroup({ formRef }) {
+
+  
     const navigate = useNavigate();
 
     const addGroupSubmitHandler = async (e) => {
