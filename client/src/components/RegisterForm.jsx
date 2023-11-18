@@ -4,21 +4,14 @@ import styles from "./RegisterForm.module.css";
 import { useState, useEffect, useRef } from "react";
 
 const formInitialState = {
-  groupName: "",
-  ship: "",
-  itinerary: "",
-  duration: "",
-  capacity: "",
-  startDate: "",
-  endDate: "",
-  insidePrice: "",
-  outsidePrice: "",
-  balconyPrice: "",
-  imageUril: "",
+  firstName: "",
+  lastName: "",
+  email: "",
+  password: "",
 };
 
 export default function RegisterForm() {
-  const groupNameInputRef = useRef();
+  const userNameInputRef = useRef();
   const isMountedRef = useRef(false);
   const [formValues, setFormValues] = useState(formInitialState);
   const [priceError, setPriceError] = useState("");
@@ -26,7 +19,7 @@ export default function RegisterForm() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    groupNameInputRef.current.focus();
+    userNameInputRef.current.focus();
   }, []);
 
   useEffect(() => {
@@ -109,20 +102,20 @@ export default function RegisterForm() {
     }
   };
   return (
-    <div className={styles.addForm}>
+    <div className={styles.registerForm}>
       <h3>Add New Cruise Group</h3>
       <form onSubmit={addGroupSubmitHandler}>
         <div className="row uniform">
-          <div className="6u 12u$(xsmall)">
-            <label htmlFor="groupName">Group name:</label>
+          <div className="12u 12u$(xsmall)">
+            <label htmlFor="firstName">First name:</label>
             <input
-              ref={groupNameInputRef}
+              ref={userNameInputRef}
               type="text"
-              name="groupName"
-              id="groupName"
-              value={formValues.groupName}
+              name="firstName"
+              id="firstName"
+              value={formValues.firstName}
               onChange={changeHandler}
-              placeholder="Group name"
+              placeholder="First name"
             />
             <div
               data-lastpass-icon-root="true"
@@ -134,15 +127,15 @@ export default function RegisterForm() {
               }}
             />
           </div>
-          <div className="6u 6u$(xsmall)">
-            <label htmlFor="ship">Ship name:</label>
+          <div className="12u 12u$(xsmall)">
+            <label htmlFor="lastName">Last name:</label>
             <input
               type="text"
-              name="ship"
-              id="ship"
-              value={formValues.ship}
+              name="lastName"
+              id="lastName"
+              value={formValues.lastName}
               onChange={changeHandler}
-              placeholder="Ship name"
+              placeholder="Last name"
             />
             <div
               data-lastpass-icon-root="true"
@@ -156,14 +149,14 @@ export default function RegisterForm() {
           </div>
 
           <div className="12u 12u$(xsmall)">
-            <label htmlFor="itinerary">Itinerary</label>
+            <label htmlFor="email">User email:</label>
             <input
-              type="text"
-              name="itinerary"
-              id="itinerary"
-              value={formValues.itinerary}
+              type="email"
+              name="email"
+              id="email"
+              value={formValues.email}
               onChange={changeHandler}
-              placeholder="Itinerary"
+              placeholder="Email"
             />
             <div
               data-lastpass-icon-root="true"
@@ -175,61 +168,9 @@ export default function RegisterForm() {
               }}
             />
           </div>
-          <div className="3u 12u$(xsmall)">
-            <label htmlFor="duration">Duration:</label>
-            <input
-              type="number"
-              name="duration"
-              id="duration"
-              value={formValues.duration}
-              onChange={changeHandler}
-              onBlur={priceValidator}
-              className={priceError && styles.inputError}
-              placeholder="Duration"
-            />
-            <div
-              data-lastpass-icon-root="true"
-              style={{
-                position: "relative !important",
-                height: "0px !important",
-                width: "0px !important",
-                float: "left !important",
-              }}
-            />
-            {priceError && (
-            <p className={styles.errorMessage}>{priceError}</p>
-        )}
-          </div>
-          <div className="3u 12u$(xsmall)">
-            <label htmlFor="capacity">Group size:</label>
-            <input
-              type="number"
-              name="capacity"
-              id="capacity"
-              value={formValues.capacity}
-              onChange={changeHandler}
-              onBlur={capacityValidator}
-             className={capacityError && styles.inputError}
-              placeholder="Size"
-            />
-                 
-
-            <div
-              data-lastpass-icon-root="true"
-              style={{
-                position: "relative !important",
-                height: "0px !important",
-                width: "0px !important",
-                float: "left !important",
-              }}
-            />
-
-{capacityError && (
-            <p className={styles.errorMessage}>{capacityError}</p>
-        )}
-          </div>
+   
           {/* Transprtation */}
-          <div className="6u$">
+          <div className="12u$">
             <div className="select-wrapper">
               <label htmlFor="transportation">Transportation:</label>
               <select name="transportation" id="transportation">
@@ -241,122 +182,15 @@ export default function RegisterForm() {
             </div>
           </div>
 
-          <div className="6u 12u$(xsmall)">
-            <label htmlFor="startDate">Departure:</label>
-            <input
-              type="date"
-              name="startDate"
-              id="startDate"
-              defaultValue=""
-              placeholder="From"
-            />
-            <div
-              data-lastpass-icon-root="true"
-              style={{
-                position: "relative !important",
-                height: "0px !important",
-                width: "0px !important",
-                float: "left !important",
-              }}
-            />
-          </div>
-          <div className="6u 12u$(xsmall)">
-            <label htmlFor="endDate">Return:</label>
-            <input
-              type="date"
-              name="endDate"
-              id="endDate"
-              defaultValue
-              placeholder="To"
-            />
-            <div
-              data-lastpass-icon-root="true"
-              style={{
-                position: "relative !important",
-                height: "0px !important",
-                width: "0px !important",
-                float: "left !important",
-              }}
-            />
-          </div>
-          <div className="4u 12u$(xsmall)">
-            <label htmlFor="insidePrice">Inside Cabin Price:</label>
-            <input
-              type="number"
-              name="insidePrice"
-              id="insidePrice"
-              defaultValue
-              placeholder="Price in €"
-            />
-            <div
-              data-lastpass-icon-root="true"
-              style={{
-                position: "relative !important",
-                height: "0px !important",
-                width: "0px !important",
-                float: "left !important",
-              }}
-            />
-          </div>
-
-          <div className="4u 12u$(xsmall)">
-            <label htmlFor="outsidePrice">Outside Cabin Price:</label>
-            <input
-              type="number"
-              name="outsidePrice"
-              id="outsidePrice"
-              defaultValue
-              placeholder="Price in €"
-            />
-            <div
-              data-lastpass-icon-root="true"
-              style={{
-                position: "relative !important",
-                height: "0px !important",
-                width: "0px !important",
-                float: "left !important",
-              }}
-            />
-          </div>
-
-          <div className="4u 12u$(xsmall)">
-            <label htmlFor="balconyPrice">Balcony Cabin Price:</label>
-            <input
-              type="number"
-              name="balconyPrice"
-              id="balconyPrice"
-              defaultValue
-              placeholder="Price in €"
-            />
-            <div
-              data-lastpass-icon-root="true"
-              style={{
-                position: "relative !important",
-                height: "0px !important",
-                width: "0px !important",
-                float: "left !important",
-              }}
-            />
-          </div>
-
-          <div className="12u 12u$(xsmall)">
-            <label htmlFor="imageUrl">ImageUrl</label>
-            <input
-              type="text"
-              name="imageUrl"
-              id="imageUrl"
-              defaultValue=""
-              placeholder="Paste Image URL here"
-            />
-          </div>
+         
           {/* Break */}
           <div className="12u$">
             <ul className="actions">
               <li>
-                <input type="submit" defaultValue="Send Message" />
+                <input type="submit" value="Register" />
               </li>
               <li>
-                <input type="reset" defaultValue="Reset" className="alt" />
+                <input type="reset" value="Reset" className="alt" />
               </li>
             </ul>
           </div>

@@ -13,10 +13,10 @@ export default function Navbar({toggle,}) {
           Grouman
         </a>
         <nav className={styles.right}>
-          <Link to="/login" className={[styles.button, styles.alt].join(' ')}>
+          <Link to="/users/login" className={[styles.button, styles.alt].join(' ')}>
             Log in
           </Link>
-          <Link to="/mann" className={[styles.button, styles.alt].join(' ')}>
+          <Link to="/users/register" className={[styles.button, styles.alt].join(' ')}>
             Register
           </Link>
         </nav>

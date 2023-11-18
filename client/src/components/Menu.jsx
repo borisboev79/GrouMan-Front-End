@@ -25,12 +25,12 @@ export default function Menu({toggle,}) {
       </ul>
       <ul className={[styles.actions, styles.vertical].join(' ')}>
         <li>
-          <Link to='/login' className={[styles.button, styles.fit].join(' ')}>
+          <Link to='/users/login' className={[styles.button, styles.fit].join(' ')}>
             Login
           </Link>
         </li>
         <li>
-          <Link to="/register" className={[styles.button, styles.fit].join(' ')}>
+          <Link to="/users/register" className={[styles.button, styles.fit].join(' ')}>
             Register
           </Link>
         </li>

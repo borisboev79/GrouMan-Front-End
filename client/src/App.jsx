@@ -29,8 +29,8 @@ function App() {
       <Navbar toggle={showMenuHandler} />
       {showMenu && <Menu toggle={closeMenuHandler} />}
       <Routes>
-        <Route path="/login" element={<LoginForm />} />
-        <Route path="/mann" element={<RegisterForm />} />
+        <Route path="/users/login" element={<LoginForm />} />
+        <Route path="/users/register" element={<RegisterForm />} />
         <Route path="/groups" element={<Groups />} />
         <Route path="/home" element={<Banner />} />
         <Route path="/misc" element={<Miscellaneous />} />
