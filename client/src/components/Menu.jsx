@@ -30,9 +30,9 @@ export default function Menu({toggle,}) {
           </Link>
         </li>
         <li>
-          <a href="#" className={[styles.button, styles.fit].join(' ')}>
+          <Link to="/register" className={[styles.button, styles.fit].join(' ')}>
             Register
-          </a>
+          </Link>
         </li>
       </ul>
     </nav>

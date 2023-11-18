@@ -16,9 +16,9 @@ export default function Navbar({toggle,}) {
           <Link to="/login" className={[styles.button, styles.alt].join(' ')}>
             Log in
           </Link>
-          <a href="#" className={[styles.button, styles.alt].join(' ')}>
+          <Link to="/mann" className={[styles.button, styles.alt].join(' ')}>
             Register
-          </a>
+          </Link>
         </nav>
       </header>
       </>

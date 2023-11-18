@@ -1,6 +1,6 @@
-import * as groupService from "../services/groupService";
+import * as userService from "../services/userService";
 import { Form, useNavigate } from "react-router-dom";
-import styles from "./AddGroup.module.css";
+import styles from "./RegisterForm.module.css";
 import { useState, useEffect, useRef } from "react";
 
 const formInitialState = {
@@ -17,7 +17,7 @@ const formInitialState = {
   imageUril: "",
 };
 
-export default function AddGroup() {
+export default function RegisterForm() {
   const groupNameInputRef = useRef();
   const isMountedRef = useRef(false);
   const [formValues, setFormValues] = useState(formInitialState);
