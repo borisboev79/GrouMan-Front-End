@@ -8,6 +8,7 @@ const formInitialState = {
   lastName: "",
   email: "",
   password: "",
+  repeatPassword: "",
 };
 
 export default function RegisterForm() {
@@ -169,15 +170,59 @@ export default function RegisterForm() {
             />
           </div>
    
-          {/* Transprtation */}
+
+          <div className="12u 12u$(xsmall)">
+            <label htmlFor="password">Choose password:</label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              value={formValues.email}
+              onChange={changeHandler}
+              placeholder="Enter password"
+            />
+            <div
+              data-lastpass-icon-root="true"
+              style={{
+                position: "relative !important",
+                height: "0px !important",
+                width: "0px !important",
+                float: "left !important",
+              }}
+            />
+          </div>
+
+          
+          <div className="12u 12u$(xsmall)">
+            <label htmlFor="repeatPassword">Repeat password:</label>
+            <input
+              type="password"
+              name="repeatPassword"
+              id="repeatPassword"
+              value={formValues.email}
+              onChange={changeHandler}
+              placeholder="Repeat password"
+            />
+            <div
+              data-lastpass-icon-root="true"
+              style={{
+                position: "relative !important",
+                height: "0px !important",
+                width: "0px !important",
+                float: "left !important",
+              }}
+            />
+          </div>
+
+          {/* Office select */}
           <div className="12u$">
             <div className="select-wrapper">
-              <label htmlFor="transportation">Transportation:</label>
+              <label htmlFor="transportation">Office:</label>
               <select name="transportation" id="transportation">
-                <option value>- Choose Transport -</option>
-                <option value={"plane"}>Flight</option>
-                <option value={"bus"}>Bus</option>
-                <option value={"car"}>Car</option>
+                <option value>- Select office -</option>
+                <option value={"SOFR"}>Sofia Central</option>
+                <option value={"MOS"}>Mall of Sofia</option>
+                <option value={"PDV"}>Plovdiv</option>
               </select>
             </div>
           </div>
