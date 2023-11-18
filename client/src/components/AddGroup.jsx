@@ -2,25 +2,54 @@ import * as groupService from "../services/groupService";
 import { Form, useNavigate } from "react-router-dom";
 import styles from "./AddGroup.module.css";
 import { useState, useEffect, useRef } from "react";
+import {useForm } from '../hooks/useFrom';
 
-const formInitialState = {
-  groupName: "",
-  ship: "",
-  itinerary: "",
-  duration: "",
-  capacity: "",
-  startDate: "",
-  endDate: "",
-  insidePrice: "",
-  outsidePrice: "",
-  balconyPrice: "",
-  imageUril: "",
-};
+// const formInitialState = {
+//   groupName: "",
+//   ship: "",
+//   itinerary: "",
+//   duration: "",
+//   capacity: "",
+//   startDate: "",
+//   endDate: "",
+//   insidePrice: "",
+//   outsidePrice: "",
+//   balconyPrice: "",
+//   imageUril: "",
+// };
 
 export default function AddGroup() {
+
+  const {formValues, changeHandler, resetFormHandler, onSubmit} = useForm({
+    groupName: "",
+    ship: "",
+    itinerary: "",
+    duration: "",
+    capacity: "",
+    startDate: "",
+    endDate: "",
+    insidePrice: "",
+    outsidePrice: "",
+    balconyPrice: "",
+    imageUrl: "",
+  }, async (values) => {
+
+    try {
+      await groupService.add(values);
+      resetFormHandler;
+      navigate("/groups");
+    } catch (err) {
+      console.log(err);
+    }
+
+
+  });
+
+
+
   const groupNameInputRef = useRef();
   const isMountedRef = useRef(false);
-  const [formValues, setFormValues] = useState(formInitialState);
+  // const [formValues, setFormValues] = useState(formInitialState);
   const [priceError, setPriceError] = useState("");
   const [capacityError, setCapacityError] = useState("");
   const navigate = useNavigate();
@@ -38,32 +67,34 @@ export default function AddGroup() {
     console.log("Form is updated");
   }, [formValues]);
 
-  const changeHandler = (e) => {
+  // WITHOUT CUSTOM HOOK
 
-    let value = "";
+//   const changeHandler = (e) => {
 
-    switch (e.target.type) {
-      case "number":
-        value = Number(e.target.value);
-        break;
-      case "checkbox":
-        value = e.target.checked;
-        break;
-      default:
-        value = e.target.value;
-        break;
-    }
+//     let value = "";
+
+//     switch (e.target.type) {
+//       case "number":
+//         value = Number(e.target.value);
+//         break;
+//       case "checkbox":
+//         value = e.target.checked;
+//         break;
+//       default:
+//         value = e.target.value;
+//         break;
+//     }
   
 
-  setFormValues((state) => ({
-    ...state,
-    [e.target.name]: value,
-  }));
-};
+//   setFormValues((state) => ({
+//     ...state,
+//     [e.target.name]: value,
+//   }));
+// };
 
-  const resetFormHandler = () => {
-    setFormValues(formInitialState);
-  };
+  // const resetFormHandler = () => {
+  //   setFormValues(formInitialState);
+  // };
 
   
 
@@ -93,25 +124,29 @@ export default function AddGroup() {
   
 
 
+  //WITHOUT customHook:
+
+  // const addGroupSubmitHandler = async (e) => {
+  //   e.preventDefault();
+
+  //   const groupData = Object.fromEntries(new FormData(e.currentTarget));
 
 
-  const addGroupSubmitHandler = async (e) => {
-    e.preventDefault();
 
-    const groupData = Object.fromEntries(new FormData(e.currentTarget));
+  //   try {
+  //     await groupService.add(groupData);
+  //     resetFormHandler(formInitialState);
+  //     navigate("/groups");
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
-    try {
-      await groupService.add(groupData);
-      resetFormHandler(formInitialState);
-      navigate("/groups");
-    } catch (err) {
-      console.log(err);
-    }
-  };
+
   return (
     <div className={styles.addForm}>
       <h3>Add New Cruise Group</h3>
-      <form onSubmit={addGroupSubmitHandler}>
+      <form onSubmit={onSubmit}>
         <div className="row uniform">
           <div className="6u 12u$(xsmall)">
             <label htmlFor="groupName">Group name:</label>
@@ -345,7 +380,8 @@ export default function AddGroup() {
               type="text"
               name="imageUrl"
               id="imageUrl"
-              defaultValue=""
+              value={formValues.imageUrl}
+              onChange={changeHandler}
               placeholder="Paste Image URL here"
             />
           </div>
