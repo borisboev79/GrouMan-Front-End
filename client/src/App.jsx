@@ -24,7 +24,6 @@ function App() {
   }
 
 
-
   return (
     <div>
       <Navbar toggle={showMenuHandler}/>

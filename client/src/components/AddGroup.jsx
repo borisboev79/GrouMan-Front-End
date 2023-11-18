@@ -1,7 +1,7 @@
 import * as groupService from "../services/groupService";
 import { Form, useNavigate } from "react-router-dom";
 import styles from "./AddGroup.module.css";
-import { useState, useEffect, useRef } from "react-router-dom";
+import { useState, useEffect, useRef } from "react";
 
 const formInitialState = {
   groupName: "",
@@ -17,11 +17,12 @@ const formInitialState = {
   imageUril: "",
 };
 
-export default function AddGroup({ formRef }) {
+export default function AddGroup() {
   const groupNameInputRef = useRef();
   const isMountedRef = useRef(false);
   const [formValues, setFormValues] = useState(formInitialState);
   const [priceError, setPriceError] = useState("");
+  const [capacityError, setCapacityError] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -38,6 +39,7 @@ export default function AddGroup({ formRef }) {
   }, [formValues]);
 
   const changeHandler = (e) => {
+
     let value = "";
 
     switch (e.target.type) {
@@ -51,12 +53,13 @@ export default function AddGroup({ formRef }) {
         value = e.target.value;
         break;
     }
-  };
+  
 
   setFormValues((state) => ({
     ...state,
     [e.target.name]: value,
   }));
+};
 
   const resetFormHandler = () => {
     setFormValues(formInitialState);
@@ -66,13 +69,26 @@ export default function AddGroup({ formRef }) {
 
   const priceValidator = () => {
 
-    if(formValues.insidePrice < 0 || formValues.outsidePrice < 0 || formValues.balconyPrice < 0) {
-        setPriceError('Price must be positive. Just like you :)');
+    if(formValues.duration <= 0) {
 
+        setPriceError('Duration must be positive. Just like you :)');
 
-    }else {
+      }else {
         setPriceError('');
     }
+    
+  }
+
+  const capacityValidator = () => {
+
+    if(formValues.capacity <= 0) {
+    
+        setCapacityError('We dont make empty groups :)');
+
+      }else {
+        setCapacityError('');
+    }
+    
   }
   
 
@@ -100,10 +116,12 @@ export default function AddGroup({ formRef }) {
           <div className="6u 12u$(xsmall)">
             <label htmlFor="groupName">Group name:</label>
             <input
+              ref={groupNameInputRef}
               type="text"
               name="groupName"
               id="groupName"
-              defaultValue=""
+              value={formValues.groupName}
+              onChange={changeHandler}
               placeholder="Group name"
             />
             <div
@@ -122,7 +140,8 @@ export default function AddGroup({ formRef }) {
               type="text"
               name="ship"
               id="ship"
-              defaultValue=""
+              value={formValues.ship}
+              onChange={changeHandler}
               placeholder="Ship name"
             />
             <div
@@ -142,7 +161,8 @@ export default function AddGroup({ formRef }) {
               type="text"
               name="itinerary"
               id="itinerary"
-              defaultValue=""
+              value={formValues.itinerary}
+              onChange={changeHandler}
               placeholder="Itinerary"
             />
             <div
@@ -161,7 +181,10 @@ export default function AddGroup({ formRef }) {
               type="number"
               name="duration"
               id="duration"
-              defaultValue
+              value={formValues.duration}
+              onChange={changeHandler}
+              onBlur={priceValidator}
+              className={priceError && styles.inputError}
               placeholder="Duration"
             />
             <div
@@ -173,6 +196,9 @@ export default function AddGroup({ formRef }) {
                 float: "left !important",
               }}
             />
+            {priceError && (
+            <p className={styles.errorMessage}>{priceError}</p>
+        )}
           </div>
           <div className="3u 12u$(xsmall)">
             <label htmlFor="capacity">Group size:</label>
@@ -180,9 +206,14 @@ export default function AddGroup({ formRef }) {
               type="number"
               name="capacity"
               id="capacity"
-              defaultValue="Size"
+              value={formValues.capacity}
+              onChange={changeHandler}
+              onBlur={capacityValidator}
+             className={capacityError && styles.inputError}
               placeholder="Size"
             />
+                 
+
             <div
               data-lastpass-icon-root="true"
               style={{
@@ -192,6 +223,10 @@ export default function AddGroup({ formRef }) {
                 float: "left !important",
               }}
             />
+
+{capacityError && (
+            <p className={styles.errorMessage}>{capacityError}</p>
+        )}
           </div>
           {/* Transprtation */}
           <div className="6u$">

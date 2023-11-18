@@ -211,3 +211,14 @@ form {
     color: #bbb !important;
     opacity: 1;
   }
+
+  .errorMessage {
+    color: red;
+    font-size: 12px;
+    margin-top: 0;
+  }
+
+  input[type="number"].inputError {
+  border: solid 2px red;
+}
+  
