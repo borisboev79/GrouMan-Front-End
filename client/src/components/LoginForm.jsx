@@ -13,7 +13,7 @@ export default function LoginForm({ close }) {
             type="email"
             name="email"
             id="email"
-            defaultValue
+            value="Enter your email"
             placeholder="Email"
           />
           <div

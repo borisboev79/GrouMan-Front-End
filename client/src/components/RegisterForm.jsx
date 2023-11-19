@@ -2,19 +2,40 @@ import * as userService from "../services/userService";
 import { Form, useNavigate } from "react-router-dom";
 import styles from "./RegisterForm.module.css";
 import { useState, useEffect, useRef } from "react";
+import { useForm } from "../hooks/useForm";
 
 const formInitialState = {
   firstName: "",
   lastName: "",
   email: "",
   password: "",
-  repeatPassword: "",
+  confirmPassword: "",
+  office: "",
 };
 
 export default function RegisterForm() {
+  const { formValues, changeHandler, resetFormHandler, onSubmit } = useForm(
+    {
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
+    async (values) => {
+      try {
+        await userService.add(values);
+        resetFormHandler;
+        navigate("/groups");
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  );
+
   const userNameInputRef = useRef();
   const isMountedRef = useRef(false);
-  const [formValues, setFormValues] = useState(formInitialState);
+  // const [formValues, setFormValues] = useState(formInitialState);
   const [priceError, setPriceError] = useState("");
   const [capacityError, setCapacityError] = useState("");
   const navigate = useNavigate();
@@ -32,62 +53,47 @@ export default function RegisterForm() {
     console.log("Form is updated");
   }, [formValues]);
 
-  const changeHandler = (e) => {
+  //   const changeHandler = (e) => {
 
-    let value = "";
+  //     let value = "";
 
-    switch (e.target.type) {
-      case "number":
-        value = Number(e.target.value);
-        break;
-      case "checkbox":
-        value = e.target.checked;
-        break;
-      default:
-        value = e.target.value;
-        break;
-    }
-  
+  //     switch (e.target.type) {
+  //       case "number":
+  //         value = Number(e.target.value);
+  //         break;
+  //       case "checkbox":
+  //         value = e.target.checked;
+  //         break;
+  //       default:
+  //         value = e.target.value;
+  //         break;
+  //     }
 
-  setFormValues((state) => ({
-    ...state,
-    [e.target.name]: value,
-  }));
-};
+  //   setFormValues((state) => ({
+  //     ...state,
+  //     [e.target.name]: value,
+  //   }));
+  // };
 
-  const resetFormHandler = () => {
-    setFormValues(formInitialState);
-  };
-
-  
+  //   const resetFormHandler = () => {
+  //     setFormValues(formInitialState);
+  //   };
 
   const priceValidator = () => {
-
-    if(formValues.duration <= 0) {
-
-        setPriceError('Duration must be positive. Just like you :)');
-
-      }else {
-        setPriceError('');
+    if (formValues.duration <= 0) {
+      setPriceError("Duration must be positive. Just like you :)");
+    } else {
+      setPriceError("");
     }
-    
-  }
+  };
 
   const capacityValidator = () => {
-
-    if(formValues.capacity < 12) {
-    
-        setCapacityError('No dozen, no group');
-
-      }else {
-        setCapacityError('');
+    if (formValues.capacity < 12) {
+      setCapacityError("No dozen, no group");
+    } else {
+      setCapacityError("");
     }
-    
-  }
-  
-
-
-
+  };
 
   const addGroupSubmitHandler = async (e) => {
     e.preventDefault();
@@ -105,8 +111,9 @@ export default function RegisterForm() {
   return (
     <div className={styles.registerForm}>
       <h3>Register New User</h3>
-      <form onSubmit={addGroupSubmitHandler}>
+      <form onSubmit={onSubmit}>
         <div className="row uniform">
+          {/* First name */}
           <div className="12u 12u$(xsmall)">
             <label htmlFor="firstName">First name:</label>
             <input
@@ -128,6 +135,7 @@ export default function RegisterForm() {
               }}
             />
           </div>
+          {/* Last name */}
           <div className="12u 12u$(xsmall)">
             <label htmlFor="lastName">Last name:</label>
             <input
@@ -148,7 +156,7 @@ export default function RegisterForm() {
               }}
             />
           </div>
-
+          {/* Email */}
           <div className="12u 12u$(xsmall)">
             <label htmlFor="email">User email:</label>
             <input
@@ -169,15 +177,14 @@ export default function RegisterForm() {
               }}
             />
           </div>
-   
-
+          {/* Password */}
           <div className="12u 12u$(xsmall)">
             <label htmlFor="password">Choose password:</label>
             <input
               type="password"
               name="password"
               id="password"
-              value={formValues.email}
+              value={formValues.password}
               onChange={changeHandler}
               placeholder="Enter password"
             />
@@ -191,17 +198,16 @@ export default function RegisterForm() {
               }}
             />
           </div>
-
-          
+          {/* Confirm password */}
           <div className="12u 12u$(xsmall)">
-            <label htmlFor="repeatPassword">Repeat password:</label>
+            <label htmlFor="confirmPassword">Confirm password:</label>
             <input
               type="password"
-              name="repeatPassword"
-              id="repeatPassword"
-              value={formValues.email}
+              name="confirmPassword"
+              id="confirmPassword"
+              value={formValues.confirmPassword}
               onChange={changeHandler}
-              placeholder="Repeat password"
+              placeholder="Confirm password"
             />
             <div
               data-lastpass-icon-root="true"
@@ -217,8 +223,8 @@ export default function RegisterForm() {
           {/* Office select */}
           <div className="12u$">
             <div className="select-wrapper">
-              <label htmlFor="transportation">Office:</label>
-              <select name="transportation" id="transportation">
+              <label htmlFor="office">Office:</label>
+              <select name="office" id="office" value={formValues.office} onChange={changeHandler}>
                 <option value>- Select office -</option>
                 <option value={"SOFR"}>Sofia Central</option>
                 <option value={"MOS"}>Mall of Sofia</option>
@@ -227,7 +233,6 @@ export default function RegisterForm() {
             </div>
           </div>
 
-         
           {/* Break */}
           <div className="12u$">
             <ul className="actions">
@@ -235,7 +240,7 @@ export default function RegisterForm() {
                 <input type="submit" value="Register" />
               </li>
               <li>
-                <input type="reset" value="Reset" className="alt" />
+                <input type="reset" value="Reset" className="alt" onClick={resetFormHandler} />
               </li>
             </ul>
           </div>
