@@ -1,8 +1,11 @@
+import './LoginForm.css'
+
 export default function LoginForm() {
     return(
-        <>
-        <h3>Login</h3>
-        <form method="post" action="#">
+        <div className='wrapper'>
+       
+        <form className="login">
+          <h3>Login</h3>
           <div className="row uniform">
             <div className="6u 12u$(xsmall)">
               <input
@@ -106,6 +109,6 @@ export default function LoginForm() {
             </div>
           </div>
         </form>
-        </>
+        </div>
     )
 }

@@ -15,6 +15,7 @@ import GroupDetails from "./components/GroupDetails";
 
 function App() {
   const [showMenu, setShowMenu] = useState(false);
+  const [showLogin, setShowLogin] = useState(true);
 
   const showMenuHandler = () => {
     setShowMenu(true);
@@ -24,15 +25,25 @@ function App() {
     setShowMenu(false);
   };
 
+  const showLoginHandler = () => {
+    setShowLogin(true);
+  }
+
+  const closeLoginHandler = () => {
+    setShowLogin(false);
+  }
+
   return (
   //  <SomeContext.Provider>
 
    
     <div>
-      <Navbar toggle={showMenuHandler} />
+      <Navbar toggle={showMenuHandler} showLogin={showLogin} />
       {showMenu && <Menu toggle={closeMenuHandler} />}
+      {showLogin && <LoginForm close={closeLoginHandler} />}
+
       <Routes>
-        <Route path="/users/login" element={<LoginForm />} />
+        {/* <Route path="/users/login"  element={<LoginForm />} /> */}
         <Route path="/users/register" element={<RegisterForm />} />
         <Route path="/groups" element={<Groups />} />
         <Route path="/home" element={<Banner />} />

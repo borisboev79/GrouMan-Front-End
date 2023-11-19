@@ -2,7 +2,7 @@ import * as groupService from "../services/groupService";
 import { Form, useNavigate } from "react-router-dom";
 import styles from "./AddGroup.module.css";
 import { useState, useEffect, useRef } from "react";
-import { useForm } from "../hooks/useFrom";
+import { useForm } from "../hooks/useForm";
 
 // const formInitialState = {
 //   groupName: "",
