@@ -1,8 +1,9 @@
-.wrapper {
+.login-wrapper {
   background: rgb(128, 128, 128, 0.8);
   position: absolute;
   width: 100vw;
   height: 100vh;
+  overflow-y: auto;
   z-index: 10;
 }
 
@@ -282,4 +283,3 @@ form {
     line-height: 4em;
   }
 }
-  

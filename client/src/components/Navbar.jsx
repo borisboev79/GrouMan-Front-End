@@ -1,7 +1,7 @@
 import styles from './Navbar.module.css'
 import { Link } from 'react-router-dom'
 
-export default function Navbar({toggle,}) {
+export default function Navbar({toggle, showLogin}) {
     return(
       <>
         <header className={styles.header}>
@@ -13,9 +13,9 @@ export default function Navbar({toggle,}) {
           Grouman
         </a>
         <nav className={styles.right}>
-          <Link to="/users/login" className={[styles.button, styles.alt].join(' ')}>
+          <a className={[styles.button, styles.alt].join(' ')} onClick={showLogin}>
             Log in
-          </Link>
+          </a>
           <Link to="/users/register" className={[styles.button, styles.alt].join(' ')}>
             Register
           </Link>

@@ -15,7 +15,7 @@ import GroupDetails from "./components/GroupDetails";
 
 function App() {
   const [showMenu, setShowMenu] = useState(false);
-  const [showLogin, setShowLogin] = useState(true);
+  const [showLogin, setShowLogin] = useState(false);
 
   const showMenuHandler = () => {
     setShowMenu(true);
@@ -38,7 +38,7 @@ function App() {
 
    
     <div>
-      <Navbar toggle={showMenuHandler} showLogin={showLogin} />
+      <Navbar toggle={showMenuHandler} showLogin={showLoginHandler} />
       {showMenu && <Menu toggle={closeMenuHandler} />}
       {showLogin && <LoginForm close={closeLoginHandler} />}
 

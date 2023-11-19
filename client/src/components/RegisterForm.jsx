@@ -104,7 +104,7 @@ export default function RegisterForm() {
   };
   return (
     <div className={styles.registerForm}>
-      <h3>Add New Cruise Group</h3>
+      <h3>Register New User</h3>
       <form onSubmit={addGroupSubmitHandler}>
         <div className="row uniform">
           <div className="12u 12u$(xsmall)">
