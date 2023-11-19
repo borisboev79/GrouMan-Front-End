@@ -26,7 +26,7 @@ export default function RegisterForm() {
       try {
         await userService.add(values);
         resetFormHandler;
-        navigate("/groups");
+        navigate("/users");
       } catch (err) {
         console.log(err);
       }
@@ -35,9 +35,8 @@ export default function RegisterForm() {
 
   const userNameInputRef = useRef();
   const isMountedRef = useRef(false);
-  // const [formValues, setFormValues] = useState(formInitialState);
-  const [priceError, setPriceError] = useState("");
-  const [capacityError, setCapacityError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [stringError, setstringError] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -53,43 +52,17 @@ export default function RegisterForm() {
     console.log("Form is updated");
   }, [formValues]);
 
-  //   const changeHandler = (e) => {
-
-  //     let value = "";
-
-  //     switch (e.target.type) {
-  //       case "number":
-  //         value = Number(e.target.value);
-  //         break;
-  //       case "checkbox":
-  //         value = e.target.checked;
-  //         break;
-  //       default:
-  //         value = e.target.value;
-  //         break;
-  //     }
-
-  //   setFormValues((state) => ({
-  //     ...state,
-  //     [e.target.name]: value,
-  //   }));
-  // };
-
-  //   const resetFormHandler = () => {
-  //     setFormValues(formInitialState);
-  //   };
-
-  const priceValidator = () => {
-    if (formValues.duration <= 0) {
-      setPriceError("Duration must be positive. Just like you :)");
+  const emailValidator = () => {
+    if (!(formValues.email).includes("@")) {
+      setEmailError("This is not a valid email.");
     } else {
-      setPriceError("");
+      setEmailError("");
     }
   };
 
-  const capacityValidator = () => {
-    if (formValues.capacity < 12) {
-      setCapacityError("No dozen, no group");
+  const stringValidator = () => {
+    if ((formValues.passord).length < 12) {
+      setCapacityError("Password should be at least 8 characters");
     } else {
       setCapacityError("");
     }
@@ -103,7 +76,7 @@ export default function RegisterForm() {
     try {
       await groupService.add(groupData);
       resetFormHandler(formInitialState);
-      navigate("/groups");
+      navigate("/users");
     } catch (err) {
       console.log(err);
     }
@@ -145,7 +118,8 @@ export default function RegisterForm() {
               value={formValues.lastName}
               onChange={changeHandler}
               placeholder="Last name"
-            />
+              className="redlabel"
+                          />
             <div
               data-lastpass-icon-root="true"
               style={{
@@ -165,8 +139,13 @@ export default function RegisterForm() {
               id="email"
               value={formValues.email}
               onChange={changeHandler}
+              onBlur={emailValidator}
+              className={emailError && styles.redlabel}
               placeholder="Email"
             />
+            {emailError && (
+              <p className={styles.errorMessage}>{emailError}</p>
+            )}
             <div
               data-lastpass-icon-root="true"
               style={{

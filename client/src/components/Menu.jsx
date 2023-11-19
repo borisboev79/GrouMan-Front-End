@@ -22,6 +22,9 @@ export default function Menu({toggle,}) {
         <li>
           <Link to="/groups/add">Add Group</Link>
         </li>
+        <li>
+          <Link to="/users">View and Modify Users</Link>
+        </li>
       </ul>
       <ul className={[styles.actions, styles.vertical].join(' ')}>
         <li>

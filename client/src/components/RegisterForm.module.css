@@ -218,7 +218,9 @@ form {
     margin-top: 0;
   }
 
-  input[type="number"].inputError {
+  .redlabel {
+    background: red;
+    color: red;
   border: solid 2px red;
 }
   

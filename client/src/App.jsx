@@ -1,6 +1,7 @@
 import Navbar from "./components/Navbar";
 import Menu from "./components/Menu";
 import Groups from "./components/Groups";
+import UserList from "./components/UserList";
 import Miscellaneous from "./components/Miscellaneous";
 import One from "./components/One";
 import Banner from "./components/Banner";
@@ -48,6 +49,7 @@ function App() {
         <Route path="/groups" element={<Groups />} />
         <Route path="/home" element={<Banner />} />
         <Route path="/misc" element={<Miscellaneous />} />
+        <Route path="/users" element={<UserList />}/>
         <Route path="/groups/add" element={<AddGroup />} />
         <Route path="/groups/:groupId" element={<GroupDetails />} />
       </Routes>
