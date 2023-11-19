@@ -389,7 +389,7 @@ export default function AddGroup() {
                 <input type="submit" value="Submit" />
               </li>                       
               <li>
-                <input type="reset" value="Reset" className="alt" />
+                <input type="reset" value="Reset" className="alt" onClick={resetFormHandler} />
               </li>
             </ul>
           </div>
