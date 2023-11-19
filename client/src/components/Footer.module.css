@@ -53,14 +53,20 @@
 
 
 .footer {
-    padding: 2em 0 2em 0;
+    padding: 1em 0 1em 0;
     background: #25a2c3;
     text-align: center;
     color: #c8e7f0;
+    height: 6vh;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 3vh;
   }
   
-  .footer h2 {
+  .footer h3 {
     color: #fff;
+    margin-bottom: 0.5em;
   }
   
   .footer .icon {
@@ -96,9 +102,10 @@
     font-size: 0.75em;
     text-align: center;
     border-top: 1px solid rgba(255, 255, 255, 0.25);
-    padding: 2em 0 2em 0;
+    padding: 1.2em 0 1em 0;
     width: 100%;
-    position: relative;
+    height: 3vh;
+    position: fixed;
     bottom: 0;
   }
   .copyright a {

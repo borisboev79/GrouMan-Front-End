@@ -5,7 +5,7 @@ export default function Footer() {
         <>
         <footer className={styles.footer}>
         <div className={styles.inner}>
-          <h2>For Assistance</h2>
+          <h3>For Assistance</h3>
           <ul className={styles.actions}>
             <li>
               <span className="icon fa-phone" /> <a href="#">(+359) 888-9876543</a>
