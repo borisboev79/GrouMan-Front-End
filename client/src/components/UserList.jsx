@@ -32,21 +32,14 @@ export default function UserList() {
 
                 {users.map(user => <UserRow key={user._id} {...user}  />)}
 
-                <tr>
-                  <td>Item 4</td>
-                  <td>Vitae integer tempus condimentum.</td>
-                  <td>19.99</td>
-                </tr>
-                <tr>
-                  <td>Item 5</td>
-                  <td>Ante turpis integer aliquet porttitor.</td>
-                  <td>29.99</td>
-                </tr>
+               
               </tbody>
               <tfoot>
                 <tr>
-                  <td colSpan={2} />
-                  <td>100.00</td>
+                    
+                  <td colSpan={1} />
+                  <td>Active Users</td>
+                  <td>{users.length}</td>
                 </tr>
               </tfoot>
             </table>
