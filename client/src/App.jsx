@@ -51,14 +51,11 @@ function App() {
         <Route path="/groups/add" element={<AddGroup />} />
         <Route path="/groups/:groupId" element={<GroupDetails />} />
       </Routes>
-
+    
       <One />
 
-      {/* <Two /> */}
-
-      {/* Footer */}
       <Footer />
-    </div>
+      </div>
 
  //    </SomeContext.Provider>
   );

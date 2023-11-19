@@ -2227,6 +2227,8 @@ input[type="radio"] + label:before {
   padding: 0;
 }
 
+
+
 /* Icon */
 
 .icon {
@@ -3370,5 +3372,9 @@ body.is-loading #banner .content {
 
   #footer .copyright {
     padding: 2em 0;
+  }
+
+  .main-frame {
+    background: red;
   }
 }

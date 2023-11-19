@@ -53,7 +53,7 @@
 
 
 .footer {
-    padding: 6em 0 4em 0;
+    padding: 2em 0 2em 0;
     background: #25a2c3;
     text-align: center;
     color: #c8e7f0;
@@ -98,6 +98,8 @@
     border-top: 1px solid rgba(255, 255, 255, 0.25);
     padding: 2em 0 2em 0;
     width: 100%;
+    position: relative;
+    bottom: 0;
   }
   .copyright a {
     color: white;
