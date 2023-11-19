@@ -1,4 +1,5 @@
 import './UserRow.css';
+import { officeDecoder } from '../utils/officeDecoder';
 
 export default function UserRow({
   _id,
@@ -21,7 +22,7 @@ export default function UserRow({
         {firstName} {lastName}
       </td>
       <td>{email}</td>
-      <td>{office}</td>
+      <td>{officeDecoder(office)}</td>
       <td>
         <a className="button small" value="Edit">
           Edit
