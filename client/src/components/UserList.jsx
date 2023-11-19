@@ -13,6 +13,12 @@ export default function UserList() {
       .catch((err) => console.log(err));
   }, []);
 
+  const removeHandler = (userId) => {
+    userService.remove(userId);
+
+    setUsers((state) => state.filter((u) => u._id !== userId));
+  }
+
   return (
     <>
       <div className="users-row 200%">
@@ -26,20 +32,23 @@ export default function UserList() {
                   <th>Name</th>
                   <th>Email</th>
                   <th>Office</th>
+                  <th colspan={2} style={{textAlign: 'center'}}>Commands</th>
+                  
+
                 </tr>
               </thead>
               <tbody>
 
-                {users.map(user => <UserRow key={user._id} {...user}  />)}
+                {users.map(user => <UserRow key={user._id} onDelete={removeHandler} {...user}   />)}
 
                
               </tbody>
               <tfoot>
                 <tr>
                     
-                  <td colSpan={1} />
-                  <td>Active Users</td>
-                  <td>{users.length}</td>
+                  <td colSpan={3} />
+                  <td style={{textAlign: 'right', fontWeight: '700'}} >Active Users</td>
+                  <td style={{textAlign: 'right', fontWeight: '700', color: '#25a2c3'}}>{users.length}</td>
                 </tr>
               </tfoot>
             </table>

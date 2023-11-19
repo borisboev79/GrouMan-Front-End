@@ -6,8 +6,6 @@ export const getAllUsers = async () => {
 
   const result = await request.get(baseUrl);
 
-  console.log(result[0])
-  
   return Object.values(result);
 
 };
@@ -22,4 +20,8 @@ export const getOne = async (userId) => {
   const result = await request.get(`${baseUrl}/${userId}`, );
 
   return result;
+}
+
+export const remove = async (userId) => {
+  const result = await request.remove(`${baseUrl}/${userId}`, );
 }

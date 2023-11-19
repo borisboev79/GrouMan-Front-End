@@ -1,0 +1,15 @@
+td .button {
+    display: flex;
+   
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+}
+
+td .button.alt:hover {
+    display: flex;
+background: rgb(223, 113, 113);;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+}
