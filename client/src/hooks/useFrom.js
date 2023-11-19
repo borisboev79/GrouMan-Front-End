@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import * as formatter from "../utils/dateUtils";
 
 export const useForm = (initialValues, onSubmitHandler) => {
   const [formValues, setFormValues] = useState(initialValues);
@@ -15,7 +14,7 @@ export const useForm = (initialValues, onSubmitHandler) => {
         value = e.target.checked;
         break;
       case "date":
-        value = formatter.formatDate(e.target.value);
+        value = Date(e.target.value);
       default:
         value = e.target.value;
         break;

@@ -2,7 +2,7 @@ import * as groupService from "../services/groupService";
 import { Form, useNavigate } from "react-router-dom";
 import styles from "./AddGroup.module.css";
 import { useState, useEffect, useRef } from "react";
-import {useForm } from '../hooks/useFrom';
+import { useForm } from "../hooks/useFrom";
 
 // const formInitialState = {
 //   groupName: "",
@@ -19,40 +19,41 @@ import {useForm } from '../hooks/useFrom';
 // };
 
 export default function AddGroup() {
-
-  const {formValues, changeHandler, resetFormHandler, onSubmit} = useForm({
-    groupName: "",
-    ship: "",
-    itinerary: "",
-    duration: "",
-    capacity: "",
-    startDate: "",
-    endDate: "",
-    insidePrice: "",
-    outsidePrice: "",
-    balconyPrice: "",
-    imageUrl: "",
-  }, async (values) => {
-
-    try {
-      await groupService.add(values);
-      resetFormHandler;
-      navigate("/groups");
-    } catch (err) {
-      console.log(err);
+  const { formValues, changeHandler, resetFormHandler, onSubmit } = useForm(
+    {
+      groupName: "",
+      ship: "",
+      itinerary: "",
+      duration: "",
+      capacity: "",
+      transportation: "default",
+      startDate: "",
+      endDate: "",
+      insidePrice: "",
+      outsidePrice: "",
+      balconyPrice: "",
+      imageUrl: "",
+    },
+    async (values) => {
+      try {
+        await groupService.add(values);
+        resetFormHandler;
+        navigate("/groups");
+      } catch (err) {
+        console.log(err);
+      }
     }
+  );
 
+  const [priceError, setPriceError] = useState("");
+  const [capacityError, setCapacityError] = useState("");
 
-  });
-
-
+  const navigate = useNavigate();
 
   const groupNameInputRef = useRef();
   const isMountedRef = useRef(false);
+
   // const [formValues, setFormValues] = useState(formInitialState);
-  const [priceError, setPriceError] = useState("");
-  const [capacityError, setCapacityError] = useState("");
-  const navigate = useNavigate();
 
   useEffect(() => {
     groupNameInputRef.current.focus();
@@ -63,66 +64,51 @@ export default function AddGroup() {
       isMountedRef.current = true;
       return;
     }
-
-    console.log("Form is updated");
   }, [formValues]);
 
   // WITHOUT CUSTOM HOOK
 
-//   const changeHandler = (e) => {
+  //   const changeHandler = (e) => {
 
-//     let value = "";
+  //     let value = "";
 
-//     switch (e.target.type) {
-//       case "number":
-//         value = Number(e.target.value);
-//         break;
-//       case "checkbox":
-//         value = e.target.checked;
-//         break;
-//       default:
-//         value = e.target.value;
-//         break;
-//     }
-  
+  //     switch (e.target.type) {
+  //       case "number":
+  //         value = Number(e.target.value);
+  //         break;
+  //       case "checkbox":
+  //         value = e.target.checked;
+  //         break;
+  //       default:
+  //         value = e.target.value;
+  //         break;
+  //     }
 
-//   setFormValues((state) => ({
-//     ...state,
-//     [e.target.name]: value,
-//   }));
-// };
+  //   setFormValues((state) => ({
+  //     ...state,
+  //     [e.target.name]: value,
+  //   }));
+  // };
 
   // const resetFormHandler = () => {
   //   setFormValues(formInitialState);
   // };
 
-  
-
   const priceValidator = () => {
-
-    if(formValues.duration <= 0) {
-
-        setPriceError('Duration must be positive. Just like you :)');
-
-      }else {
-        setPriceError('');
+    if (formValues.duration <= 0) {
+      setPriceError("Duration must be positive. Just like you :)");
+    } else {
+      setPriceError("");
     }
-    
-  }
+  };
 
   const capacityValidator = () => {
-
-    if(formValues.capacity < 12) {
-    
-        setCapacityError('No dozen, no group');
-
-      }else {
-        setCapacityError('');
+    if (formValues.capacity < 12) {
+      setCapacityError("No dozen, no group");
+    } else {
+      setCapacityError("");
     }
-    
-  }
-  
-
+  };
 
   //WITHOUT customHook:
 
@@ -130,8 +116,6 @@ export default function AddGroup() {
   //   e.preventDefault();
 
   //   const groupData = Object.fromEntries(new FormData(e.currentTarget));
-
-
 
   //   try {
   //     await groupService.add(groupData);
@@ -142,12 +126,12 @@ export default function AddGroup() {
   //   }
   // };
 
-
   return (
     <div className={styles.addForm}>
       <h3>Add New Cruise Group</h3>
       <form onSubmit={onSubmit}>
         <div className="row uniform">
+          {/* Group Name */}
           <div className="6u 12u$(xsmall)">
             <label htmlFor="groupName">Group name:</label>
             <input
@@ -169,6 +153,8 @@ export default function AddGroup() {
               }}
             />
           </div>
+
+          {/* Ship name */}
           <div className="6u 6u$(xsmall)">
             <label htmlFor="ship">Ship name:</label>
             <input
@@ -189,7 +175,7 @@ export default function AddGroup() {
               }}
             />
           </div>
-
+          {/* Itinerary */}
           <div className="12u 12u$(xsmall)">
             <label htmlFor="itinerary">Itinerary</label>
             <input
@@ -210,6 +196,7 @@ export default function AddGroup() {
               }}
             />
           </div>
+          {/* Duration */}
           <div className="3u 12u$(xsmall)">
             <label htmlFor="duration">Duration:</label>
             <input
@@ -231,10 +218,9 @@ export default function AddGroup() {
                 float: "left !important",
               }}
             />
-            {priceError && (
-            <p className={styles.errorMessage}>{priceError}</p>
-        )}
+            {priceError && <p className={styles.errorMessage}>{priceError}</p>}
           </div>
+          {/* Capacity */}
           <div className="3u 12u$(xsmall)">
             <label htmlFor="capacity">Group size:</label>
             <input
@@ -244,10 +230,9 @@ export default function AddGroup() {
               value={formValues.capacity}
               onChange={changeHandler}
               onBlur={capacityValidator}
-             className={capacityError && styles.inputError}
+              className={capacityError && styles.inputError}
               placeholder="Size"
             />
-                 
 
             <div
               data-lastpass-icon-root="true"
@@ -259,30 +244,36 @@ export default function AddGroup() {
               }}
             />
 
-{capacityError && (
-            <p className={styles.errorMessage}>{capacityError}</p>
-        )}
+            {capacityError && (
+              <p className={styles.errorMessage}>{capacityError}</p>
+            )}
           </div>
           {/* Transprtation */}
           <div className="6u$">
             <div className="select-wrapper">
               <label htmlFor="transportation">Transportation:</label>
-              <select name="transportation" id="transportation">
-                <option value>- Choose Transport -</option>
+              <select
+                name="transportation"
+                id="transportation"
+                value={formValues.transportation}
+                onChange={changeHandler}
+              >
+                <option value={"default"}>- Choose Transport -</option>
                 <option value={"plane"}>Flight</option>
                 <option value={"bus"}>Bus</option>
                 <option value={"car"}>Car</option>
               </select>
             </div>
           </div>
-
+          {/* Start date */}
           <div className="6u 12u$(xsmall)">
             <label htmlFor="startDate">Departure:</label>
             <input
               type="date"
               name="startDate"
               id="startDate"
-              defaultValue=""
+              value={formValues.startDate}
+              onChange={changeHandler}
               placeholder="From"
             />
             <div
@@ -295,13 +286,15 @@ export default function AddGroup() {
               }}
             />
           </div>
+          {/* End data */}
           <div className="6u 12u$(xsmall)">
             <label htmlFor="endDate">Return:</label>
             <input
               type="date"
               name="endDate"
               id="endDate"
-              defaultValue
+              value={formValues.endDate}
+              onChange={changeHandler}
               placeholder="To"
             />
             <div
@@ -314,13 +307,15 @@ export default function AddGroup() {
               }}
             />
           </div>
+          {/* Inside Price */}
           <div className="4u 12u$(xsmall)">
             <label htmlFor="insidePrice">Inside Cabin Price:</label>
             <input
               type="number"
               name="insidePrice"
               id="insidePrice"
-              defaultValue
+              value={formValues.insidePrice}
+              onChange={changeHandler}
               placeholder="Price in €"
             />
             <div
@@ -333,14 +328,15 @@ export default function AddGroup() {
               }}
             />
           </div>
-
+          {/* Outside Price */}
           <div className="4u 12u$(xsmall)">
             <label htmlFor="outsidePrice">Outside Cabin Price:</label>
             <input
               type="number"
               name="outsidePrice"
               id="outsidePrice"
-              defaultValue
+              value={formValues.outsidePrice}
+              onChange={changeHandler}
               placeholder="Price in €"
             />
             <div
@@ -353,14 +349,15 @@ export default function AddGroup() {
               }}
             />
           </div>
-
+          {/* Balcony Price */}
           <div className="4u 12u$(xsmall)">
             <label htmlFor="balconyPrice">Balcony Cabin Price:</label>
             <input
               type="number"
               name="balconyPrice"
               id="balconyPrice"
-              defaultValue
+              value={formValues.balconyPrice}
+              onChange={changeHandler}
               placeholder="Price in €"
             />
             <div
@@ -373,7 +370,7 @@ export default function AddGroup() {
               }}
             />
           </div>
-
+          {/* Image Url */}
           <div className="12u 12u$(xsmall)">
             <label htmlFor="imageUrl">ImageUrl</label>
             <input
@@ -385,14 +382,14 @@ export default function AddGroup() {
               placeholder="Paste Image URL here"
             />
           </div>
-          {/* Break */}
+          {/* Buttons */}
           <div className="12u$">
             <ul className="actions">
               <li>
-                <input type="submit" defaultValue="Send Message" />
-              </li>
+                <input type="submit" value="Submit" />
+              </li>                       
               <li>
-                <input type="reset" defaultValue="Reset" className="alt" />
+                <input type="reset" value="Reset" className="alt" />
               </li>
             </ul>
           </div>

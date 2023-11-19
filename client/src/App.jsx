@@ -3,7 +3,6 @@ import Menu from "./components/Menu";
 import Groups from "./components/Groups";
 import Miscellaneous from "./components/Miscellaneous";
 import One from "./components/One";
-import Two from "./components/Two";
 import Banner from "./components/Banner";
 import Footer from "./components/Footer";
 import LoginForm from "./components/LoginForm";
@@ -12,6 +11,7 @@ import { Routes, Route } from "react-router-dom";
 import { useState } from "react";
 import AddGroup from "./components/AddGroup";
 import GroupDetails from "./components/GroupDetails";
+//import SomeContext from './contexts/SomeContext'
 
 function App() {
   const [showMenu, setShowMenu] = useState(false);
@@ -25,6 +25,9 @@ function App() {
   };
 
   return (
+  //  <SomeContext.Provider>
+
+   
     <div>
       <Navbar toggle={showMenuHandler} />
       {showMenu && <Menu toggle={closeMenuHandler} />}
@@ -45,6 +48,8 @@ function App() {
       {/* Footer */}
       <Footer />
     </div>
+
+ //    </SomeContext.Provider>
   );
 }
 
