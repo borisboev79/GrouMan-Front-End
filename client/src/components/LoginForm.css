@@ -11,8 +11,9 @@
   background: white;
   border: 1px solid darkgrey;
   border-radius: 0.5em;
-  padding: 3em;
+  padding: 1em 3em 3em 3em;
   margin: 10em auto;
+
 }
 
 .registerForm {
@@ -235,5 +236,50 @@ form {
 
   input[type="number"].inputError {
   border: solid 2px red;
+}
+
+.close {
+  text-decoration: none;
+  -moz-transition: color 0.2s ease-in-out;
+  -webkit-transition: color 0.2s ease-in-out;
+  -ms-transition: color 0.2s ease-in-out;
+  transition: color 0.2s ease-in-out;
+  -webkit-tap-highlight-color: transparent;
+  border: 0;
+  color: rgb(128, 128, 128);
+  cursor: pointer;
+  display: flex;
+  justify-content: flex-end;
+  height: 3.25em;
+  line-height: 3.25em;
+ 
+ 
+  text-align: right;
+
+}
+
+.close:before {
+  content: "";
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  text-transform: none !important;
+}
+
+.close:before {
+  font-size: 1.25em;
+}
+
+.close:hover {
+  color: #25a2c3;
+}
+
+@media screen and (max-width: 736px) {
+  .close {
+    height: 4em;
+    line-height: 4em;
+  }
 }
   
