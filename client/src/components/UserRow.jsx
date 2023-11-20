@@ -6,6 +6,7 @@ export default function UserRow({
   firstName,
   lastName,
   email,
+  username,
   office,
   onDelete,
 }) {
@@ -22,6 +23,7 @@ export default function UserRow({
         {firstName} {lastName}
       </td>
       <td>{email}</td>
+      <td>{username}</td>
       <td>{officeDecoder(office)}</td>
       <td>
         <a className="button small" value="Edit">

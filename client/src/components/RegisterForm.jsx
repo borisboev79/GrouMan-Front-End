@@ -8,6 +8,7 @@ const formInitialState = {
   firstName: "",
   lastName: "",
   email: "",
+  username: "",
   password: "",
   confirmPassword: "",
   office: "",
@@ -19,6 +20,7 @@ export default function RegisterForm() {
       firstName: "",
       lastName: "",
       email: "",
+      username: "",
       password: "",
       confirmPassword: "",
     },
@@ -146,6 +148,28 @@ export default function RegisterForm() {
             {emailError && (
               <p className={styles.errorMessage}>{emailError}</p>
             )}
+            <div
+              data-lastpass-icon-root="true"
+              style={{
+                position: "relative !important",
+                height: "0px !important",
+                width: "0px !important",
+                float: "left !important",
+              }}
+            />
+          </div>
+           {/* Username */}
+           <div className="12u 12u$(xsmall)">
+            <label htmlFor="username">Username:</label>
+            <input
+              type="text"
+              name="username"
+              id="username"
+              value={formValues.username}
+              onChange={changeHandler}
+              placeholder="Username"
+              className="redlabel"
+                          />
             <div
               data-lastpass-icon-root="true"
               style={{

@@ -31,8 +31,9 @@ export default function UserList() {
                 <tr>
                   <th>Name</th>
                   <th>Email</th>
+                  <th>Username</th>
                   <th>Office</th>
-                  <th colSpan={2} style={{textAlign: 'center'}}>Commands</th>
+                  <th colSpan={3} style={{textAlign: 'center'}}>Commands</th>
                   
 
                 </tr>
@@ -46,7 +47,7 @@ export default function UserList() {
               <tfoot>
                 <tr>
                     
-                  <td colSpan={3} />
+                  <td colSpan={4} />
                   <td style={{textAlign: 'right', fontWeight: '700'}} >Active Users</td>
                   <td style={{textAlign: 'right', fontWeight: '700', color: '#25a2c3'}}>{users.length}</td>
                 </tr>

@@ -11,13 +11,15 @@ export const getAllUsers = async () => {
 };
 
 export const add = async (userData) => {
-  const result = await request.post(baseUrl, userData);
+  const result = await request.post(`${baseUrl}/register`, userData);
+  const resultLocal = await request.post(baseUrl, userData);
 
-  return result;
+  return resultLocal;
 };
 
 export const getOne = async (userId) => {
   const result = await request.get(`${baseUrl}/${userId}`, );
+ 
 
   return result;
 }
