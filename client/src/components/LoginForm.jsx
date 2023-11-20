@@ -1,48 +1,37 @@
 import "./LoginForm.css";
-import { useLoginForm } from "../hooks/useForm";
-import { useNavigate } from "react-router-dom";
+import { useLoginForm } from "../hooks/useLoginForm";
+import { useContext } from "react";
+import AuthContext from "../contexts/AuthContext";
+
+const LoginFormKeys = {
+  Email: "email",
+  Password: "password",
+};
 
 export default function LoginForm({ close }) {
+  const { loginSubmitHandler } = useContext(AuthContext);
 
-  const formInitialState = {
-    email: "",
-    password: "",
-  };
-
-  const { formValues, changeHandler, resetFormHandler, onSubmit } = useLoginForm(
-    {
-      email: "",
-      password: "",
-    },
-    async (values) => {
-      try {
-        await userService.add(values);
-        resetFormHandler;
-        navigate("/groups");
-      } catch (err) {
-        console.log(err);
-      }
-    }
-  );
-
-  const navigate = useNavigate();
-
+  const { values, onChange, onSubmit } = useLoginForm(loginSubmitHandler, {
+    [LoginFormKeys.Email]: "",
+    [LoginFormKeys.Password]: "",
+  });
 
   return (
-    <div className="login-wrapper" onClick={close}>
+    <div>
+      <div className="login-wrapper" onClick={close}></div>
       <form className="login" onSubmit={onSubmit}>
         <a className="icon close" onClick={close}></a>
         <h3>User Login</h3>
         <label htmlFor="email">Email:</label>
         {/* Email */}
-        <div className="12u$ 12u$(xsmall)">
+        <div className="12u">
           <input
             type="email"
-            name="email"
+            name={LoginFormKeys.Email}
             id="email"
-            value={formValues.email}
-            onChange={changeHandler}
-            placeholder="Enter your email"
+            value={values[LoginFormKeys.Email]}
+            onChange={onChange}
+            placeholder="Email"
           />
           <div
             data-lastpass-icon-root="true"
@@ -55,44 +44,43 @@ export default function LoginForm({ close }) {
           />
         </div>
         {/* Password */}
-        <div className="row uniform">
-          <div className="12u 12u$(xsmall)">
-            <label htmlFor="password">Password:</label>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              value={formValues.password}
-              onChange={changeHandler}
-              placeholder="Password"
-            />
-            <div
-              data-lastpass-icon-root="true"
-              style={{
-                position: "relative !important",
-                height: "0px !important",
-                width: "0px !important",
-                float: "left !important",
-              }}
-            />
-          </div>
 
-          {/* Buttons */}
-          <div className="12u$ btns">
-            <ul className="actions" style={{ paddingLeft: "15%" }}>
-              <li>
-                <input type="submit" value="Log In" />
-              </li>
-              <li>
-                <input
-                  type="reset"
-                  value="Cancel"
-                  className="alt"
-                  onClick={close}
-                />
-              </li>
-            </ul>
-          </div>
+        <div className="12u pass">
+          <label htmlFor="password">Password:</label>
+          <input
+            type="password"
+            name={LoginFormKeys.Password}
+            id="password"
+            value={values[LoginFormKeys.Password]}
+            onChange={onChange}
+            placeholder="Password"
+          />
+          <div
+            data-lastpass-icon-root="true"
+            style={{
+              position: "relative !important",
+              height: "0px !important",
+              width: "0px !important",
+              float: "left !important",
+            }}
+          />
+        </div>
+
+        {/* Buttons */}
+        <div className="12u$ btns">
+          <ul className="actions" style={{ padding: "0.2em" }}>
+            <li>
+              <input type="submit" value="Log In" />
+            </li>
+            <li>
+              <input
+                type="reset"
+                value="Cancel"
+                className="alt"
+                onClick={close}
+              />
+            </li>
+          </ul>
         </div>
       </form>
     </div>

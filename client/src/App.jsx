@@ -8,11 +8,13 @@ import Banner from "./components/Banner";
 import Footer from "./components/Footer";
 import LoginForm from "./components/LoginForm";
 import RegisterForm from "./components/RegisterForm";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import AddGroup from "./components/AddGroup";
 import GroupDetails from "./components/GroupDetails";
-//import SomeContext from './contexts/SomeContext'
+import AuthContext from './contexts/AuthContext';
+import * as authService from './services/authService';
+import Path from './paths';
 
 function App() {
   const [showMenu, setShowMenu] = useState(false);
@@ -32,19 +34,41 @@ function App() {
 
   const closeLoginHandler = () => {
     setShowLogin(false);
+    navigate('/home');
+  }
+
+  const navigate = useNavigate();
+  const [auth, setAuth] = useState({});
+
+
+
+  const loginSubmitHandler = async (values) => {
+  
+    const result = await authService.login(values.email, values.password);
+
+    setAuth(result);
+    navigate(Path.Groups);
+  }
+
+  const values = {
+    loginSubmitHandler,
+    username: auth.username,
+    email: auth.email,
+    isAuthenticated: !!auth.email,
+
   }
 
   return (
-  //  <SomeContext.Provider>
+    <AuthContext.Provider value={values}>
 
    
     <div>
       <Navbar toggle={showMenuHandler} showLogin={showLoginHandler} />
       {showMenu && <Menu toggle={closeMenuHandler} />}
-      {showLogin && <LoginForm close={closeLoginHandler} />}
+      {/* {showLogin && <LoginForm loginHandler={loginSubmitHandler} close={closeLoginHandler} />} */}
 
       <Routes>
-        {/* <Route path="/users/login"  element={<LoginForm />} /> */}
+       {showLogin && <Route path="/users/login"  element={<LoginForm loginHandler={loginSubmitHandler} close={closeLoginHandler} />} />}
         <Route path="/users/register" element={<RegisterForm />} />
         <Route path="/groups" element={<Groups />} />
         <Route path="/home" element={<Banner />} />
@@ -59,7 +83,7 @@ function App() {
       <Footer />
       </div>
 
- //    </SomeContext.Provider>
+     </AuthContext.Provider>
   );
 }
 

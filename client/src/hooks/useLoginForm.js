@@ -1,45 +1,25 @@
 import { useState, useEffect } from "react";
 
-export const useForm = (initialValues, onSubmitHandler) => {
-  const [formValues, setFormValues] = useState(initialValues);
+export const useLoginForm = (submitHandler, initialValues) => {
+  const [values, setValues] = useState(initialValues);
 
-  const changeHandler = (e) => {
-    let value = "";
+  const onChange = (e) => {
 
-    switch (e.target.type) {
-      case "number":
-        value = Number(e.target.value);
-        break;
-      case "checkbox":
-        value = e.target.checked;
-        break;
-      case "date":
-        value = Date(e.target.value);
-      default:
-        value = e.target.value;
-        break;
-    }
-
-    setFormValues((state) => ({
+    setValues((state) => ({
       ...state,
-      [e.target.name]: value,
+      [e.target.name]: e.target.value,
     }));
-  };
-
-  const resetFormHandler = () => {
-    setFormValues(initialValues);
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
 
-    onSubmitHandler(formValues);
+    submitHandler(values);
   }
 
   return {
-    formValues,
-    changeHandler,
-    resetFormHandler,
+    values,
+    onChange,
     onSubmit,
   };
 };

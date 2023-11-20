@@ -32,7 +32,7 @@ export default function UserList() {
                   <th>Name</th>
                   <th>Email</th>
                   <th>Office</th>
-                  <th colspan={2} style={{textAlign: 'center'}}>Commands</th>
+                  <th colSpan={2} style={{textAlign: 'center'}}>Commands</th>
                   
 
                 </tr>
