@@ -1,9 +1,33 @@
 import "./LoginForm.css";
+import { useForm } from "../hooks/useForm";
 
 export default function LoginForm({ close }) {
+
+  const formInitialState = {
+    email: "",
+    password: "",
+  };
+
+  const { formValues, changeHandler, resetFormHandler, onSubmit } = useForm(
+    {
+      email: "",
+      password: "",
+    },
+    async (values) => {
+      try {
+        await userService.add(values);
+        resetFormHandler;
+        navigate("/users");
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  );
+
+
   return (
     <div className="login-wrapper" onClick={close}>
-      <form className="login">
+      <form className="login" onSubmit={onSubmit}>
         <a className="icon close" onClick={close}></a>
         <h3>User Login</h3>
         <label htmlFor="email">Email:</label>
@@ -13,8 +37,9 @@ export default function LoginForm({ close }) {
             type="email"
             name="email"
             id="email"
-            value="Enter your email"
-            placeholder="Email"
+            value={formValues.email}
+            onChange={changeHandler}
+            placeholder="Enter your email"
           />
           <div
             data-lastpass-icon-root="true"
@@ -34,7 +59,8 @@ export default function LoginForm({ close }) {
               type="password"
               name="password"
               id="password"
-              defaultValue
+              value={formValues.password}
+              onChange={changeHandler}
               placeholder="Password"
             />
             <div
