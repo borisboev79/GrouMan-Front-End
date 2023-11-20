@@ -1,5 +1,6 @@
 import "./LoginForm.css";
-import { useForm } from "../hooks/useForm";
+import { useLoginForm } from "../hooks/useForm";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginForm({ close }) {
 
@@ -8,7 +9,7 @@ export default function LoginForm({ close }) {
     password: "",
   };
 
-  const { formValues, changeHandler, resetFormHandler, onSubmit } = useForm(
+  const { formValues, changeHandler, resetFormHandler, onSubmit } = useLoginForm(
     {
       email: "",
       password: "",
@@ -17,12 +18,14 @@ export default function LoginForm({ close }) {
       try {
         await userService.add(values);
         resetFormHandler;
-        navigate("/users");
+        navigate("/groups");
       } catch (err) {
         console.log(err);
       }
     }
   );
+
+  const navigate = useNavigate();
 
 
   return (
