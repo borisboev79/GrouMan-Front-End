@@ -8,6 +8,15 @@ const buildOptions = (data) => {
         };
     }
 
+    const token = localStorage.getItem('accessToken');
+
+    if (token) {
+        options.headers = {
+            ...options.headers,
+            'X-Authorization': token
+        };
+    }
+   
     return options;
 };
 
@@ -17,7 +26,17 @@ const request = async (method, url, data) => {
         method,
     });
 
+    // This is specific only to softuni practice server
+    if (response.status === 204) {
+        return {};
+    }
+
     const result = await response.json();
+
+    //Suggestion:
+    if (!response.ok) {
+        throw result;
+    }
 
     return result;
 };

@@ -15,16 +15,6 @@ const RegisterFormKeys = {
   Office: "office",
 }
 
-// const formInitialState = {
-//   firstName: "",
-//   lastName: "",
-//   email: "",
-//   username: "",
-//   password: "",
-//   confirmPassword: "",
-//   office: "",
-// };
-
 export default function RegisterForm() {
 
   const {registerSubmitHandler} = useContext(AuthContext);
@@ -40,27 +30,6 @@ export default function RegisterForm() {
     [RegisterFormKeys.Office]: '',
 
   });
-
-
-  // const { formValues, changeHandler, resetFormHandler, onSubmit } = useForm(
-  //   {
-  //     firstName: "",
-  //     lastName: "",
-  //     email: "",
-  //     username: "",
-  //     password: "",
-  //     confirmPassword: "",
-  //   },
-  //   async (values) => {
-  //     try {
-  //       await userService.add(values);
-  //       resetFormHandler;
-  //       navigate("/users");
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   }
-  // );
 
   const userNameInputRef = useRef();
   const isMountedRef = useRef(false);
@@ -97,19 +66,6 @@ export default function RegisterForm() {
     }
   };
 
-  const addGroupSubmitHandler = async (e) => {
-    e.preventDefault();
-
-    const groupData = Object.fromEntries(new FormData(e.currentTarget));
-
-    try {
-      await groupService.add(groupData);
-      resetFormHandler(formInitialState);
-      navigate("/users");
-    } catch (err) {
-      console.log(err);
-    }
-  };
   return (
     <div className={styles.registerForm}>
       <h3>Register New User</h3>

@@ -36,7 +36,7 @@ export default function Navbar({ toggle, showLogin }) {
         {isAuthenticated && (
           <nav className={styles.right}>
          
-            <Link to="/" className={[styles.button, styles.alt].join(" ")}>
+            <Link to="/logout" className={[styles.button, styles.alt].join(" ")}>
               Logout <span>{username} </span>
             </Link>
            

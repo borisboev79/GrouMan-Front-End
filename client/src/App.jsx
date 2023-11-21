@@ -18,6 +18,7 @@ import AddGroup from "./components/AddGroup";
 import UserList from "./components/UserList";
 import LoginForm from "./components/LoginForm";
 import RegisterForm from "./components/RegisterForm";
+import Logout from "./components/Logout";
 
 import Miscellaneous from "./components/Miscellaneous";
 import Footer from "./components/Footer";
@@ -44,12 +45,19 @@ function App() {
   };
 
   const navigate = useNavigate();
-  const [auth, setAuth] = useState({});
+  const [auth, setAuth] = useState(() => {
+    localStorage.removeItem('accessToken');
+
+    return {};
+  });
 
   const loginSubmitHandler = async (values) => {
     const result = await authService.login(values.email, values.password);
 
     setAuth(result);
+
+    localStorage.setItem('accessToken', result.accessToken);
+
     navigate(Path.Groups);
   };
 
@@ -64,7 +72,11 @@ function App() {
     );
 
     setAuth(result);
+
+    localStorage.setItem('accessToken', result.accessToken);
+
     navigate(Path.Home);
+
   };
 
   const localRegister = async (values) => {
@@ -78,10 +90,19 @@ function App() {
     );
   };
 
+
+  const logoutHandler = () => {
+    setAuth({});
+
+    localStorage.removeItem('accessToken');
+
+  }
+
   const values = {
     loginSubmitHandler,
     registerSubmitHandler,
     localRegister,
+    logoutHandler,
     username: auth.username || auth.email,
     email: auth.email,
     isAuthenticated: !!auth.email,
@@ -113,6 +134,7 @@ function App() {
           <Route path="/users" element={<UserList />} />
           <Route path="/groups/add" element={<AddGroup />} />
           <Route path="/groups/:groupId" element={<GroupDetails />} />
+          <Route path={Path.Logout} element={<Logout />} />
         </Routes>
 
         <One />
