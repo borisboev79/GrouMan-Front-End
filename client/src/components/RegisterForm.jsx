@@ -1,44 +1,71 @@
 import * as userService from "../services/userService";
 import { Form, useNavigate } from "react-router-dom";
 import styles from "./RegisterForm.module.css";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback, useContext } from "react";
 import { useForm } from "../hooks/useForm";
+import AuthContext from "../contexts/AuthContext";
 
-const formInitialState = {
-  firstName: "",
-  lastName: "",
-  email: "",
-  username: "",
-  password: "",
-  confirmPassword: "",
-  office: "",
-};
+const RegisterFormKeys = {
+  FirstName: "firstName",
+  LastName: "lastName",
+  Email: "email",
+  Username: "username",
+  Password: "password",
+  ConfirmPassword: "confirmPassword",
+  Office: "office",
+}
+
+// const formInitialState = {
+//   firstName: "",
+//   lastName: "",
+//   email: "",
+//   username: "",
+//   password: "",
+//   confirmPassword: "",
+//   office: "",
+// };
 
 export default function RegisterForm() {
-  const { formValues, changeHandler, resetFormHandler, onSubmit } = useForm(
-    {
-      firstName: "",
-      lastName: "",
-      email: "",
-      username: "",
-      password: "",
-      confirmPassword: "",
-    },
-    async (values) => {
-      try {
-        await userService.add(values);
-        resetFormHandler;
-        navigate("/users");
-      } catch (err) {
-        console.log(err);
-      }
-    }
-  );
+
+  const {registerSubmitHandler} = useContext(AuthContext);
+  const {localRegister} = useContext(AuthContext);
+
+  const { formValues, changeHandler, onSubmit, resetFormHandler } = useForm(registerSubmitHandler, localRegister, {
+    [RegisterFormKeys.FirstName]: '',
+    [RegisterFormKeys.LastName]: '',
+    [RegisterFormKeys.Email]: '',
+    [RegisterFormKeys.Username]: '',
+    [RegisterFormKeys.Password]: '',
+    [RegisterFormKeys.ConfirmPassword]: '',
+    [RegisterFormKeys.Office]: '',
+
+  });
+
+
+  // const { formValues, changeHandler, resetFormHandler, onSubmit } = useForm(
+  //   {
+  //     firstName: "",
+  //     lastName: "",
+  //     email: "",
+  //     username: "",
+  //     password: "",
+  //     confirmPassword: "",
+  //   },
+  //   async (values) => {
+  //     try {
+  //       await userService.add(values);
+  //       resetFormHandler;
+  //       navigate("/users");
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   }
+  // );
 
   const userNameInputRef = useRef();
   const isMountedRef = useRef(false);
   const [emailError, setEmailError] = useState("");
-  const [stringError, setstringError] = useState("");
+  const [stringError, setStringError] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -55,7 +82,7 @@ export default function RegisterForm() {
   }, [formValues]);
 
   const emailValidator = () => {
-    if (!(formValues.email).includes("@")) {
+    if (!formValues[RegisterFormKeys.Email].includes("@")){
       setEmailError("This is not a valid email.");
     } else {
       setEmailError("");
@@ -63,10 +90,10 @@ export default function RegisterForm() {
   };
 
   const stringValidator = () => {
-    if ((formValues.passord).length < 12) {
-      setCapacityError("Password should be at least 8 characters");
+    if (formValues[RegisterFormKeys.Password].length < 12){
+      setStringError("Password should be at least 8 characters");
     } else {
-      setCapacityError("");
+      setStringError("");
     }
   };
 
@@ -96,7 +123,7 @@ export default function RegisterForm() {
               type="text"
               name="firstName"
               id="firstName"
-              value={formValues.firstName}
+              value={formValues[RegisterFormKeys.FirstName]}
               onChange={changeHandler}
               placeholder="First name"
             />
@@ -117,7 +144,7 @@ export default function RegisterForm() {
               type="text"
               name="lastName"
               id="lastName"
-              value={formValues.lastName}
+              value={formValues[RegisterFormKeys.LastName]}
               onChange={changeHandler}
               placeholder="Last name"
               className="redlabel"
@@ -139,7 +166,7 @@ export default function RegisterForm() {
               type="email"
               name="email"
               id="email"
-              value={formValues.email}
+              value={formValues[RegisterFormKeys.Email]}
               onChange={changeHandler}
               onBlur={emailValidator}
               className={emailError && styles.redlabel}
@@ -165,7 +192,7 @@ export default function RegisterForm() {
               type="text"
               name="username"
               id="username"
-              value={formValues.username}
+              value={formValues[RegisterFormKeys.Username]}
               onChange={changeHandler}
               placeholder="Username"
               className="redlabel"
@@ -187,8 +214,10 @@ export default function RegisterForm() {
               type="password"
               name="password"
               id="password"
-              value={formValues.password}
+              value={formValues[RegisterFormKeys.Password]}
               onChange={changeHandler}
+              onBlur={stringValidator}
+              className={stringError && styles.redlabel}
               placeholder="Enter password"
             />
             <div
@@ -208,7 +237,7 @@ export default function RegisterForm() {
               type="password"
               name="confirmPassword"
               id="confirmPassword"
-              value={formValues.confirmPassword}
+              value={formValues[RegisterFormKeys.ConfirmPassword]}
               onChange={changeHandler}
               placeholder="Confirm password"
             />
@@ -227,7 +256,7 @@ export default function RegisterForm() {
           <div className="12u$">
             <div className="select-wrapper">
               <label htmlFor="office">Office:</label>
-              <select name="office" id="office" value={formValues.office} onChange={changeHandler}>
+              <select name="office" id="office" value={formValues[RegisterFormKeys.Office]} onChange={changeHandler}>
                 <option value>- Select office -</option>
                 <option value={"SOFR"}>Sofia Central</option>
                 <option value={"MOS"}>Mall of Sofia</option>

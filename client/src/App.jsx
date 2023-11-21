@@ -1,10 +1,11 @@
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-import AuthContext from './contexts/AuthContext';
-import * as authService from './services/authService';
+import AuthContext from "./contexts/AuthContext";
+import * as authService from "./services/authService";
+import * as userService from "./services/userService";
 
-import Path from './paths';
+import Path from "./paths";
 import Navbar from "./components/Navbar";
 import Menu from "./components/Menu";
 import One from "./components/One";
@@ -35,60 +36,90 @@ function App() {
 
   const showLoginHandler = () => {
     setShowLogin(true);
-  }
+  };
 
   const closeLoginHandler = () => {
     setShowLogin(false);
-    navigate('/home');
-  }
+    navigate("/home");
+  };
 
   const navigate = useNavigate();
   const [auth, setAuth] = useState({});
 
-
-
   const loginSubmitHandler = async (values) => {
-  
     const result = await authService.login(values.email, values.password);
 
     setAuth(result);
     navigate(Path.Groups);
-  }
+  };
+
+  const registerSubmitHandler = async (values) => {
+    const result = await authService.register(
+      values.firstName,
+      values.lastName,
+      values.email,
+      values.username,
+      values.password,
+      values.office
+    );
+
+    setAuth(result);
+    navigate(Path.Home);
+  };
+
+  const localRegister = async (values) => {
+    await userService.add(
+      values.firstName,
+      values.lastName,
+      values.email,
+      values.username,
+      values.password,
+      values.office
+    );
+  };
 
   const values = {
     loginSubmitHandler,
-    username: auth.username,
+    registerSubmitHandler,
+    localRegister,
+    username: auth.username || auth.email,
     email: auth.email,
     isAuthenticated: !!auth.email,
-
-  }
+  };
 
   return (
     <AuthContext.Provider value={values}>
+      <div>
+        <Navbar toggle={showMenuHandler} showLogin={showLoginHandler} />
+        {showMenu && <Menu toggle={closeMenuHandler} />}
+        {/* {showLogin && <LoginForm loginHandler={loginSubmitHandler} close={closeLoginHandler} />} */}
 
-   
-    <div>
-      <Navbar toggle={showMenuHandler} showLogin={showLoginHandler} />
-      {showMenu && <Menu toggle={closeMenuHandler} />}
-      {/* {showLogin && <LoginForm loginHandler={loginSubmitHandler} close={closeLoginHandler} />} */}
+        <Routes>
+          {showLogin && (
+            <Route
+              path="/users/login"
+              element={
+                <LoginForm
+                  loginHandler={loginSubmitHandler}
+                  close={closeLoginHandler}
+                />
+              }
+            />
+          )}
+          <Route path="/users/register" element={<RegisterForm />} />
+          <Route path="/groups" element={<Groups />} />
+          <Route path="/home" element={<Banner />} />
+          <Route path="/misc" element={<Miscellaneous />} />
+          <Route path="/users" element={<UserList />} />
+          <Route path="/groups/add" element={<AddGroup />} />
+          <Route path="/groups/:groupId" element={<GroupDetails />} />
+        </Routes>
 
-      <Routes>
-       {showLogin && <Route path="/users/login"  element={<LoginForm loginHandler={loginSubmitHandler} close={closeLoginHandler} />} />}
-        <Route path="/users/register" element={<RegisterForm />} />
-        <Route path="/groups" element={<Groups />} />
-        <Route path="/home" element={<Banner />} />
-        <Route path="/misc" element={<Miscellaneous />} />
-        <Route path="/users" element={<UserList />}/>
-        <Route path="/groups/add" element={<AddGroup />} />
-        <Route path="/groups/:groupId" element={<GroupDetails />} />
-      </Routes>
-    
-      <One />
+        <One />
 
-      <Footer />
+        <Footer />
       </div>
-
-     </AuthContext.Provider>
+    </AuthContext.Provider>
   );
 }
 

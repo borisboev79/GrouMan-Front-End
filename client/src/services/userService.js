@@ -10,9 +10,10 @@ export const getAllUsers = async () => {
 
 };
 
-export const add = async (userData) => {
-  const result = await request.post(`${baseUrl}/register`, userData);
-  const resultLocal = await request.post(baseUrl, userData);
+export const add = async (firstName, lastName, email, username, password, office) => {
+  const resultLocal = await request.post(baseUrl, {
+    firstName, lastName, email, username, password, office,
+  });
 
   return resultLocal;
 };
