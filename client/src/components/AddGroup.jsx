@@ -4,46 +4,46 @@ import styles from "./AddGroup.module.css";
 import { useState, useEffect, useRef } from "react";
 import { useForm } from "../hooks/useForm";
 
-// const formInitialState = {
-//   groupName: "",
-//   ship: "",
-//   itinerary: "",
-//   duration: "",
-//   capacity: "",
-//   startDate: "",
-//   endDate: "",
-//   insidePrice: "",
-//   outsidePrice: "",
-//   balconyPrice: "",
-//   imageUril: "",
-// };
+const formInitialState = {
+  groupName: "",
+  ship: "",
+  itinerary: "",
+  duration: "",
+  capacity: "",
+  startDate: "",
+  endDate: "",
+  insidePrice: "",
+  outsidePrice: "",
+  balconyPrice: "",
+  imageUril: "",
+};
 
 export default function AddGroup() {
-  const { formValues, changeHandler, resetFormHandler, onSubmit } = useForm(
-    {
-      groupName: "",
-      ship: "",
-      itinerary: "",
-      duration: "",
-      capacity: "",
-      transportation: "default",
-      startDate: "",
-      endDate: "",
-      insidePrice: "",
-      outsidePrice: "",
-      balconyPrice: "",
-      imageUrl: "",
-    },
-    async (values) => {
-      try {
-        await groupService.add(values);
-        resetFormHandler;
-        navigate("/groups");
-      } catch (err) {
-        console.log(err);
-      }
-    }
-  );
+  // const { formValues, changeHandler, onSubmit, resetFormHandler } = useForm(
+  //   {
+  //     groupName: "",
+  //     ship: "",
+  //     itinerary: "",
+  //     duration: "",
+  //     capacity: "",
+  //     transportation: "default",
+  //     startDate: "",
+  //     endDate: "",
+  //     insidePrice: "",
+  //     outsidePrice: "",
+  //     balconyPrice: "",
+  //     imageUrl: "",
+  //   },
+  //   async (values) => {
+  //     try {
+  //       await groupService.add(values);
+  //       resetFormHandler;
+  //       navigate("/groups");
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   }
+  // );
 
   const [priceError, setPriceError] = useState("");
   const [capacityError, setCapacityError] = useState("");
@@ -53,7 +53,7 @@ export default function AddGroup() {
   const groupNameInputRef = useRef();
   const isMountedRef = useRef(false);
 
-  // const [formValues, setFormValues] = useState(formInitialState);
+  const [formValues, setFormValues] = useState(formInitialState);
 
   useEffect(() => {
     groupNameInputRef.current.focus();
@@ -68,31 +68,31 @@ export default function AddGroup() {
 
   // WITHOUT CUSTOM HOOK
 
-  //   const changeHandler = (e) => {
+    const changeHandler = (e) => {
 
-  //     let value = "";
+      let value = "";
 
-  //     switch (e.target.type) {
-  //       case "number":
-  //         value = Number(e.target.value);
-  //         break;
-  //       case "checkbox":
-  //         value = e.target.checked;
-  //         break;
-  //       default:
-  //         value = e.target.value;
-  //         break;
-  //     }
+      switch (e.target.type) {
+        case "number":
+          value = Number(e.target.value);
+          break;
+        case "checkbox":
+          value = e.target.checked;
+          break;
+        default:
+          value = e.target.value;
+          break;
+      }
 
-  //   setFormValues((state) => ({
-  //     ...state,
-  //     [e.target.name]: value,
-  //   }));
-  // };
+    setFormValues((state) => ({
+      ...state,
+      [e.target.name]: value,
+    }));
+  };
 
-  // const resetFormHandler = () => {
-  //   setFormValues(formInitialState);
-  // };
+  const resetFormHandler = () => {
+    setFormValues(formInitialState);
+  };
 
   const priceValidator = () => {
     if (formValues.duration <= 0) {
@@ -112,24 +112,24 @@ export default function AddGroup() {
 
   //WITHOUT customHook:
 
-  // const addGroupSubmitHandler = async (e) => {
-  //   e.preventDefault();
+  const addGroupSubmitHandler = async (e) => {
+    e.preventDefault();
 
-  //   const groupData = Object.fromEntries(new FormData(e.currentTarget));
+    const groupData = Object.fromEntries(new FormData(e.currentTarget));
 
-  //   try {
-  //     await groupService.add(groupData);
-  //     resetFormHandler(formInitialState);
-  //     navigate("/groups");
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
+    try {
+      await groupService.add(groupData);
+      resetFormHandler(formInitialState);
+      navigate("/groups");
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div className={styles.addForm}>
       <h3>Add New Cruise Group</h3>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={addGroupSubmitHandler}>
         <div className="row uniform">
           {/* Group Name */}
           <div className="6u 12u$(xsmall)">

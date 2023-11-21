@@ -1,6 +1,6 @@
 import * as request from "../lib/request";
 
-const baseUrl = "http://localhost:3030/jsonstore/groups";
+const baseUrl = "http://localhost:3030/data/groups";
 
 export const getAllGroups = async () => {
 
