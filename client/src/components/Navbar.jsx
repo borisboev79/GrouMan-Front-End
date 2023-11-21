@@ -32,12 +32,14 @@ export default function Navbar({ toggle, showLogin }) {
             </Link>
           </nav>
         )};
-        
+
         {isAuthenticated && (
           <nav className={styles.right}>
+         
             <Link to="/" className={[styles.button, styles.alt].join(" ")}>
-              Logout
+              Logout <span>{username} </span>
             </Link>
+           
           </nav>
         )}
         ;

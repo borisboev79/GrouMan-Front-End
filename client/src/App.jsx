@@ -1,20 +1,25 @@
-import Navbar from "./components/Navbar";
-import Menu from "./components/Menu";
-import Groups from "./components/Groups";
-import UserList from "./components/UserList";
-import Miscellaneous from "./components/Miscellaneous";
-import One from "./components/One";
-import Banner from "./components/Banner";
-import Footer from "./components/Footer";
-import LoginForm from "./components/LoginForm";
-import RegisterForm from "./components/RegisterForm";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import AddGroup from "./components/AddGroup";
-import GroupDetails from "./components/GroupDetails";
+
 import AuthContext from './contexts/AuthContext';
 import * as authService from './services/authService';
+
 import Path from './paths';
+import Navbar from "./components/Navbar";
+import Menu from "./components/Menu";
+import One from "./components/One";
+import Banner from "./components/Banner";
+
+import Groups from "./components/Groups";
+import GroupDetails from "./components/GroupDetails";
+import AddGroup from "./components/AddGroup";
+
+import UserList from "./components/UserList";
+import LoginForm from "./components/LoginForm";
+import RegisterForm from "./components/RegisterForm";
+
+import Miscellaneous from "./components/Miscellaneous";
+import Footer from "./components/Footer";
 
 function App() {
   const [showMenu, setShowMenu] = useState(false);
