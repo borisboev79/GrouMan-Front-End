@@ -1,7 +1,7 @@
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-import { AuthProvider } from "./contexts/authContext";
+import AuthContext from "./contexts/authContext";
 import * as authService from "./services/authService";
 import * as userService from "./services/userService";
 
@@ -109,7 +109,7 @@ function App() {
   };
 
   return (
-    <AuthProvider value={values}>
+    <AuthContext.Provider value={values}>
       <div>
         <Navbar toggle={showMenuHandler} showLogin={showLoginHandler} />
         {showMenu && <Menu toggle={closeMenuHandler} />}
@@ -140,7 +140,7 @@ function App() {
 
         <Footer />
       </div>
-    </AuthProvider>
+    </AuthContext.Provider>
   );
 }
 
