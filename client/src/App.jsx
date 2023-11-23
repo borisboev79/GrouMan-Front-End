@@ -1,9 +1,9 @@
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-import AuthContext from "./contexts/authContext";
-import * as authService from "./services/authService";
-import * as userService from "./services/userService";
+import { AuthProvider } from "./contexts/authContext";
+// import * as authService from "./services/authService";
+// import * as userService from "./services/userService";
 
 import Path from "./paths";
 import Navbar from "./components/Navbar";
@@ -22,10 +22,12 @@ import Logout from "./components/Logout";
 
 import Miscellaneous from "./components/Miscellaneous";
 import Footer from "./components/Footer";
+// import { AuthProvider } from "./contexts/AuthContext";
 
 function App() {
-  const [showMenu, setShowMenu] = useState(false);
+ const [showMenu, setShowMenu] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
+ const navigate = useNavigate();
 
   const showMenuHandler = () => {
     setShowMenu(true);
@@ -44,72 +46,72 @@ function App() {
     navigate("/home");
   };
 
-  const navigate = useNavigate();
-  const [auth, setAuth] = useState(() => {
-    localStorage.removeItem('accessToken');
+  
+  // const [auth, setAuth] = useState(() => {
+  //   localStorage.removeItem('accessToken');
 
-    return {};
-  });
+  //   return {};
+  // });
 
-  const loginSubmitHandler = async (values) => {
-    const result = await authService.login(values.email, values.password);
+  // const loginSubmitHandler = async (values) => {
+  //   const result = await authService.login(values.email, values.password);
 
-    setAuth(result);
+  //   setAuth(result);
 
-    localStorage.setItem('accessToken', result.accessToken);
+  //   localStorage.setItem('accessToken', result.accessToken);
 
-    navigate(Path.Groups);
-  };
+  //   navigate(Path.Groups);
+  // };
 
-  const registerSubmitHandler = async (values) => {
-    const result = await authService.register(
-      values.firstName,
-      values.lastName,
-      values.email,
-      values.username,
-      values.password,
-      values.office
-    );
+  // const registerSubmitHandler = async (values) => {
+  //   const result = await authService.register(
+  //     values.firstName,
+  //     values.lastName,
+  //     values.email,
+  //     values.username,
+  //     values.password,
+  //     values.office
+  //   );
 
-    setAuth(result);
+  //   setAuth(result);
 
-    localStorage.setItem('accessToken', result.accessToken);
+  //   localStorage.setItem('accessToken', result.accessToken);
 
-    navigate(Path.Home);
+  //   navigate(Path.Home);
 
-  };
+  // };
 
-  const localRegister = async (values) => {
-    await userService.add(
-      values.firstName,
-      values.lastName,
-      values.email,
-      values.username,
-      values.password,
-      values.office
-    );
-  };
+  // const localRegister = async (values) => {
+  //   await userService.add(
+  //     values.firstName,
+  //     values.lastName,
+  //     values.email,
+  //     values.username,
+  //     values.password,
+  //     values.office
+  //   );
+  // };
 
 
-  const logoutHandler = () => {
-    setAuth({});
+  // const logoutHandler = () => {
+  //   setAuth({});
 
-    localStorage.removeItem('accessToken');
+  //   localStorage.removeItem('accessToken');
 
-  }
+  // }
 
-  const values = {
-    loginSubmitHandler,
-    registerSubmitHandler,
-    localRegister,
-    logoutHandler,
-    username: auth.username || auth.email,
-    email: auth.email,
-    isAuthenticated: !!auth.email,
-  };
+  // const values = {
+  //   loginSubmitHandler,
+  //   registerSubmitHandler,
+  //   localRegister,
+  //   logoutHandler,
+  //   username: auth.username || auth.email,
+  //   email: auth.email,
+  //   isAuthenticated: !!auth.email,
+  // };
 
   return (
-    <AuthContext.Provider value={values}>
+    <AuthProvider>
       <div>
         <Navbar toggle={showMenuHandler} showLogin={showLoginHandler} />
         {showMenu && <Menu toggle={closeMenuHandler} />}
@@ -120,8 +122,9 @@ function App() {
               path="/users/login"
               element={
                 <LoginForm
+                      close={closeLoginHandler}
                   loginHandler={loginSubmitHandler}
-                  close={closeLoginHandler}
+            
                 />
               }
             />
@@ -140,7 +143,7 @@ function App() {
 
         <Footer />
       </div>
-    </AuthContext.Provider>
+    </AuthProvider>
   );
 }
 

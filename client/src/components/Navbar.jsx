@@ -1,6 +1,6 @@
 import styles from "./Navbar.module.css";
 import { Link } from "react-router-dom";
-import AuthContext from "../contexts/AuthContext";
+import AuthContext from "../contexts/authContext";
 import { useContext } from "react";
 
 export default function Navbar({ toggle, showLogin }) {
