@@ -7,9 +7,13 @@ export const getAllGroups = async () => {
     load: `owner=_ownerId:users`,
   });
 
-  const result = await request.get(`${baseUrl}?${query}`);
+ // const result = await request.get(`${baseUrl}?${query}`);
+
+  const test = await request.get(baseUrl);
+
+  console.log(test);
   
-  return Object.values(result);
+  return test;
 
 };
 
