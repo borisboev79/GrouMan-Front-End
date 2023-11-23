@@ -15,6 +15,7 @@ export default function Navbar({ toggle, showLogin }) {
         <a href="/home" className={styles.logo}>
           Grouman
         </a>
+        
         {!isAuthenticated && (
           <nav className={styles.right}>
             <Link
@@ -31,7 +32,7 @@ export default function Navbar({ toggle, showLogin }) {
               Register
             </Link>
           </nav>
-        )};
+        )}
 
         {isAuthenticated && (
           <nav className={styles.right}>
@@ -42,7 +43,7 @@ export default function Navbar({ toggle, showLogin }) {
            
           </nav>
         )}
-        ;
+        
       </header>
     </>
   );
