@@ -6,38 +6,12 @@ import * as userService from "../services/userService";
 
 import Path from "../paths";
 
-
 const AuthContext = createContext();
 
-
-
-export const AuthProvider = ({ 
-  children,
-}) => {
-
-  //  const [showMenu, setShowMenu] = useState(false);
-  // const [showLogin, setShowLogin] = useState(false);
-
-  // const showMenuHandler = () => {
-  //   setShowMenu(true);
-  // };
-
-  // const closeMenuHandler = () => {
-  //   setShowMenu(false);
-  // };
-
-  // const showLoginHandler = () => {
-  //   setShowLogin(true);
-  // };
-
-  // const closeLoginHandler = () => {
-  //   setShowLogin(false);
-  //   navigate("/home");
-  // };
-
+export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const [auth, setAuth] = useState(() => {
-    localStorage.removeItem('accessToken');
+    localStorage.removeItem("accessToken");
 
     return {};
   });
@@ -47,7 +21,7 @@ export const AuthProvider = ({
 
     setAuth(result);
 
-    localStorage.setItem('accessToken', result.accessToken);
+    localStorage.setItem("accessToken", result.accessToken);
 
     navigate(Path.Groups);
   };
@@ -64,10 +38,9 @@ export const AuthProvider = ({
 
     setAuth(result);
 
-    localStorage.setItem('accessToken', result.accessToken);
+    localStorage.setItem("accessToken", result.accessToken);
 
     navigate(Path.Home);
-
   };
 
   const localRegister = async (values) => {
@@ -81,21 +54,13 @@ export const AuthProvider = ({
     );
   };
 
-
   const logoutHandler = () => {
     setAuth({});
 
-    localStorage.removeItem('accessToken');
-
-  }
+    localStorage.removeItem("accessToken");
+  };
 
   const values = {
-    // showLogin,
-    // showMenu,
-    // showMenuHandler,
-    // closeMenuHandler,
-    // showLoginHandler,
-    // closeLoginHandler,
     loginSubmitHandler,
     registerSubmitHandler,
     localRegister,
@@ -105,10 +70,7 @@ export const AuthProvider = ({
     isAuthenticated: !!auth.email,
   };
 
-  return (
-  <AuthContext.Provider value={values}>
-    {children}
-  </AuthContext.Provider>);
+  return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>;
 };
 
 AuthContext.displayName = "AuthContext";

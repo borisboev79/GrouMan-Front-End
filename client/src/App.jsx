@@ -1,9 +1,6 @@
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { useState } from "react";
-
 import { AuthProvider } from "./contexts/authContext";
-// import * as authService from "./services/authService";
-// import * as userService from "./services/userService";
 
 import Path from "./paths";
 import Navbar from "./components/Navbar";
@@ -22,12 +19,11 @@ import Logout from "./components/Logout";
 
 import Miscellaneous from "./components/Miscellaneous";
 import Footer from "./components/Footer";
-// import { AuthProvider } from "./contexts/AuthContext";
 
 function App() {
- const [showMenu, setShowMenu] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
- const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const showMenuHandler = () => {
     setShowMenu(true);
@@ -46,70 +42,6 @@ function App() {
     navigate("/home");
   };
 
-  
-  // const [auth, setAuth] = useState(() => {
-  //   localStorage.removeItem('accessToken');
-
-  //   return {};
-  // });
-
-  // const loginSubmitHandler = async (values) => {
-  //   const result = await authService.login(values.email, values.password);
-
-  //   setAuth(result);
-
-  //   localStorage.setItem('accessToken', result.accessToken);
-
-  //   navigate(Path.Groups);
-  // };
-
-  // const registerSubmitHandler = async (values) => {
-  //   const result = await authService.register(
-  //     values.firstName,
-  //     values.lastName,
-  //     values.email,
-  //     values.username,
-  //     values.password,
-  //     values.office
-  //   );
-
-  //   setAuth(result);
-
-  //   localStorage.setItem('accessToken', result.accessToken);
-
-  //   navigate(Path.Home);
-
-  // };
-
-  // const localRegister = async (values) => {
-  //   await userService.add(
-  //     values.firstName,
-  //     values.lastName,
-  //     values.email,
-  //     values.username,
-  //     values.password,
-  //     values.office
-  //   );
-  // };
-
-
-  // const logoutHandler = () => {
-  //   setAuth({});
-
-  //   localStorage.removeItem('accessToken');
-
-  // }
-
-  // const values = {
-  //   loginSubmitHandler,
-  //   registerSubmitHandler,
-  //   localRegister,
-  //   logoutHandler,
-  //   username: auth.username || auth.email,
-  //   email: auth.email,
-  //   isAuthenticated: !!auth.email,
-  // };
-
   return (
     <AuthProvider>
       <div>
@@ -120,13 +52,7 @@ function App() {
           {showLogin && (
             <Route
               path="/users/login"
-              element={
-                <LoginForm
-                      close={closeLoginHandler}
-                  loginHandler={loginSubmitHandler}
-            
-                />
-              }
+              element={<LoginForm close={closeLoginHandler} />}
             />
           )}
           <Route path="/users/register" element={<RegisterForm />} />

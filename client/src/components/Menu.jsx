@@ -1,6 +1,6 @@
 import styles from "./Menu.module.css";
-import { Link, NavLink } from "react-router-dom";
-import AuthContext from "../contexts/AuthContext";
+import { Link } from "react-router-dom";
+import AuthContext from "../contexts/authContext";
 import { useContext } from "react";
 
 export default function Menu({ toggle }) {
@@ -26,7 +26,9 @@ export default function Menu({ toggle }) {
           </li>
 
           <li>{isAuthenticated && <Link to="/groups/add">Add Group</Link>}</li>
-          <li>{isAuthenticated && <Link to="/users">View and Modify Users</Link>}</li>
+          <li>
+            {isAuthenticated && <Link to="/users">View and Modify Users</Link>}
+          </li>
         </ul>
         <ul className={[styles.actions, styles.vertical].join(" ")}>
           <li>

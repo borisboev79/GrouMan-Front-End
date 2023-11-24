@@ -1,9 +1,8 @@
-import * as userService from "../services/userService";
 import { Form, useNavigate } from "react-router-dom";
 import styles from "./RegisterForm.module.css";
 import { useState, useEffect, useRef, useCallback, useContext } from "react";
 import { useForm } from "../hooks/useForm";
-import AuthContext from "../contexts/AuthContext";
+import AuthContext from "../contexts/authContext";
 
 const RegisterFormKeys = {
   FirstName: "firstName",
