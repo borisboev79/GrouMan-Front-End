@@ -74,8 +74,10 @@ export default function GroupDetails() {
           <div className="row">
             <div className="6u$ 12u$(small)"></div>
           </div>
+          <h4>Added by: {group._ownerId}</h4>
           <hr className="major" />
           {/* Elements */}
+          
 
           <div className="row 200%">
             <div className="12u">

@@ -11,7 +11,7 @@ export const getAllGroups = async () => {
 
   const test = await request.get(baseUrl);
 
-  console.log(`${baseUrl}?${query.load}`);
+  console.log(`${baseUrl}?${query}`);
   
   return result;
 
