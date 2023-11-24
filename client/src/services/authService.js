@@ -24,3 +24,12 @@ export const register = (firstName, lastName, email, username, password, office)
 });
 
 export const logout = () => request.get(`${baseUrl}/logout`);
+
+export const getMe = async () => {
+
+    const result = await request.get(`${baseUrl}/me`);
+
+    console.log(result);
+
+    return (result);
+}
