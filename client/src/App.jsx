@@ -56,12 +56,13 @@ function App() {
             />
           )}
           <Route path="/users/register" element={<RegisterForm />} />
-          <Route path="/groups" element={<Groups />} />
+          <Route path={Path.Groups} element={<Groups />} />
           <Route path="/home" element={<Banner />} />
           <Route path="/misc" element={<Miscellaneous />} />
           <Route path="/users" element={<UserList />} />
           <Route path="/groups/add" element={<AddGroup />} />
           <Route path="/groups/:groupId" element={<GroupDetails />} />
+          <Route path={Path.AddGuest} element={<GuestAddForm />} />
           <Route path={Path.Logout} element={<Logout />} />
         </Routes>
 

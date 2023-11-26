@@ -1,5 +1,6 @@
 import styles from "./Banner.module.css";
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import Path from "../paths";
 
 export default function Banner() {
   return (
@@ -12,7 +13,7 @@ export default function Banner() {
         </div>
         <ul className={styles.actions}>
           <li>
-            <Link to='/groups'
+            <Link to={Path.Groups}
               className={[styles.button, styles.scrolly].join(" ")}
             >
               Show All Groups

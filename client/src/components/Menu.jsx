@@ -2,9 +2,25 @@ import styles from "./Menu.module.css";
 import { Link } from "react-router-dom";
 import AuthContext from "../contexts/authContext";
 import { useContext } from "react";
+import Path from "../paths";
+import * as groupService from '../services/groupService';
 
 export default function Menu({ toggle }) {
-  const { isAuthenticated, username } = useContext(AuthContext);
+  const { isAuthenticated, username, userId } = useContext(AuthContext);
+
+  const onClickHandler = (e) => {
+    e.preventDefault();
+
+      console.log('clicckk')
+
+     const result = groupService.getMyGroups(userId);
+
+      console.log(result);
+
+      return result;
+
+      
+  }
 
   return (
     <div className={styles.overlay} onClick={toggle}>
@@ -19,7 +35,7 @@ export default function Menu({ toggle }) {
             <Link to="/home">Home</Link>
           </li>
           <li>
-            <Link to="/groups">Groups</Link>
+            <Link to={Path.Groups}>Groups</Link>
           </li>
           <li>
             <Link to="/misc">Element library</Link>
