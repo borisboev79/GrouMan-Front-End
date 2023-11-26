@@ -1,4 +1,4 @@
-import { Form, useNavigate } from "react-router-dom";
+import { Form, useNavigate, useParams } from "react-router-dom";
 import styles from "./RegisterForm.module.css";
 import { useState, useEffect, useRef, useCallback, useContext } from "react";
 import { useForm } from "../hooks/useForm";
@@ -15,12 +15,14 @@ const GuestAddKey = {
   Cabin: "office",
 }
 
-export default function GuestAddForm(groupId) {
+export default function GuestAddForm() {
 
   const {registerSubmitHandler} = useContext(AuthContext);
   const {localRegister} = useContext(AuthContext);
+  const { groupId } = useParams();
 
-  const { formValues, changeHandler, onSubmit, resetFormHandler } = useForm(registerSubmitHandler, {
+
+  const { formValues, changeHandler, onSubmit, resetFormHandler } = useForm(registerSubmitHandler, {}, {
     [GuestAddKey.FirstName]: '',
     [GuestAddKey.LastName]: '',
     [GuestAddKey.Email]: '',
@@ -38,11 +40,16 @@ export default function GuestAddForm(groupId) {
   const [stringError, setStringError] = useState("");
   const navigate = useNavigate();
 
+  console.log(groupId)
+
   useEffect(() => {
     const group = groupService.getOne(groupId);
 
     setGroup(group);
-  })
+  }, [groupId]);
+
+
+  console.log(group)
 
 
 
@@ -84,7 +91,7 @@ export default function GuestAddForm(groupId) {
           <div className="12u 12u$(xsmall)">
             <label htmlFor="firstName">First name:</label>
             <input
-              ref={userNameInputRef}
+              ref={firstNameInputRef}
               type="text"
               name="firstName"
               id="firstName"

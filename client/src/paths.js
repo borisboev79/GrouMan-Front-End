@@ -3,6 +3,7 @@ const Path  = {
     Groups: '/groups',
     MyGroups: 'groups/:userId',
     Logout: '/logout',
+    AddGuest: '/guests/add/:groupId',
 
 };
 

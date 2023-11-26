@@ -11,6 +11,7 @@ import Banner from "./components/Banner";
 import Groups from "./components/Groups";
 import GroupDetails from "./components/GroupDetails";
 import AddGroup from "./components/AddGroup";
+import GuestAddForm from "./components/GuestAddForm";
 
 import UserList from "./components/UserList";
 import LoginForm from "./components/LoginForm";

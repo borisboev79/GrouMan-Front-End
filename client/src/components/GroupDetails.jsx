@@ -1,13 +1,18 @@
 import "./groupDetails.css";
 import { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { Routes, Route, useParams, Link } from "react-router-dom";
 import * as groupService from "../services/groupService";
 import * as formatter from "../utils/dateUtils";
+import Path from "../paths";
+import GuestAddForm from "./GuestAddForm";
+import GuestListItem from "./GuestListItem";
 
 export default function GroupDetails() {
   const [group, setGroup] = useState({});
   const [transport, setTransport] = useState("");
+  const [showForm, setShowForm] = useState(false);
   const { groupId } = useParams();
+
 
   useEffect(() => {
     groupService.getOne(groupId)
@@ -18,6 +23,14 @@ export default function GroupDetails() {
     setTransport(group.transportation)
   },[group]);
 
+  const showGuestAddHandler = () => {
+    
+    if(showForm) {
+      setShowForm(false);
+    } else {
+      setShowForm(true);
+    }
+  }
   
 
   return (
@@ -78,6 +91,7 @@ export default function GroupDetails() {
           <hr className="major" />
           {/* Elements */}
           
+         
 
           <div className="row 200%">
             <div className="12u">
@@ -93,31 +107,7 @@ export default function GroupDetails() {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>Item 1</td>
-                      <td>Ante turpis integer aliquet porttitor.</td>
-                      <td>29.99</td>
-                    </tr>
-                    <tr>
-                      <td>Item 2</td>
-                      <td>Vis ac commodo adipiscing arcu aliquet.</td>
-                      <td>19.99</td>
-                    </tr>
-                    <tr>
-                      <td>Item 3</td>
-                      <td> Morbi faucibus arcu accumsan lorem.</td>
-                      <td>29.99</td>
-                    </tr>
-                    <tr>
-                      <td>Item 4</td>
-                      <td>Vitae integer tempus condimentum.</td>
-                      <td>19.99</td>
-                    </tr>
-                    <tr>
-                      <td>Item 5</td>
-                      <td>Ante turpis integer aliquet porttitor.</td>
-                      <td>29.99</td>
-                    </tr>
+                   <GuestListItem />
                   </tbody>
                   <tfoot>
                     <tr>
@@ -128,15 +118,15 @@ export default function GroupDetails() {
                 </table>
               </div>
             </div>
-
+            
             <div className="12u">
               {/* Buttons */}
 
               <ul className="actions">
                 <li>
-                  <a href="#" className="button">
-                    Add Passenger
-                  </a>
+                  <Link onClick={showGuestAddHandler} className="button">
+                    {!showForm ? 'Add Passenger' : 'Cancel Add Passenger'}
+                  </Link>
                 </li>
                 <li>
                   <Link to="/groups" className="button alt">
@@ -144,6 +134,7 @@ export default function GroupDetails() {
                   </Link>
                 </li>
               </ul>
+              {showForm && <GuestAddForm/>}
             </div>
           </div>
         </div>
