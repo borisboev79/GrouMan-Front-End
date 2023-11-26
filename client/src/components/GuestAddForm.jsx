@@ -1,30 +1,27 @@
 import { Form, useNavigate, useParams } from "react-router-dom";
-import styles from "./RegisterForm.module.css";
+import styles from "./GuestAddForm.module.css";
 import { useState, useEffect, useRef, useCallback, useContext } from "react";
 import { useForm } from "../hooks/useForm";
 import AuthContext from "../contexts/authContext";
 import * as groupService from '../services/groupService';
 
 const GuestAddKey = {
-  FirstName: "firstName",
-  LastName: "lastName",
+  FullName: "fullName",
   Email: "email",
   EGN: "username",
   Phone: "password",
-  Birthdate: "confirmPassword",
+  Birthdate: "birthDate",
   Cabin: "office",
 }
 
 export default function GuestAddForm() {
 
   const {registerSubmitHandler} = useContext(AuthContext);
-  const {localRegister} = useContext(AuthContext);
   const { groupId } = useParams();
 
 
   const { formValues, changeHandler, onSubmit, resetFormHandler } = useForm(registerSubmitHandler, {}, {
-    [GuestAddKey.FirstName]: '',
-    [GuestAddKey.LastName]: '',
+    [GuestAddKey.FullName]: '',
     [GuestAddKey.Email]: '',
     [GuestAddKey.EGN]: '',
     [GuestAddKey.Phone]: '',
@@ -33,7 +30,7 @@ export default function GuestAddForm() {
 
   });
 
-  const firstNameInputRef = useRef();
+  const fullNameInputRef = useRef();
   const isMountedRef = useRef(false);
   const [group, setGroup] = useState({});
   const [emailError, setEmailError] = useState("");
@@ -54,7 +51,7 @@ export default function GuestAddForm() {
 
 
   useEffect(() => {
-    firstNameInputRef.current.focus();
+    fullNameInputRef.current.focus();
   }, []);
 
   useEffect(() => {
@@ -83,44 +80,22 @@ export default function GuestAddForm() {
   };
 
   return (
-    <div className={styles.registerForm}>
-      <h3>Add Guest to {group.groupName}</h3>
+    <div className={styles.guestForm}>
+      <h3>Add Guest to Group</h3>
       <form onSubmit={onSubmit}>
         <div className="row uniform">
-          {/* First name */}
-          <div className="12u 12u$(xsmall)">
-            <label htmlFor="firstName">First name:</label>
+          {/* Full name */}
+          <div className="6u 12u$(xsmall)">
+            <label htmlFor="fullName">Name and Surname:</label>
             <input
-              ref={firstNameInputRef}
+              ref={fullNameInputRef}
               type="text"
-              name="firstName"
-              id="firstName"
-              value={formValues[GuestAddKey.FirstName]}
+              name="fullName"
+              id="fullName"
+              value={formValues[GuestAddKey.FullName]}
               onChange={changeHandler}
-              placeholder="First name"
+              placeholder="Name and Surname"
             />
-            <div
-              data-lastpass-icon-root="true"
-              style={{
-                position: "relative !important",
-                height: "0px !important",
-                width: "0px !important",
-                float: "left !important",
-              }}
-            />
-          </div>
-          {/* Last name */}
-          <div className="12u 12u$(xsmall)">
-            <label htmlFor="lastName">Last name:</label>
-            <input
-              type="text"
-              name="lastName"
-              id="lastName"
-              value={formValues[GuestAddKey.LastName]}
-              onChange={changeHandler}
-              placeholder="Last name"
-              className="redlabel"
-                          />
             <div
               data-lastpass-icon-root="true"
               style={{
@@ -132,8 +107,8 @@ export default function GuestAddForm() {
             />
           </div>
           {/* Email */}
-          <div className="12u 12u$(xsmall)">
-            <label htmlFor="email">User email:</label>
+          <div className="6u 12u$(xsmall)">
+            <label htmlFor="email">Contact email:</label>
             <input
               type="email"
               name="email"
@@ -158,7 +133,7 @@ export default function GuestAddForm() {
             />
           </div>
            {/* Username */}
-           <div className="12u 12u$(xsmall)">
+           <div className="6u 12u$(xsmall)">
             <label htmlFor="username">Username:</label>
             <input
               type="text"
@@ -180,7 +155,7 @@ export default function GuestAddForm() {
             />
           </div>
           {/* Password */}
-          <div className="12u 12u$(xsmall)">
+          <div className="6u 12u$(xsmall)">
             <label htmlFor="password">Choose password:</label>
             <input
               type="password"
@@ -203,12 +178,12 @@ export default function GuestAddForm() {
             />
           </div>
           {/* Confirm password */}
-          <div className="12u 12u$(xsmall)">
-            <label htmlFor="confirmPassword">Confirm password:</label>
+          <div className="6u 12u$(xsmall)">
+            <label htmlFor="birthDate">Confirm password:</label>
             <input
               type="password"
-              name="confirmPassword"
-              id="confirmPassword"
+              name="birthDate"
+              id="birthDate"
               value={formValues[GuestAddKey.ConfirmPassword]}
               onChange={changeHandler}
               placeholder="Confirm password"
