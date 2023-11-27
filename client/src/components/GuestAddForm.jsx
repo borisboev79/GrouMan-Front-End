@@ -8,10 +8,10 @@ import * as groupService from '../services/groupService';
 const GuestAddKey = {
   FullName: "fullName",
   Email: "email",
-  EGN: "username",
-  Phone: "password",
+  EGN: "egn",
+  Phone: "phone",
   Birthdate: "birthDate",
-  Cabin: "office",
+  Cabin: "cabin",
 }
 
 export default function GuestAddForm() {
@@ -72,8 +72,8 @@ export default function GuestAddForm() {
   };
 
   const stringValidator = () => {
-    if (formValues[GuestAddKey.Password].length < 12){
-      setStringError("Password should be at least 8 characters");
+    if (formValues[GuestAddKey.Phone].length < 10){
+      setStringError("Phone should be at least 10 digits");
     } else {
       setStringError("");
     }
@@ -132,16 +132,16 @@ export default function GuestAddForm() {
               }}
             />
           </div>
-           {/* Username */}
+           {/* EGN */}
            <div className="6u 12u$(xsmall)">
-            <label htmlFor="username">Username:</label>
+            <label htmlFor="egn">EGN:</label>
             <input
               type="text"
-              name="username"
-              id="username"
-              value={formValues[GuestAddKey.Username]}
+              name="egn"
+              id="egn"
+              value={formValues[GuestAddKey.egn]}
               onChange={changeHandler}
-              placeholder="Username"
+              placeholder="EGN"
               className="redlabel"
                           />
             <div
@@ -154,18 +154,18 @@ export default function GuestAddForm() {
               }}
             />
           </div>
-          {/* Password */}
+          {/* Phone */}
           <div className="6u 12u$(xsmall)">
-            <label htmlFor="password">Choose password:</label>
+            <label htmlFor="phone">Mobile phone:</label>
             <input
-              type="password"
-              name="password"
-              id="password"
-              value={formValues[GuestAddKey.Password]}
+              type="text"
+              name="phone"
+              id="phone"
+              value={formValues[GuestAddKey.Phone]}
               onChange={changeHandler}
               onBlur={stringValidator}
               className={stringError && styles.redlabel}
-              placeholder="Enter password"
+              placeholder="Enter phone"
             />
             <div
               data-lastpass-icon-root="true"
@@ -177,16 +177,16 @@ export default function GuestAddForm() {
               }}
             />
           </div>
-          {/* Confirm password */}
+          {/* Birthdate */}
           <div className="6u 12u$(xsmall)">
-            <label htmlFor="birthDate">Confirm password:</label>
+            <label htmlFor="birthDate">Passenger Birthdate:</label>
             <input
-              type="password"
+              type="date"
               name="birthDate"
               id="birthDate"
-              value={formValues[GuestAddKey.ConfirmPassword]}
+              value={formValues[GuestAddKey.Birthdate]}
               onChange={changeHandler}
-              placeholder="Confirm password"
+              placeholder="Enter dat of birth"
             />
             <div
               data-lastpass-icon-root="true"
@@ -199,15 +199,15 @@ export default function GuestAddForm() {
             />
           </div>
 
-          {/* Office select */}
-          <div className="12u$">
+          {/* Cabin select */}
+          <div className="6u 12u$(xsmall)">
             <div className="select-wrapper">
-              <label htmlFor="office">Office:</label>
-              <select name="office" id="office" value={formValues[GuestAddKey.Office]} onChange={changeHandler}>
-                <option value>- Select office -</option>
-                <option value={"SOFR"}>Sofia Central</option>
-                <option value={"MOS"}>Mall of Sofia</option>
-                <option value={"PDV"}>Plovdiv</option>
+              <label htmlFor="cabin">Chosen cabin:</label>
+              <select name="cabin" id="cabin" value={formValues[GuestAddKey.Cabin]} onChange={changeHandler}>
+                <option value>- Select cabin -</option>
+                <option value={"Inside"}>INSIDE</option>
+                <option value={"Outside"}>OUTSIDE</option>
+                <option value={"Balcony"}>BALCONY</option>
               </select>
             </div>
           </div>
