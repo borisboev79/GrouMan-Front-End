@@ -9,7 +9,14 @@ export const getAllGuests = async () => {
   //   load: `owner=_ownerId:users`,
   // })
 
-  const result = await request.get(baseUrl);
+  const query = new URLSearchParams({
+    where: `groupId="${groupId}"`,
+    load: `owner=_ownerId:users`,
+  })
+
+  console.log(`${baseUrl}?${query}`)
+
+  const result = await request.get(`${baseUrl}?${query}`);
 
   return result;
 
