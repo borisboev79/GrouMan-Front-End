@@ -1,5 +1,6 @@
 /* Grid */
 
+
 .row {
   border-bottom: solid 1px transparent;
   -moz-box-sizing: border-box;
@@ -514,6 +515,11 @@ button:disabled,
 .wrapper.style1 h4,
 .wrapper.style1 h5 {
   color: #fff;
+}
+
+h3 {
+  text-align: center;
+  margin: 1em auto;
 }
 
 h4 {

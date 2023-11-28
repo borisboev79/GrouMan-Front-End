@@ -102,7 +102,7 @@ export default function GroupDetails() {
           <div className="row 200%">
             <div className="12u">
               {/* Table */}
-              <h3>Table</h3>
+              <h3>Guests in group</h3>
               <div className="table-wrapper">
                 <table className="alt">
                   <thead>
