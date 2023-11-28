@@ -1,11 +1,9 @@
-import { Form, useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import styles from "./GuestAddForm.module.css";
-import { useState, useEffect, useRef, useCallback, useContext } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useForm } from "../hooks/useForm";
-import AuthContext from "../contexts/authContext";
 import * as groupService from '../services/groupService';
 import * as guestService from '../services/guestService';
-import Path from "../paths";
 
 
 const GuestAddKey = {
@@ -17,9 +15,7 @@ const GuestAddKey = {
   Cabin: "cabin",
 }
 
-export default function GuestAddForm({toggler}) {
-
-  
+export default function GuestAddForm({toggler, setState,}) {
   const { groupId } = useParams();
 
   const addGuestSubmitHandler = async (values) => {
@@ -32,15 +28,12 @@ export default function GuestAddForm({toggler}) {
       values.cabin,
       groupId,
     );
-    
-    console.log(groupId);
-    
       
     resetFormHandler();
 
-    toggler();
+    setState((state) => [...state, result]);
 
-    navigate(Path.Home);
+    toggler();
   };
 
 
@@ -60,7 +53,7 @@ export default function GuestAddForm({toggler}) {
   const [group, setGroup] = useState({});
   const [emailError, setEmailError] = useState("");
   const [stringError, setStringError] = useState("");
-  const navigate = useNavigate();
+
 
   console.log(groupId)
 

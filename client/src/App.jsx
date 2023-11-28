@@ -62,7 +62,7 @@ function App() {
           <Route path="/misc" element={<Miscellaneous />} />
           <Route path="/users" element={<UserList />} />
           <Route path="/groups/add" element={<AddGroup />} />
-          <Route path="/groups/:groupId" element={<GroupDetails />} />
+          <Route path={Path.GroupDetails} element={<GroupDetails />} />
           <Route path={Path.AddGuest} element={<GuestAddForm />} />
           <Route path={Path.Logout} element={<Logout />} />
         </Routes>

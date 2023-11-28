@@ -1,15 +1,15 @@
 import "./groupDetails.css";
 import { useState, useEffect } from "react";
-import { Routes, Route, useParams, Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import * as groupService from "../services/groupService";
 import * as guestService from "../services/guestService";
 import * as formatter from "../utils/dateUtils";
-import Path from "../paths";
 import GuestAddForm from "./GuestAddForm";
 import GuestListItem from "./GuestListItem";
 
 export default function GroupDetails() {
   const [group, setGroup] = useState({});
+
   const [transport, setTransport] = useState("");
   const [showForm, setShowForm] = useState(false);
   const [guests, setGuests] = useState([{}]);
@@ -25,11 +25,9 @@ export default function GroupDetails() {
 
   useEffect(() => {
     guestService.getAllGuests().then((result) => {
-     
       const filtered = result.filter((guest) => guest.groupId === groupId);
       setGuests(filtered);
     });
-  
   }, [groupId]);
 
   const showGuestAddHandler = () => {
@@ -129,12 +127,6 @@ export default function GroupDetails() {
                       />
                     ))}
                   </tbody>
-                  <tfoot>
-                    <tr>
-                      <td colSpan={2} />
-                      <td>100.00</td>
-                    </tr>
-                  </tfoot>
                 </table>
               </div>
             </div>
@@ -154,7 +146,12 @@ export default function GroupDetails() {
                   </Link>
                 </li>
               </ul>
-              {showForm && <GuestAddForm toggler={showGuestAddHandler} />}
+              {showForm && (
+                <GuestAddForm
+                  toggler={showGuestAddHandler}
+                  setState={setGuests}
+                />
+              )}
             </div>
           </div>
         </div>
