@@ -2,9 +2,16 @@ import * as request from "../lib/request";
 
 const baseUrl = "http://localhost:3030/data/guests";
 
-export const getAllGuests = async () => {
+export const getAllGuests = async (groupId) => {
 
-  const result = await request.get(baseUrl);
+  const query = new URLSearchParams({
+    where: `groupId="${groupId}"`,
+    load: `owner=_ownerId:users`,
+  })
+
+  console.log(`${baseUrl}?${query}`)
+
+  const result = await request.get(`${baseUrl}?${query}`);
 
   return result;
 
