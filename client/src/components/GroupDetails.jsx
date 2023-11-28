@@ -102,12 +102,15 @@ export default function GroupDetails() {
                   <thead>
                     <tr>
                       <th>Name</th>
-                      <th>Description</th>
-                      <th>Price</th>
+                      <th>Email</th>
+                      <th>EGN</th>
+                      <th>Phone</th>
+                      <th>Birthdate</th>
+                      <th>Cabin Type</th>
                     </tr>
                   </thead>
                   <tbody>
-                   <GuestListItem />
+                   <GuestListItem  groupId={groupId}/>
                   </tbody>
                   <tfoot>
                     <tr>
@@ -134,7 +137,7 @@ export default function GroupDetails() {
                   </Link>
                 </li>
               </ul>
-              {showForm && <GuestAddForm/>}
+              {showForm && <GuestAddForm toggler={showGuestAddHandler}/>}
             </div>
           </div>
         </div>

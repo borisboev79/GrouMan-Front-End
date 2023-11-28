@@ -4,6 +4,9 @@ import { useState, useEffect, useRef, useCallback, useContext } from "react";
 import { useForm } from "../hooks/useForm";
 import AuthContext from "../contexts/authContext";
 import * as groupService from '../services/groupService';
+import * as guestService from '../services/guestService';
+import Path from "../paths";
+
 
 const GuestAddKey = {
   FullName: "fullName",
@@ -14,19 +17,41 @@ const GuestAddKey = {
   Cabin: "cabin",
 }
 
-export default function GuestAddForm() {
+export default function GuestAddForm({toggler}) {
 
-  const {registerSubmitHandler} = useContext(AuthContext);
+  
   const { groupId } = useParams();
 
+  const addGuestSubmitHandler = async (values) => {
+    const result = await guestService.add(
+      values.fullName,
+      values.email,
+      values.egn,
+      values.phone,
+      values.birthDate,
+      values.cabin,
+      groupId,
+    );
+    
+    console.log(groupId);
+    
+      
+    resetFormHandler();
 
-  const { formValues, changeHandler, onSubmit, resetFormHandler } = useForm(registerSubmitHandler, {}, {
+    toggler();
+
+    navigate(Path.Home);
+  };
+
+
+  const { formValues, changeHandler, onSubmit, resetFormHandler } = useForm(addGuestSubmitHandler, {}, {
     [GuestAddKey.FullName]: '',
     [GuestAddKey.Email]: '',
     [GuestAddKey.EGN]: '',
     [GuestAddKey.Phone]: '',
     [GuestAddKey.Birthdate]: '',
     [GuestAddKey.Cabin]: '',
+
 
   });
 
@@ -64,7 +89,7 @@ export default function GuestAddForm() {
   }, [formValues]);
 
   const emailValidator = () => {
-    if (!formValues[GuestAddKey.Email].includes("@")){
+    if (!formValues[GuestAddKey.Email].includes("@") && !formValues[GuestAddKey.Email].includes('.')){
       setEmailError("This is not a valid email.");
     } else {
       setEmailError("");
