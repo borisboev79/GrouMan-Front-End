@@ -4,6 +4,11 @@ const baseUrl = "http://localhost:3030/data/guests";
 
 export const getAllGuests = async () => {
 
+  // const query = new URLSearchParams({
+  //   where: `groupId="${groupId}"`,
+  //   load: `owner=_ownerId:users`,
+  // })
+
   const result = await request.get(baseUrl);
 
   return result;

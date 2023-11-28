@@ -2,6 +2,7 @@ import "./groupDetails.css";
 import { useState, useEffect } from "react";
 import { Routes, Route, useParams, Link } from "react-router-dom";
 import * as groupService from "../services/groupService";
+import * as guestService from "../services/guestService";
 import * as formatter from "../utils/dateUtils";
 import Path from "../paths";
 import GuestAddForm from "./GuestAddForm";
@@ -11,27 +12,33 @@ export default function GroupDetails() {
   const [group, setGroup] = useState({});
   const [transport, setTransport] = useState("");
   const [showForm, setShowForm] = useState(false);
+  const [guests, setGuests] = useState([{}]);
   const { groupId } = useParams();
 
-
   useEffect(() => {
-    groupService.getOne(groupId)
-    .then(setGroup);
+    groupService.getOne(groupId).then(setGroup);
   }, [groupId]);
 
   useEffect(() => {
-    setTransport(group.transportation)
-  },[group]);
+    setTransport(group.transportation);
+  }, [group]);
+
+  useEffect(() => {
+    guestService.getAllGuests().then((result) => {
+     
+      const filtered = result.filter((guest) => guest.groupId === groupId);
+      setGuests(filtered);
+    });
+  
+  }, [groupId]);
 
   const showGuestAddHandler = () => {
-    
-    if(showForm) {
+    if (showForm) {
       setShowForm(false);
     } else {
       setShowForm(true);
     }
-  }
-  
+  };
 
   return (
     <>
@@ -56,7 +63,8 @@ export default function GroupDetails() {
                 Itinerary: <b>{group.itinerary}</b>
               </li>
               <li>
-                Transportation: <a href="#" className={`icon fa-${transport}`}></a>
+                Transportation:{" "}
+                <a href="#" className={`icon fa-${transport}`}></a>
               </li>
               <li>
                 Duration: <b>{group.duration}</b> days
@@ -90,8 +98,6 @@ export default function GroupDetails() {
           <h4>Added by: {group._ownerId}</h4>
           <hr className="major" />
           {/* Elements */}
-          
-         
 
           <div className="row 200%">
             <div className="12u">
@@ -110,7 +116,18 @@ export default function GroupDetails() {
                     </tr>
                   </thead>
                   <tbody>
-                   <GuestListItem  groupId={groupId}/>
+                    {guests.map((guest) => (
+                      <GuestListItem
+                        key={guest._id}
+                        _id={guest._id}
+                        fullName={guest.fullName}
+                        email={guest.email}
+                        egn={guest.egn}
+                        phone={guest.phone}
+                        birthDate={guest.birthDate}
+                        cabin={guest.cabin}
+                      />
+                    ))}
                   </tbody>
                   <tfoot>
                     <tr>
@@ -121,14 +138,14 @@ export default function GroupDetails() {
                 </table>
               </div>
             </div>
-            
+
             <div className="12u">
               {/* Buttons */}
 
               <ul className="actions">
                 <li>
                   <Link onClick={showGuestAddHandler} className="button">
-                    {!showForm ? 'Add Passenger' : 'Cancel Add Passenger'}
+                    {!showForm ? "Add Passenger" : "Cancel Add Passenger"}
                   </Link>
                 </li>
                 <li>
@@ -137,13 +154,11 @@ export default function GroupDetails() {
                   </Link>
                 </li>
               </ul>
-              {showForm && <GuestAddForm toggler={showGuestAddHandler}/>}
+              {showForm && <GuestAddForm toggler={showGuestAddHandler} />}
             </div>
           </div>
         </div>
       </section>
     </>
   );
-
-
 }
