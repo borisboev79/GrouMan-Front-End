@@ -37,7 +37,7 @@ export default function GuestAddForm({toggler, setState,}) {
   };
 
 
-  const { formValues, changeHandler, onSubmit, resetFormHandler } = useForm(addGuestSubmitHandler, {}, {
+  const { formValues, changeHandler, onSubmit, resetFormHandler } = useForm(addGuestSubmitHandler, () => {}, {
     [GuestAddKey.FullName]: '',
     [GuestAddKey.Email]: '',
     [GuestAddKey.EGN]: '',

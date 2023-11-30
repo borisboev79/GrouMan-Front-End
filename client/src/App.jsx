@@ -3,6 +3,7 @@ import { useState } from "react";
 import { AuthProvider } from "./contexts/authContext";
 
 import Path from "./paths";
+import NotFound404 from "./components/NotFound404";
 import Navbar from "./components/Navbar";
 import Menu from "./components/Menu";
 import One from "./components/One";
@@ -20,6 +21,7 @@ import Logout from "./components/Logout";
 
 import Miscellaneous from "./components/Miscellaneous";
 import Footer from "./components/Footer";
+import GroupDetailWrapper from "./components/GroupDetailWrapper";
 
 function App() {
   const [showMenu, setShowMenu] = useState(false);
@@ -43,6 +45,9 @@ function App() {
     navigate("/home");
   };
 
+ 
+  
+
   return (
     <AuthProvider>
       <div>
@@ -56,15 +61,17 @@ function App() {
               element={<LoginForm close={closeLoginHandler} />}
             />
           )}
+         
           <Route path="/users/register" element={<RegisterForm />} />
           <Route path={Path.Groups} element={<Groups />} />
           <Route path="/home" element={<Banner />} />
           <Route path="/misc" element={<Miscellaneous />} />
           <Route path="/users" element={<UserList />} />
           <Route path="/groups/add" element={<AddGroup />} />
-          <Route path={Path.GroupDetails} element={<GroupDetails />} />
+          <Route path={Path.GroupDetails} element={<GroupDetailWrapper/>} />
           <Route path={Path.AddGuest} element={<GuestAddForm />} />
           <Route path={Path.Logout} element={<Logout />} />
+          <Route path='*' element={<NotFound404 />} />
         </Routes>
 
         <One />

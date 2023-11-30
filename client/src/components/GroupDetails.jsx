@@ -7,11 +7,11 @@ import * as formatter from "../utils/dateUtils";
 import GuestAddForm from "./GuestAddForm";
 import GuestListItem from "./GuestListItem";
 
-export default function GroupDetails() {
+export default function GroupDetails({showForm, showGuestAddHandler, children}) {
   const [group, setGroup] = useState({});
 
   const [transport, setTransport] = useState("");
-  const [showForm, setShowForm] = useState(false);
+  // const [showForm, setShowForm] = useState(false);
   const [guests, setGuests] = useState([{}]);
   const { groupId } = useParams();
 
@@ -30,13 +30,13 @@ export default function GroupDetails() {
     });
   }, [groupId]);
 
-  const showGuestAddHandler = () => {
-    if (showForm) {
-      setShowForm(false);
-    } else {
-      setShowForm(true);
-    }
-  };
+  // const showGuestAddHandler = () => {
+  //   if (showForm) {
+  //     setShowForm(false);
+  //   } else {
+  //     setShowForm(true);
+  //   }
+  // };
 
   return (
     <>
@@ -114,9 +114,9 @@ export default function GroupDetails() {
                     </tr>
                   </thead>
                   <tbody>
-                    {guests.map((guest) => (
+                    {guests.map((guest, index) => (
                       <GuestListItem
-                        key={guest._id}
+                        key={index}
                         _id={guest._id}
                         fullName={guest.fullName}
                         email={guest.email}
@@ -134,18 +134,8 @@ export default function GroupDetails() {
             <div className="12u">
               {/* Buttons */}
 
-              <ul className="actions">
-                <li>
-                  <Link onClick={showGuestAddHandler} className="button">
-                    {!showForm ? "Add Passenger" : "Cancel Add Passenger"}
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/groups" className="button alt">
-                    Back to all groups
-                  </Link>
-                </li>
-              </ul>
+             {children}
+
               {showForm && (
                 <GuestAddForm
                   toggler={showGuestAddHandler}

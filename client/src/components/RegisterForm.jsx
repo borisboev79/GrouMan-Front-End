@@ -50,7 +50,7 @@ export default function RegisterForm() {
   }, [formValues]);
 
   const emailValidator = () => {
-    if (!formValues[RegisterFormKeys.Email].includes("@")){
+    if (!formValues[RegisterFormKeys.Email].includes(".") || !formValues[RegisterFormKeys.Email].includes("@")){
       setEmailError("This is not a valid email.");
     } else {
       setEmailError("");
@@ -58,7 +58,8 @@ export default function RegisterForm() {
   };
 
   const stringValidator = () => {
-    if (formValues[RegisterFormKeys.Password].length < 12){
+    if (formValues[RegisterFormKeys.Password].length < 8){
+      console.log("vliza")
       setStringError("Password should be at least 8 characters");
     } else {
       setStringError("");
@@ -175,6 +176,9 @@ export default function RegisterForm() {
               className={stringError && styles.redlabel}
               placeholder="Enter password"
             />
+             {stringError && (
+              <p className={styles.errorMessage}>{stringError}</p>
+            )}
             <div
               data-lastpass-icon-root="true"
               style={{
