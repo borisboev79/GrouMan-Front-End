@@ -1,9 +1,8 @@
-import { Form, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styles from "./RegisterForm.module.css";
-import { useState, useEffect, useRef, useCallback, useContext } from "react";
+import { useEffect, useRef, useContext } from "react";
 import { useForm } from "../hooks/useForm";
 import AuthContext from "../contexts/authContext";
-import formValidator from "../utils/validations";
 import { useValidation } from "../hooks/useValidation";
 
 const RegisterFormKeys = {
@@ -36,10 +35,9 @@ export default function RegisterForm() {
 
   const userNameInputRef = useRef();
   const isMountedRef = useRef(false);
- // const [emailError, setEmailError] = useState("");
- // const [stringError, setStringError] = useState("");
-  const [error, setError] = useState("");
   const navigate = useNavigate();
+  const { validationValues, validateEmail, validateName, validateLastName } =
+    useValidation();
 
   useEffect(() => {
     userNameInputRef.current.focus();
@@ -50,40 +48,7 @@ export default function RegisterForm() {
       isMountedRef.current = true;
       return;
     }
-
-    console.log("Form is updated");
   }, [formValues]);
-
-
-
-  const { validationValues, validateEmail } = useValidation();
-
-
-  function errorValidator (type, value) {
-
-    setError(formValidator(type, value));
-
-  }
-
-  // const emailValidator = () => {
-  //   if (
-  //     !formValues[RegisterFormKeys.Email].includes(".") ||
-  //     !formValues[RegisterFormKeys.Email].includes("@")
-  //   ) {
-  //     setEmailError("This is not a valid email.");
-  //   } else {
-  //     setEmailError("");
-  //   }
-  // };
-
-  // const stringValidator = () => {
-  //   if (formValues[RegisterFormKeys.Password].length < 8) {
-  //     console.log("vliza");
-  //     setStringError("Password should be at least 8 characters");
-  //   } else {
-  //     setStringError("");
-  //   }
-  // };
 
   return (
     <div className={styles.registerForm}>
@@ -100,8 +65,17 @@ export default function RegisterForm() {
               id="firstName"
               value={formValues[RegisterFormKeys.FirstName]}
               onChange={changeHandler}
+              onBlur={() =>
+                validateName(formValues[RegisterFormKeys.FirstName])
+              }
+              className={validationValues.firstName && styles.redlabel}
               placeholder="First name"
             />
+            {validationValues.firstName && (
+              <p className={styles.errorMessage}>
+                {[validationValues.firstName]}
+              </p>
+            )}
             <div
               data-lastpass-icon-root="true"
               style={{
@@ -121,9 +95,18 @@ export default function RegisterForm() {
               id="lastName"
               value={formValues[RegisterFormKeys.LastName]}
               onChange={changeHandler}
+              onBlur={() =>
+              validateLastName(formValues[RegisterFormKeys.LastName])
+              }
+              className={validationValues.lastName && styles.redlabel}
               placeholder="Last name"
-              className="redlabel"
             />
+             {validationValues.lastName && (
+              <p className={styles.errorMessage}>
+                {[validationValues.lastName]}
+              </p>
+            )}
+
             <div
               data-lastpass-icon-root="true"
               style={{
@@ -143,11 +126,13 @@ export default function RegisterForm() {
               id="email"
               value={formValues[RegisterFormKeys.Email]}
               onChange={changeHandler}
-              onBlur={validateEmail}
+              onBlur={() => validateEmail(formValues[RegisterFormKeys.Email])}
               className={validationValues.email && styles.redlabel}
               placeholder="Email"
             />
-            {validationValues.email && <p className={styles.errorMessage}>{[validationValues.email]}</p>}
+            {validationValues.email && (
+              <p className={styles.errorMessage}>{[validationValues.email]}</p>
+            )}
             <div
               data-lastpass-icon-root="true"
               style={{
@@ -167,11 +152,13 @@ export default function RegisterForm() {
               id="username"
               value={formValues[RegisterFormKeys.Username]}
               onChange={changeHandler}
-          //    onBlur={() => errorValidator("username", formValues[RegisterFormKeys.Username] )}
-              className={error && styles.redlabel}
+              //    onBlur={() => errorValidator("username", formValues[RegisterFormKeys.Username] )}
+              className={validationValues.username && styles.redlabel}
               placeholder="Username"
             />
-             {error && <p className={styles.errorMessage}>{error}</p>}
+            {validationValues.username && (
+              <p className={styles.errorMessage}>{validationValues.username}</p>
+            )}
             <div
               data-lastpass-icon-root="true"
               style={{
@@ -191,12 +178,12 @@ export default function RegisterForm() {
               id="password"
               value={formValues[RegisterFormKeys.Password]}
               onChange={changeHandler}
-           //   onBlur={() => errorValidator("password", formValues[RegisterFormKeys.Password] )}
-              className={error && styles.redlabel}
+              //   onBlur={() => errorValidator("password", formValues[RegisterFormKeys.Password] )}
+              className={validationValues.password && styles.redlabel}
               placeholder="Enter password"
             />
-            {error && (
-              <p className={styles.errorMessage}>{error}</p>
+            {validationValues.password && (
+              <p className={styles.errorMessage}>{validationValues.password}</p>
             )}
             <div
               data-lastpass-icon-root="true"

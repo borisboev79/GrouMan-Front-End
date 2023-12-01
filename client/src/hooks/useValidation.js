@@ -9,51 +9,59 @@ export const useValidation = () => {
     password: "",
     confirmPassword: "",
     office: "",
-
   });
 
+  const validateName = (value) => {
+    const validName = value.length >=  2;
 
-  //console.log(validationValues);
-
-  // const changeHandler = (e) => {
-  //   let value = "";
-
-  //   switch (e.target.type) {
-  //     case "number":
-  //       value = Number(e.target.value);
-  //       break;
-  //     case "checkbox":
-  //       value = e.target.checked;
-  //       break;
-  //     case "date":
-  //       value = Date(e.target.value);
-  //     default:
-  //       value = e.target.value;
-  //       break;
-  //   }
-
-  //   setFormValues((state) => ({
-  //     ...state,
-  //     [e.target.name]: value,
-  //   }));
-  // };
-
-  const validateEmail = () => {
-    if (!validationValues.email.includes(".") || !validationValues.email.includes("@")) {
-      console.log("2 " + "vliza s email");
-      
-    
-    setValidationValues((state) => ({
-      ...state,
-      [validationValues.email]: "This is not a valid email.",}));
-
-      console.log([validationValues.email])
-
+    if (validationValues.firstName === "" && !validName) {
+      setValidationValues((state) => ({
+        ...state,
+        firstName: "Name should be at least two characters long.",
+      }));
+    } else if (validationValues.firstName !== "" && validName) {
+      setValidationValues((state) => ({
+        ...state,
+        firstName: "",
+      }));
+    }
   };
-  }
 
+  const validateLastName = (value) => {
+    const validLastName = value.length >=  3;
+
+    if (validationValues.lastName === "" && !validLastName) {
+      setValidationValues((state) => ({
+        ...state,
+        lastName: "Last name should be at least three characters long.",
+      }));
+    } else if (validationValues.lastName !== "" && validLastName) {
+      setValidationValues((state) => ({
+        ...state,
+        lastName: "",
+      }));
+    }
+  };
+
+  const validateEmail = (value) => {
+    const validEmail = value.includes(".") && value.includes("@");
+
+    if (validationValues.email === "" && !validEmail) {
+      setValidationValues((state) => ({
+        ...state,
+        email: "This is not a valid email.",
+      }));
+    } else if (validationValues.email !== "" && validEmail) {
+      setValidationValues((state) => ({
+        ...state,
+        email: "",
+      }));
+    }
+  };
 
   return {
+    validateName,
+    validateLastName,
     validateEmail,
     validationValues,
   };
