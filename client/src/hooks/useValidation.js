@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 export const useValidation = () => {
+  const [buttonToggle, setButtonToggle] = useState(false);
   const [validationValues, setValidationValues] = useState({
     firstName: "",
     lastName: "",
@@ -19,11 +20,14 @@ export const useValidation = () => {
         ...state,
         firstName: "Name should be at least two characters long.",
       }));
+      setButtonToggle(true);
+
     } else if (validationValues.firstName !== "" && validName) {
       setValidationValues((state) => ({
         ...state,
         firstName: "",
       }));
+      setButtonToggle(false);
     }
   };
 
@@ -35,11 +39,13 @@ export const useValidation = () => {
         ...state,
         lastName: "Last name should be at least three characters long.",
       }));
+      setButtonToggle(true);
     } else if (validationValues.lastName !== "" && validLastName) {
       setValidationValues((state) => ({
         ...state,
         lastName: "",
       }));
+      setButtonToggle(false);
     }
   };
 
@@ -51,11 +57,13 @@ export const useValidation = () => {
         ...state,
         email: "This is not a valid email.",
       }));
+      setButtonToggle(true);
     } else if (validationValues.email !== "" && validEmail) {
       setValidationValues((state) => ({
         ...state,
         email: "",
       }));
+      setButtonToggle(false);
     }
   };
 
@@ -64,5 +72,6 @@ export const useValidation = () => {
     validateLastName,
     validateEmail,
     validationValues,
+    buttonToggle,
   };
 };

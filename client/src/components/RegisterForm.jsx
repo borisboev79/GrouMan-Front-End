@@ -36,7 +36,7 @@ export default function RegisterForm() {
   const userNameInputRef = useRef();
   const isMountedRef = useRef(false);
   const navigate = useNavigate();
-  const { validationValues, validateEmail, validateName, validateLastName } =
+  const { validationValues, validateEmail, validateName, validateLastName, buttonToggle, } =
     useValidation();
 
   useEffect(() => {
@@ -96,12 +96,12 @@ export default function RegisterForm() {
               value={formValues[RegisterFormKeys.LastName]}
               onChange={changeHandler}
               onBlur={() =>
-              validateLastName(formValues[RegisterFormKeys.LastName])
+                validateLastName(formValues[RegisterFormKeys.LastName])
               }
               className={validationValues.lastName && styles.redlabel}
               placeholder="Last name"
             />
-             {validationValues.lastName && (
+            {validationValues.lastName && (
               <p className={styles.errorMessage}>
                 {[validationValues.lastName]}
               </p>
@@ -239,7 +239,11 @@ export default function RegisterForm() {
           <div className="12u$">
             <ul className="actions">
               <li>
-                <input type="submit" value="Register" />
+                <input
+                  disabled={ buttonToggle }
+                  type="submit"
+                  value="Register"
+                />
               </li>
               <li>
                 <input
