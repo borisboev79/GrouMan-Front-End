@@ -3,6 +3,7 @@ import styles from "./RegisterForm.module.css";
 import { useState, useEffect, useRef, useCallback, useContext } from "react";
 import { useForm } from "../hooks/useForm";
 import AuthContext from "../contexts/authContext";
+import formValidator from "../utils/validations";
 
 const RegisterFormKeys = {
   FirstName: "firstName",
@@ -12,28 +13,31 @@ const RegisterFormKeys = {
   Password: "password",
   ConfirmPassword: "confirmPassword",
   Office: "office",
-}
+};
 
 export default function RegisterForm() {
+  const { registerSubmitHandler } = useContext(AuthContext);
+  const { localRegister } = useContext(AuthContext);
 
-  const {registerSubmitHandler} = useContext(AuthContext);
-  const {localRegister} = useContext(AuthContext);
-
-  const { formValues, changeHandler, onSubmit, resetFormHandler } = useForm(registerSubmitHandler, localRegister, {
-    [RegisterFormKeys.FirstName]: '',
-    [RegisterFormKeys.LastName]: '',
-    [RegisterFormKeys.Email]: '',
-    [RegisterFormKeys.Username]: '',
-    [RegisterFormKeys.Password]: '',
-    [RegisterFormKeys.ConfirmPassword]: '',
-    [RegisterFormKeys.Office]: '',
-
-  });
+  const { formValues, changeHandler, onSubmit, resetFormHandler } = useForm(
+    registerSubmitHandler,
+    localRegister,
+    {
+      [RegisterFormKeys.FirstName]: "",
+      [RegisterFormKeys.LastName]: "",
+      [RegisterFormKeys.Email]: "",
+      [RegisterFormKeys.Username]: "",
+      [RegisterFormKeys.Password]: "",
+      [RegisterFormKeys.ConfirmPassword]: "",
+      [RegisterFormKeys.Office]: "",
+    }
+  );
 
   const userNameInputRef = useRef();
   const isMountedRef = useRef(false);
   const [emailError, setEmailError] = useState("");
   const [stringError, setStringError] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -49,8 +53,18 @@ export default function RegisterForm() {
     console.log("Form is updated");
   }, [formValues]);
 
+
+  function errorValidator (type, value) {
+
+    setError(formValidator(type, value));
+
+  }
+
   const emailValidator = () => {
-    if (!formValues[RegisterFormKeys.Email].includes(".") || !formValues[RegisterFormKeys.Email].includes("@")){
+    if (
+      !formValues[RegisterFormKeys.Email].includes(".") ||
+      !formValues[RegisterFormKeys.Email].includes("@")
+    ) {
       setEmailError("This is not a valid email.");
     } else {
       setEmailError("");
@@ -58,8 +72,8 @@ export default function RegisterForm() {
   };
 
   const stringValidator = () => {
-    if (formValues[RegisterFormKeys.Password].length < 8){
-      console.log("vliza")
+    if (formValues[RegisterFormKeys.Password].length < 8) {
+      console.log("vliza");
       setStringError("Password should be at least 8 characters");
     } else {
       setStringError("");
@@ -104,7 +118,7 @@ export default function RegisterForm() {
               onChange={changeHandler}
               placeholder="Last name"
               className="redlabel"
-                          />
+            />
             <div
               data-lastpass-icon-root="true"
               style={{
@@ -124,13 +138,11 @@ export default function RegisterForm() {
               id="email"
               value={formValues[RegisterFormKeys.Email]}
               onChange={changeHandler}
-              onBlur={emailValidator}
+              onBlur={() => errorValidator("email", formValues[RegisterFormKeys.Email] )}
               className={emailError && styles.redlabel}
               placeholder="Email"
             />
-            {emailError && (
-              <p className={styles.errorMessage}>{emailError}</p>
-            )}
+            {error && <p className={styles.errorMessage}>{error}</p>}
             <div
               data-lastpass-icon-root="true"
               style={{
@@ -141,8 +153,8 @@ export default function RegisterForm() {
               }}
             />
           </div>
-           {/* Username */}
-           <div className="12u 12u$(xsmall)">
+          {/* Username */}
+          <div className="12u 12u$(xsmall)">
             <label htmlFor="username">Username:</label>
             <input
               type="text"
@@ -150,9 +162,11 @@ export default function RegisterForm() {
               id="username"
               value={formValues[RegisterFormKeys.Username]}
               onChange={changeHandler}
+              onBlur={() => errorValidator("username", formValues[RegisterFormKeys.Username] )}
+              className={error && styles.redlabel}
               placeholder="Username"
-              className="redlabel"
-                          />
+            />
+             {error && <p className={styles.errorMessage}>{error}</p>}
             <div
               data-lastpass-icon-root="true"
               style={{
@@ -176,7 +190,7 @@ export default function RegisterForm() {
               className={stringError && styles.redlabel}
               placeholder="Enter password"
             />
-             {stringError && (
+            {stringError && (
               <p className={styles.errorMessage}>{stringError}</p>
             )}
             <div
@@ -215,7 +229,12 @@ export default function RegisterForm() {
           <div className="12u$">
             <div className="select-wrapper">
               <label htmlFor="office">Office:</label>
-              <select name="office" id="office" value={formValues[RegisterFormKeys.Office]} onChange={changeHandler}>
+              <select
+                name="office"
+                id="office"
+                value={formValues[RegisterFormKeys.Office]}
+                onChange={changeHandler}
+              >
                 <option value>- Select office -</option>
                 <option value={"SOFR"}>Sofia Central</option>
                 <option value={"MOS"}>Mall of Sofia</option>
@@ -231,7 +250,12 @@ export default function RegisterForm() {
                 <input type="submit" value="Register" />
               </li>
               <li>
-                <input type="reset" value="Reset" className="alt" onClick={resetFormHandler} />
+                <input
+                  type="reset"
+                  value="Reset"
+                  className="alt"
+                  onClick={resetFormHandler}
+                />
               </li>
             </ul>
           </div>
