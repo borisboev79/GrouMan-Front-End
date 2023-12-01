@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, useCallback, useContext } from "react";
 import { useForm } from "../hooks/useForm";
 import AuthContext from "../contexts/authContext";
 import formValidator from "../utils/validations";
+import { useValidation } from "../hooks/useValidation";
 
 const RegisterFormKeys = {
   FirstName: "firstName",
@@ -52,6 +53,10 @@ export default function RegisterForm() {
 
     console.log("Form is updated");
   }, [formValues]);
+
+
+
+  const { validationValues, validateEmail } = useValidation();
 
 
   function errorValidator (type, value) {
@@ -138,11 +143,11 @@ export default function RegisterForm() {
               id="email"
               value={formValues[RegisterFormKeys.Email]}
               onChange={changeHandler}
-              onBlur={() => errorValidator("email", formValues[RegisterFormKeys.Email] )}
-              className={error && styles.redlabel}
+              onBlur={validateEmail}
+              className={validationValues.email && styles.redlabel}
               placeholder="Email"
             />
-            {error && <p className={styles.errorMessage}>{error}</p>}
+            {validationValues.email && <p className={styles.errorMessage}>{[validationValues.email]}</p>}
             <div
               data-lastpass-icon-root="true"
               style={{
@@ -162,7 +167,7 @@ export default function RegisterForm() {
               id="username"
               value={formValues[RegisterFormKeys.Username]}
               onChange={changeHandler}
-              onBlur={() => errorValidator("username", formValues[RegisterFormKeys.Username] )}
+          //    onBlur={() => errorValidator("username", formValues[RegisterFormKeys.Username] )}
               className={error && styles.redlabel}
               placeholder="Username"
             />
@@ -186,7 +191,7 @@ export default function RegisterForm() {
               id="password"
               value={formValues[RegisterFormKeys.Password]}
               onChange={changeHandler}
-              onBlur={() => errorValidator("password", formValues[RegisterFormKeys.Password] )}
+           //   onBlur={() => errorValidator("password", formValues[RegisterFormKeys.Password] )}
               className={error && styles.redlabel}
               placeholder="Enter password"
             />
