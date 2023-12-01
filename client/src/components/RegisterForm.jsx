@@ -35,8 +35,8 @@ export default function RegisterForm() {
 
   const userNameInputRef = useRef();
   const isMountedRef = useRef(false);
-  const [emailError, setEmailError] = useState("");
-  const [stringError, setStringError] = useState("");
+ // const [emailError, setEmailError] = useState("");
+ // const [stringError, setStringError] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
@@ -60,25 +60,25 @@ export default function RegisterForm() {
 
   }
 
-  const emailValidator = () => {
-    if (
-      !formValues[RegisterFormKeys.Email].includes(".") ||
-      !formValues[RegisterFormKeys.Email].includes("@")
-    ) {
-      setEmailError("This is not a valid email.");
-    } else {
-      setEmailError("");
-    }
-  };
+  // const emailValidator = () => {
+  //   if (
+  //     !formValues[RegisterFormKeys.Email].includes(".") ||
+  //     !formValues[RegisterFormKeys.Email].includes("@")
+  //   ) {
+  //     setEmailError("This is not a valid email.");
+  //   } else {
+  //     setEmailError("");
+  //   }
+  // };
 
-  const stringValidator = () => {
-    if (formValues[RegisterFormKeys.Password].length < 8) {
-      console.log("vliza");
-      setStringError("Password should be at least 8 characters");
-    } else {
-      setStringError("");
-    }
-  };
+  // const stringValidator = () => {
+  //   if (formValues[RegisterFormKeys.Password].length < 8) {
+  //     console.log("vliza");
+  //     setStringError("Password should be at least 8 characters");
+  //   } else {
+  //     setStringError("");
+  //   }
+  // };
 
   return (
     <div className={styles.registerForm}>
@@ -139,7 +139,7 @@ export default function RegisterForm() {
               value={formValues[RegisterFormKeys.Email]}
               onChange={changeHandler}
               onBlur={() => errorValidator("email", formValues[RegisterFormKeys.Email] )}
-              className={emailError && styles.redlabel}
+              className={error && styles.redlabel}
               placeholder="Email"
             />
             {error && <p className={styles.errorMessage}>{error}</p>}
@@ -186,12 +186,12 @@ export default function RegisterForm() {
               id="password"
               value={formValues[RegisterFormKeys.Password]}
               onChange={changeHandler}
-              onBlur={stringValidator}
-              className={stringError && styles.redlabel}
+              onBlur={() => errorValidator("password", formValues[RegisterFormKeys.Password] )}
+              className={error && styles.redlabel}
               placeholder="Enter password"
             />
-            {stringError && (
-              <p className={styles.errorMessage}>{stringError}</p>
+            {error && (
+              <p className={styles.errorMessage}>{error}</p>
             )}
             <div
               data-lastpass-icon-root="true"
