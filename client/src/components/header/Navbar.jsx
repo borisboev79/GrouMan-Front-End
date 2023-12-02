@@ -15,7 +15,7 @@ export default function Navbar({ toggle, showLogin }) {
       <header className={styles.header}>
         <nav className={styles.left}>
           {/* <Link className={styles.menuBurger} onClick={toggle} /> */}
-          <FontAwesomeIcon as Link className={styles.menuBurger} onClick={toggle} icon={faBars} />
+          <FontAwesomeIcon className={styles.menuBurger} onClick={toggle} icon={faBars} />
         </nav>
         <a href="/home" className={styles.logo}>
           Grouman

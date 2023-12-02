@@ -12,7 +12,7 @@ export default function Groups() {
       .getAllGroups()
       .then((result) => setGroups(result))
       .catch((err) => console.log(err));
-    console.log("fetching");
+
   }, []);
 
 

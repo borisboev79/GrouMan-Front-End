@@ -480,9 +480,9 @@ button.alt,
   color: #727a82 !important;
 }
 
-button.alt:hover,
-.button.alt:hover {
-  background-color: rgba(144, 144, 144, 0.075);
+button.alt.delete:hover,
+.button.alt.delete:hover {
+  background: rgb(223, 113, 113) !important;
 }
 
 button.alt:active,
@@ -548,13 +548,29 @@ h3 {
   margin: 1em auto;
 }
 
-h4 {
-  display: inline;
-  color: #25a2c3;
+.author {
+  font-size: 0.85em;
+  font-style: italic;
+  text-align: right;
+  font-weight: 100;
+  color: #727a82;
 }
 
 .wrapper.style1 cite.author {
   color: #fff;
+}
+
+.group-buttons{
+ 
+  display: flex;
+  gap: 1em;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-content: center;
+}
+
+.group-buttons > * {
+  margin: 1.5em 0 0 0;
 }
 
 @media screen and (max-width: 980px) {

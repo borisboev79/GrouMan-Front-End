@@ -11,17 +11,13 @@ import {faClose} from "@fortawesome/free-solid-svg-icons";
 export default function Menu({ toggle }) {
   const { isAuthenticated, username, userId } = useContext(AuthContext);
 
-  const onClickHandler = (e) => {
-    e.preventDefault();
+  // const onClickHandler = (e) => {
+  //   e.preventDefault();
 
-    console.log("clicckk");
+  //   const result = groupService.getMyGroups(userId);
 
-    const result = groupService.getMyGroups(userId);
-
-    console.log(result);
-
-    return result;
-  };
+  //   return result;
+  // };
 
   return (
     <div className={styles.overlay} onClick={toggle}>

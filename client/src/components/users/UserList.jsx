@@ -11,7 +11,6 @@ export default function UserList() {
   
 
   const getOneHanler = () => {
-    console.log(loggedUser);
 
     if(Object.keys(loggedUser).length === 0) {
 

@@ -1,4 +1,4 @@
-import "./groupDetails.css";
+import "./GroupDetails.css";
 import { useState, useEffect, useContext } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 
@@ -42,18 +42,18 @@ export default function GroupDetails({
   //   setTransport(group.transportation);
   // }, [group]);
 
-  useEffect(async () => {
-   await guestService.getAllGuests().then((result) => {
+  useEffect(() => {
+    guestService.getAllGuests().then((result) => {
       const filtered = result.filter((guest) => guest.groupId === groupId);
       setGuests(filtered);
     });
   }, [groupId]);
 
   const filterGuests = (guestId) => {
-    const result = guests.filter(guest => guest._id !== guestId);
+    const result = guests.filter((guest) => guest._id !== guestId);
 
     setGuests(result);
-  }
+  };
 
   const deleteButtonClickHandler = async () => {
     const hasConfirmed = confirm(
@@ -81,6 +81,7 @@ export default function GroupDetails({
                   width={500}
                   height={350}
                 />
+                <p className="author">Group created by: {group._ownerId}</p>
               </div>
               <ul className="alt">
                 <li>
@@ -93,19 +94,16 @@ export default function GroupDetails({
                   Transportation:
                   {group.transportation === "plane" && (
                     <span className="transport-icon">
-                     
                       <FontAwesomeIcon icon={faPlaneDeparture} />
                     </span>
                   )}
                   {group.transportation === "car" && (
                     <span className="transport-icon">
-                     
                       <FontAwesomeIcon icon={faCar} />
                     </span>
                   )}
                   {group.transportation === "bus" && (
                     <span className="transport-icon">
-                      
                       <FontAwesomeIcon icon={faBus} />
                     </span>
                   )}
@@ -136,26 +134,26 @@ export default function GroupDetails({
               </ul>
             </div>
           </div>
-
+          
           <div className="row">
             <div className="6u$ 12u$(small)"></div>
           </div>
 
-          <h4>Added by: {group._ownerId}</h4>
-          {isAuthenticated && userId === group._ownerId && (
-            <>
-              <Link className="button fit small" to={`/groups/${groupId}/edit`}>
-                Edit Group
-              </Link>
-              <button
-                className="button fit small"
-                onClick={deleteButtonClickHandler}
-              >
-                Delete Group
-              </button>
-            </>
-          )}
-
+          <div className="group-buttons">
+            {isAuthenticated && userId === group._ownerId && (
+              <>
+                <Link className="button small" to={`/groups/${groupId}/edit`}>
+                  Edit Group
+                </Link>
+                <button
+                  className="button alt delete"
+                  onClick={deleteButtonClickHandler}
+                >
+                  Delete Group
+                </button>
+              </>
+            )}
+          </div>
           <hr className="major" />
 
           {/* GuestList */}

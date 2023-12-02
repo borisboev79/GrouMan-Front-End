@@ -1,6 +1,7 @@
 import * as request from "../lib/request";
 
 const baseUrl = "http://localhost:3030/jsonstore/users";
+const realBaseUrl = "http://localhost:3030/jsonstore/users";
 
 export const getAllUsers = async () => {
 
@@ -18,7 +19,7 @@ export const add = async (firstName, lastName, email, username, password, office
   return resultLocal;
 };
 
-export const getOne = async (userId) => {
+export const getOne = async (userId) => { 
   const result = await request.get(`${baseUrl}/${userId}`, );
  
 
@@ -26,5 +27,9 @@ export const getOne = async (userId) => {
 }
 
 export const remove = async (userId) => {
+  const result = await request.remove(`${baseUrl}/${userId}`, );
+}
+
+export const del = async (userId) => {
   const result = await request.remove(`${baseUrl}/${userId}`, );
 }

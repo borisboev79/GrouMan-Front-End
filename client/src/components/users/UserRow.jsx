@@ -13,7 +13,6 @@ export default function UserRow({
 
 
   const onClickRemoveHandler = () => {
-    console.log('I will remove ' +  _id)
     onDelete(_id);
   };
 

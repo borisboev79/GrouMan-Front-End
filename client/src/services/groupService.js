@@ -21,8 +21,6 @@ export const getMyGroups = async (userId) => {
   const result = await request.get(`${baseUrl}?${query}`);
 
   const test = await request.get(baseUrl);
-
-  console.log(`${baseUrl}?${query}`);
   
   return result;
 

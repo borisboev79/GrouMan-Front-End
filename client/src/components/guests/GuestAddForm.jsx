@@ -54,18 +54,11 @@ export default function GuestAddForm({toggler, setState,}) {
   const [emailError, setEmailError] = useState("");
   const [stringError, setStringError] = useState("");
 
-
-  console.log(groupId)
-
   useEffect(() => {
     const group = groupService.getOne(groupId);
 
     setGroup(group);
   }, [groupId]);
-
-
-  console.log(group)
-
 
 
   useEffect(() => {
@@ -77,8 +70,7 @@ export default function GuestAddForm({toggler, setState,}) {
       isMountedRef.current = true;
       return;
     }
-
-    console.log("Form is updated");
+    
   }, [formValues]);
 
   const emailValidator = () => {
@@ -234,7 +226,7 @@ export default function GuestAddForm({toggler, setState,}) {
           <div className="12u$">
             <ul className="actions">
               <li>
-                <input type="submit" value="Register" />
+                <input type="submit" value="Submit Guest" />
               </li>
               <li>
                 <input type="reset" value="Reset" className="alt" onClick={resetFormHandler} />

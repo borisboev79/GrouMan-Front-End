@@ -29,7 +29,5 @@ export const getMe = async () => {
 
     const result = await request.get(`${baseUrl}/me`);
 
-    console.log(result);
-
     return (result);
 }

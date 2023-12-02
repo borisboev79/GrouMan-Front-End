@@ -30,13 +30,6 @@ export default function GuestListItem({
       await guestService.remove(guestId);
 
       filterGuests(guestId);
-
-      //navigate(0);
-
-      // setGuests((state) => {
-      //   console.log(state);
-      //  state.filter(guest => guest._id !== guestId);
-      // });
     }
   };
 
