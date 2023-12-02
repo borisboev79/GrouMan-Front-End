@@ -5,7 +5,7 @@ import { useState } from "react";
 import { AuthProvider } from "./contexts/authContext";
 
 import Path from "./paths";
-import NotFound404 from "./components/NotFound404";
+import NotFound404 from "./components/404/NotFound404";
 import Navbar from "./components/header/Navbar";
 import Menu from "./components/menu/Menu";
 import One from "./components/One";

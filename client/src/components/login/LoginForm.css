@@ -30,6 +30,10 @@ form {
   margin: 0 0 2em 0;
 }
 
+h3 {
+  margin: 0 0 1em 0; 
+}
+
 label {
   color: #727a82;
   display: block;
@@ -254,8 +258,8 @@ input[type="number"].inputError {
   cursor: pointer;
   display: block;
   margin-left: auto;
-  height: 3.25em;
-  line-height: 3.25em;
+  height: 2em;
+  line-height: 2em;
   width: 1em;
   text-align: right;
 }
@@ -295,5 +299,10 @@ input[type="number"].inputError {
   justify-content: center;
   margin-top: 2em;
 
+}
+
+.login-actions li {
+  display: inline;
+  list-style: none;
 }
 

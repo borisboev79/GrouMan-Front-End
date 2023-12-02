@@ -3,6 +3,9 @@ import { useLoginForm } from "../../hooks/useLoginForm";
 import { useContext } from "react";
 import AuthContext from "../../contexts/authContext";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {faClose} from "@fortawesome/free-solid-svg-icons";
+
 const LoginFormKeys = {
   Email: "email",
   Password: "password",
@@ -20,7 +23,12 @@ export default function LoginForm({ close }) {
     <div>
       <div className="login-wrapper" onClick={close}></div>
       <form className="login" onSubmit={onSubmit}>
-        <a className="icon close" onClick={close}></a>
+      <FontAwesomeIcon as a 
+        icon={faClose}
+          className="close"
+          onClick={close}
+         // style={{ color: "white" }}
+        />
         <h3>User Login</h3>
         <label htmlFor="email">Email:</label>
         {/* Email */}
@@ -68,7 +76,7 @@ export default function LoginForm({ close }) {
 
         {/* Buttons */}
         <div className="12u$ btns">
-          <ul className="actions" style={{ padding: "0.2em" }}>
+          <ul className="login-actions">
             <li>
               <input type="submit" value="Log In" />
             </li>
