@@ -41,14 +41,16 @@ export default function GroupDetails({
   }, [groupId]);
 
   const deleteButtonClickHandler = async () => {
-    const hasConfirmed = confirm(`Are you sure you want to delete ${group.groupName}?`);
+    const hasConfirmed = confirm(
+      `Are you sure you want to delete ${group.groupName}?`
+    );
 
     if (hasConfirmed) {
-        await groupService.remove(groupId);
+      await groupService.remove(groupId);
 
-        navigate(Path.Groups);
+      navigate(Path.Groups);
     }
-  }
+  };
 
   return (
     <>
@@ -108,23 +110,41 @@ export default function GroupDetails({
           </div>
 
           <h4>Added by: {group._ownerId}</h4>
-          {isAuthenticated && (userId === group._ownerId &&
-          <>
-          <Link className="button fit small" to={`/groups/${groupId}/edit`}>
-            Edit Group
-          </Link>
-          <button className="button fit small" onClick={deleteButtonClickHandler}>
-            Delete Group
-          </button>
-          </>)}
+          {isAuthenticated && userId === group._ownerId && (
+            <>
+              <Link className="button fit small" to={`/groups/${groupId}/edit`}>
+                Edit Group
+              </Link>
+              <button
+                className="button fit small"
+                onClick={deleteButtonClickHandler}
+              >
+                Delete Group
+              </button>
+            </>
+          )}
 
           <hr className="major" />
 
           {/* GuestList */}
           <div className="row 200%">
-            <div className="12u">
-              <GuestList guests={guests} />
-            </div>
+            {guests.length !== 0 ? (
+              <div className="12u">
+                <GuestList guests={guests} />
+              </div>
+            ) : (
+              <div
+                style={{
+                  paddingTop: "1em",
+                  height: "10em",
+                  width: "100%",
+                  textAlign: "center",
+                }}
+              >
+                <h2><span className="icon fa-ship"> </span>No Guests Yet <span className="icon fa-poo"> </span></h2>
+                <p>Login to enroll your clients.</p>
+              </div>
+            )}
             {/* Buttons */}
             <div className="12u">
               {children}
