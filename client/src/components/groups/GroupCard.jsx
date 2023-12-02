@@ -1,4 +1,4 @@
-import * as dateFormatter from "../utils/dateUtils";
+import * as dateFormatter from "../../utils/dateUtils";
 import styles from "./GroupCard.module.css";
 import { Link } from 'react-router-dom';
 

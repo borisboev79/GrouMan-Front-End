@@ -1,7 +1,7 @@
 import "./LoginForm.css";
-import { useLoginForm } from "../hooks/useLoginForm";
+import { useLoginForm } from "../../hooks/useLoginForm";
 import { useContext } from "react";
-import AuthContext from "../contexts/authContext";
+import AuthContext from "../../contexts/authContext";
 
 const LoginFormKeys = {
   Email: "email",

@@ -1,6 +1,6 @@
 import styles from "./Banner.module.css";
 import { Link } from 'react-router-dom';
-import Path from "../paths";
+import Path from "../../paths";
 
 export default function Banner() {
   return (

@@ -1,9 +1,9 @@
 import styles from "./Menu.module.css";
 import { Link } from "react-router-dom";
-import AuthContext from "../contexts/authContext";
+import AuthContext from "../../contexts/authContext";
 import { useContext } from "react";
-import Path from "../paths";
-import * as groupService from '../services/groupService';
+import Path from "../../paths";
+import * as groupService from '../../services/groupService';
 
 export default function Menu({ toggle }) {
   const { isAuthenticated, username, userId } = useContext(AuthContext);

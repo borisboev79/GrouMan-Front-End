@@ -1,9 +1,9 @@
 import { useParams } from "react-router-dom";
 import styles from "./GuestAddForm.module.css";
 import { useState, useEffect, useRef } from "react";
-import { useForm } from "../hooks/useForm";
-import * as groupService from '../services/groupService';
-import * as guestService from '../services/guestService';
+import { useForm } from "../../hooks/useForm";
+import * as groupService from '../../services/groupService';
+import * as guestService from '../../services/guestService';
 
 
 const GuestAddKey = {

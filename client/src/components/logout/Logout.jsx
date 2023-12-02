@@ -1,9 +1,9 @@
 import { useContext, useEffect } from "react";
 
-import * as authService from "../services/authService";
+import * as authService from "../../services/authService";
 import { useNavigate } from "react-router-dom";
-import AuthContext from "../contexts/AuthContext";
-import Path from "../paths";
+import AuthContext from "../../contexts/authContext";
+import Path from "../../paths";
 
 export default function Logout() {
   const navigate = useNavigate();

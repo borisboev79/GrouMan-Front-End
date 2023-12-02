@@ -1,6 +1,6 @@
 import styles from "./Groups.module.css";
-import * as groupService from "../services/groupService";
-import * as dateFormatter from "../utils/dateUtils";
+import * as groupService from "../../services/groupService";
+import * as dateFormatter from "../../utils/dateUtils";
 import { useState, useEffect } from "react";
 import GroupCard from "./GroupCard";
 

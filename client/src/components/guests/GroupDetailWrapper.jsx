@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import GroupDetails from "./GroupDetails";
+import GroupDetails from "../groups/GroupDetails";
 import GroupDetailsPassengerButtons from "./GroupDetailsPassengerButtons";
 
 

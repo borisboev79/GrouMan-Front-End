@@ -4,24 +4,24 @@ import { AuthProvider } from "./contexts/authContext";
 
 import Path from "./paths";
 import NotFound404 from "./components/NotFound404";
-import Navbar from "./components/Navbar";
-import Menu from "./components/Menu";
+import Navbar from "./components/header/Navbar";
+import Menu from "./components/menu/Menu";
 import One from "./components/One";
-import Banner from "./components/Banner";
+import Banner from "./components/banner/Banner";
 
-import Groups from "./components/Groups";
-import GroupDetails from "./components/GroupDetails";
-import AddGroup from "./components/AddGroup";
-import GuestAddForm from "./components/GuestAddForm";
+import Groups from "./components/groups/Groups";
+import GroupDetails from "./components/groups/GroupDetails";
+import AddGroup from "./components/add-group/AddGroup";
+import GuestAddForm from "./components/guests/GuestAddForm";
 
 import UserList from "./components/UserList";
-import LoginForm from "./components/LoginForm";
+import LoginForm from "./components/login/LoginForm";
 import RegisterForm from "./components/RegisterForm";
-import Logout from "./components/Logout";
+import Logout from "./components/logout/Logout";
 
 import Miscellaneous from "./components/Miscellaneous";
-import Footer from "./components/Footer";
-import GroupDetailWrapper from "./components/GroupDetailWrapper";
+import Footer from "./components/footer/Footer";
+import GroupDetailWrapper from "./components/guests/GroupDetailWrapper";
 
 function App() {
   const [showMenu, setShowMenu] = useState(false);
@@ -61,7 +61,7 @@ function App() {
               element={<LoginForm close={closeLoginHandler} />}
             />
           )}
-         
+          <Route path="/" element={<Banner />} />
           <Route path="/users/register" element={<RegisterForm />} />
           <Route path={Path.Groups} element={<Groups />} />
           <Route path="/home" element={<Banner />} />
