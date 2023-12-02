@@ -1,6 +1,7 @@
 import GuestListItem from "./GuestListItem";
 
 export default function GuestList({guests}) {
+ 
   return (
   
       <div className="12u">
@@ -19,16 +20,18 @@ export default function GuestList({guests}) {
               </tr>
             </thead>
             <tbody>
-              {guests.map((guest, index) => (
+              {guests.map((guest) => (
                 <GuestListItem
-                  key={index}
-                  _id={guest._id}
-                  fullName={guest.fullName}
-                  email={guest.email}
-                  egn={guest.egn}
-                  phone={guest.phone}
-                  birthDate={guest.birthDate}
-                  cabin={guest.cabin}
+                  key={guest._id}
+                  {...guest}
+                  // _id={guest._id}
+                  // _ownerId = {guest._ownerId}
+                  // fullName={guest.fullName}
+                  // email={guest.email}
+                  // egn={guest.egn}
+                  // phone={guest.phone}
+                  // birthDate={guest.birthDate}
+                  // cabin={guest.cabin}
                 />
               ))}
             </tbody>

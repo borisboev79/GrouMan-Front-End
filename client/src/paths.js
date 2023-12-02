@@ -1,7 +1,7 @@
 const Path  = {
     Home: '/home',
     Groups: '/groups',
-    GroupDetails: 'groups/:groupId',
+    GroupDetails: '/groups/:groupId',
     MyGroups: 'groups/:userId',
     Login: '/users/login',
     Logout: '/logout',

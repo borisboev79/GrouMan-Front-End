@@ -23,7 +23,7 @@ export default function Groups() {
           {groups.map((group) => (
             <GroupCard
               key={group._id}
-              _id={group._id}
+              groupId={group._id}
               name={group.groupName}
               ship={group.ship}
               itinerary={group.itinerary}

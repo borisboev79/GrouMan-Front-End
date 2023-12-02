@@ -4,6 +4,8 @@ import AuthContext from '../../contexts/authContext';
 
 
 export default function GuestListItem({
+  _id,
+  _ownerId,
   fullName,
   email,
   egn,
@@ -12,6 +14,7 @@ export default function GuestListItem({
   cabin,
 }) {
   const { isAuthenticated } = useContext(AuthContext);
+  const { userId } = useContext(AuthContext);
 
   return (
     <>
@@ -23,7 +26,8 @@ export default function GuestListItem({
         <td>{birthDate}</td>
         <td>{cabin}</td>
         {isAuthenticated && 
-        ( 
+        (userId === _ownerId &&  
+
         <>
         <td> <a className="button small">
           Edit

@@ -1,9 +1,11 @@
 import * as dateFormatter from "../../utils/dateUtils";
 import styles from "./GroupCard.module.css";
 import { Link } from 'react-router-dom';
+import Path from "../../paths";
+import { pathToUrl } from "../../utils/pathUtils";
 
 export default function GroupCard({
-  _id,
+  groupId,
   name,
   ship,
   itinerary,
@@ -17,7 +19,7 @@ export default function GroupCard({
   return (
     <div className={[styles.flexItem, styles.box].join(" ")}>
       <div className={[styles.image, styles.fit].join(" ")}>
-        <img src={imageUrl} alt={_id} width={418} height={200} />
+        <img src={imageUrl} alt={groupId} width={418} height={200} />
       </div>
       <h3>{name}</h3>
       <div>
@@ -47,7 +49,7 @@ export default function GroupCard({
           <b className={styles.priceTag}> {capacity}</b> passengers
         </p>
         <div className={styles.btnContainer}>
-          <Link className={[styles.button, styles.fit, styles.small].join(" ")} to={`/groups/${_id}`}>
+          <Link className={[styles.button, styles.fit, styles.small].join(" ")} to={pathToUrl(Path.GroupDetails, { groupId })}>
             Details
           </Link>
         </div>

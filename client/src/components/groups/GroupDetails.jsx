@@ -1,19 +1,25 @@
 import "./groupDetails.css";
-import { useState, useEffect } from "react";
-import { useParams} from "react-router-dom";
+import { useState, useEffect, useContext } from "react";
+import { useParams, Link, useNavigate } from "react-router-dom";
+
 import * as groupService from "../../services/groupService";
 import * as guestService from "../../services/guestService";
 import * as formatter from "../../utils/dateUtils";
+
 import GuestAddForm from "../guests/GuestAddForm";
-// import GuestListItem from "./GuestListItem";
 import GuestList from "../guests/GuestList";
+import Path from "../../paths";
+import AuthContext from "../../contexts/authContext";
 
 export default function GroupDetails({
   showForm,
   showGuestAddHandler,
   children,
 }) {
+  const navigate = useNavigate();
   const [group, setGroup] = useState({});
+  const { isAuthenticated } = useContext(AuthContext);
+  const { userId } = useContext(AuthContext);
 
   const [transport, setTransport] = useState("");
   const [guests, setGuests] = useState([{}]);
@@ -33,6 +39,16 @@ export default function GroupDetails({
       setGuests(filtered);
     });
   }, [groupId]);
+
+  const deleteButtonClickHandler = async () => {
+    const hasConfirmed = confirm(`Are you sure you want to delete ${group.groupName}?`);
+
+    if (hasConfirmed) {
+        await groupService.remove(groupId);
+
+        navigate(Path.Groups);
+    }
+  }
 
   return (
     <>
@@ -92,6 +108,15 @@ export default function GroupDetails({
           </div>
 
           <h4>Added by: {group._ownerId}</h4>
+          {isAuthenticated && (userId === group._ownerId &&
+          <>
+          <Link className="button fit small" to={`/groups/${groupId}/edit`}>
+            Edit Group
+          </Link>
+          <button className="button fit small" onClick={deleteButtonClickHandler}>
+            Delete Group
+          </button>
+          </>)}
 
           <hr className="major" />
 

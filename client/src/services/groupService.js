@@ -40,3 +40,6 @@ export const getOne = async (groupId) => {
   return result;
 }
 
+export const remove = async (groupId) => {
+  await request.remove(`${baseUrl}/${groupId}`, );
+}
