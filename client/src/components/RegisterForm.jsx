@@ -15,9 +15,22 @@ const RegisterFormKeys = {
   Office: "office",
 };
 
+const validationKeys = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    username: "",
+    password: "",
+    confirmPassword: "",
+    office: "",
+  }
+
+
 export default function RegisterForm() {
   const { registerSubmitHandler } = useContext(AuthContext);
   const { localRegister } = useContext(AuthContext);
+ const userNameInputRef = useRef();
+  const isMountedRef = useRef(false);
 
   const { formValues, changeHandler, onSubmit, resetFormHandler } = useForm(
     registerSubmitHandler,
@@ -33,16 +46,7 @@ export default function RegisterForm() {
     }
   );
 
-  const userNameInputRef = useRef();
-  const isMountedRef = useRef(false);
-  const navigate = useNavigate();
-  const { validationValues, 
-    // validateEmail, 
-    // validateName, 
-    // validateLastName,
-    validate,
-    buttonToggle, } =
-    useValidation();
+  const { validationValues, validate, buttonToggle, setValidationValues, } = useValidation(validationKeys);
 
   useEffect(() => {
     userNameInputRef.current.focus();
@@ -54,6 +58,12 @@ export default function RegisterForm() {
       return;
     }
   }, [formValues]);
+
+  const onResetClick = () => {
+    resetFormHandler();
+    setValidationValues(validationKeys);
+  }
+
 
   return (
     <div className={styles.registerForm}>
@@ -282,7 +292,7 @@ export default function RegisterForm() {
                   type="reset"
                   value="Reset"
                   className="alt"
-                  onClick={resetFormHandler}
+                  onClick={onResetClick}
                 />
               </li>
             </ul>

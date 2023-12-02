@@ -1,16 +1,8 @@
 import { useState } from "react";
 
-export const useValidation = () => {
+export const useValidation = (values) => {
   const [buttonToggle, setButtonToggle] = useState(false);
-  const [validationValues, setValidationValues] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    username: "",
-    password: "",
-    confirmPassword: "",
-    office: "",
-  });
+  const [validationValues, setValidationValues] = useState(values);
 
   const validate = (key, value, value2 = "default") => {
     let isValid = "";
@@ -70,5 +62,6 @@ export const useValidation = () => {
     validationValues,
     buttonToggle,
     validate,
+    setValidationValues,
   };
 };
