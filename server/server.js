@@ -1456,7 +1456,7 @@
         itinerary: "Великобритания, Германия, Холандия, Белгия, Франция",
         duration: "7",
         capacity: "20",
-        transportation: "Plane",
+        transportation: "plane",
         startDate: "2023-12-03",
         endDate: "2023-12-17",
         insidePrice: "1000",
@@ -1475,7 +1475,7 @@
           "София , Атина (Лаврион), Миконос, Кушадасъ (Ефес), Патмос, Ираклион (Крит), Санторини, Атина (Лаврион), София",
         duration: "5",
         capacity: "50",
-        transportation: "Bus",
+        transportation: "bus",
         startDate: "2024-05-02",
         endDate: "2024-05-06",
         insidePrice: "549",
@@ -1486,7 +1486,24 @@
         _createdOn: 1700681885957,
         _id: "d8139918-2ecd-44bd-82d2-7d11d94562d3",
       },
-    },
+    "808faad3-11f8-4829-a35f-63434f8db3f2": {
+      _ownerId: "35c62d76-8152-4626-8712-eeb96381bea8",
+      groupName: "ПОСРЕЩНИ ВЕЛИКДЕН С НАС ВЪВ ФЛОРЕНЦИЯ ИЛИ ПИЗА",
+      ship: "CELESTYAL Olympia",
+      itinerary: "София , Атина (Лаврион), Миконос, Кушадасъ (Ефес), Патмос, Ираклион (Крит), Санторини, Атина (Лаврион), София",
+      duration: "5",
+      capacity: "50",
+      transportation: "car",
+      startDate: "2023-12-31",
+      endDate: "2024-01-07",
+      insidePrice: "549",
+      outsidePrice: "589",
+      balconyPrice: "999",
+      imageUrl: "https://crusit.bg/assets/upload/7/63458/455x300_oferta-kruiz-vechniat-bestselar-velikden-na-santorini.jpg?v=2",
+      _createdOn: 1701551215648,
+      _id: "808faad3-11f8-4829-a35f-63434f8db3f2"
+  },
+},
 
     recipes: {
       "3987279d-0ad4-4afb-8ca9-5b256ae3b298": {

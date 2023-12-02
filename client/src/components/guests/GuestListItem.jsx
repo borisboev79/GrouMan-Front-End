@@ -14,7 +14,7 @@ export default function GuestListItem({
   phone,
   birthDate,
   cabin,
-  setGuests,
+  filterGuests,
 }) {
   const { isAuthenticated } = useContext(AuthContext);
   const { userId } = useContext(AuthContext);
@@ -29,7 +29,9 @@ export default function GuestListItem({
     if (hasConfirmed) {
       await guestService.remove(guestId);
 
-      navigate(0);
+      filterGuests(guestId);
+
+      //navigate(0);
 
       // setGuests((state) => {
       //   console.log(state);

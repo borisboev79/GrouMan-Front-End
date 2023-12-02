@@ -30,24 +30,30 @@ export default function GroupDetails({
   const { isAuthenticated } = useContext(AuthContext);
   const { userId } = useContext(AuthContext);
 
-  const [transport, setTransport] = useState("");
-  const [guests, setGuests] = useState([{}]);
+  //const [transport, setTransport] = useState("");
+  const [guests, setGuests] = useState([]);
   const { groupId } = useParams();
 
   useEffect(() => {
     groupService.getOne(groupId).then(setGroup);
   }, [groupId]);
 
-  useEffect(() => {
-    setTransport(group.transportation);
-  }, [group]);
+  // useEffect(() => {
+  //   setTransport(group.transportation);
+  // }, [group]);
 
-  useEffect(() => {
-    guestService.getAllGuests().then((result) => {
+  useEffect(async () => {
+   await guestService.getAllGuests().then((result) => {
       const filtered = result.filter((guest) => guest.groupId === groupId);
       setGuests(filtered);
     });
   }, [groupId]);
+
+  const filterGuests = (guestId) => {
+    const result = guests.filter(guest => guest._id !== guestId);
+
+    setGuests(result);
+  }
 
   const deleteButtonClickHandler = async () => {
     const hasConfirmed = confirm(
@@ -85,19 +91,19 @@ export default function GroupDetails({
                 </li>
                 <li>
                   Transportation:
-                  {group.transportation === "Plane" && (
+                  {group.transportation === "plane" && (
                     <span className="transport-icon">
                      
                       <FontAwesomeIcon icon={faPlaneDeparture} />
                     </span>
                   )}
-                  {group.transportation === "Car" && (
+                  {group.transportation === "car" && (
                     <span className="transport-icon">
                      
                       <FontAwesomeIcon icon={faCar} />
                     </span>
                   )}
-                  {group.transportation === "Bus" && (
+                  {group.transportation === "bus" && (
                     <span className="transport-icon">
                       
                       <FontAwesomeIcon icon={faBus} />
@@ -156,7 +162,7 @@ export default function GroupDetails({
           <div className="row 200%">
             {guests.length !== 0 ? (
               <div className="12u">
-                <GuestList guests={guests} setGuests={setGuests} />
+                <GuestList guests={guests} filterGuests={filterGuests} />
               </div>
             ) : (
               <div

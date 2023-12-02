@@ -1,6 +1,6 @@
 import GuestListItem from "./GuestListItem";
 
-export default function GuestList({guests, setGuests}) {
+export default function GuestList({guests, filterGuests}) {
  
   return (
   
@@ -24,7 +24,7 @@ export default function GuestList({guests, setGuests}) {
                 <GuestListItem
                   key={guest._id}
                   {...guest}
-                  setGuests={setGuests}
+                  filterGuests={filterGuests}
                   // _id={guest._id}
                   // _ownerId = {guest._ownerId}
                   // fullName={guest.fullName}
