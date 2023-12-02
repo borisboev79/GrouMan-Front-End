@@ -44,15 +44,17 @@ export default function GroupDetails({showForm, showGuestAddHandler, children}) 
         <div className="inner">
           <div className="12u">
             <h2 id="content">{group.groupName}</h2>
-
-            <span className="image left">
+            <div className="group-details">
+            {/* <span className="image left"> */}
+             <div className="picture">
               <img
                 src={group.imageUrl}
                 alt={group.groupName}
-                width={430}
-                height={330}
+                width={500}
+                height={350}
               />
-            </span>
+            {/* </span> */}
+            </div>
             <ul className="alt">
               <li>
                 Ship: <h4>{group.ship}</h4>
@@ -88,6 +90,7 @@ export default function GroupDetails({showForm, showGuestAddHandler, children}) 
                 </span>
               </li>
             </ul>
+            </div>
           </div>
 
           <div className="row">

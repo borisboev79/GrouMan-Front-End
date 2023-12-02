@@ -117,8 +117,13 @@
 
 .inner {
   margin: 2em auto;
-  max-width: 65em;
+  min-width: 80vw;
+  /* max-width: 65vw; */
+
+  ;
 }
+
+
 
 @media screen and (max-width: 1280px) {
   .inner {
@@ -159,6 +164,13 @@
   display: none;
 }
 
+.group-details {
+  display: flex;
+  gap: 2em;
+
+}
+
+
 /* Image */
 
 .image {
@@ -187,12 +199,17 @@
   top: 0.25em;
 }
 
-
+.picture {
+  margin-bottom: 0;
+  /* background: red; */
+  height: 100%;
+}
 
 /* List */
 
 
 ul {
+
   list-style: disc;
   margin: 0 0 2em 0;
   padding-left: 1em;
@@ -203,8 +220,11 @@ ul li {
 }
 
 ul.alt {
+  margin-bottom: 0;
+  text-align: left;
+  /* background: green; */
   list-style: none;
-  padding-left: 0;
+  
 }
 
 ul.alt .price{
@@ -263,7 +283,7 @@ ul.alt li .icon:before {
 ul.actions {
   cursor: default;
   list-style: none;
-  padding-left: 25%;
+  padding-left: 0 !important;
 }
 
 ul.actions li {
@@ -494,6 +514,8 @@ button:disabled,
 
 .wrapper {
   padding: 6em 0 4em 0;
+  min-width: 80vw;
+  
 }
 
 .wrapper h1,
