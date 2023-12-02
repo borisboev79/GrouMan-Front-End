@@ -27,7 +27,8 @@ export const useValidation = () => {
         errorMessage = "Last name should be at least three characters long.";
         break;
       case "email":
-        isValid = value.includes(".") && value.includes("@");
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        isValid = emailRegex.test(value);
         errorMessage = "This is not a valid email.";
         break;
       case "username":
