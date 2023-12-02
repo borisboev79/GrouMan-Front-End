@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import styles from "./RegisterForm.module.css";
 import { useEffect, useRef, useContext } from "react";
-import { useForm } from "../hooks/useForm";
-import AuthContext from "../contexts/authContext";
-import { useValidation } from "../hooks/useValidation";
+import { useForm } from "../../hooks/useForm";
+import AuthContext from "../../contexts/authContext";
+import { useValidation } from "../../hooks/useValidation";
 
 const RegisterFormKeys = {
   FirstName: "firstName",

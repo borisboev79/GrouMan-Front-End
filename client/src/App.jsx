@@ -10,18 +10,19 @@ import One from "./components/One";
 import Banner from "./components/banner/Banner";
 
 import Groups from "./components/groups/Groups";
-import GroupDetails from "./components/groups/GroupDetails";
+import GroupDetailWrapper from "./components/guests/GroupDetailWrapper";
 import AddGroup from "./components/add-group/AddGroup";
 import GuestAddForm from "./components/guests/GuestAddForm";
 
-import UserList from "./components/UserList";
+import UserList from "./components/users/UserList";
+import AuthGuard from "./components/guards/AuthGuard";
 import LoginForm from "./components/login/LoginForm";
-import RegisterForm from "./components/RegisterForm";
+import RegisterForm from "./components/register/RegisterForm";
 import Logout from "./components/logout/Logout";
 
 import Miscellaneous from "./components/Miscellaneous";
 import Footer from "./components/footer/Footer";
-import GroupDetailWrapper from "./components/guests/GroupDetailWrapper";
+
 
 function App() {
   const [showMenu, setShowMenu] = useState(false);
@@ -45,9 +46,6 @@ function App() {
     navigate("/home");
   };
 
- 
-  
-
   return (
     <AuthProvider>
       <div>
@@ -57,7 +55,7 @@ function App() {
         <Routes>
           {showLogin && (
             <Route
-              path="/users/login"
+              path={Path.Login}
               element={<LoginForm close={closeLoginHandler} />}
             />
           )}
@@ -67,11 +65,16 @@ function App() {
           <Route path="/home" element={<Banner />} />
           <Route path="/misc" element={<Miscellaneous />} />
           <Route path="/users" element={<UserList />} />
-          <Route path="/groups/add" element={<AddGroup />} />
-          <Route path={Path.GroupDetails} element={<GroupDetailWrapper/>} />
-          <Route path={Path.AddGuest} element={<GuestAddForm />} />
-          <Route path={Path.Logout} element={<Logout />} />
-          <Route path='*' element={<NotFound404 />} />
+          <Route path={Path.GroupDetails} element={<GroupDetailWrapper />} />
+
+          <Route element={<AuthGuard />}>
+            <Route path="/groups/add" element={<AddGroup />} />
+            <Route path={Path.Logout} element={<Logout />} />
+            <Route path={Path.AddGuest} element={<GuestAddForm />} />
+
+          </Route>
+
+          <Route path="*" element={<NotFound404 />} />
         </Routes>
 
         <One />

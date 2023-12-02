@@ -1,7 +1,7 @@
 import "./UserList.css";
 import { useState, useEffect } from "react";
-import * as userService from "../services/userService";
-import * as authService from "../services/authService";
+import * as userService from "../../services/userService";
+import * as authService from "../../services/authService";
 import UserRow from "./UserRow";
 
 export default function UserList() {

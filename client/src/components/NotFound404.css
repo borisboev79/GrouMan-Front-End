@@ -1,8 +1,12 @@
-.wrapper {
+.error-wrapper {
     text-align: center;
-    padding: 0;
+    padding-top: 10em;
     width: 50%;
     height: auto;
-    margin: 10em auto 0 auto;
+    margin: 0 auto;
     
+}
+
+.error-wrapper h1 {
+    color: #25a2c3;
 }

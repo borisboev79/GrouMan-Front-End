@@ -1,5 +1,5 @@
 import './UserRow.css';
-import { officeDecoder } from '../utils/officeDecoder';
+import { officeDecoder } from '../../utils/officeDecoder';
 
 export default function UserRow({
   _id,
