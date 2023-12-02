@@ -91,15 +91,15 @@
     color: #a7d9e7;
     cursor: pointer;
     display: block;
-    height: 3.25em;
+    height: 1.5em;
     line-height: 3.25em;
-    padding-right: 1.25em;
+    padding-top: 1.25em;
     position: absolute;
     right: 0;
     text-align: right;
     top: 0;
     vertical-align: middle;
-    width: 7em;
+    width: 4em;
   }
   
   .menu .close:before {

@@ -11,13 +11,22 @@ import GuestList from "../guests/GuestList";
 import Path from "../../paths";
 import AuthContext from "../../contexts/authContext";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faPeopleGroup,
+  faShip,
+  faPlaneDeparture,
+  faCar,
+  faBus,
+} from "@fortawesome/free-solid-svg-icons";
+
 export default function GroupDetails({
   showForm,
   showGuestAddHandler,
   children,
 }) {
   const navigate = useNavigate();
-  const [group, setGroup] = useState({});
+  const [group, setGroup] = useState([{}]);
   const { isAuthenticated } = useContext(AuthContext);
   const { userId } = useContext(AuthContext);
 
@@ -75,8 +84,25 @@ export default function GroupDetails({
                   Itinerary: <b>{group.itinerary}</b>
                 </li>
                 <li>
-                  Transportation:{" "}
-                  <a href="#" className={`icon fa-${transport}`}></a>
+                  Transportation:
+                  {group.transportation === "Plane" && (
+                    <span className="transport-icon">
+                     
+                      <FontAwesomeIcon icon={faPlaneDeparture} />
+                    </span>
+                  )}
+                  {group.transportation === "Car" && (
+                    <span className="transport-icon">
+                     
+                      <FontAwesomeIcon icon={faCar} />
+                    </span>
+                  )}
+                  {group.transportation === "Bus" && (
+                    <span className="transport-icon">
+                      
+                      <FontAwesomeIcon icon={faBus} />
+                    </span>
+                  )}
                 </li>
                 <li>
                   Duration: <b>{group.duration}</b> days
@@ -130,7 +156,7 @@ export default function GroupDetails({
           <div className="row 200%">
             {guests.length !== 0 ? (
               <div className="12u">
-                <GuestList guests={guests} />
+                <GuestList guests={guests} setGuests={setGuests} />
               </div>
             ) : (
               <div
@@ -141,8 +167,15 @@ export default function GroupDetails({
                   textAlign: "center",
                 }}
               >
-                <h2><span className="icon fa-ship"> </span>No Guests Yet <span className="icon fa-poo"> </span></h2>
-                <p>Login to enroll your clients.</p>
+                <h2>
+                  {/* <FontAwesomeIcon icon={faPeople} /> */}
+                  <FontAwesomeIcon icon={faPeopleGroup} />{" "}
+                  <span>No Guests Yet </span>
+                  <FontAwesomeIcon icon={faShip} />
+                </h2>
+                <p>
+                  <b>Login to enroll your clients.</b>
+                </p>
               </div>
             )}
             {/* Buttons */}

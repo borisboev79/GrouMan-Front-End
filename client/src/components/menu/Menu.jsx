@@ -3,7 +3,10 @@ import { Link } from "react-router-dom";
 import AuthContext from "../../contexts/authContext";
 import { useContext } from "react";
 import Path from "../../paths";
-import * as groupService from '../../services/groupService';
+import * as groupService from "../../services/groupService";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {faClose} from "@fortawesome/free-solid-svg-icons";
 
 export default function Menu({ toggle }) {
   const { isAuthenticated, username, userId } = useContext(AuthContext);
@@ -11,25 +14,25 @@ export default function Menu({ toggle }) {
   const onClickHandler = (e) => {
     e.preventDefault();
 
-      console.log('clicckk')
+    console.log("clicckk");
 
-     const result = groupService.getMyGroups(userId);
+    const result = groupService.getMyGroups(userId);
 
-      console.log(result);
+    console.log(result);
 
-      return result;
-
-      
-  }
+    return result;
+  };
 
   return (
     <div className={styles.overlay} onClick={toggle}>
       <nav className={styles.menu}>
-        <a
+        <FontAwesomeIcon as a 
+        icon={faClose}
           className={styles.close}
           onClick={toggle}
           style={{ color: "white" }}
-        ></a>
+        />
+        {/* <FontAwesomeIcon icon={faClose} /> */}
         <ul className={styles.links}>
           <li>
             <Link to="/home">Home</Link>

@@ -15,7 +15,7 @@ export default function One() {
             </div>
           </div>
           <div className={[styles.flexItem, styles.image, styles.fit, styles.round].join(' ')}>
-            <img src="images/pic01.jpg" alt="" width={330} height={330} />
+            <img src="\src\assets\crusit-pad.jpg" alt="" width={330} height={330} />
           </div>
           <div className={[styles.flexItem, styles.right].join(' ')}>
             <div>

@@ -275,28 +275,31 @@ ul.alt li:last-child {
 }
 
 ul.icons li .icon:before,
-ul.alt li .icon:before {
-  font-size: 2em;
-  fill: #25a2c3;
+ul.alt li .icon:before,
+.transport-icon {
+  padding-left: 0.5em;
+  font-size: 1.5em;
+  color: #25a2c3;
 }
 
 ul.actions {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+  padding: 0 !important;
+  margin: 0 auto;
+  justify-content: center;
   cursor: default;
   list-style: none;
-  padding-left: 0 !important;
+  
 }
 
 ul.actions li {
-  display: inline-block;
-  padding: 0 1em 0 0;
+  
   vertical-align: middle;
-  margin: 0 auto;
+  margin: 0 !important;
+  padding: 0 !important;
 }
-
-ul.actions li:last-child {
-  padding-right: 0;
-}
-
 
 
 ul.actions.fit {

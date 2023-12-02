@@ -1,5 +1,4 @@
 @charset "UTF-8";
-@import url(font-awesome.min.css);
 @import "https://fonts.googleapis.com/css?family=Montserrat:700|Open+Sans:300,400|Pacifico";
 
 
@@ -3276,7 +3275,7 @@ body.is-loading #banner .content {
   }
 } */
 
-@media screen and (max-width: 980px) {
+/* @media screen and (max-width: 980px) {
   #two blockquote br {
     display: none;
   }
@@ -3286,11 +3285,11 @@ body.is-loading #banner .content {
   #three {
     text-align: center;
   }
-}
+} */
 
 /* Footer */
 
-#footer {
+/* #footer {
   padding: 6em 0 4em 0;
   background: #25a2c3;
   text-align: center;
@@ -3355,10 +3354,10 @@ body.is-loading #banner .content {
   #footer .copyright {
     padding: 2em 5em;
   }
-}
+} */
 
 @media screen and (max-width: 480px) {
-  #footer {
+  /* #footer {
     padding: 2em 0 0.1em 0;
   }
 
@@ -3372,7 +3371,7 @@ body.is-loading #banner .content {
 
   #footer .copyright {
     padding: 2em 0;
-  }
+  } */
 
   .main-frame {
     background: red;

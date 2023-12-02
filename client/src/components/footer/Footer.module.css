@@ -63,6 +63,7 @@
 }
 
 .footer ul li {
+  font-size: 0.9em;
   padding: 0 2em;
   display: inline;
 }
