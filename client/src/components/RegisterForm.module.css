@@ -218,8 +218,9 @@ form {
     margin-top: 0;
   }
 
-  .redlabel {
-    background: red;
+  input.redlabel,
+  select.redlabel {
+
     color: red;
   border: solid 2px red;
 }

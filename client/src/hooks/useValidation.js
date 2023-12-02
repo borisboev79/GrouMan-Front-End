@@ -12,66 +12,62 @@ export const useValidation = () => {
     office: "",
   });
 
-  const validateName = (value) => {
-    const validName = value.length >=  2;
+  const validate = (key, value, value2 = "default") => {
+    let isValid = "";
+    let errorMessage = "";
+    let propertyValue = (obj, key) => obj[key];
 
-    if (validationValues.firstName === "" && !validName) {
-      setValidationValues((state) => ({
-        ...state,
-        firstName: "Name should be at least two characters long.",
-      }));
-      setButtonToggle(true);
-
-    } else if (validationValues.firstName !== "" && validName) {
-      setValidationValues((state) => ({
-        ...state,
-        firstName: "",
-      }));
-      setButtonToggle(false);
+    switch (key) {
+      case "firstName":
+        isValid = value.length >= 2;
+        errorMessage = "Name should be at least two characters long.";
+        break;
+      case "lastName":
+        isValid = value.length >= 3;
+        errorMessage = "Last name should be at least three characters long.";
+        break;
+      case "email":
+        isValid = value.includes(".") && value.includes("@");
+        errorMessage = "This is not a valid email.";
+        break;
+      case "username":
+        isValid = value.length >= 5;
+        errorMessage = "Username should be at least five characters long.";
+        break;
+      case "password":
+        const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/;
+        isValid = value.length >= 8 && regex.test(value);
+        errorMessage =
+          "A valid password is at least 8 characters long and should contain a lowercase, an uppercase and a digit.";
+        break;
+      case "confirmPassword":
+        isValid = value === value2;
+        errorMessage = "Passwords don't match.";
+        break;
+      case "office":
+        isValid = value != "default";
+        errorMessage = "Selecting an office is mandatory";
+        break;
     }
-  };
 
-  const validateLastName = (value) => {
-    const validLastName = value.length >=  3;
-
-    if (validationValues.lastName === "" && !validLastName) {
+    if (propertyValue(validationValues, key) === "" && !isValid) {
       setValidationValues((state) => ({
         ...state,
-        lastName: "Last name should be at least three characters long.",
+        [key]: errorMessage,
       }));
       setButtonToggle(true);
-    } else if (validationValues.lastName !== "" && validLastName) {
+    } else if (propertyValue(validationValues, key) !== "" && isValid) {
       setValidationValues((state) => ({
         ...state,
-        lastName: "",
-      }));
-      setButtonToggle(false);
-    }
-  };
-
-  const validateEmail = (value) => {
-    const validEmail = value.includes(".") && value.includes("@");
-
-    if (validationValues.email === "" && !validEmail) {
-      setValidationValues((state) => ({
-        ...state,
-        email: "This is not a valid email.",
-      }));
-      setButtonToggle(true);
-    } else if (validationValues.email !== "" && validEmail) {
-      setValidationValues((state) => ({
-        ...state,
-        email: "",
+        [key]: "",
       }));
       setButtonToggle(false);
     }
   };
 
   return {
-    validateName,
-    validateLastName,
-    validateEmail,
     validationValues,
     buttonToggle,
+    validate,
   };
 };

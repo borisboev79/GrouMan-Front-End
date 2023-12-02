@@ -36,7 +36,12 @@ export default function RegisterForm() {
   const userNameInputRef = useRef();
   const isMountedRef = useRef(false);
   const navigate = useNavigate();
-  const { validationValues, validateEmail, validateName, validateLastName, buttonToggle, } =
+  const { validationValues, 
+    // validateEmail, 
+    // validateName, 
+    // validateLastName,
+    validate,
+    buttonToggle, } =
     useValidation();
 
   useEffect(() => {
@@ -66,7 +71,7 @@ export default function RegisterForm() {
               value={formValues[RegisterFormKeys.FirstName]}
               onChange={changeHandler}
               onBlur={() =>
-                validateName(formValues[RegisterFormKeys.FirstName])
+                validate("firstName", formValues[RegisterFormKeys.FirstName])
               }
               className={validationValues.firstName && styles.redlabel}
               placeholder="First name"
@@ -96,7 +101,7 @@ export default function RegisterForm() {
               value={formValues[RegisterFormKeys.LastName]}
               onChange={changeHandler}
               onBlur={() =>
-                validateLastName(formValues[RegisterFormKeys.LastName])
+                validate("lastName", formValues[RegisterFormKeys.LastName])
               }
               className={validationValues.lastName && styles.redlabel}
               placeholder="Last name"
@@ -126,7 +131,7 @@ export default function RegisterForm() {
               id="email"
               value={formValues[RegisterFormKeys.Email]}
               onChange={changeHandler}
-              onBlur={() => validateEmail(formValues[RegisterFormKeys.Email])}
+              onBlur={() => validate("email", formValues[RegisterFormKeys.Email])}
               className={validationValues.email && styles.redlabel}
               placeholder="Email"
             />
@@ -152,12 +157,16 @@ export default function RegisterForm() {
               id="username"
               value={formValues[RegisterFormKeys.Username]}
               onChange={changeHandler}
-              //    onBlur={() => errorValidator("username", formValues[RegisterFormKeys.Username] )}
+              onBlur={() =>
+                validate("username", formValues[RegisterFormKeys.Username])
+              }
               className={validationValues.username && styles.redlabel}
               placeholder="Username"
             />
             {validationValues.username && (
-              <p className={styles.errorMessage}>{validationValues.username}</p>
+              <p className={styles.errorMessage}>
+                {[validationValues.username]}
+              </p>
             )}
             <div
               data-lastpass-icon-root="true"
@@ -178,12 +187,16 @@ export default function RegisterForm() {
               id="password"
               value={formValues[RegisterFormKeys.Password]}
               onChange={changeHandler}
-              //   onBlur={() => errorValidator("password", formValues[RegisterFormKeys.Password] )}
+              onBlur={() =>
+                validate("password", formValues[RegisterFormKeys.Password])
+              }
               className={validationValues.password && styles.redlabel}
-              placeholder="Enter password"
+              placeholder="Password"
             />
             {validationValues.password && (
-              <p className={styles.errorMessage}>{validationValues.password}</p>
+              <p className={styles.errorMessage}>
+                {[validationValues.password]}
+              </p>
             )}
             <div
               data-lastpass-icon-root="true"
@@ -204,8 +217,17 @@ export default function RegisterForm() {
               id="confirmPassword"
               value={formValues[RegisterFormKeys.ConfirmPassword]}
               onChange={changeHandler}
-              placeholder="Confirm password"
+              onBlur={() =>
+                validate("confirmPassword", formValues[RegisterFormKeys.Password], formValues[RegisterFormKeys.ConfirmPassword])
+              }
+              className={validationValues.confirmPassword && styles.redlabel}
+              placeholder="Confirm Password"
             />
+            {validationValues.confirmPassword && (
+              <p className={styles.errorMessage}>
+                {[validationValues.confirmPassword]}
+              </p>
+            )}
             <div
               data-lastpass-icon-root="true"
               style={{
@@ -226,12 +248,22 @@ export default function RegisterForm() {
                 id="office"
                 value={formValues[RegisterFormKeys.Office]}
                 onChange={changeHandler}
+                onBlur={() =>
+                  validate("office", formValues[RegisterFormKeys.Office])
+                }
+                className={validationValues.office && styles.redlabel}
               >
-                <option value>- Select office -</option>
+                      
+                <option value="default">- Select office -</option>
                 <option value={"SOFR"}>Sofia Central</option>
                 <option value={"MOS"}>Mall of Sofia</option>
                 <option value={"PDV"}>Plovdiv</option>
               </select>
+              {validationValues.office && (
+              <p className={styles.errorMessage}>
+                {[validationValues.office]}
+              </p>
+            )}
             </div>
           </div>
 
