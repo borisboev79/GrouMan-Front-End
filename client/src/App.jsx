@@ -3,7 +3,7 @@ import "./App.css";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { AuthProvider } from "./contexts/authContext";
-//import { GuestContextProvider } from "./contexts/guestContext";
+import { GuestContextProvider } from "./contexts/guestContext";
 
 import Path from "./paths";
 import NotFound404 from "./components/404/NotFound404";
@@ -53,7 +53,7 @@ function App() {
   return (
   
       <AuthProvider>
-          {/* <GuestContextProvider> */}
+          <GuestContextProvider>
         <div>
           <Navbar toggle={showMenuHandler} showLogin={showLoginHandler} />
           {showMenu && <Menu toggle={closeMenuHandler} />}
@@ -90,7 +90,7 @@ function App() {
 
           <Footer />
         </div>
-          {/* </GuestContextProvider> */}
+          </GuestContextProvider>
       </AuthProvider>
   
   );

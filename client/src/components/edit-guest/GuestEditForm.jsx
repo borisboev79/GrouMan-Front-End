@@ -1,17 +1,17 @@
 import { useNavigate, useParams } from "react-router-dom";
 import styles from "./GuestEditForm.module.css";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
 
 import * as groupService from "../../services/groupService";
 import * as guestService from "../../services/guestService";
+import AuthContext from "../../contexts/authContext";
+import GuestContext from "../../contexts/guestContext";
 
-
-
-export default function GuestEditForm({toggle}) {
-  const { groupId } = useParams();
-  const { guestId } = useParams();
+export default function GuestEditForm({ groupId }) {
   const navigate = useNavigate();
 
+  const { showGuestEditHandler } = useContext(GuestContext);
+  const { guestId } = useContext(GuestContext);
 
   const guestEditSubmitHandler = async (e) => {
     e.preventDefault();
@@ -19,17 +19,13 @@ export default function GuestEditForm({toggle}) {
     const guestData = Object.fromEntries(new FormData(e.currentTarget));
 
     try {
+      await guestService.edit(guestId, { ...guestData, groupId });
 
-      // const guestDataWithGroupId = [...guestData, groupId];
-
-      await guestService.edit(guestId, {...guestData, groupId});
-
-      navigate(-1);
+      showGuestEditHandler();
     } catch (error) {
       console.error("Error editing guest =>", error.message);
     }
   };
-
 
   const fullNameInputRef = useRef();
   const isMountedRef = useRef(false);
@@ -43,7 +39,6 @@ export default function GuestEditForm({toggle}) {
     cabin: "",
   });
   const [group, setGroup] = useState({});
-
 
   useEffect(() => {
     groupService.getOne(groupId).then((result) => setGroup(result));
@@ -85,8 +80,6 @@ export default function GuestEditForm({toggle}) {
     }));
   };
 
-
-
   return (
     // <div className={styles.editWrapper} onClick={toggle}>
     <div className={styles.guestForm}>
@@ -124,10 +117,9 @@ export default function GuestEditForm({toggle}) {
               id="email"
               value={guest.email}
               onChange={changeHandler}
-             
               placeholder="Email"
             />
-      
+
             <div
               data-lastpass-icon-root="true"
               style={{
@@ -169,7 +161,6 @@ export default function GuestEditForm({toggle}) {
               id="phone"
               value={guest.phone}
               onChange={changeHandler}
-         
               placeholder="Enter phone"
             />
             <div
@@ -230,10 +221,10 @@ export default function GuestEditForm({toggle}) {
               </li>
               <li>
                 <input
-                  type="submit"
+                  type="button"
                   value="Cancel Edit"
                   className="alt"
-                  onClick={toggle}
+                  onClick={showGuestEditHandler}
                 />
               </li>
             </ul>

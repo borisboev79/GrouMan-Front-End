@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import * as authService from "../services/authService";
@@ -66,7 +66,7 @@ export const AuthProvider = ({ children }) => {
     userId: auth._id,
     email: auth.email,
     isAuthenticated: !!auth.email,
-  };
+  }
 
   return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>;
 };

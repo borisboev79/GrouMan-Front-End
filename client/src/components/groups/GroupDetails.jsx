@@ -11,8 +11,8 @@ import GuestEditForm from "../edit-guest/GuestEditForm";
 import GuestList from "../guests/GuestList";
 import Path from "../../paths";
 import AuthContext from "../../contexts/authContext";
-// import GuestContext from "../../contexts/guestContext";
-import { pathToUrl } from "../../utils/pathUtils";
+import GuestContext from "../../contexts/guestContext";
+
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -22,7 +22,7 @@ import {
   faCar,
   faBus,
 } from "@fortawesome/free-solid-svg-icons";
-import GuestListItem from "../guests/GuestListItem";
+
 
 export default function GroupDetails({
   showForm,
@@ -33,20 +33,15 @@ export default function GroupDetails({
   const [group, setGroup] = useState([{}]);
   const { isAuthenticated } = useContext(AuthContext);
   const { userId } = useContext(AuthContext);
-  // const { showEdit } = useContext(GuestContext);
+  const { showEdit } = useContext(GuestContext);
 
-  const [showEdit, setShowEdit] = useState(false);
-
+  
   const [guests, setGuests] = useState([]);
   const { groupId } = useParams();
 
-  const showGuestEditHandler = () => {
-    if (showEdit) {
-      setShowEdit(false);
-    } else {
-      setShowEdit(true);
-    }
-  };
+  const { showGuestEditHandler } = useContext(GuestContext);
+
+  
 
   useEffect(() => {
     groupService.getOne(groupId).then(setGroup);
@@ -193,6 +188,7 @@ export default function GroupDetails({
               </div>
             )}
             {/* Buttons */}
+            {!showEdit && 
             <div className="12u">
               {children}
 
@@ -202,19 +198,19 @@ export default function GroupDetails({
                   setState={setGuests}
                 />
               )}
-            </div>
-            {/* <div className="12u">
+            </div>}
+            <div className="12u">
               {showEdit &&
                 (<GuestEditForm
-                      toggle={showGuestEditHandler}
-                      guestId={guestId}
+                      groupId={groupId}
                     />
-                  ,
-                  <GuestListItem toggle={showGuestEditHandler} />)}
-            </div> */}
+                )}
+                
+            </div>
           </div>
         </div>
       </section>
     </>
   );
+
 }

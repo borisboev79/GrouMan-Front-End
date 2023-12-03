@@ -1,13 +1,16 @@
 import { createContext, useState } from "react";
-import * as guestService from '../services/guestService';
 
 const GuestContext = createContext();
 
-export const GuestContextProvider = ({children}) => {
+export const GuestContextProvider = ({ children }) => {
+  const [showEdit, setShowEdit] = useState(false);
+  const [guestId, setGuestId] = useState("");
 
-const [showEdit, setShowEdit] = useState(false);
+  const guestIdSetter = (id) => {
+    setGuestId(id);
+  };
 
-const showGuestEditHandler = () => {
+  const showGuestEditHandler = () => {
     if (showEdit) {
       setShowEdit(false);
     } else {
@@ -15,23 +18,14 @@ const showGuestEditHandler = () => {
     }
   };
 
-const selectedGuest = async (guestId) => {
-    const result = await guestService.getOne(guestId);
-
-    return result;
-};
-
-const values = {
+  const values = {
     showEdit,
     showGuestEditHandler,
-    selectedGuest,
-};
+    guestId,
+    guestIdSetter,
+  }
 
-return 
-    <GuestContext.Provider value={values}>
-        {children}
-    </GuestContext.Provider>
-
+  return <GuestContext.Provider value={values}>{children}</GuestContext.Provider>;
 };
 
 GuestContext.displayName = "GuestContext";
