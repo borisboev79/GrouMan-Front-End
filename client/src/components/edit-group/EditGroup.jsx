@@ -70,7 +70,7 @@ export default function EditGroup() {
   };
 
   const priceValidator = () => {
-    if (formValues.duration <= 0) {
+    if (group.duration <= 0) {
       setPriceError("Duration must be positive. Just like you :)");
     } else {
       setPriceError("");
@@ -78,7 +78,7 @@ export default function EditGroup() {
   };
 
   const capacityValidator = () => {
-    if (formValues.capacity < 12) {
+    if (group.capacity < 12) {
       setCapacityError("No dozen, no group");
     } else {
       setCapacityError("");
@@ -94,8 +94,8 @@ export default function EditGroup() {
       await groupService.edit(groupId, groupData);
 
       navigate(-1);
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.error("Error editing group =>", error.message);
     }
   };
 

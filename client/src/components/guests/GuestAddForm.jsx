@@ -2,9 +2,8 @@ import { useParams } from "react-router-dom";
 import styles from "./GuestAddForm.module.css";
 import { useState, useEffect, useRef } from "react";
 import { useForm } from "../../hooks/useForm";
-import * as groupService from '../../services/groupService';
-import * as guestService from '../../services/guestService';
-
+import * as groupService from "../../services/groupService";
+import * as guestService from "../../services/guestService";
 
 const GuestAddKey = {
   FullName: "fullName",
@@ -13,9 +12,9 @@ const GuestAddKey = {
   Phone: "phone",
   Birthdate: "birthDate",
   Cabin: "cabin",
-}
+};
 
-export default function GuestAddForm({toggler, setState,}) {
+export default function GuestAddForm({ toggler, setState }) {
   const { groupId } = useParams();
 
   const addGuestSubmitHandler = async (values) => {
@@ -26,9 +25,9 @@ export default function GuestAddForm({toggler, setState,}) {
       values.phone,
       values.birthDate,
       values.cabin,
-      groupId,
+      groupId
     );
-      
+
     resetFormHandler();
 
     setState((state) => [...state, result]);
@@ -36,30 +35,29 @@ export default function GuestAddForm({toggler, setState,}) {
     toggler();
   };
 
-
-  const { formValues, changeHandler, onSubmit, resetFormHandler } = useForm(addGuestSubmitHandler, () => {}, {
-    [GuestAddKey.FullName]: '',
-    [GuestAddKey.Email]: '',
-    [GuestAddKey.EGN]: '',
-    [GuestAddKey.Phone]: '',
-    [GuestAddKey.Birthdate]: '',
-    [GuestAddKey.Cabin]: '',
-
-
-  });
+  const { formValues, changeHandler, onSubmit, resetFormHandler } = useForm(
+    addGuestSubmitHandler,
+    () => {},
+    {
+      [GuestAddKey.FullName]: "",
+      [GuestAddKey.Email]: "",
+      [GuestAddKey.EGN]: "",
+      [GuestAddKey.Phone]: "",
+      [GuestAddKey.Birthdate]: "",
+      [GuestAddKey.Cabin]: "",
+    }
+  );
 
   const fullNameInputRef = useRef();
   const isMountedRef = useRef(false);
   const [group, setGroup] = useState({});
   const [emailError, setEmailError] = useState("");
   const [stringError, setStringError] = useState("");
+  const [capacity, setCapacity] = useState(group.capacity);
 
   useEffect(() => {
-    const group = groupService.getOne(groupId);
-
-    setGroup(group);
+    groupService.getOne(groupId).then((result) => setGroup(result));
   }, [groupId]);
-
 
   useEffect(() => {
     fullNameInputRef.current.focus();
@@ -70,11 +68,13 @@ export default function GuestAddForm({toggler, setState,}) {
       isMountedRef.current = true;
       return;
     }
-    
   }, [formValues]);
 
   const emailValidator = () => {
-    if (!formValues[GuestAddKey.Email].includes("@") && !formValues[GuestAddKey.Email].includes('.')){
+    if (
+      !formValues[GuestAddKey.Email].includes("@") &&
+      !formValues[GuestAddKey.Email].includes(".")
+    ) {
       setEmailError("This is not a valid email.");
     } else {
       setEmailError("");
@@ -82,12 +82,30 @@ export default function GuestAddForm({toggler, setState,}) {
   };
 
   const stringValidator = () => {
-    if (formValues[GuestAddKey.Phone].length < 10){
+    if (formValues[GuestAddKey.Phone].length < 10) {
       setStringError("Phone should be at least 10 digits");
     } else {
       setStringError("");
     }
   };
+
+  useEffect(() => {
+    setCapacity(Number(group.capacity) - 1);
+
+    setGroup((state) => ({
+      ...state,
+      capacity: String(capacity),
+    }));
+
+    try {
+      async () => await groupService.edit(groupId, group);
+
+    } catch (error) {
+      console.error("Error updating group capacity =>", error.message);
+    }
+
+
+  }, [setState]);
 
   return (
     <div className={styles.guestForm}>
@@ -129,9 +147,7 @@ export default function GuestAddForm({toggler, setState,}) {
               className={emailError && styles.redlabel}
               placeholder="Email"
             />
-            {emailError && (
-              <p className={styles.errorMessage}>{emailError}</p>
-            )}
+            {emailError && <p className={styles.errorMessage}>{emailError}</p>}
             <div
               data-lastpass-icon-root="true"
               style={{
@@ -142,8 +158,8 @@ export default function GuestAddForm({toggler, setState,}) {
               }}
             />
           </div>
-           {/* EGN */}
-           <div className="6u 12u$(xsmall)">
+          {/* EGN */}
+          <div className="6u 12u$(xsmall)">
             <label htmlFor="egn">EGN:</label>
             <input
               type="text"
@@ -153,7 +169,7 @@ export default function GuestAddForm({toggler, setState,}) {
               onChange={changeHandler}
               placeholder="EGN"
               className="redlabel"
-                          />
+            />
             <div
               data-lastpass-icon-root="true"
               style={{
@@ -213,7 +229,12 @@ export default function GuestAddForm({toggler, setState,}) {
           <div className="6u 12u$(xsmall)">
             <div className="select-wrapper">
               <label htmlFor="cabin">Chosen cabin:</label>
-              <select name="cabin" id="cabin" value={formValues[GuestAddKey.Cabin]} onChange={changeHandler}>
+              <select
+                name="cabin"
+                id="cabin"
+                value={formValues[GuestAddKey.Cabin]}
+                onChange={changeHandler}
+              >
                 <option value>- Select cabin -</option>
                 <option value={"Inside"}>INSIDE</option>
                 <option value={"Outside"}>OUTSIDE</option>
@@ -229,7 +250,12 @@ export default function GuestAddForm({toggler, setState,}) {
                 <input type="submit" value="Submit Guest" />
               </li>
               <li>
-                <input type="reset" value="Reset" className="alt" onClick={resetFormHandler} />
+                <input
+                  type="reset"
+                  value="Reset"
+                  className="alt"
+                  onClick={resetFormHandler}
+                />
               </li>
             </ul>
           </div>

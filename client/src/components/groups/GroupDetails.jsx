@@ -147,7 +147,7 @@ export default function GroupDetails({
                   Edit Group
                 </Link>
                 <button
-                  className="button alt delete"
+                  className="button alt small delete"
                   onClick={deleteButtonClickHandler}
                 >
                   Delete Group

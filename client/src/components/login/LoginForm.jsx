@@ -23,7 +23,7 @@ export default function LoginForm({ close }) {
     <div>
       <div className="login-wrapper" onClick={close}></div>
       <form className="login" onSubmit={onSubmit}>
-      <FontAwesomeIcon as a 
+      <FontAwesomeIcon  
         icon={faClose}
           className="close"
           onClick={close}

@@ -33,7 +33,7 @@ export default function UserList() {
     userService
       .getAllUsers()
       .then((result) => setUsers(result))
-      .catch((err) => console.log(err));
+      .catch((error) => console.error("Error fething users => ", error.message));
   }, []);
 
   const removeHandler = (userId) => {

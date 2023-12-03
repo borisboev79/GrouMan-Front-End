@@ -41,6 +41,8 @@ export const getOne = async (groupId) => {
 export const edit = async (groupId, groupData) => {
   const result = await request.put(`${baseUrl}/${groupId}`, groupData);
 
+  console.log('group edited');
+
   return result;
 };
 

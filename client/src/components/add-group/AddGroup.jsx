@@ -39,8 +39,8 @@ export default function AddGroup() {
   //       await groupService.add(values);
   //       resetFormHandler;
   //       navigate("/groups");
-  //     } catch (err) {
-  //       console.log(err);
+  //     } catch (error) {
+  //        console.error("Error adding group =>", error.message);
   //     }
   //   }
   // );
@@ -110,8 +110,6 @@ export default function AddGroup() {
     }
   };
 
-  //WITHOUT customHook:
-
   const addGroupSubmitHandler = async (e) => {
     e.preventDefault();
 
@@ -121,8 +119,8 @@ export default function AddGroup() {
       await groupService.add(groupData);
       resetFormHandler(formInitialState);
       navigate("/groups");
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.error("Error adding group => ", error.message);
     }
   };
 

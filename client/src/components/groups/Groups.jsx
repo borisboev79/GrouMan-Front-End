@@ -11,7 +11,8 @@ export default function Groups() {
     groupService
       .getAllGroups()
       .then((result) => setGroups(result))
-      .catch((err) => console.log(err));
+      .catch(error => {
+        console.error("Error updating group capacity =>", error.message)});
 
   }, []);
 

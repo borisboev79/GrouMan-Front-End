@@ -1468,7 +1468,7 @@
         _id: "680c9ebb-8227-40a1-8a49-7e16b5a5d804",
       },
       "d8139918-2ecd-44bd-82d2-7d11d94562d3": {
-        _ownerId: "9a02b7fa-b0dc-4f78-aad1-dc53efc770bf",
+        _ownerId: "847ec027-f659-4086-8032-5173e2f9c93a	",
         groupName: "ВЕЧНИЯТ БЕСТСЕЛЪР: ВЕЛИКДЕН НА САНТОРИНИ",
         ship: "CELESTYAL Olympia",
         itinerary:
