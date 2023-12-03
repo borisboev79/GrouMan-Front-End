@@ -1,8 +1,26 @@
+/* .editWrapper {
+  background: rgb(128, 128, 128, 0.8);
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  z-index: 10;
+} */
+
 
 
 .guestForm {
     margin: 0 auto;
-  
+  /* width: 50vw;
+  background: white;
+  border: 1px solid darkgrey;
+  border-radius: 0.5em;
+  padding: 1em 3em 0 3em;
+
+  position: relative;
+  top: 20vh;
+  z-index: 100; */
 }
 
 form {

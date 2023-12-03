@@ -7,9 +7,11 @@ import * as guestService from "../../services/guestService";
 import * as formatter from "../../utils/dateUtils";
 
 import GuestAddForm from "../guests/GuestAddForm";
+import GuestEditForm from "../edit-guest/GuestEditForm";
 import GuestList from "../guests/GuestList";
 import Path from "../../paths";
 import AuthContext from "../../contexts/authContext";
+// import GuestContext from "../../contexts/guestContext";
 import { pathToUrl } from "../../utils/pathUtils";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -20,6 +22,7 @@ import {
   faCar,
   faBus,
 } from "@fortawesome/free-solid-svg-icons";
+import GuestListItem from "../guests/GuestListItem";
 
 export default function GroupDetails({
   showForm,
@@ -30,18 +33,24 @@ export default function GroupDetails({
   const [group, setGroup] = useState([{}]);
   const { isAuthenticated } = useContext(AuthContext);
   const { userId } = useContext(AuthContext);
+  // const { showEdit } = useContext(GuestContext);
 
-  //const [transport, setTransport] = useState("");
+  const [showEdit, setShowEdit] = useState(false);
+
   const [guests, setGuests] = useState([]);
   const { groupId } = useParams();
+
+  const showGuestEditHandler = () => {
+    if (showEdit) {
+      setShowEdit(false);
+    } else {
+      setShowEdit(true);
+    }
+  };
 
   useEffect(() => {
     groupService.getOne(groupId).then(setGroup);
   }, [groupId]);
-
-  // useEffect(() => {
-  //   setTransport(group.transportation);
-  // }, [group]);
 
   useEffect(() => {
     guestService.getAllGuests().then((result) => {
@@ -135,7 +144,7 @@ export default function GroupDetails({
               </ul>
             </div>
           </div>
-          
+
           <div className="row">
             <div className="6u$ 12u$(small)"></div>
           </div>
@@ -194,6 +203,15 @@ export default function GroupDetails({
                 />
               )}
             </div>
+            {/* <div className="12u">
+              {showEdit &&
+                (<GuestEditForm
+                      toggle={showGuestEditHandler}
+                      guestId={guestId}
+                    />
+                  ,
+                  <GuestListItem toggle={showGuestEditHandler} />)}
+            </div> */}
           </div>
         </div>
       </section>

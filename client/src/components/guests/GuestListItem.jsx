@@ -1,12 +1,14 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 import AuthContext from '../../contexts/authContext';
 import * as guestService from '../../services/guestService';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import GuestEditForm from "../edit-guest/GuestEditForm";
 
 
 export default function GuestListItem({
   _id,
+  groupId,
   _ownerId,
   fullName,
   email,
@@ -15,6 +17,7 @@ export default function GuestListItem({
   birthDate,
   cabin,
   filterGuests,
+
 }) {
   const { isAuthenticated } = useContext(AuthContext);
   const { userId } = useContext(AuthContext);
@@ -33,6 +36,16 @@ export default function GuestListItem({
     }
   };
 
+  const [showModal, setShowModal] = useState(false);
+
+  const showModalHandler = () => {
+    if(showModal) {
+      setShowModal(false);
+    }else {
+      setShowModal(true);
+    }
+  }
+
   return (
     <>
       <tr>
@@ -46,15 +59,16 @@ export default function GuestListItem({
         (userId === _ownerId &&  
 
         <>
-        <td> <a className="button small">
+        <td> <Link className="button small" to={`/${groupId}/${guestId}/edit`} onClick={showModalHandler}>
           Edit
-        </a></td>
+        </Link></td>
         <td> <a className="button alt small" onClick={deleteButtonClickHandler}>
           Delete
         </a></td>
         </>
         )}
       </tr>
+      {showModal && <GuestEditForm toggle={showModalHandler}/>}
     </>
   );
 }

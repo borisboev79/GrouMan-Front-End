@@ -30,6 +30,14 @@ export const getOne = async (guestId) => {
   return result;
 }
 
+export const edit = async (guestId, guestData) => {
+  const result = await request.put(`${baseUrl}/${guestId}`, guestData);
+
+  console.log("guest edited");
+
+  return result;
+};
+
 export const remove = async (guestId) => {
   const result = await request.remove(`${baseUrl}/${guestId}`, );
 }

@@ -1,6 +1,15 @@
+import { useState } from 'react';
+
 import GuestListItem from "./GuestListItem";
+import GuestEditForm from '../edit-guest/GuestEditForm';
+
+
 
 export default function GuestList({guests, filterGuests}) {
+
+  const[isEdit, setIsEdit] = useState(false);
+
+
  
   return (
   
@@ -20,21 +29,15 @@ export default function GuestList({guests, filterGuests}) {
               </tr>
             </thead>
             <tbody>
-              {guests.map((guest) => (
+              {!isEdit &&
+              guests.map((guest) => (
                 <GuestListItem
                   key={guest._id}
                   {...guest}
                   filterGuests={filterGuests}
-                  // _id={guest._id}
-                  // _ownerId = {guest._ownerId}
-                  // fullName={guest.fullName}
-                  // email={guest.email}
-                  // egn={guest.egn}
-                  // phone={guest.phone}
-                  // birthDate={guest.birthDate}
-                  // cabin={guest.cabin}
                 />
               ))}
+              {isEdit && <GuestEditForm toggler={setIsEdit}/> }
             </tbody>
           </table>
         </div>

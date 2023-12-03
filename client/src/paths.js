@@ -7,6 +7,7 @@ const Path  = {
     Login: '/users/login',
     Logout: '/logout',
     AddGuest: '/guests/add/:groupId',
+    EditGuest: '/:groupId/:guestId/edit',
 
 };
 
