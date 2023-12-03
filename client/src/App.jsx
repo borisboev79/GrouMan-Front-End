@@ -18,7 +18,7 @@ import AddGroup from "./components/add-group/AddGroup";
 import GuestAddForm from "./components/guests/GuestAddForm";
 
 import UserList from "./components/users/UserList";
-import AuthGuard from "./components/guards/AuthGuard";
+import AuthGuard from "./guards/AuthGuard";
 import LoginForm from "./components/login/LoginForm";
 import RegisterForm from "./components/register/RegisterForm";
 import Logout from "./components/logout/Logout";

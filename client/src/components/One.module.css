@@ -2592,7 +2592,7 @@ dl dd {
   -moz-align-items: stretch;
   -webkit-align-items: stretch;
   -ms-align-items: stretch;
-  align-items: stretch;
+  align-items: flex-start;
 }
 
 .one .flexItem.left div:first-child,
@@ -2631,7 +2631,7 @@ dl dd {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
-    text-align: center;
+    text-align: left;
   }
 
   .one .flexItem.left br,
@@ -2646,10 +2646,10 @@ dl dd {
 
   .one .flexItem.left div:last-child,
   .one .flexItem.right div:last-child {
-    -moz-align-self: center;
-    -webkit-align-self: center;
-    -ms-align-self: center;
-    align-self: center;
+    -moz-align-self: left;
+    -webkit-align-self: left;
+    -ms-align-self: left;
+    align-self: left;
   }
 
   .one .flexItem.left div p,
@@ -2676,15 +2676,19 @@ dl dd {
   }
 }
 
-@media screen and (max-width: 980px) {
-  #two blockquote br {
-    display: none;
-  }
+.leftSide > * {
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: left;
 }
 
-@media screen and (max-width: 980px) {
-  #three {
-    text-align: center;
-  }
+.rightSide > * {
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  text-align: right;
 }
 
