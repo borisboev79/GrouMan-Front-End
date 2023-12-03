@@ -24,6 +24,7 @@ import Logout from "./components/logout/Logout";
 
 import Miscellaneous from "./components/Miscellaneous";
 import Footer from "./components/footer/Footer";
+import EditGroup from "./components/edit-group/EditGroup";
 
 
 function App() {
@@ -71,6 +72,7 @@ function App() {
 
           <Route element={<AuthGuard />}>
             <Route path="/groups/add" element={<AddGroup />} />
+            <Route path={Path.EditGroup} element={<EditGroup />} />
             <Route path={Path.Logout} element={<Logout />} />
             <Route path={Path.AddGuest} element={<GuestAddForm />} />
 

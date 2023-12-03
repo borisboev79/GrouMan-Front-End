@@ -1,59 +1,33 @@
 import * as groupService from "../../services/groupService";
-import { Form, useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styles from "./EditGroup.module.css";
 import { useState, useEffect, useRef } from "react";
-import { useForm } from "../../hooks/useForm";
-
-const formInitialState = {
-  groupName: "",
-  ship: "",
-  itinerary: "",
-  duration: "",
-  capacity: "",
-  startDate: "",
-  endDate: "",
-  insidePrice: "",
-  outsidePrice: "",
-  balconyPrice: "",
-  imageUril: "",
-};
 
 export default function EditGroup() {
-  // const { formValues, changeHandler, onSubmit, resetFormHandler } = useForm(
-  //   {
-  //     groupName: "",
-  //     ship: "",
-  //     itinerary: "",
-  //     duration: "",
-  //     capacity: "",
-  //     transportation: "default",
-  //     startDate: "",
-  //     endDate: "",
-  //     insidePrice: "",
-  //     outsidePrice: "",
-  //     balconyPrice: "",
-  //     imageUrl: "",
-  //   },
-  //   async (values) => {
-  //     try {
-  //       await groupService.add(values);
-  //       resetFormHandler;
-  //       navigate("/groups");
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   }
-  // );
-
+  
   const [priceError, setPriceError] = useState("");
   const [capacityError, setCapacityError] = useState("");
 
   const navigate = useNavigate();
+  const { groupId } = useParams();
 
   const groupNameInputRef = useRef();
   const isMountedRef = useRef(false);
 
-  const [formValues, setFormValues] = useState(formInitialState);
+  const [group, setGroup] = useState({
+    groupName: "",
+    ship: "",
+    itinerary: "",
+    duration: "",
+    capacity: "",
+    transportation: "default",
+    startDate: "",
+    endDate: "",
+    insidePrice: "",
+    outsidePrice: "",
+    balconyPrice: "",
+    imageUrl: "",
+  });
 
   useEffect(() => {
     groupNameInputRef.current.focus();
@@ -64,34 +38,35 @@ export default function EditGroup() {
       isMountedRef.current = true;
       return;
     }
-  }, [formValues]);
+  }, [group]);
+
+  useEffect(() => {
+    groupService.getOne(groupId).then((result) => {
+      setGroup(result);
+    });
+  }, [groupId]);
 
   // WITHOUT CUSTOM HOOK
 
-    const changeHandler = (e) => {
+  const changeHandler = (e) => {
+    let value = "";
 
-      let value = "";
+    switch (e.target.type) {
+      case "number":
+        value = Number(e.target.value);
+        break;
+      case "checkbox":
+        value = e.target.checked;
+        break;
+      default:
+        value = e.target.value;
+        break;
+    }
 
-      switch (e.target.type) {
-        case "number":
-          value = Number(e.target.value);
-          break;
-        case "checkbox":
-          value = e.target.checked;
-          break;
-        default:
-          value = e.target.value;
-          break;
-      }
-
-    setFormValues((state) => ({
+    setGroup((state) => ({
       ...state,
       [e.target.name]: value,
     }));
-  };
-
-  const resetFormHandler = () => {
-    setFormValues(formInitialState);
   };
 
   const priceValidator = () => {
@@ -110,26 +85,28 @@ export default function EditGroup() {
     }
   };
 
-  //WITHOUT customHook:
-
-  const addGroupSubmitHandler = async (e) => {
+  const editSubmitHandler = async (e) => {
     e.preventDefault();
 
     const groupData = Object.fromEntries(new FormData(e.currentTarget));
 
     try {
-      await groupService.add(groupData);
-      resetFormHandler(formInitialState);
-      navigate("/groups");
+      await groupService.edit(groupId, groupData);
+
+      navigate(-1);
     } catch (err) {
       console.log(err);
     }
   };
 
+  const cancelButtonClickHandler = () => {
+    navigate(-1);
+  };
+
   return (
     <div className={styles.addForm}>
-      <h3>Add New Cruise Group</h3>
-      <form onSubmit={addGroupSubmitHandler}>
+      <h3>Edit Cruise Group</h3>
+      <form onSubmit={editSubmitHandler}>
         <div className="row uniform">
           {/* Group Name */}
           <div className="6u 12u$(xsmall)">
@@ -139,7 +116,7 @@ export default function EditGroup() {
               type="text"
               name="groupName"
               id="groupName"
-              value={formValues.groupName}
+              value={group.groupName}
               onChange={changeHandler}
               placeholder="Group name"
             />
@@ -161,7 +138,7 @@ export default function EditGroup() {
               type="text"
               name="ship"
               id="ship"
-              value={formValues.ship}
+              value={group.ship}
               onChange={changeHandler}
               placeholder="Ship name"
             />
@@ -182,7 +159,7 @@ export default function EditGroup() {
               type="text"
               name="itinerary"
               id="itinerary"
-              value={formValues.itinerary}
+              value={group.itinerary}
               onChange={changeHandler}
               placeholder="Itinerary"
             />
@@ -203,7 +180,7 @@ export default function EditGroup() {
               type="number"
               name="duration"
               id="duration"
-              value={formValues.duration}
+              value={group.duration}
               onChange={changeHandler}
               onBlur={priceValidator}
               className={priceError && styles.inputError}
@@ -227,7 +204,7 @@ export default function EditGroup() {
               type="number"
               name="capacity"
               id="capacity"
-              value={formValues.capacity}
+              value={group.capacity}
               onChange={changeHandler}
               onBlur={capacityValidator}
               className={capacityError && styles.inputError}
@@ -255,7 +232,7 @@ export default function EditGroup() {
               <select
                 name="transportation"
                 id="transportation"
-                value={formValues.transportation}
+                value={group.transportation}
                 onChange={changeHandler}
               >
                 <option value={"default"}>- Choose Transport -</option>
@@ -272,7 +249,7 @@ export default function EditGroup() {
               type="date"
               name="startDate"
               id="startDate"
-              value={formValues.startDate}
+              value={group.startDate}
               onChange={changeHandler}
               placeholder="From"
             />
@@ -293,7 +270,7 @@ export default function EditGroup() {
               type="date"
               name="endDate"
               id="endDate"
-              value={formValues.endDate}
+              value={group.endDate}
               onChange={changeHandler}
               placeholder="To"
             />
@@ -314,7 +291,7 @@ export default function EditGroup() {
               type="number"
               name="insidePrice"
               id="insidePrice"
-              value={formValues.insidePrice}
+              value={group.insidePrice}
               onChange={changeHandler}
               placeholder="Price in €"
             />
@@ -335,7 +312,7 @@ export default function EditGroup() {
               type="number"
               name="outsidePrice"
               id="outsidePrice"
-              value={formValues.outsidePrice}
+              value={group.outsidePrice}
               onChange={changeHandler}
               placeholder="Price in €"
             />
@@ -356,7 +333,7 @@ export default function EditGroup() {
               type="number"
               name="balconyPrice"
               id="balconyPrice"
-              value={formValues.balconyPrice}
+              value={group.balconyPrice}
               onChange={changeHandler}
               placeholder="Price in €"
             />
@@ -377,7 +354,7 @@ export default function EditGroup() {
               type="text"
               name="imageUrl"
               id="imageUrl"
-              value={formValues.imageUrl}
+              value={group.imageUrl}
               onChange={changeHandler}
               placeholder="Paste Image URL here"
             />
@@ -387,9 +364,14 @@ export default function EditGroup() {
             <ul className="actions">
               <li>
                 <input type="submit" value="Submit" />
-              </li>                       
+              </li>
               <li>
-                <input type="reset" value="Reset" className="alt" onClick={resetFormHandler} />
+                <input
+                  type="reset"
+                  value="Cancel"
+                  className="alt"
+                  onClick={cancelButtonClickHandler}
+                />
               </li>
             </ul>
           </div>

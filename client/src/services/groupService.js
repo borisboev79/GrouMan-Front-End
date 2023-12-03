@@ -38,6 +38,12 @@ export const getOne = async (groupId) => {
   return result;
 }
 
+export const edit = async (groupId, groupData) => {
+  const result = await request.put(`${baseUrl}/${groupId}`, groupData);
+
+  return result;
+};
+
 export const remove = async (groupId) => {
   await request.remove(`${baseUrl}/${groupId}`, );
 }
