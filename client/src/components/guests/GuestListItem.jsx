@@ -1,12 +1,11 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
-import GuestContext from '../../contexts/guestContext';
+import "./GuestListItem.css";
+import GuestContext from "../../contexts/guestContext";
 import AuthContext from "../../contexts/authContext";
-import * as guestService from '../../services/guestService';
+import * as guestService from "../../services/guestService";
 import { useNavigate, Link } from "react-router-dom";
 import * as formatter from "../../utils/dateUtils";
-import GuestEditForm from "../edit-guest/GuestEditForm";
-
 
 
 export default function GuestListItem({
@@ -20,11 +19,10 @@ export default function GuestListItem({
   birthDate,
   cabin,
   filterGuests,
-
 }) {
   const { guestIdSetter } = useContext(GuestContext);
-  const { showEdit} = useContext(GuestContext);
-  const { showGuestEditHandler} = useContext(GuestContext);
+  const { showEdit } = useContext(GuestContext);
+  const { showGuestEditHandler } = useContext(GuestContext);
   const { isAuthenticated } = useContext(AuthContext);
   const { userId } = useContext(AuthContext);
   const guestId = _id;
@@ -33,12 +31,12 @@ export default function GuestListItem({
   const [toggleButtons, setToggleButtons] = useState(false);
 
   const toggler = () => setToggleButtons(!toggleButtons);
-  
 
-
-
-
-
+  useEffect(() => {
+    if (!showEdit) {
+      setToggleButtons(false);
+    }
+  }, [showEdit]);
 
   const deleteButtonClickHandler = async () => {
     const hasConfirmed = confirm(
@@ -61,23 +59,30 @@ export default function GuestListItem({
         <td>{phone}</td>
         <td>{formatter.formatDate(birthDate)}</td>
         <td>{cabin}</td>
-        {isAuthenticated && 
-        (userId === _ownerId &&  
 
-        <>
-        <td> <Link className="button small" 
-        
-        onClick={() => {showGuestEditHandler(), guestIdSetter(_id), toggler()}}>{(!toggleButtons || !showEdit) ? "Edit" : "Cancel Edit"}
-          
-        </Link></td>
-        {(!toggleButtons || !showEdit) &&
-        <td> <a className="button alt small" onClick={deleteButtonClickHandler}>
-          Delete
-        </a></td>}
-        </>
+        {isAuthenticated && userId === _ownerId && (
+          <span>
+            <td className="modify-buttons">
+              <Link
+                className="button small"
+                onClick={() => {
+                  showGuestEditHandler(), guestIdSetter(_id), toggler();
+                }}
+              >
+                {!toggleButtons || !showEdit ? "Edit" : "Cancel Edit"}
+              </Link>
+              {(!toggleButtons || !showEdit) && (
+                <a
+                  className="button alt small"
+                  onClick={deleteButtonClickHandler}
+                >
+                  Delete
+                </a>
+              )}
+            </td>
+          </span>
         )}
       </tr>
-     
     </>
   );
 }

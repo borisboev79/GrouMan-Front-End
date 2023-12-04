@@ -1,0 +1,15 @@
+.modify-buttons {
+
+    display: flex;
+    gap: 0.5em;
+    justify-content: space-between;
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: nowrap;
+
+}
+
+.modify-buttons a {
+    width: 100%;
+  
+}
