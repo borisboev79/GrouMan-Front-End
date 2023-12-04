@@ -38,15 +38,15 @@ export default function GuestEditForm({ groupId }) {
     birthDate: "",
     cabin: "",
   });
-  const [group, setGroup] = useState({});
+  //const [group, setGroup] = useState({});
 
-  useEffect(() => {
-    groupService.getOne(groupId).then((result) => setGroup(result));
-  }, [groupId]);
+  // useEffect(() => {
+  //   groupService.getOne(groupId).then((result) => setGroup(result));
+  // }, [groupId]);
 
   useEffect(() => {
     guestService.getOne(guestId).then((result) => setGuest(result));
-  }, [guest]);
+  }, [guestId]);
 
   useEffect(() => {
     fullNameInputRef.current.focus();
@@ -61,7 +61,7 @@ export default function GuestEditForm({ groupId }) {
 
   const changeHandler = (e) => {
     let value = "";
-
+   
     switch (e.target.type) {
       case "number":
         value = Number(e.target.value);
@@ -74,7 +74,7 @@ export default function GuestEditForm({ groupId }) {
         break;
     }
 
-    setGroup((state) => ({
+    setGuest((state) => ({
       ...state,
       [e.target.name]: value,
     }));
@@ -94,7 +94,7 @@ export default function GuestEditForm({ groupId }) {
               type="text"
               name="fullName"
               id="fullName"
-              defaultValue={guest.fullName}
+              value={guest.fullName}
               onChange={changeHandler}
               placeholder="Name and Surname"
             />
@@ -137,7 +137,7 @@ export default function GuestEditForm({ groupId }) {
               type="text"
               name="egn"
               id="egn"
-              defaultValue={guest.egn}
+              value={guest.egn}
               onChange={changeHandler}
               placeholder="EGN"
               className="redlabel"
@@ -180,7 +180,7 @@ export default function GuestEditForm({ groupId }) {
               type="date"
               name="birthDate"
               id="birthDate"
-              defaultValue={guest.birthDate}
+              value={guest.birthDate}
               onChange={changeHandler}
               placeholder="Enter dat of birth"
             />
@@ -202,7 +202,7 @@ export default function GuestEditForm({ groupId }) {
               <select
                 name="cabin"
                 id="cabin"
-                defaultValue={guest.cabin}
+                value={guest.cabin}
                 onChange={changeHandler}
               >
                 <option value>- Select cabin -</option>
