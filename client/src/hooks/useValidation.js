@@ -18,14 +18,34 @@ export const useValidation = (values) => {
         isValid = value.length >= 3;
         errorMessage = "Last name should be at least three characters long.";
         break;
-        case "fullName":
-          isValid = value.length >= 6;
-          errorMessage = "Full Name should be at least 6 characters long.";
-          break;
+      case "fullName":
+        isValid = value.length >= 6;
+        errorMessage = "Full Name should be at least 6 characters long.";
+        break;
+      case "egn":
+        const tenDigitRegex = /^\d{10}$/;
+        isValid = tenDigitRegex.test(value);
+        errorMessage = "An EGN should hold exactly ten digits.";
+        break;
       case "email":
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         isValid = emailRegex.test(value);
         errorMessage = "This is not a valid email.";
+        break;
+      case "phone":
+        const phoneRegex = /^\+\d{10,}$/;
+        isValid = phoneRegex.test(value);
+        errorMessage =
+          "Phone should start with +, followed by country code and number.";
+        break;
+      case "birthDate":
+        const inputDate = new Date(value);
+        const currentDate = new Date();
+        const sixMonthsAgo = new Date(currentDate);
+        sixMonthsAgo.setMonth(currentDate.getMonth() - 6);
+
+        isValid = inputDate <= sixMonthsAgo;
+        errorMessage = "Guest must be at least 6-months old.";
         break;
       case "username":
         isValid = value.length >= 5;
@@ -44,6 +64,10 @@ export const useValidation = (values) => {
       case "office":
         isValid = value != "default";
         errorMessage = "Selecting an office is mandatory";
+        break;
+      case "cabin":
+        isValid = value != "default";
+        errorMessage = "Selecting cabin type is mandatory";
         break;
     }
 

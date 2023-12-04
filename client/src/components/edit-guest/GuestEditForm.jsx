@@ -5,10 +5,20 @@ import * as guestService from "../../services/guestService";
 import GuestContext from "../../contexts/guestContext";
 import { useValidation } from "../../hooks/useValidation";
 
-export default function GuestEditForm({ groupId }) {
+const validationKeys = {
+  fullName: "",
+  email: "",
+  egn: "",
+  phone: "",
+  birthDate: "",
+  cabin: "",
+};
 
+export default function GuestEditForm({ groupId }) {
   const { showGuestEditHandler } = useContext(GuestContext);
   const { guestId } = useContext(GuestContext);
+  const { validationValues, validate, buttonToggle, setValidationValues } =
+    useValidation(validationKeys);
 
   const guestEditSubmitHandler = async (e) => {
     e.preventDefault();
@@ -87,8 +97,15 @@ export default function GuestEditForm({ groupId }) {
               id="fullName"
               value={guest.fullName}
               onChange={changeHandler}
+              onBlur={() => validate("fullName", guest.fullName)}
+              className={validationValues.fullName && styles.redalert}
               placeholder="Name and Surname"
             />
+            {validationValues.fullName && (
+              <p className={styles.errorMessage}>
+                {[validationValues.fullName]}
+              </p>
+            )}
             <div
               data-lastpass-icon-root="true"
               style={{
@@ -108,9 +125,15 @@ export default function GuestEditForm({ groupId }) {
               id="email"
               value={guest.email}
               onChange={changeHandler}
+              onBlur={() => validate("email", guest.email)}
+              className={validationValues.email && styles.redalert}
               placeholder="Email"
             />
-
+            {validationValues.email && (
+              <p className={styles.errorMessage}>
+                {[validationValues.email]}
+              </p>
+            )}
             <div
               data-lastpass-icon-root="true"
               style={{
@@ -130,9 +153,15 @@ export default function GuestEditForm({ groupId }) {
               id="egn"
               value={guest.egn}
               onChange={changeHandler}
+              onBlur={() => validate("egn", guest.egn)}
+              className={validationValues.egn && styles.redalert}
               placeholder="EGN"
-              className="redlabel"
             />
+            {validationValues.egn && (
+              <p className={styles.errorMessage}>
+                {[validationValues.egn]}
+              </p>
+            )}
             <div
               data-lastpass-icon-root="true"
               style={{
@@ -152,8 +181,15 @@ export default function GuestEditForm({ groupId }) {
               id="phone"
               value={guest.phone}
               onChange={changeHandler}
-              placeholder="Enter phone"
+              onBlur={() => validate("phone", guest.phone)}
+              className={validationValues.phone && styles.redalert}
+              placeholder="Enter Phone"
             />
+            {validationValues.phone && (
+              <p className={styles.errorMessage}>
+                {[validationValues.phone]}
+              </p>
+            )}
             <div
               data-lastpass-icon-root="true"
               style={{
@@ -173,8 +209,15 @@ export default function GuestEditForm({ groupId }) {
               id="birthDate"
               value={guest.birthDate}
               onChange={changeHandler}
-              placeholder="Enter dat of birth"
+              onBlur={() => validate("birthDate", guest.birthDate)}
+              className={validationValues.birthDate && styles.redalert}
+              placeholder="Enter date of birth"
             />
+            {validationValues.birthDate && (
+              <p className={styles.errorMessage}>
+                {[validationValues.birthDate]}
+              </p>
+            )}
             <div
               data-lastpass-icon-root="true"
               style={{
@@ -195,12 +238,20 @@ export default function GuestEditForm({ groupId }) {
                 id="cabin"
                 value={guest.cabin}
                 onChange={changeHandler}
+                onBlur={() => validate("cabin", guest.cabin)}
+                className={validationValues.cabin && styles.redalert}
+                placeholder="Select cabin"
               >
-                <option value>- Select cabin -</option>
+                <option value={"default"}>- Select cabin -</option>
                 <option value={"Inside"}>Inside</option>
                 <option value={"Outside"}>Outside</option>
                 <option value={"Balcony"}>Balcony</option>
               </select>
+              {validationValues.cabin && (
+                <p className={styles.errorMessage}>
+                  {[validationValues.cabin]}
+                </p>
+              )}
             </div>
           </div>
 
@@ -208,14 +259,20 @@ export default function GuestEditForm({ groupId }) {
           <div className="12u$">
             <ul className="actions">
               <li>
-                <input type="submit" value="Save Details" />
+                <input
+                  type="submit"
+                  disabled={buttonToggle}
+                  value="Save Details"
+                />
               </li>
               <li>
                 <input
                   type="button"
                   value="Cancel Edit"
                   className="alt"
-                  onClick={showGuestEditHandler}
+                  onClick={() => {
+                    showGuestEditHandler(), setValidationValues(validationKeys);
+                  }}
                 />
               </li>
             </ul>
