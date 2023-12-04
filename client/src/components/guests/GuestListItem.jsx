@@ -30,7 +30,12 @@ export default function GuestListItem({
   const guestId = _id;
   const navigate = useNavigate();
 
-  guestIdSetter(_id);
+  const [toggleButtons, setToggleButtons] = useState(false);
+
+  const toggler = () => setToggleButtons(!toggleButtons);
+  
+
+
 
 
 
@@ -62,10 +67,10 @@ export default function GuestListItem({
         <>
         <td> <Link className="button small" 
         
-        onClick={showGuestEditHandler}>{!showEdit ? "Edit" : "Cancel edit"}
+        onClick={() => {showGuestEditHandler(), guestIdSetter(_id), toggler()}}>{(!toggleButtons || !showEdit) ? "Edit" : "Cancel Edit"}
           
         </Link></td>
-        {!showEdit &&
+        {(!toggleButtons || !showEdit) &&
         <td> <a className="button alt small" onClick={deleteButtonClickHandler}>
           Delete
         </a></td>}

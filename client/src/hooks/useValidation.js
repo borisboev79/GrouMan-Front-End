@@ -18,6 +18,10 @@ export const useValidation = (values) => {
         isValid = value.length >= 3;
         errorMessage = "Last name should be at least three characters long.";
         break;
+        case "fullName":
+          isValid = value.length >= 6;
+          errorMessage = "Full Name should be at least 6 characters long.";
+          break;
       case "email":
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         isValid = emailRegex.test(value);
