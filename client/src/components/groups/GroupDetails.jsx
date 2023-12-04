@@ -52,7 +52,7 @@ export default function GroupDetails({
       const filtered = result.filter((guest) => guest.groupId === groupId);
       setGuests(filtered);
     });
-  }, [groupId]);
+  }, [groupId, showEdit]);
 
   const filterGuests = (guestId) => {
     const result = guests.filter((guest) => guest._id !== guestId);

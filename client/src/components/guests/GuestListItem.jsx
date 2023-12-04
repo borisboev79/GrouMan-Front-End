@@ -4,6 +4,7 @@ import GuestContext from '../../contexts/guestContext';
 import AuthContext from "../../contexts/authContext";
 import * as guestService from '../../services/guestService';
 import { useNavigate, Link } from "react-router-dom";
+import * as formatter from "../../utils/dateUtils";
 import GuestEditForm from "../edit-guest/GuestEditForm";
 
 
@@ -53,7 +54,7 @@ export default function GuestListItem({
         <td>{email}</td>
         <td>{egn}</td>
         <td>{phone}</td>
-        <td>{birthDate}</td>
+        <td>{formatter.formatDate(birthDate)}</td>
         <td>{cabin}</td>
         {isAuthenticated && 
         (userId === _ownerId &&  

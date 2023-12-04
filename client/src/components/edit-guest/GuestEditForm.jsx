@@ -1,14 +1,10 @@
-import { useNavigate, useParams } from "react-router-dom";
 import styles from "./GuestEditForm.module.css";
 import { useState, useEffect, useRef, useContext } from "react";
 
-import * as groupService from "../../services/groupService";
 import * as guestService from "../../services/guestService";
-import AuthContext from "../../contexts/authContext";
 import GuestContext from "../../contexts/guestContext";
 
 export default function GuestEditForm({ groupId }) {
-  const navigate = useNavigate();
 
   const { showGuestEditHandler } = useContext(GuestContext);
   const { guestId } = useContext(GuestContext);
@@ -38,11 +34,6 @@ export default function GuestEditForm({ groupId }) {
     birthDate: "",
     cabin: "",
   });
-  //const [group, setGroup] = useState({});
-
-  // useEffect(() => {
-  //   groupService.getOne(groupId).then((result) => setGroup(result));
-  // }, [groupId]);
 
   useEffect(() => {
     guestService.getOne(guestId).then((result) => setGuest(result));
@@ -61,7 +52,7 @@ export default function GuestEditForm({ groupId }) {
 
   const changeHandler = (e) => {
     let value = "";
-   
+
     switch (e.target.type) {
       case "number":
         value = Number(e.target.value);
@@ -81,7 +72,6 @@ export default function GuestEditForm({ groupId }) {
   };
 
   return (
-    // <div className={styles.editWrapper} onClick={toggle}>
     <div className={styles.guestForm}>
       <h3>Edit Guest Details</h3>
       <form onSubmit={guestEditSubmitHandler}>
@@ -232,6 +222,5 @@ export default function GuestEditForm({ groupId }) {
         </div>
       </form>
     </div>
-    // </div>
   );
 }
