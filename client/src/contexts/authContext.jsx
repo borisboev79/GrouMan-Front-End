@@ -11,16 +11,31 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
+
   const [auth, setAuth] = usePersistedState("auth", {});
 
+  const [status, setStatus] = useState("");
+
+  const statusToggler = () => {
+    if (status !== "") {
+      setStatus("");
+    }
+  };
+
   const loginSubmitHandler = async (values) => {
-    const result = await authService.login(values.email, values.password);
+    try {
+      const result = await authService.login(values.email, values.password);
 
-    setAuth(result);
+      setAuth(result);
 
-    localStorage.setItem("accessToken", result.accessToken);
+      localStorage.setItem("accessToken", result.accessToken);
 
-    navigate(Path.Groups);
+      navigate(Path.Groups);
+    } catch (error) {
+      setStatus(error.message);
+
+      console.error("Couldn't log in because", error.message);
+    }
   };
 
   const registerSubmitHandler = async (values) => {
@@ -66,7 +81,10 @@ export const AuthProvider = ({ children }) => {
     userId: auth._id,
     email: auth.email,
     isAuthenticated: !!auth.email,
-  }
+    message: auth.message,
+    status,
+    statusToggler,
+  };
 
   return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>;
 };

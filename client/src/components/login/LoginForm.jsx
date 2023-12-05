@@ -1,10 +1,10 @@
 import "./LoginForm.css";
 import { useLoginForm } from "../../hooks/useLoginForm";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import AuthContext from "../../contexts/authContext";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {faClose} from "@fortawesome/free-solid-svg-icons";
+import { faClose } from "@fortawesome/free-solid-svg-icons";
 
 const LoginFormKeys = {
   Email: "email",
@@ -13,6 +13,8 @@ const LoginFormKeys = {
 
 export default function LoginForm({ close }) {
   const { loginSubmitHandler } = useContext(AuthContext);
+  const { status } = useContext(AuthContext);
+  const { statusToggler } = useContext(AuthContext);
 
   const { values, onChange, onSubmit } = useLoginForm(loginSubmitHandler, {
     [LoginFormKeys.Email]: "",
@@ -21,20 +23,28 @@ export default function LoginForm({ close }) {
 
   return (
     <div>
-      <div className="login-wrapper" onClick={close}></div>
+      <div
+        className="login-wrapper"
+        onClick={() => {
+          close(), statusToggler();
+        }}
+      ></div>
       <form className="login" onSubmit={onSubmit}>
-      <FontAwesomeIcon  
-        icon={faClose}
+        <FontAwesomeIcon
+          icon={faClose}
           className="close"
-          onClick={close}
-         // style={{ color: "white" }}
+          onClick={() => {
+            close(), statusToggler();
+          }}
         />
+
         <h3>User Login</h3>
         <label htmlFor="email">Email:</label>
         {/* Email */}
         <div className="12u">
           <input
             type="email"
+            className={status !== "" && "red"}
             name={LoginFormKeys.Email}
             id="email"
             value={values[LoginFormKeys.Email]}
@@ -57,6 +67,7 @@ export default function LoginForm({ close }) {
           <label htmlFor="password">Password:</label>
           <input
             type="password"
+            className={status !== "" && "red"}
             name={LoginFormKeys.Password}
             id="password"
             value={values[LoginFormKeys.Password]}
@@ -73,19 +84,23 @@ export default function LoginForm({ close }) {
             }}
           />
         </div>
-
+        {status !== "" && (
+          <p className="error-message">Incorrect email or password!</p>
+        )}
         {/* Buttons */}
         <div className="12u$ btns">
           <ul className="login-actions">
             <li>
-              <input type="submit" value="Log In" />
+              <input type="submit" onClick={statusToggler} value="Log In" />
             </li>
             <li>
               <input
                 type="reset"
                 value="Cancel"
                 className="alt"
-                onClick={close}
+                onClick={() => {
+                  close(), statusToggler();
+                }}
               />
             </li>
           </ul>

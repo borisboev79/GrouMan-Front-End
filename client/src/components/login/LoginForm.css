@@ -31,7 +31,7 @@ form {
 }
 
 h3 {
-  margin: 0 0 1em 0; 
+  margin: 0 0 1em 0;
 }
 
 label {
@@ -291,14 +291,12 @@ input[type="number"].inputError {
 
 .pass {
   margin-top: 1em;
-
 }
 
 .btns {
   display: flex;
   justify-content: center;
   margin-top: 2em;
-
 }
 
 .login-actions li {
@@ -306,3 +304,13 @@ input[type="number"].inputError {
   list-style: none;
 }
 
+.error-message {
+  color: red;
+  font-size: 12px;
+  margin-top: 0;
+}
+
+input.red {
+  color: red;
+  border: solid 2px red !important;
+}
