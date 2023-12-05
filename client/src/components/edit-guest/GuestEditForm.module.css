@@ -230,15 +230,24 @@ input[type="radio"] + label:before {
 .errorMessage {
   color: red;
   font-size: 12px;
-  margin-top: 0;
+  margin-bottom: 4px;
+}
+
+.errorHolder {
+  margin: 0;
+  padding: 0;
+  visibility: hidden;
 }
 
 .redalert {
-
   color: red !important;
   border: solid 2px red !important;
 }
 
 .guestForm {
   margin-top: 2em;
+}
+
+.guestHeading {
+  margin-bottom: 2.5em !important;
 }

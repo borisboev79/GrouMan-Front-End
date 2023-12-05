@@ -84,7 +84,7 @@ export default function GuestEditForm({ groupId }) {
 
   return (
     <div className={styles.guestForm}>
-      <h3>Edit Guest Details</h3>
+      <h3 className={styles.guestHeading}>Edit Guest Details</h3>
       <form onSubmit={guestEditSubmitHandler}>
         <div className="row uniform">
           {/* Full name */}
@@ -129,10 +129,11 @@ export default function GuestEditForm({ groupId }) {
               className={validationValues.email && styles.redalert}
               placeholder="Email"
             />
+            {!validationValues.email && (
+              <div className={styles.errorHolder}>.</div>
+            )}
             {validationValues.email && (
-              <p className={styles.errorMessage}>
-                {[validationValues.email]}
-              </p>
+              <p className={styles.errorMessage}>{[validationValues.email]}</p>
             )}
             <div
               data-lastpass-icon-root="true"
@@ -158,9 +159,7 @@ export default function GuestEditForm({ groupId }) {
               placeholder="EGN"
             />
             {validationValues.egn && (
-              <p className={styles.errorMessage}>
-                {[validationValues.egn]}
-              </p>
+              <p className={styles.errorMessage}>{[validationValues.egn]}</p>
             )}
             <div
               data-lastpass-icon-root="true"
@@ -185,10 +184,11 @@ export default function GuestEditForm({ groupId }) {
               className={validationValues.phone && styles.redalert}
               placeholder="Enter Phone"
             />
+            {!validationValues.phone && (
+              <div className={styles.errorHolder}>.</div>
+            )}
             {validationValues.phone && (
-              <p className={styles.errorMessage}>
-                {[validationValues.phone]}
-              </p>
+              <p className={styles.errorMessage}>{[validationValues.phone]}</p>
             )}
             <div
               data-lastpass-icon-root="true"
@@ -247,6 +247,9 @@ export default function GuestEditForm({ groupId }) {
                 <option value={"Outside"}>Outside</option>
                 <option value={"Balcony"}>Balcony</option>
               </select>
+              {!validationValues.cabin && (
+              <div className={styles.errorHolder}>.</div>
+            )}
               {validationValues.cabin && (
                 <p className={styles.errorMessage}>
                   {[validationValues.cabin]}

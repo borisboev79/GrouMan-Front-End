@@ -66,7 +66,7 @@ export const useValidation = (values) => {
         errorMessage = "Selecting an office is mandatory";
         break;
       case "cabin":
-        isValid = value != "default";
+        isValid = (value != "default" && value !="");
         errorMessage = "Selecting cabin type is mandatory";
         break;
     }

@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { useForm } from "../../hooks/useForm";
 import * as groupService from "../../services/groupService";
 import * as guestService from "../../services/guestService";
+import { useValidation } from "../../hooks/useValidation";
 
 const GuestAddKey = {
   FullName: "fullName",
@@ -12,6 +13,15 @@ const GuestAddKey = {
   Phone: "phone",
   Birthdate: "birthDate",
   Cabin: "cabin",
+};
+
+const validationKeys = {
+  fullName: "",
+  email: "",
+  egn: "",
+  phone: "",
+  birthDate: "",
+  cabin: "",
 };
 
 export default function GuestAddForm({ toggler, setState }) {
@@ -47,6 +57,9 @@ export default function GuestAddForm({ toggler, setState }) {
       [GuestAddKey.Cabin]: "",
     }
   );
+
+  const { validationValues, validate, buttonToggle, setValidationValues } =
+    useValidation(validationKeys);
 
   const fullNameInputRef = useRef();
   const isMountedRef = useRef(false);
@@ -99,17 +112,14 @@ export default function GuestAddForm({ toggler, setState }) {
 
     try {
       async () => await groupService.edit(groupId, group);
-
     } catch (error) {
       console.error("Error updating group capacity =>", error.message);
     }
-
-
   }, [setState]);
 
   return (
     <div className={styles.guestForm}>
-      <h3>Add Guest to Group</h3>
+      <h3 className={styles.guestHeading}>Add Guest to Group</h3>
       <form onSubmit={onSubmit}>
         <div className="row uniform">
           {/* Full name */}
@@ -122,8 +132,17 @@ export default function GuestAddForm({ toggler, setState }) {
               id="fullName"
               value={formValues[GuestAddKey.FullName]}
               onChange={changeHandler}
+              onBlur={() =>
+                validate("fullName", formValues[GuestAddKey.FullName])
+              }
+              className={validationValues.fullName && styles.redalert}
               placeholder="Name and Surname"
             />
+            {validationValues.fullName && (
+              <p className={styles.errorMessage}>
+                {[validationValues.fullName]}
+              </p>
+            )}
             <div
               data-lastpass-icon-root="true"
               style={{
@@ -143,11 +162,16 @@ export default function GuestAddForm({ toggler, setState }) {
               id="email"
               value={formValues[GuestAddKey.Email]}
               onChange={changeHandler}
-              onBlur={emailValidator}
-              className={emailError && styles.redlabel}
+              onBlur={() => validate("email", formValues[GuestAddKey.Email])}
+              className={validationValues.email && styles.redalert}
               placeholder="Email"
             />
-            {emailError && <p className={styles.errorMessage}>{emailError}</p>}
+            {!validationValues.email && (
+              <div className={styles.errorHolder}>.</div>
+            )}
+            {validationValues.email && (
+              <p className={styles.errorMessage}>{[validationValues.email]}</p>
+            )}
             <div
               data-lastpass-icon-root="true"
               style={{
@@ -165,11 +189,15 @@ export default function GuestAddForm({ toggler, setState }) {
               type="text"
               name="egn"
               id="egn"
-              value={formValues[GuestAddKey.egn]}
+              value={formValues[GuestAddKey.EGN]}
               onChange={changeHandler}
+              onBlur={() => validate("egn", formValues[GuestAddKey.EGN])}
+              className={validationValues.egn && styles.redalert}
               placeholder="EGN"
-              className="redlabel"
             />
+            {validationValues.egn && (
+              <p className={styles.errorMessage}>{[validationValues.egn]}</p>
+            )}
             <div
               data-lastpass-icon-root="true"
               style={{
@@ -189,10 +217,16 @@ export default function GuestAddForm({ toggler, setState }) {
               id="phone"
               value={formValues[GuestAddKey.Phone]}
               onChange={changeHandler}
-              onBlur={stringValidator}
-              className={stringError && styles.redlabel}
-              placeholder="Enter phone"
+              onBlur={() => validate("phone", formValues[GuestAddKey.Phone])}
+              className={validationValues.phone && styles.redalert}
+              placeholder="Enter Phone"
             />
+             {!validationValues.phone && (
+              <div className={styles.errorHolder}>.</div>
+            )}
+            {validationValues.phone && (
+              <p className={styles.errorMessage}>{[validationValues.phone]}</p>
+            )}
             <div
               data-lastpass-icon-root="true"
               style={{
@@ -212,8 +246,17 @@ export default function GuestAddForm({ toggler, setState }) {
               id="birthDate"
               value={formValues[GuestAddKey.Birthdate]}
               onChange={changeHandler}
-              placeholder="Enter dat of birth"
+              onBlur={() =>
+                validate("birthDate", formValues[GuestAddKey.Birthdate])
+              }
+              className={validationValues.birthDate && styles.redalert}
+              placeholder="Enter date of birth"
             />
+            {validationValues.birthDate && (
+              <p className={styles.errorMessage}>
+                {[validationValues.birthDate]}
+              </p>
+            )}
             <div
               data-lastpass-icon-root="true"
               style={{
@@ -234,12 +277,23 @@ export default function GuestAddForm({ toggler, setState }) {
                 id="cabin"
                 value={formValues[GuestAddKey.Cabin]}
                 onChange={changeHandler}
+                onBlur={() => validate("cabin", formValues[GuestAddKey.Cabin])}
+                className={validationValues.cabin && styles.redalert}
+                placeholder="Select cabin"
               >
-                <option value>- Select cabin -</option>
-                <option value={"Inside"}>INSIDE</option>
-                <option value={"Outside"}>OUTSIDE</option>
-                <option value={"Balcony"}>BALCONY</option>
+                <option value={"default"}>- Select cabin -</option>
+                <option value={"Inside"}>Inside</option>
+                <option value={"Outside"}>Outside</option>
+                <option value={"Balcony"}>Balcony</option>
               </select>
+              {!validationValues.cabin && (
+              <div className={styles.errorHolder}>.</div>
+            )}
+              {validationValues.cabin && (
+                <p className={styles.errorMessage}>
+                  {[validationValues.cabin]}
+                </p>
+              )}
             </div>
           </div>
 
@@ -247,7 +301,12 @@ export default function GuestAddForm({ toggler, setState }) {
           <div className="12u$">
             <ul className="actions">
               <li>
-                <input type="submit" value="Submit Guest" />
+                <input
+                  type="submit"
+                  value="Submit Guest"
+                  disabled={buttonToggle}
+                  onClick={() => setValidationValues(validationKeys)}
+                />
               </li>
               <li>
                 <input
