@@ -1,8 +1,8 @@
 import * as groupService from "../../services/groupService";
-import { Form, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styles from "./AddGroup.module.css";
 import { useState, useEffect, useRef } from "react";
-import { useForm } from "../../hooks/useForm";
+import { useValidation } from "../../hooks/useValidation";
 
 const formInitialState = {
   groupName: "",
@@ -10,43 +10,31 @@ const formInitialState = {
   itinerary: "",
   duration: "",
   capacity: "",
+  transportation: "default",
   startDate: "",
   endDate: "",
   insidePrice: "",
   outsidePrice: "",
   balconyPrice: "",
-  imageUril: "",
+  imageUrl: "",
+};
+
+const validationKeys = {
+  groupName: "",
+  ship: "",
+  itinerary: "",
+  duration: "",
+  capacity: "",
+  transportation: "",
+  startDate: "",
+  endDate: "",
+  insidePrice: "",
+  outsidePrice: "",
+  balconyPrice: "",
+  imageUrl: "",
 };
 
 export default function AddGroup() {
-  // const { formValues, changeHandler, onSubmit, resetFormHandler } = useForm(
-  //   {
-  //     groupName: "",
-  //     ship: "",
-  //     itinerary: "",
-  //     duration: "",
-  //     capacity: "",
-  //     transportation: "default",
-  //     startDate: "",
-  //     endDate: "",
-  //     insidePrice: "",
-  //     outsidePrice: "",
-  //     balconyPrice: "",
-  //     imageUrl: "",
-  //   },
-  //   async (values) => {
-  //     try {
-  //       await groupService.add(values);
-  //       resetFormHandler;
-  //       navigate("/groups");
-  //     } catch (error) {
-  //        console.error("Error adding group =>", error.message);
-  //     }
-  //   }
-  // );
-
-  const [priceError, setPriceError] = useState("");
-  const [capacityError, setCapacityError] = useState("");
 
   const navigate = useNavigate();
 
@@ -54,6 +42,8 @@ export default function AddGroup() {
   const isMountedRef = useRef(false);
 
   const [formValues, setFormValues] = useState(formInitialState);
+  const { validationValues, validate, buttonToggle, setValidationValues } =
+  useValidation(validationKeys);
 
   useEffect(() => {
     groupNameInputRef.current.focus();
@@ -94,22 +84,6 @@ export default function AddGroup() {
     setFormValues(formInitialState);
   };
 
-  const priceValidator = () => {
-    if (formValues.duration <= 0) {
-      setPriceError("Duration must be positive. Just like you :)");
-    } else {
-      setPriceError("");
-    }
-  };
-
-  const capacityValidator = () => {
-    if (formValues.capacity < 12) {
-      setCapacityError("No dozen, no group");
-    } else {
-      setCapacityError("");
-    }
-  };
-
   const addGroupSubmitHandler = async (e) => {
     e.preventDefault();
 
@@ -126,7 +100,7 @@ export default function AddGroup() {
 
   return (
     <div className={styles.addForm}>
-      <h3>Add New Cruise Group</h3>
+      <h3 className={styles.groupHeading}>Add New Cruise Group</h3>
       <form onSubmit={addGroupSubmitHandler}>
         <div className="row uniform">
           {/* Group Name */}
@@ -139,8 +113,15 @@ export default function AddGroup() {
               id="groupName"
               value={formValues.groupName}
               onChange={changeHandler}
+              onBlur={() => validate("groupName", formValues.groupName)}
+              className={validationValues.groupName && styles.redalert}
               placeholder="Group name"
             />
+            {validationValues.groupName && (
+              <p className={styles.errorMessage}>
+                {[validationValues.groupName]}
+              </p>
+            )}
             <div
               data-lastpass-icon-root="true"
               style={{
@@ -161,8 +142,15 @@ export default function AddGroup() {
               id="ship"
               value={formValues.ship}
               onChange={changeHandler}
+              onBlur={() => validate("ship", formValues.ship)}
+              className={validationValues.ship && styles.redalert}
               placeholder="Ship name"
             />
+            {validationValues.ship && (
+              <p className={styles.errorMessage}>
+                {[validationValues.ship]}
+              </p>
+            )}
             <div
               data-lastpass-icon-root="true"
               style={{
@@ -182,8 +170,15 @@ export default function AddGroup() {
               id="itinerary"
               value={formValues.itinerary}
               onChange={changeHandler}
+              onBlur={() => validate("itinerary", formValues.itinerary)}
+              className={validationValues.itinerary && styles.redalert}
               placeholder="Itinerary"
             />
+            {validationValues.itinerary && (
+              <p className={styles.errorMessage}>
+                {[validationValues.itinerary]}
+              </p>
+            )}
             <div
               data-lastpass-icon-root="true"
               style={{
@@ -203,10 +198,15 @@ export default function AddGroup() {
               id="duration"
               value={formValues.duration}
               onChange={changeHandler}
-              onBlur={priceValidator}
-              className={priceError && styles.inputError}
+              onBlur={() => validate("duration", formValues.duration)}
+              className={validationValues.duration && styles.redalert}
               placeholder="Duration"
             />
+            {validationValues.duration && (
+              <p className={styles.errorMessage}>
+                {[validationValues.duration]}
+              </p>
+            )}
             <div
               data-lastpass-icon-root="true"
               style={{
@@ -216,7 +216,6 @@ export default function AddGroup() {
                 float: "left !important",
               }}
             />
-            {priceError && <p className={styles.errorMessage}>{priceError}</p>}
           </div>
           {/* Capacity */}
           <div className="3u 12u$(xsmall)">
@@ -227,10 +226,15 @@ export default function AddGroup() {
               id="capacity"
               value={formValues.capacity}
               onChange={changeHandler}
-              onBlur={capacityValidator}
-              className={capacityError && styles.inputError}
+              onBlur={() => validate("capacity", formValues.capacity)}
+              className={validationValues.capacity && styles.redalert}
               placeholder="Size"
             />
+            {validationValues.capacity && (
+              <p className={styles.errorMessage}>
+                {[validationValues.capacity]}
+              </p>
+            )}
 
             <div
               data-lastpass-icon-root="true"
@@ -241,10 +245,6 @@ export default function AddGroup() {
                 float: "left !important",
               }}
             />
-
-            {capacityError && (
-              <p className={styles.errorMessage}>{capacityError}</p>
-            )}
           </div>
           {/* Transprtation */}
           <div className="6u$">
@@ -255,12 +255,20 @@ export default function AddGroup() {
                 id="transportation"
                 value={formValues.transportation}
                 onChange={changeHandler}
+                onBlur={() => validate("transportation", formValues.transportation)}
+                className={validationValues.transportation && styles.redalert}
+                placeholder="Choose transport"
               >
                 <option value={"default"}>- Choose Transport -</option>
                 <option value={"plane"}>Flight</option>
                 <option value={"bus"}>Bus</option>
                 <option value={"car"}>Car</option>
               </select>
+              {validationValues.transportation && (
+                <p className={styles.errorMessage}>
+                  {[validationValues.transportation]}
+                </p>
+              )}
             </div>
           </div>
           {/* Start date */}
@@ -272,8 +280,15 @@ export default function AddGroup() {
               id="startDate"
               value={formValues.startDate}
               onChange={changeHandler}
-              placeholder="From"
+              onBlur={() => validate("startDate", formValues.startDate)}
+              className={validationValues.startDate && styles.redalert}
+              placeholder="Departure"
             />
+            {validationValues.startDate && (
+              <p className={styles.errorMessage}>
+                {[validationValues.startDate]}
+              </p>
+            )}
             <div
               data-lastpass-icon-root="true"
               style={{
@@ -293,8 +308,18 @@ export default function AddGroup() {
               id="endDate"
               value={formValues.endDate}
               onChange={changeHandler}
-              placeholder="To"
+              onBlur={() => validate("endDate", formValues.startDate, formValues.endDate)}
+              className={validationValues.endDate && styles.redalert}
+              placeholder="Return"
             />
+               {!validationValues.endDate && (
+              <div className={styles.errorHolder}>.</div>
+            )}
+            {validationValues.endDate && (
+              <p className={styles.errorMessage}>
+                {[validationValues.endDate]}
+              </p>
+            )}
             <div
               data-lastpass-icon-root="true"
               style={{
@@ -314,8 +339,15 @@ export default function AddGroup() {
               id="insidePrice"
               value={formValues.insidePrice}
               onChange={changeHandler}
+              onBlur={() => validate("insidePrice", formValues.insidePrice)}
+              className={validationValues.insidePrice && styles.redalert}
               placeholder="Price in €"
             />
+            {validationValues.insidePrice && (
+              <p className={styles.errorMessage}>
+                {[validationValues.insidePrice]}
+              </p>
+            )}
             <div
               data-lastpass-icon-root="true"
               style={{
@@ -335,8 +367,15 @@ export default function AddGroup() {
               id="outsidePrice"
               value={formValues.outsidePrice}
               onChange={changeHandler}
+              onBlur={() => validate("outsidePrice", formValues.outsidePrice)}
+              className={validationValues.outsidePrice && styles.redalert}
               placeholder="Price in €"
             />
+            {validationValues.outsidePrice && (
+              <p className={styles.errorMessage}>
+                {[validationValues.outsidePrice]}
+              </p>
+            )}
             <div
               data-lastpass-icon-root="true"
               style={{
@@ -356,8 +395,15 @@ export default function AddGroup() {
               id="balconyPrice"
               value={formValues.balconyPrice}
               onChange={changeHandler}
+              onBlur={() => validate("balconyPrice", formValues.balconyPrice)}
+              className={validationValues.balconyPrice && styles.redalert}
               placeholder="Price in €"
             />
+            {validationValues.balconyPrice && (
+              <p className={styles.errorMessage}>
+                {[validationValues.balconyPrice]}
+              </p>
+            )}
             <div
               data-lastpass-icon-root="true"
               style={{
@@ -377,8 +423,15 @@ export default function AddGroup() {
               id="imageUrl"
               value={formValues.imageUrl}
               onChange={changeHandler}
-              placeholder="Paste Image URL here"
+              onBlur={() => validate("imageUrl", formValues.imageUrl)}
+              className={validationValues.imageUrl && styles.redalert}
+              placeholder="Paste image URL here"
             />
+            {validationValues.imageUrl && (
+              <p className={styles.errorMessage}>
+                {[validationValues.imageUrl]}
+              </p>
+            )}
           </div>
           {/* Buttons */}
           <div className="12u$">

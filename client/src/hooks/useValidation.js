@@ -10,6 +10,10 @@ export const useValidation = (values) => {
     let propertyValue = (obj, key) => obj[key];
 
     switch (key) {
+      case "groupName":
+        isValid = value.length >= 20;
+        errorMessage = "Name should be at least 20 character long.";
+        break;
       case "firstName":
         isValid = value.length >= 2;
         errorMessage = "Name should be at least two characters long.";
@@ -21,6 +25,38 @@ export const useValidation = (values) => {
       case "fullName":
         isValid = value.length >= 6;
         errorMessage = "Full Name should be at least 6 characters long.";
+        break;
+      case "ship":
+        isValid = value.length >= 7;
+        errorMessage = "Ship name should be at least 7 characters long.";
+        break;
+      case "itinerary":
+        isValid = value.length >= 20;
+        errorMessage = "Itinerary should be at least 20 character long.";
+        break;
+      case "imageUrl":
+        isValid = value.length > 0;
+        errorMessage = "Image URL cannot be empty.";
+        break;
+      case "duration":
+        isValid = Number(value) >= 1;
+        errorMessage = "Duration must be at least 1 day.";
+        break;
+      case "capacity":
+        isValid = Number(value) >= 20;
+        errorMessage = "Groups start at 10 cabins.";
+        break;
+      case "insidePrice":
+        isValid = Number(value) > 0;
+        errorMessage = "Price must be positive number.";
+        break;
+      case "outsidePrice":
+        isValid = Number(value) > 0;
+        errorMessage = "Price must be positive number.";
+        break;
+      case "balconyPrice":
+        isValid = Number(value) > 0;
+        errorMessage = "Price must be positive number.";
         break;
       case "egn":
         const tenDigitRegex = /^\d{10}$/;
@@ -47,6 +83,24 @@ export const useValidation = (values) => {
         isValid = inputDate <= sixMonthsAgo;
         errorMessage = "Guest must be at least 6-months old.";
         break;
+      case "startDate":
+        const departureDate = new Date(value);
+        const dateNow = new Date();
+        const tomorrow = new Date(dateNow);
+        tomorrow.setDate(dateNow.getDate() + 1);
+
+        isValid = departureDate >= tomorrow;
+        errorMessage = "Departure date should be in the future";
+        break;
+      case "endDate":
+        const startDate = new Date(value);
+        const endDate = new Date(value2);
+        const returnDate = new Date(endDate);
+        returnDate.setDate(startDate.getDate() + 1);
+
+        isValid = returnDate <= endDate;
+        errorMessage = "Return should be after departure";
+        break;
       case "username":
         isValid = value.length >= 5;
         errorMessage = "Username should be at least five characters long.";
@@ -62,12 +116,16 @@ export const useValidation = (values) => {
         errorMessage = "Passwords don't match.";
         break;
       case "office":
-        isValid = value != "default";
+        isValid = value !== "default";
         errorMessage = "Selecting an office is mandatory";
         break;
       case "cabin":
-        isValid = (value != "default" && value !="");
+        isValid = value !== "default" && value !== "";
         errorMessage = "Selecting cabin type is mandatory";
+        break;
+      case "transportation":
+        isValid = value !== "default";
+        errorMessage = "Means of transport is mandatory";
         break;
     }
 

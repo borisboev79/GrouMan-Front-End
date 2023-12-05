@@ -215,8 +215,28 @@ form {
   .errorMessage {
     color: red;
     font-size: 12px;
-    margin-top: 0;
+    margin-bottom: 4px;
   }
+  
+  .errorHolder {
+    margin: 0;
+    padding: 0;
+    visibility: hidden;
+  }
+  
+  .redalert {
+    color: red !important;
+    border: solid 2px red !important;
+  }
+  
+  .groupForm {
+    margin-top: 2em;
+  }
+  
+  .groupHeading {
+    margin-bottom: 2.5em !important;
+  }
+  
 
   input[type="number"].inputError {
   border: solid 2px red;
