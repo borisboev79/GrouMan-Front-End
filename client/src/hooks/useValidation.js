@@ -116,7 +116,7 @@ export const useValidation = (values) => {
         errorMessage = "Passwords don't match.";
         break;
       case "office":
-        isValid = value !== "default";
+        isValid = value !== "default" || value === "";
         errorMessage = "Selecting an office is mandatory";
         break;
       case "cabin":

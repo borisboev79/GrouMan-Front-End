@@ -218,10 +218,8 @@ form {
     margin-top: 0;
   }
 
-  .editInput.redlabel,
-  select.redlabel {
-
-    color: red;
-  border: solid 2px red;
-}
+  .redalert {
+    color: red !important;
+    border: solid 2px red !important;
+  }
   

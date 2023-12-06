@@ -83,7 +83,7 @@ export default function RegisterForm() {
               onBlur={() =>
                 validate("firstName", formValues[RegisterFormKeys.FirstName])
               }
-              className={validationValues.firstName && styles.redlabel}
+              className={validationValues.firstName && styles.redalert}
               placeholder="First name"
             />
             {validationValues.firstName && (
@@ -113,7 +113,7 @@ export default function RegisterForm() {
               onBlur={() =>
                 validate("lastName", formValues[RegisterFormKeys.LastName])
               }
-              className={validationValues.lastName && styles.redlabel}
+              className={validationValues.lastName && styles.redalert}
               placeholder="Last name"
             />
             {validationValues.lastName && (
@@ -142,7 +142,7 @@ export default function RegisterForm() {
               value={formValues[RegisterFormKeys.Email]}
               onChange={changeHandler}
               onBlur={() => validate("email", formValues[RegisterFormKeys.Email])}
-              className={validationValues.email && styles.redlabel}
+              className={validationValues.email && styles.redalert}
               placeholder="Email"
             />
             {validationValues.email && (
@@ -170,7 +170,7 @@ export default function RegisterForm() {
               onBlur={() =>
                 validate("username", formValues[RegisterFormKeys.Username])
               }
-              className={validationValues.username && styles.redlabel}
+              className={validationValues.username && styles.redalert}
               placeholder="Username"
             />
             {validationValues.username && (
@@ -200,7 +200,7 @@ export default function RegisterForm() {
               onBlur={() =>
                 validate("password", formValues[RegisterFormKeys.Password])
               }
-              className={validationValues.password && styles.redlabel}
+              className={validationValues.password && styles.redalert}
               placeholder="Password"
             />
             {validationValues.password && (
@@ -230,7 +230,7 @@ export default function RegisterForm() {
               onBlur={() =>
                 validate("confirmPassword", formValues[RegisterFormKeys.Password], formValues[RegisterFormKeys.ConfirmPassword])
               }
-              className={validationValues.confirmPassword && styles.redlabel}
+              className={validationValues.confirmPassword && styles.redalert}
               placeholder="Confirm Password"
             />
             {validationValues.confirmPassword && (
@@ -261,10 +261,10 @@ export default function RegisterForm() {
                 onBlur={() =>
                   validate("office", formValues[RegisterFormKeys.Office])
                 }
-                className={validationValues.office && styles.redlabel}
+                className={validationValues.office && styles.redalert}
               >
                       
-                <option value="default">- Select office -</option>
+                <option value={"default"}>- Select office -</option>
                 <option value={"SOFR"}>Sofia Central</option>
                 <option value={"MOS"}>Mall of Sofia</option>
                 <option value={"PDV"}>Plovdiv</option>
