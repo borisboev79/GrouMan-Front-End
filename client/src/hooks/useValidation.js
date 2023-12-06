@@ -95,7 +95,7 @@ export const useValidation = (values) => {
       case "endDate":
         const startDate = new Date(value);
         const endDate = new Date(value2);
-        const returnDate = new Date(endDate);
+        const returnDate = new Date(startDate);
         returnDate.setDate(startDate.getDate() + 1);
 
         isValid = returnDate <= endDate;

@@ -437,7 +437,7 @@ export default function AddGroup() {
           <div className="12u$">
             <ul className="actions">
               <li>
-                <input type="submit" value="Submit" />
+                <input disabled={buttonToggle} type="submit" value="Submit" />
               </li>                       
               <li>
                 <input type="reset" value="Reset" className="alt" onClick={resetFormHandler} />
