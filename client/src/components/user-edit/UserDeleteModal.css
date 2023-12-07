@@ -1,0 +1,313 @@
+.delete-wrapper {
+  background: rgb(128, 128, 128, 0.8);
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  z-index: 10;
+}
+
+.delete {
+  width: 35vw;
+  background: white;
+  border: 1px solid darkgrey;
+  border-radius: 0.5em;
+  padding: 1em 3em 0 3em;
+  margin: 0 auto;
+  position: relative;
+  top: 20vh;
+  z-index: 100;
+}
+
+.registerForm {
+  width: 35vw;
+  margin: 0 auto;
+  padding-top: 10em;
+}
+
+form {
+  margin: 0 0 2em 0;
+}
+
+label {
+  color: #727a82;
+  display: block;
+  font-size: 0.9em;
+  font-weight: 700;
+  margin: 0 0 1em 0;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="number"],
+input[type="password"],
+input[type="email"],
+input[type="tel"],
+select,
+textarea {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  background: rgba(144, 144, 144, 0.075);
+  border-radius: 4px;
+  border: none;
+  border: solid 1px #dee1e3;
+  color: inherit;
+  display: block;
+  outline: 0;
+  padding: 0 1em;
+  text-decoration: none;
+  width: 100%;
+}
+
+input[type="text"]:invalid,
+input[type="date"]:invalid,
+input[type="number"]:invalid,
+input[type="password"]:invalid,
+input[type="email"]:invalid,
+input[type="tel"]:invalid,
+select:invalid,
+textarea:invalid {
+  box-shadow: none;
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus,
+input[type="number"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+select:focus,
+textarea:focus {
+  border-color: #25a2c3;
+  box-shadow: 0 0 0 1px #25a2c3;
+}
+
+.select-wrapper {
+  text-decoration: none;
+  display: block;
+  position: relative;
+}
+
+.select-wrapper:before {
+  content: "";
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  text-transform: none !important;
+}
+
+.select-wrapper:before {
+  color: #dee1e3;
+  display: block;
+  height: 2.75em;
+  line-height: 2.75em;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  top: 0;
+  width: 2.75em;
+}
+
+.select-wrapper select::-ms-expand {
+  display: none;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="number"],
+input[type="password"],
+input[type="email"],
+select {
+  height: 3.5em;
+  line-height: 3.5em;
+}
+
+textarea {
+  padding: 0.75em 1em;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  display: block;
+  float: left;
+  margin-right: -2em;
+  opacity: 0;
+  width: 1em;
+  z-index: -1;
+}
+
+input[type="checkbox"] + label,
+input[type="radio"] + label {
+  text-decoration: none;
+  color: #767d85;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1em;
+  font-weight: 300;
+  padding-left: 2.4em;
+  padding-right: 0.75em;
+  position: relative;
+}
+
+input[type="checkbox"] + label:before,
+input[type="radio"] + label:before {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  text-transform: none !important;
+}
+
+input[type="checkbox"] + label:before,
+input[type="radio"] + label:before {
+  background: rgba(144, 144, 144, 0.075);
+  border-radius: 4px;
+  border: solid 1px #dee1e3;
+  content: "";
+  display: inline-block;
+  height: 1.65em;
+  left: 0;
+  line-height: 1.58125em;
+  position: absolute;
+  text-align: center;
+  top: 0;
+  width: 1.65em;
+}
+
+input[type="checkbox"]:checked + label:before,
+input[type="radio"]:checked + label:before {
+  background: #f6755e;
+  border-color: #f6755e;
+  color: #ffffff;
+  content: "\f00c";
+}
+
+input[type="checkbox"]:focus + label:before,
+input[type="radio"]:focus + label:before {
+  border-color: #25a2c3;
+  box-shadow: 0 0 0 1px #25a2c3;
+}
+
+input[type="checkbox"] + label:before {
+  border-radius: 4px;
+}
+
+input[type="radio"] + label:before {
+  border-radius: 100%;
+}
+
+::-webkit-input-placeholder {
+  color: #bbb !important;
+  opacity: 1;
+}
+
+:-moz-placeholder {
+  color: #bbb !important;
+  opacity: 1;
+}
+
+::-moz-placeholder {
+  color: #bbb !important;
+  opacity: 1;
+}
+
+:-ms-input-placeholder {
+  color: #bbb !important;
+  opacity: 1;
+}
+
+.formerize-placeholder {
+  color: #bbb !important;
+  opacity: 1;
+}
+
+.errorMessage {
+  color: red;
+  font-size: 12px;
+  margin-top: 0;
+}
+
+input[type="number"].inputError {
+  border: solid 2px red;
+}
+
+.close {
+  text-decoration: none;
+  -moz-transition: color 0.2s ease-in-out;
+  -webkit-transition: color 0.2s ease-in-out;
+  -ms-transition: color 0.2s ease-in-out;
+  transition: color 0.2s ease-in-out;
+  -webkit-tap-highlight-color: transparent;
+  border: 0;
+  color: rgb(128, 128, 128);
+  cursor: pointer;
+  display: block;
+  margin-left: auto;
+  margin-bottom: 1em;
+  height: 2em;
+  line-height: 2em;
+  width: 1em;
+  text-align: right;
+}
+
+.close:before {
+  content: "";
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  text-transform: none !important;
+}
+
+.close:before {
+  font-size: 1.25em;
+}
+
+.close:hover {
+  color: #25a2c3;
+}
+
+@media screen and (max-width: 736px) {
+  .close {
+    height: 4em;
+    line-height: 4em;
+  }
+}
+
+.pass {
+  margin-top: 1em;
+}
+
+.btns {
+  display: flex;
+  justify-content: center;
+  margin-top: 2em;
+}
+
+.delete-actions li {
+  display: inline;
+  list-style: none;
+}
+
+.error-message {
+  color: red;
+  font-size: 12px;
+  margin-top: 0;
+}
+
+input.red {
+  color: red;
+  border: solid 2px red !important;
+}

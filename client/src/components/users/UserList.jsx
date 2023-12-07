@@ -3,47 +3,65 @@ import { useState, useEffect } from "react";
 import * as userService from "../../services/userService";
 import * as authService from "../../services/authService";
 import UserRow from "./UserRow";
+import UserDeleteModal from "../user-edit/UserDeleteModal";
 
 export default function UserList() {
   const [users, setUsers] = useState([]);
   const [loggedUser, setLoggedUser] = useState({});
-
-  
+  const [userId, setUserId] = useState("");
 
   const getOneHanler = () => {
+    if (Object.keys(loggedUser).length === 0) {
+      authService.getMe().then((result) => setLoggedUser(result));
 
-    if(Object.keys(loggedUser).length === 0) {
-
-      authService.getMe()
-      .then(result => setLoggedUser(result))
-      
       return loggedUser;
     } else {
       setLoggedUser({});
     }
-    
   };
-
-  // useEffect(() => {
-  //   authService.getMe()
-  //   .then(result => setLoggedUser(result))
-  // }, [loggedUser])
 
   useEffect(() => {
     userService
       .getAllUsers()
       .then((result) => setUsers(result))
-      .catch((error) => console.error("Error fething users => ", error.message));
+      .catch((error) =>
+        console.error("Error fething users => ", error.message)
+      );
   }, []);
 
-  const removeHandler = (userId) => {
-    userService.remove(userId);
+  const [showModal, setShowModal] = useState(false);
+  const [user, setUser] = useState({});
 
+  const showModalHandler = () => {
+    setShowModal(true);
+  };
+
+  const closeModalHandler = () => {
+    setShowModal(false);
+  };
+
+  const userIdHandler = (userId) => {
+    setUserId(userId);
+  };
+
+  useEffect(() => {
+    userService.getOne(userId).then((result) => setUser(result));
+  }, [userId]);
+
+  const filterUsers = (userId) => {
     setUsers((state) => state.filter((u) => u._id !== userId));
   };
 
   return (
     <>
+      {showModal && (
+        <UserDeleteModal
+          userId={user._id}
+          close={closeModalHandler}
+          filterUsers={filterUsers}
+          {...user}
+        />
+      )}
       <div className="users-row 200%">
         <div className="12u inner">
           {/* Table */}
@@ -63,7 +81,12 @@ export default function UserList() {
               </thead>
               <tbody>
                 {users.map((user) => (
-                  <UserRow key={user._id} onDelete={removeHandler} {...user} />
+                  <UserRow
+                    key={user._id}
+                    showModalHandler={showModalHandler}
+                    setUserId={userIdHandler}
+                    {...user}
+                  />
                 ))}
               </tbody>
               <tfoot>
@@ -98,26 +121,19 @@ export default function UserList() {
                 <th>Email</th>
                 <th>Username</th>
                 <th>Office</th>
-                <th style={{ textAlign: "center" }}>
-                  Command
-                </th>
+                <th style={{ textAlign: "center" }}>Command</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>
-                  {loggedUser._id}
-                </td>
+                <td>{loggedUser._id}</td>
                 <td>{loggedUser.email}</td>
                 <td>{loggedUser.username}</td>
                 <td>{loggedUser.office}</td>
 
                 <td>
-                  <a
-                    className="button small"
-                    onClick={getOneHanler}
-                  >
-                    {Object.keys(loggedUser).length === 0 ? 'Show' : 'Hide'}
+                  <a className="button small" onClick={getOneHanler}>
+                    {Object.keys(loggedUser).length === 0 ? "Show" : "Hide"}
                   </a>
                 </td>
               </tr>
@@ -126,7 +142,6 @@ export default function UserList() {
           </table>
         </div>
       </div>
-     
     </>
   );
 }

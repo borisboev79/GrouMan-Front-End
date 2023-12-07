@@ -21,12 +21,14 @@ import UserList from "./components/users/UserList";
 import AuthGuard from "./guards/AuthGuard";
 import LoginForm from "./components/login/LoginForm";
 import RegisterForm from "./components/register/RegisterForm";
+import UserDeleteModal from "./components/user-edit/UserDeleteModal";
 import Logout from "./components/logout/Logout";
 
 import Miscellaneous from "./components/Miscellaneous";
 import Footer from "./components/footer/Footer";
 import EditGroup from "./components/edit-group/EditGroup";
 import GuestEditForm from "./components/edit-guest/GuestEditForm";
+
 
 function App() {
   const [showMenu, setShowMenu] = useState(false);
@@ -76,11 +78,11 @@ function App() {
 
             <Route element={<AuthGuard />}>
               <Route path={Path.EditGuest} element={<GuestEditForm />} />
-
               <Route path="/groups/add" element={<AddGroup />} />
               <Route path={Path.EditGroup} element={<EditGroup />} />
               <Route path={Path.Logout} element={<Logout />} />
               <Route path={Path.AddGuest} element={<GuestAddForm />} />
+              <Route path={Path.DeleteUser} element={<UserDeleteModal />}/>
             </Route>
 
             <Route path="*" element={<NotFound404 />} />

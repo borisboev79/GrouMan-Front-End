@@ -8,6 +8,7 @@ const Path  = {
     Logout: '/logout',
     AddGuest: '/guests/add/:groupId',
     EditGuest: '/:groupId/:guestId/edit',
+    DeleteUser: '/users/delete/:userId',
 
 };
 

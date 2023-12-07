@@ -1,5 +1,6 @@
-import './UserRow.css';
-import { officeDecoder } from '../../utils/officeDecoder';
+import "./UserRow.css";
+import { Link } from "react-router-dom";
+import { officeDecoder } from "../../utils/officeDecoder";
 
 export default function UserRow({
   _id,
@@ -8,32 +9,32 @@ export default function UserRow({
   email,
   username,
   office,
-  onDelete,
+  showModalHandler,
+  setUserId,
 }) {
-
-
-  const onClickRemoveHandler = () => {
-    onDelete(_id);
-  };
-
   return (
-    <tr>
-      <td>
-        {firstName} {lastName}
-      </td>
-      <td>{email}</td>
-      <td>{username}</td>
-      <td>{officeDecoder(office)}</td>
-      <td>
-        <a className="button small" value="Edit">
-          Edit
-        </a>
-      </td>
-      <td>
-        <a className="button alt small" onClick={onClickRemoveHandler}>
-          Delete
-        </a>
-      </td>
-    </tr>
+    <>
+      <tr>
+        <td>
+          {firstName} {lastName}
+        </td>
+        <td>{email}</td>
+        <td>{username}</td>
+        <td>{officeDecoder(office)}</td>
+        <td>
+          <Link className="button small" value="Edit">
+            Edit
+          </Link>
+        </td>
+        <td>
+          <Link
+            className="button alt small"
+            onClick={() => [setUserId(_id), showModalHandler()]}
+          >
+            Delete
+          </Link>
+        </td>
+      </tr>
+    </>
   );
 }
