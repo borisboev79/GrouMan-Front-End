@@ -3,9 +3,6 @@ import "./GroupDeleteModal.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 
-import GuestContext from "../../contexts/guestContext";
-import { useContext } from "react";
-
 export default function GuestDeleteModal({
   _id,
   groupName,
@@ -17,9 +14,7 @@ export default function GuestDeleteModal({
     <div>
       <div
         className="group-delete-wrapper"
-        onClick={() => {
-          showDeleteHandler(), statusToggler();
-        }}
+        onClick={showDeleteGroupToggler}
       ></div>
 
       <div className="group-delete">

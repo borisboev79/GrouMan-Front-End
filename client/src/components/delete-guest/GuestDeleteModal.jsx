@@ -13,18 +13,17 @@ export default function GuestDeleteModal({
 }) {
 
   const { showDeleteHandler } = useContext(GuestContext);
+  const { scrolLockToggler } = useContext(GuestContext);
 
   return (
     <div>
       <div
         className="guest-delete-wrapper"
-        onClick={() => {
-          showDeleteHandler(), statusToggler();
-        }}
+        onClick={() => [showDeleteHandler(), scrolLockToggler()]}
       ></div>
 
       <div className="guest-delete">
-        <FontAwesomeIcon icon={faClose} className="close" onClick={showDeleteHandler} />
+        <FontAwesomeIcon icon={faClose} className="close" onClick={() => [showDeleteHandler(), scrolLockToggler()]} />
         <h3 className="guest-delete-heading">
           Are you sure you want to delete this guest?
         </h3>
@@ -36,7 +35,7 @@ export default function GuestDeleteModal({
               <input
                 type="submit"
                 className="del"
-                onClick={() => [onDelete(_id), showDeleteHandler()]}
+                onClick={() => [onDelete(_id), scrolLockToggler(), showDeleteHandler()]}
                 value="Delete"
               />
             </li>
@@ -45,7 +44,7 @@ export default function GuestDeleteModal({
                 type="reset"
                 value="Cancel"
                 className="alt"
-                onClick={showDeleteHandler}
+                onClick={() => [showDeleteHandler(), scrolLockToggler()]}
               />
             </li>
           </ul>

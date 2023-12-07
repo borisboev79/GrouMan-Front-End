@@ -6,7 +6,7 @@
   background: rgb(128, 128, 128, 0.8);
   position: absolute;
   width: 100vw;
-  height: 100vh;
+  height: 200vh;
   position: absolute;
   top: 0;
   left: 0;
@@ -20,8 +20,9 @@
   border-radius: 0.5em;
   padding: 1em 3em 0 3em;
   margin: 0 auto;
-  position: relative;
+  position: fixed;
   top: 20vh;
+  left: 32.5vw;
   z-index: 100;
 }
 
@@ -38,6 +39,10 @@ form {
 .guest-delete-heading {
   font-size: 1.05em;
   color: #f6755e !important;
+}
+
+h5 {
+  color: #727a82 !important;
 }
 
 

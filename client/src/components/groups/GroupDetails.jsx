@@ -39,8 +39,10 @@ export default function GroupDetails({
   const showDeleteGroupToggler = () => {
     if (showGroupDelete) {
       setShowGroupDelete(false);
+      scrolLockToggler();
     } else {
       setShowGroupDelete(true);
+      scrolLockToggler();
     }
   };
 
@@ -50,6 +52,7 @@ export default function GroupDetails({
   const { showEdit } = useContext(GuestContext);
   const [guestToDelete, setGuestToDelete] = useState({});
   const { showDelete } = useContext(GuestContext);
+  const { scrolLockToggler } = useContext(GuestContext);
 
   useEffect(() => {
     guestService.getOne(guestId).then(setGuestToDelete);
@@ -84,13 +87,6 @@ export default function GroupDetails({
 
   return (
     <>
-     {/* DeleteGuest Modal */}
-     {showDelete && (
-        <GuestDeleteModal
-          onDelete={deleteGuestClickHandler}
-          {...guestToDelete}
-        />
-      )}
       {/* DeleteGroup Modal */}
       {showGroupDelete && (
         <GroupDeleteModal
@@ -177,7 +173,7 @@ export default function GroupDetails({
                 </Link>
                 <button
                   className="button alt small spec"
-                  onClick={showDeleteGroupToggler}
+                  onClick={() => [showDeleteGroupToggler(), scrolLockToggler()]}
                 >
                   Delete Group
                 </button>
@@ -185,6 +181,13 @@ export default function GroupDetails({
             )}
           </div>
           <hr className="major" />
+          {/* DeleteGuest Modal */}
+          {showDelete && (
+            <GuestDeleteModal
+              onDelete={deleteGuestClickHandler}
+              {...guestToDelete}
+            />
+          )}
 
           {/* GuestList */}
           <div className="row 200%">
@@ -231,7 +234,6 @@ export default function GroupDetails({
           </div>
         </div>
       </section>
-     
     </>
   );
 }

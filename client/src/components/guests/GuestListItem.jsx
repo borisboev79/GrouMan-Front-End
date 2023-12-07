@@ -22,6 +22,7 @@ export default function GuestListItem({
 }) {
   const { guestIdSetter } = useContext(GuestContext);
   const { showEdit } = useContext(GuestContext);
+  const { scrolLockToggler } = useContext(GuestContext);
 
   const { showDeleteHandler } = useContext(GuestContext);
   const { showGuestEditHandler } = useContext(GuestContext);
@@ -40,17 +41,17 @@ export default function GuestListItem({
     }
   }, [showEdit]);
 
-  const deleteButtonClickHandler = async () => {
-    const hasConfirmed = confirm(
-      `Are you sure you want to delete ${fullName}?`
-    );
+  // const deleteButtonClickHandler = async () => {
+  //   const hasConfirmed = confirm(
+  //     `Are you sure you want to delete ${fullName}?`
+  //   );
 
-    if (hasConfirmed) {
-      await guestService.remove(guestId);
+  //   if (hasConfirmed) {
+  //     await guestService.remove(guestId);
 
-      filterGuests(guestId);
-    }
-  };
+  //     filterGuests(guestId);
+  //   }
+  // };
 
   
 
@@ -78,8 +79,8 @@ export default function GuestListItem({
               {(!toggleButtons || !showEdit) && (
                 <a
                   className="button alt small"
-                  //onClick={deleteButtonClickHandler}
-                  onClick={() => [showDeleteHandler(), guestIdSetter(_id)]}
+                
+                  onClick={() => [showDeleteHandler(), guestIdSetter(_id), scrolLockToggler()]}
                   
                 >
                   Delete
