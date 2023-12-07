@@ -1,4 +1,4 @@
-body {
+.guest-delete ~ body {
   overflow-y: hidden;
 }
 

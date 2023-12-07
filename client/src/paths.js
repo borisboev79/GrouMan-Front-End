@@ -8,7 +8,6 @@ const Path  = {
     MyGroups: 'groups/:userId',
     RegisterUser: '/users/register',
     EditUser: '/users/edit/:userId',
-    DeleteUser: '/users/delete/:userId',
     Users: '/users',
     Login: '/users/login',
     Logout: '/logout',

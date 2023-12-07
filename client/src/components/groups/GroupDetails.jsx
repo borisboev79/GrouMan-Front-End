@@ -13,6 +13,7 @@ import Path from "../../paths";
 import AuthContext from "../../contexts/authContext";
 import GuestContext from "../../contexts/guestContext";
 import GuestDeleteModal from "../delete-guest/GuestDeleteModal";
+import GroupDeleteModal from "../delete-group/GroupDeleteModal";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -32,21 +33,37 @@ export default function GroupDetails({
   const [group, setGroup] = useState([{}]);
   const { isAuthenticated } = useContext(AuthContext);
   const { userId } = useContext(AuthContext);
-  const { showEdit } = useContext(GuestContext);
+  const { groupId } = useParams();
+  const [showGroupDelete, setShowGroupDelete] = useState(false);
+
+  const showDeleteGroupToggler = () => {
+    if (showGroupDelete) {
+      setShowGroupDelete(false);
+    } else {
+      setShowGroupDelete(true);
+    }
+  };
 
   const [guests, setGuests] = useState([]);
-  const { groupId } = useParams();
-
-  const { showGuestEditHandler } = useContext(GuestContext);
 
   const { guestId } = useContext(GuestContext);
+  const { showEdit } = useContext(GuestContext);
   const [guestToDelete, setGuestToDelete] = useState({});
   const { showDelete } = useContext(GuestContext);
-  const { showDeleteHandler } = useContext(GuestContext);
 
   useEffect(() => {
     guestService.getOne(guestId).then(setGuestToDelete);
   }, [guestId]);
+
+  const filterGuests = (guestId) => {
+    const result = guests.filter((guest) => guest._id !== guestId);
+    setGuests(result);
+  };
+
+  const deleteGuestClickHandler = async (userId) => {
+    await guestService.remove(userId);
+    filterGuests(guestId);
+  };
 
   useEffect(() => {
     groupService.getOne(groupId).then(setGroup);
@@ -59,27 +76,10 @@ export default function GroupDetails({
     });
   }, [groupId, showEdit]);
 
-  const filterGuests = (guestId) => {
-    const result = guests.filter((guest) => guest._id !== guestId);
+  const deleteGroupClickHandler = async () => {
+    await groupService.remove(groupId);
 
-    setGuests(result);
-  };
-
-  const deleteButtonClickHandler = async () => {
-    const hasConfirmed = confirm(
-      `Are you sure you want to delete ${group.groupName}?`
-    );
-
-    if (hasConfirmed) {
-      await groupService.remove(groupId);
-
-      navigate(Path.Groups);
-    }
-  };
-
-  const deleteGuestClickHandler = async (userId) => {
-    await guestService.remove(userId);
-    filterGuests(guestId);
+    navigate(Path.Groups);
   };
 
   return (
@@ -162,7 +162,7 @@ export default function GroupDetails({
                 </Link>
                 <button
                   className="button alt small spec"
-                  onClick={deleteButtonClickHandler}
+                  onClick={showDeleteGroupToggler}
                 >
                   Delete Group
                 </button>
@@ -216,13 +216,21 @@ export default function GroupDetails({
           </div>
         </div>
       </section>
-       {/* DeleteGuest Modal */}
-       {showDelete && (
-            <GuestDeleteModal
-              onDelete={deleteGuestClickHandler}
-              {...guestToDelete}
-            />
-          )}
+      {/* DeleteGuest Modal */}
+      {showDelete && (
+        <GuestDeleteModal
+          onDelete={deleteGuestClickHandler}
+          {...guestToDelete}
+        />
+      )}
+      {/* DeleteGroup Modal */}
+      {showGroupDelete && (
+        <GroupDeleteModal
+          onDelete={deleteGroupClickHandler}
+          showDeleteGroupToggler={showDeleteGroupToggler}
+          {...group}
+        />
+      )}
     </>
   );
 }

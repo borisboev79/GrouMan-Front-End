@@ -22,8 +22,11 @@ export default function UserDeleteModal({
       <div className="delete">
         <FontAwesomeIcon icon={faClose} className="close" onClick={close} />
         <h3 className="delete-heading">
-          Are you sure you want to delete user {firstName} {lastName}?
+          Are you sure you want to delete this user?
         </h3>
+        <h5>
+          {firstName} {lastName}
+        </h5>
         {/* Buttons */}
         <div className="12u$ btns">
           <ul className="delete-actions">

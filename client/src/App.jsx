@@ -16,19 +16,19 @@ import Groups from "./components/groups/Groups";
 import GroupDetailWrapper from "./components/guests/GroupDetailWrapper";
 import AddGroup from "./components/add-group/AddGroup";
 import GuestAddForm from "./components/guests/GuestAddForm";
-
 import UserList from "./components/users/UserList";
+
 import AuthGuard from "./guards/AuthGuard";
 import LoginForm from "./components/login/LoginForm";
 import RegisterForm from "./components/register/RegisterForm";
-import UserEditForm from "./components/edit-user/UserEditForm";
-import UserDeleteModal from "./components/delete-user/UserDeleteModal";
-import Logout from "./components/logout/Logout";
 
-import Miscellaneous from "./components/Miscellaneous";
-import Footer from "./components/footer/Footer";
+import UserEditForm from "./components/edit-user/UserEditForm";
 import EditGroup from "./components/edit-group/EditGroup";
 import GuestEditForm from "./components/edit-guest/GuestEditForm";
+
+import Logout from "./components/logout/Logout";
+import Footer from "./components/footer/Footer";
+
 
 
 function App() {
@@ -72,7 +72,6 @@ function App() {
             <Route path={Path.RegisterUser} element={<RegisterForm />} />
             <Route path={Path.Groups} element={<Groups />} />
             <Route path={Path.Home} element={<Banner />} />
-            <Route path="/misc" element={<Miscellaneous />} />
             <Route path={Path.Users} element={<UserList />} />
 
             <Route path={Path.GroupDetails} element={<GroupDetailWrapper />} />
@@ -84,7 +83,6 @@ function App() {
               <Route path={Path.Logout} element={<Logout />} />
               <Route path={Path.AddGuest} element={<GuestAddForm />} />
               <Route path={Path.EditUser} element={<UserEditForm />} />
-              <Route path={Path.DeleteUser} element={<UserDeleteModal />}/>
             </Route>
 
             <Route path={Path.NotFound} element={<NotFound404 />} />

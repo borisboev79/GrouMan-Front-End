@@ -8,8 +8,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import * as groupService from "../../services/groupService";
-import * as dateFormatter from "../../utils/dateUtils";
-
 import GroupCard from "./GroupCard";
 
 export default function Groups() {
@@ -27,7 +25,6 @@ export default function Groups() {
   return (
     <>
       <section className={[styles.three, styles.wrapper].join(" ")}>
-        {/* <div className={[styles.inner, styles.flex, styles.flex3].join(" ")}> */}
           {groups.length !== 0 ? (
             <div
               className={[styles.inner, styles.flex, styles.flex3].join(" ")}

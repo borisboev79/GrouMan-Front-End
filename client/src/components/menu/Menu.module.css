@@ -1,13 +1,4 @@
 .menu {
-    /* -moz-transform: translateX(-20em);
-    -webkit-transform: translateX(-20em);
-    -ms-transform: translateX(-20em);
-    transform: translateX(-20em);
-    -moz-transition: -moz-transform 0.5s ease, visibility 0.5s;
-    -webkit-transition: -webkit-transform 0.5s ease, visibility 0.5s;
-    -ms-transition: -ms-transform 0.5s ease, visibility 0.5s;
-    transition: transform 0.5s ease, visibility 0.5s;
-    -webkit-overflow-scrolling: touch; */
     background: #25a2c3;
     color: #ffffff;
     height: 100%;

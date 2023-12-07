@@ -2,17 +2,18 @@
   overflow-y: hidden;
 } */
 
-.delete-wrapper {
+.group-delete-wrapper {
   background: rgb(128, 128, 128, 0.8);
   position: absolute;
   width: 100vw;
   height: 100vh;
   position: absolute;
   top: 0;
+  left: 0;
   z-index: 10;
 }
 
-.delete {
+.group-delete {
   width: 35vw;
   background: white;
   border: 1px solid darkgrey;
@@ -20,7 +21,7 @@
   padding: 1em 3em 0 3em;
   margin: 0 auto;
   position: relative;
-  top: 20vh;
+  top: -46.6vh;
   z-index: 100;
 }
 
@@ -30,13 +31,19 @@
   padding-top: 10em;
 }
 
+h5 {
+  font-size: 1.1em;
+  width: 100%;
+  text-align: center;
+}
+
 form {
   margin: 0 0 2em 0;
 }
 
-.delete-heading {
+.group-delete-heading {
   font-size: 1.05em;
-  color: #f6755e;
+  color: #f6755e !important;
 }
 
 

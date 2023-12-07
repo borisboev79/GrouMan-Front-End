@@ -1,4 +1,4 @@
-import "./GuestDeleteModal.css";
+import "./GroupDeleteModal.css";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
@@ -8,29 +8,28 @@ import { useContext } from "react";
 
 export default function GuestDeleteModal({
   _id,
-  fullName,
+  groupName,
   onDelete,
+  showDeleteGroupToggler,
 }) {
-
-  const { showDeleteHandler } = useContext(GuestContext);
 
   console.log(_id);
 
   return (
     <div>
       <div
-        className="guest-delete-wrapper"
+        className="group-delete-wrapper"
         onClick={() => {
           showDeleteHandler(), statusToggler();
         }}
       ></div>
 
-      <div className="guest-delete">
-        <FontAwesomeIcon icon={faClose} className="close" onClick={showDeleteHandler} />
-        <h3 className="guest-delete-heading">
-          Are you sure you want to delete this guest?
+      <div className="group-delete">
+        <FontAwesomeIcon icon={faClose} className="close" onClick={showDeleteGroupToggler} />
+        <h3 className="group-delete-heading">
+          Are you sure you want to delete this group?
         </h3>
-        <h5>{fullName}</h5>
+        <h5>{groupName}</h5>
         {/* Buttons */}
         <div className="12u$ btns">
           <ul className="delete-actions">
@@ -38,7 +37,7 @@ export default function GuestDeleteModal({
               <input
                 type="submit"
                 className="del"
-                onClick={() => [onDelete(_id), showDeleteHandler()]}
+                onClick={() => [onDelete(_id), showDeleteGroupToggler()]}
                 value="Delete"
               />
             </li>
@@ -47,7 +46,7 @@ export default function GuestDeleteModal({
                 type="reset"
                 value="Cancel"
                 className="alt"
-                onClick={showDeleteHandler}
+                onClick={showDeleteGroupToggler}
               />
             </li>
           </ul>
