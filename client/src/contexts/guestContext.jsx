@@ -5,6 +5,18 @@ const GuestContext = createContext();
 export const GuestContextProvider = ({ children }) => {
   const [showEdit, setShowEdit] = useState(false);
   const [guestId, setGuestId] = useState("");
+  const [showDelete, setShowDelete] = useState(false);
+
+  const showDeleteHandler = () => {
+    console.log(showDelete);
+    if (showDelete) {
+      setShowDelete(false);
+    } else {
+      setShowDelete(true);
+    }
+  };
+
+  console.log(`after: ${showDelete}`);
 
   const guestIdSetter = (id) => {
     setGuestId(id);
@@ -23,9 +35,14 @@ export const GuestContextProvider = ({ children }) => {
     showGuestEditHandler,
     guestId,
     guestIdSetter,
-  }
 
-  return <GuestContext.Provider value={values}>{children}</GuestContext.Provider>;
+    showDelete,
+    showDeleteHandler,
+  };
+
+  return (
+    <GuestContext.Provider value={values}>{children}</GuestContext.Provider>
+  );
 };
 
 GuestContext.displayName = "GuestContext";

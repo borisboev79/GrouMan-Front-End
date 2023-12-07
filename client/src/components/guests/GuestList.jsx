@@ -1,6 +1,7 @@
 import GuestListItem from "./GuestListItem";
 
 export default function GuestList({guests, filterGuests}) {
+
   return (
   
       <div className="12u">

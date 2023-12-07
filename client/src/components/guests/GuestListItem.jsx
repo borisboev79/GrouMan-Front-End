@@ -22,6 +22,8 @@ export default function GuestListItem({
 }) {
   const { guestIdSetter } = useContext(GuestContext);
   const { showEdit } = useContext(GuestContext);
+
+  const { showDeleteHandler } = useContext(GuestContext);
   const { showGuestEditHandler } = useContext(GuestContext);
   const { isAuthenticated } = useContext(AuthContext);
   const { userId } = useContext(AuthContext);
@@ -50,6 +52,8 @@ export default function GuestListItem({
     }
   };
 
+  
+
   return (
     <>
       <tr>
@@ -61,7 +65,7 @@ export default function GuestListItem({
         <td>{cabin}</td>
 
         {isAuthenticated && userId === _ownerId && (
-          <span>
+          <>
             <td className="modify-buttons">
               <Link
                 className="button small"
@@ -74,13 +78,15 @@ export default function GuestListItem({
               {(!toggleButtons || !showEdit) && (
                 <a
                   className="button alt small"
-                  onClick={deleteButtonClickHandler}
+                  //onClick={deleteButtonClickHandler}
+                  onClick={() => [showDeleteHandler(), guestIdSetter(_id)]}
+                  
                 >
                   Delete
                 </a>
               )}
             </td>
-          </span>
+          </>
         )}
       </tr>
     </>

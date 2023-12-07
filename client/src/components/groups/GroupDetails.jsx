@@ -12,7 +12,7 @@ import GuestList from "../guests/GuestList";
 import Path from "../../paths";
 import AuthContext from "../../contexts/authContext";
 import GuestContext from "../../contexts/guestContext";
-
+import GuestDeleteModal from "../delete-guest/GuestDeleteModal";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -22,7 +22,6 @@ import {
   faCar,
   faBus,
 } from "@fortawesome/free-solid-svg-icons";
-
 
 export default function GroupDetails({
   showForm,
@@ -35,13 +34,19 @@ export default function GroupDetails({
   const { userId } = useContext(AuthContext);
   const { showEdit } = useContext(GuestContext);
 
-  
   const [guests, setGuests] = useState([]);
   const { groupId } = useParams();
 
   const { showGuestEditHandler } = useContext(GuestContext);
 
-  
+  const { guestId } = useContext(GuestContext);
+  const [guestToDelete, setGuestToDelete] = useState({});
+  const { showDelete } = useContext(GuestContext);
+  const { showDeleteHandler } = useContext(GuestContext);
+
+  useEffect(() => {
+    guestService.getOne(guestId).then(setGuestToDelete);
+  }, [guestId]);
 
   useEffect(() => {
     groupService.getOne(groupId).then(setGroup);
@@ -70,6 +75,11 @@ export default function GroupDetails({
 
       navigate(Path.Groups);
     }
+  };
+
+  const deleteGuestClickHandler = async (userId) => {
+    await guestService.remove(userId);
+    filterGuests(guestId);
   };
 
   return (
@@ -188,29 +198,31 @@ export default function GroupDetails({
               </div>
             )}
             {/* Buttons */}
-            {!showEdit && 
-            <div className="12u">
-              {children}
+            {!showEdit && (
+              <div className="12u">
+                {children}
 
-              {showForm && (
-                <GuestAddForm
-                  toggler={showGuestAddHandler}
-                  setState={setGuests}
-                />
-              )}
-            </div>}
-            <div className="12u">
-              {showEdit &&
-                (<GuestEditForm
-                      groupId={groupId}
-                    />
+                {showForm && (
+                  <GuestAddForm
+                    toggler={showGuestAddHandler}
+                    setState={setGuests}
+                  />
                 )}
-                
+              </div>
+            )}
+            <div className="12u">
+              {showEdit && <GuestEditForm groupId={groupId} />}
             </div>
           </div>
         </div>
       </section>
+       {/* DeleteGuest Modal */}
+       {showDelete && (
+            <GuestDeleteModal
+              onDelete={deleteGuestClickHandler}
+              {...guestToDelete}
+            />
+          )}
     </>
   );
-
 }
