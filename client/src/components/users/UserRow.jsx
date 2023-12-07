@@ -1,6 +1,8 @@
 import "./UserRow.css";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { officeDecoder } from "../../utils/officeDecoder";
+import GuestContext from "../../contexts/guestContext";
 
 export default function UserRow({
   _id,
@@ -12,6 +14,9 @@ export default function UserRow({
   showModalHandler,
   setUserId,
 }) {
+
+  const { scrolLockToggler } = useContext(GuestContext);
+
   return (
     <>
       <tr>
@@ -29,7 +34,7 @@ export default function UserRow({
         <td>
           <Link
             className="button alt small"
-            onClick={() => [setUserId(_id), showModalHandler()]}
+            onClick={() => [setUserId(_id), showModalHandler(), scrolLockToggler()]}
           >
             Delete
           </Link>

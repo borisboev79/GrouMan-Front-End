@@ -1,7 +1,9 @@
 import "./UserDeleteModal.css";
+import { useContext } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
+import GuestContext from "../../contexts/guestContext";
 
 export default function UserDeleteModal({
   close,
@@ -10,17 +12,18 @@ export default function UserDeleteModal({
   lastName,
   onDelete,
 }) {
+
+  const { scrolLockToggler } = useContext(GuestContext);
+
   return (
     <div>
       <div
         className="delete-wrapper"
-        onClick={() => {
-          close(), statusToggler();
-        }}
+        onClick={() => [close(), scrolLockToggler()]}
       ></div>
 
       <div className="delete">
-        <FontAwesomeIcon icon={faClose} className="close" onClick={close} />
+        <FontAwesomeIcon icon={faClose} className="close" onClick={() => [close(), scrolLockToggler()]} />
         <h3 className="delete-heading">
           Are you sure you want to delete this user?
         </h3>
@@ -34,7 +37,7 @@ export default function UserDeleteModal({
               <input
                 type="submit"
                 className="del"
-                onClick={() => [onDelete(_id), close()]}
+                onClick={() => [onDelete(_id), close(), scrolLockToggler()]}
                 value="Delete"
               />
             </li>
@@ -43,7 +46,7 @@ export default function UserDeleteModal({
                 type="reset"
                 value="Cancel"
                 className="alt"
-                onClick={close}
+                onClick={() => [close(), scrolLockToggler()]}
               />
             </li>
           </ul>
