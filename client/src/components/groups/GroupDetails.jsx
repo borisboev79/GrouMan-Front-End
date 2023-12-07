@@ -84,6 +84,21 @@ export default function GroupDetails({
 
   return (
     <>
+     {/* DeleteGuest Modal */}
+     {showDelete && (
+        <GuestDeleteModal
+          onDelete={deleteGuestClickHandler}
+          {...guestToDelete}
+        />
+      )}
+      {/* DeleteGroup Modal */}
+      {showGroupDelete && (
+        <GroupDeleteModal
+          onDelete={deleteGroupClickHandler}
+          showDeleteGroupToggler={showDeleteGroupToggler}
+          {...group}
+        />
+      )}
       <section id="main" className="wrapper">
         <div className="inner">
           <div className="12u">
@@ -216,21 +231,7 @@ export default function GroupDetails({
           </div>
         </div>
       </section>
-      {/* DeleteGuest Modal */}
-      {showDelete && (
-        <GuestDeleteModal
-          onDelete={deleteGuestClickHandler}
-          {...guestToDelete}
-        />
-      )}
-      {/* DeleteGroup Modal */}
-      {showGroupDelete && (
-        <GroupDeleteModal
-          onDelete={deleteGroupClickHandler}
-          showDeleteGroupToggler={showDeleteGroupToggler}
-          {...group}
-        />
-      )}
+     
     </>
   );
 }
