@@ -218,14 +218,6 @@ form {
     margin-top: 0;
   }
 
-  .conflictMessage {
-    width: 100%;
-    color: red;
-    font-size: 1.1em;
-    text-align: center;
-  
-  }
-
   .redalert {
     color: red !important;
     border: solid 2px red !important;

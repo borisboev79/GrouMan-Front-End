@@ -2,27 +2,14 @@ import "./UserDeleteModal.css";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
-import * as userService from "../../services/userService";
 
 export default function UserDeleteModal({
   close,
   _id,
   firstName,
   lastName,
-  filterUsers,
+  onDelete,
 }) {
-  const deleteButtonClickHandler = async () => {
-    try {
-      await userService.remove(_id);
-
-      filterUsers(_id);
-
-      close();
-    } catch {
-      (error) => console.error("Error deleting user => ", error.message);
-    }
-  };
-
   return (
     <div>
       <div
@@ -43,7 +30,7 @@ export default function UserDeleteModal({
             <li>
               <input
                 type="submit"
-                onClick={deleteButtonClickHandler}
+                onClick={() => [onDelete(_id), close()]}
                 value="Delete"
               />
             </li>

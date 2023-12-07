@@ -21,7 +21,8 @@ import UserList from "./components/users/UserList";
 import AuthGuard from "./guards/AuthGuard";
 import LoginForm from "./components/login/LoginForm";
 import RegisterForm from "./components/register/RegisterForm";
-import UserDeleteModal from "./components/user-edit/UserDeleteModal";
+import UserEditForm from "./components/edit-user/UserEditForm";
+import UserDeleteModal from "./components/delete-user/UserDeleteModal";
 import Logout from "./components/logout/Logout";
 
 import Miscellaneous from "./components/Miscellaneous";
@@ -82,6 +83,7 @@ function App() {
               <Route path={Path.EditGroup} element={<EditGroup />} />
               <Route path={Path.Logout} element={<Logout />} />
               <Route path={Path.AddGuest} element={<GuestAddForm />} />
+              <Route path={Path.EditUser} element={<UserEditForm />} />
               <Route path={Path.DeleteUser} element={<UserDeleteModal />}/>
             </Route>
 

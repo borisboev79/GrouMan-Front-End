@@ -39,6 +39,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const registerSubmitHandler = async (values) => {
+    try {
     const result = await authService.register(
       values.firstName,
       values.lastName,
@@ -52,7 +53,11 @@ export const AuthProvider = ({ children }) => {
 
     localStorage.setItem("accessToken", result.accessToken);
 
-    navigate(Path.Home);
+    navigate(Path.Home);} catch (error) {
+      setStatus(error.message);
+      console.error("Register user failed: ", error.message);
+     
+    }
   };
 
   const localRegister = async (values) => {

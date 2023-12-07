@@ -1,6 +1,7 @@
-import { useNavigate } from "react-router-dom";
-import styles from "./RegisterForm.module.css";
+import styles from "./UserEditForm.module.css";
 import { useEffect, useRef, useContext } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+
 import { useForm } from "../../hooks/useForm";
 import AuthContext from "../../contexts/authContext";
 import { useValidation } from "../../hooks/useValidation";
@@ -16,24 +17,22 @@ const RegisterFormKeys = {
 };
 
 const validationKeys = {
-    firstName: "",
-    lastName: "",
-    email: "",
-    username: "",
-    password: "",
-    confirmPassword: "",
-    office: "",
-  }
+  firstName: "",
+  lastName: "",
+  email: "",
+  username: "",
+  password: "",
+  confirmPassword: "",
+  office: "",
+};
 
-
-export default function RegisterForm() {
+export default function UserEditForm() {
+  const { userId } = useParams();
   const { registerSubmitHandler } = useContext(AuthContext);
   const { localRegister } = useContext(AuthContext);
-  const { status } = useContext(AuthContext);
-  const { statusToggler } = useContext(AuthContext);
-
- const userNameInputRef = useRef();
+  const userNameInputRef = useRef();
   const isMountedRef = useRef(false);
+  const navigate = useNavigate();
 
   const { formValues, changeHandler, onSubmit, resetFormHandler } = useForm(
     registerSubmitHandler,
@@ -49,7 +48,16 @@ export default function RegisterForm() {
     }
   );
 
-  const { validationValues, validate, buttonToggle, setValidationValues, } = useValidation(validationKeys);
+  const { validationValues, validate, buttonToggle, setValidationValues } =
+    useValidation(validationKeys);
+
+  const onCancelClick = () => {
+    //resetFormHandler();
+    navigate(-1);
+    setValidationValues(validationKeys);
+
+  };
+
 
   useEffect(() => {
     userNameInputRef.current.focus();
@@ -62,15 +70,11 @@ export default function RegisterForm() {
     }
   }, [formValues]);
 
-  const onResetClick = () => {
-    resetFormHandler();
-    setValidationValues(validationKeys);
-  }
 
- 
+
   return (
     <div className={styles.registerForm}>
-      <h3>Register New User</h3>
+      <h3>Modify User Details</h3>
       <form onSubmit={onSubmit}>
         <div className="row uniform">
           {/* First name */}
@@ -144,7 +148,9 @@ export default function RegisterForm() {
               id="email"
               value={formValues[RegisterFormKeys.Email]}
               onChange={changeHandler}
-              onBlur={() => validate("email", formValues[RegisterFormKeys.Email])}
+              onBlur={() =>
+                validate("email", formValues[RegisterFormKeys.Email])
+              }
               className={validationValues.email && styles.redalert}
               placeholder="Email"
             />
@@ -231,7 +237,11 @@ export default function RegisterForm() {
               value={formValues[RegisterFormKeys.ConfirmPassword]}
               onChange={changeHandler}
               onBlur={() =>
-                validate("confirmPassword", formValues[RegisterFormKeys.Password], formValues[RegisterFormKeys.ConfirmPassword])
+                validate(
+                  "confirmPassword",
+                  formValues[RegisterFormKeys.Password],
+                  formValues[RegisterFormKeys.ConfirmPassword]
+                )
               }
               className={validationValues.confirmPassword && styles.redalert}
               placeholder="Confirm Password"
@@ -266,39 +276,31 @@ export default function RegisterForm() {
                 }
                 className={validationValues.office && styles.redalert}
               >
-                      
                 <option value={"default"}>- Select office -</option>
                 <option value={"SOFR"}>Sofia Central</option>
                 <option value={"MOS"}>Mall of Sofia</option>
                 <option value={"PDV"}>Plovdiv</option>
               </select>
               {validationValues.office && (
-              <p className={styles.errorMessage}>
-                {[validationValues.office]}
-              </p>
-            )}
+                <p className={styles.errorMessage}>
+                  {[validationValues.office]}
+                </p>
+              )}
             </div>
           </div>
-          {status !== "" && (
-          <p className={styles.conflictMessage}>{status}!</p>
-        )}
-          {/* Buttons */}
+
+          {/* Break */}
           <div className="12u$">
             <ul className="actions">
               <li>
-                <input
-                  disabled={ buttonToggle }
-                  type="submit"
-                  value="Register"
-                  onClick={statusToggler}
-                />
+                <input disabled={buttonToggle} type="submit" value="Save Changes" />
               </li>
               <li>
                 <input
-                  type="reset"
-                  value="Reset"
+                  type="button"
+                  value="Cancel"
                   className="alt"
-                  onClick={() => [onResetClick(), statusToggler()]}
+                  onClick={onCancelClick}
                 />
               </li>
             </ul>

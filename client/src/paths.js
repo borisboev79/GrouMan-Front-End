@@ -7,12 +7,14 @@ const Path  = {
     GroupDetails: '/groups/:groupId',
     MyGroups: 'groups/:userId',
     RegisterUser: '/users/register',
+    EditUser: '/users/edit/:userId',
+    DeleteUser: '/users/delete/:userId',
     Users: '/users',
     Login: '/users/login',
     Logout: '/logout',
     AddGuest: '/guests/add/:groupId',
     EditGuest: '/:groupId/:guestId/edit',
-    DeleteUser: '/users/delete/:userId',
+   
     NotFound: '*',
 
 };

@@ -3,14 +3,14 @@ import { useState, useEffect } from "react";
 import * as userService from "../../services/userService";
 import * as authService from "../../services/authService";
 import UserRow from "./UserRow";
-import UserDeleteModal from "../user-edit/UserDeleteModal";
+import UserDeleteModal from "../delete-user/UserDeleteModal";
 
 export default function UserList() {
   const [users, setUsers] = useState([]);
   const [loggedUser, setLoggedUser] = useState({});
   const [userId, setUserId] = useState("");
 
-  const getOneHanler = () => {
+  const getOneHandler = () => {
     if (Object.keys(loggedUser).length === 0) {
       authService.getMe().then((result) => setLoggedUser(result));
 
@@ -52,13 +52,22 @@ export default function UserList() {
     setUsers((state) => state.filter((u) => u._id !== userId));
   };
 
+  const deleteButtonClickHandler = async (id) => {
+    try {
+      await userService.remove(id);
+      filterUsers(id);
+    } catch {
+      (error) => console.error("Error deleting user => ", error.message);
+    }
+  };
+
   return (
     <>
       {showModal && (
         <UserDeleteModal
-          userId={user._id}
+        //  userId={user._id}
           close={closeModalHandler}
-          filterUsers={filterUsers}
+          onDelete={deleteButtonClickHandler}
           {...user}
         />
       )}
@@ -132,7 +141,7 @@ export default function UserList() {
                 <td>{loggedUser.office}</td>
 
                 <td>
-                  <a className="button small" onClick={getOneHanler}>
+                  <a className="button small" onClick={getOneHandler}>
                     {Object.keys(loggedUser).length === 0 ? "Show" : "Hide"}
                   </a>
                 </td>

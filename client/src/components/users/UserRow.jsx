@@ -22,7 +22,7 @@ export default function UserRow({
         <td>{username}</td>
         <td>{officeDecoder(office)}</td>
         <td>
-          <Link className="button small" value="Edit">
+          <Link className="button small" to={`/users/edit/${_id}`} value="Edit">
             Edit
           </Link>
         </td>
