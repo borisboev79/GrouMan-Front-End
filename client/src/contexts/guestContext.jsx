@@ -8,15 +8,13 @@ export const GuestContextProvider = ({ children }) => {
   const [showDelete, setShowDelete] = useState(false);
 
   const showDeleteHandler = () => {
-    console.log(showDelete);
+    
     if (showDelete) {
       setShowDelete(false);
     } else {
       setShowDelete(true);
     }
   };
-
-  console.log(`after: ${showDelete}`);
 
   const guestIdSetter = (id) => {
     setGuestId(id);

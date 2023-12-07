@@ -14,8 +14,6 @@ export default function GuestDeleteModal({
 
   const { showDeleteHandler } = useContext(GuestContext);
 
-  console.log(_id);
-
   return (
     <div>
       <div

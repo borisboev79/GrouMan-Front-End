@@ -14,7 +14,7 @@ export default function Menu({ toggle }) {
   return (
     <div className={styles.overlay} onClick={toggle}>
       <nav className={styles.menu}>
-        <FontAwesomeIcon as a 
+        <FontAwesomeIcon  
         icon={faClose}
           className={styles.close}
           onClick={toggle}

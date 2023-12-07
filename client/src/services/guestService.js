@@ -3,41 +3,64 @@ import * as request from "../lib/request";
 const baseUrl = "http://localhost:3030/data/guests";
 
 export const getAllGuests = async () => {
+  try {
+    const result = await request.get(baseUrl);
 
-  // const query = new URLSearchParams({
-  //   where: `groupId="${groupId}"`,
-  //   load: `owner=_ownerId:users`,
-  // })
+    return result;
 
-  const result = await request.get(baseUrl);
-
-  return result;
-
+  } catch (error) {
+    console.error("Userlist fetching error: ", error.message);
+  }
 };
 
-export const add = async (fullName, email, egn, phone, birthDate, cabin, groupId) => {
+export const add = async (
+  fullName,
+  email,
+  egn,
+  phone,
+  birthDate,
+  cabin,
+  groupId
+) => {
   const result = await request.post(baseUrl, {
-    fullName, email, egn, phone, birthDate, cabin, groupId,
+    fullName,
+    email,
+    egn,
+    phone,
+    birthDate,
+    cabin,
+    groupId,
   });
 
   return result;
 };
 
 export const getOne = async (guestId) => {
-  const result = await request.get(`${baseUrl}/${guestId}`, );
- 
+  try {
+  const result = await request.get(`${baseUrl}/${guestId}`);
 
   return result;
-}
+  } catch(error){
+    console.error("Cannot get guest because: ", error.message);
+  }
+};
 
 export const edit = async (guestId, guestData) => {
+  try{
   const result = await request.put(`${baseUrl}/${guestId}`, guestData);
 
   console.log("guest edited");
 
   return result;
+  } catch(error){
+    console.error("Guest Edit Unsuccessful Because: ", error.message);
+  }
 };
 
 export const remove = async (guestId) => {
-  const result = await request.remove(`${baseUrl}/${guestId}`, );
-}
+  try{
+  const result = await request.remove(`${baseUrl}/${guestId}`);
+  } catch(error){
+    console.error("Couldn't delete guest: ", error.message);
+  }
+};

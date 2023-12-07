@@ -44,7 +44,7 @@ export default function LoginForm({ close }) {
         <div className="12u">
           <input
             type="email"
-            className={status !== "" && "red"}
+            className={status !== "" ? "red" : undefined}
             name={LoginFormKeys.Email}
             id="email"
             value={values[LoginFormKeys.Email]}
@@ -67,7 +67,7 @@ export default function LoginForm({ close }) {
           <label htmlFor="password">Password:</label>
           <input
             type="password"
-            className={status !== "" && "red"}
+            className={status !== "" ? "red" : undefined}
             name={LoginFormKeys.Password}
             id="password"
             value={values[LoginFormKeys.Password]}

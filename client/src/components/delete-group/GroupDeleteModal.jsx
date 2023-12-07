@@ -13,8 +13,6 @@ export default function GuestDeleteModal({
   showDeleteGroupToggler,
 }) {
 
-  console.log(_id);
-
   return (
     <div>
       <div
