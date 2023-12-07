@@ -16,15 +16,14 @@ const RegisterFormKeys = {
 };
 
 const validationKeys = {
-    firstName: "",
-    lastName: "",
-    email: "",
-    username: "",
-    password: "",
-    confirmPassword: "",
-    office: "",
-  }
-
+  firstName: "",
+  lastName: "",
+  email: "",
+  username: "",
+  password: "",
+  confirmPassword: "",
+  office: "",
+};
 
 export default function RegisterForm() {
   const { registerSubmitHandler } = useContext(AuthContext);
@@ -32,7 +31,8 @@ export default function RegisterForm() {
   const { status } = useContext(AuthContext);
   const { statusToggler } = useContext(AuthContext);
 
- const userNameInputRef = useRef();
+  const userNameInputRef = useRef();
+  const emailInputRef = useRef();
   const isMountedRef = useRef(false);
 
   const { formValues, changeHandler, onSubmit, resetFormHandler } = useForm(
@@ -49,7 +49,8 @@ export default function RegisterForm() {
     }
   );
 
-  const { validationValues, validate, buttonToggle, setValidationValues, } = useValidation(validationKeys);
+  const { validationValues, validate, buttonToggle, setValidationValues } =
+    useValidation(validationKeys);
 
   useEffect(() => {
     userNameInputRef.current.focus();
@@ -65,9 +66,15 @@ export default function RegisterForm() {
   const onResetClick = () => {
     resetFormHandler();
     setValidationValues(validationKeys);
-  }
+  };
 
- 
+  const statusChecker = () => {
+    if (status !== "") {
+   
+      emailInputRef.current.focus();
+    }
+  };
+
   return (
     <div className={styles.registerForm}>
       <h3>Register New User</h3>
@@ -139,12 +146,15 @@ export default function RegisterForm() {
           <div className="12u 12u$(xsmall)">
             <label htmlFor="email">User email:</label>
             <input
+              ref={emailInputRef}
               type="email"
               name="email"
               id="email"
               value={formValues[RegisterFormKeys.Email]}
               onChange={changeHandler}
-              onBlur={() => validate("email", formValues[RegisterFormKeys.Email])}
+              onBlur={() =>
+                validate("email", formValues[RegisterFormKeys.Email])
+              }
               className={validationValues.email && styles.redalert}
               placeholder="Email"
             />
@@ -231,7 +241,11 @@ export default function RegisterForm() {
               value={formValues[RegisterFormKeys.ConfirmPassword]}
               onChange={changeHandler}
               onBlur={() =>
-                validate("confirmPassword", formValues[RegisterFormKeys.Password], formValues[RegisterFormKeys.ConfirmPassword])
+                validate(
+                  "confirmPassword",
+                  formValues[RegisterFormKeys.Password],
+                  formValues[RegisterFormKeys.ConfirmPassword]
+                )
               }
               className={validationValues.confirmPassword && styles.redalert}
               placeholder="Confirm Password"
@@ -266,31 +280,28 @@ export default function RegisterForm() {
                 }
                 className={validationValues.office && styles.redalert}
               >
-                      
                 <option value={"default"}>- Select office -</option>
                 <option value={"SOFR"}>Sofia Central</option>
                 <option value={"MOS"}>Mall of Sofia</option>
                 <option value={"PDV"}>Plovdiv</option>
               </select>
               {validationValues.office && (
-              <p className={styles.errorMessage}>
-                {[validationValues.office]}
-              </p>
-            )}
+                <p className={styles.errorMessage}>
+                  {[validationValues.office]}
+                </p>
+              )}
             </div>
           </div>
-          {status !== "" && (
-          <p className={styles.conflictMessage}>{status}!</p>
-        )}
+          {status !== "" && <p className={styles.conflictMessage}>{status}!</p>}
           {/* Buttons */}
           <div className="12u$">
             <ul className="actions">
               <li>
                 <input
-                  disabled={ buttonToggle }
+                  disabled={buttonToggle}
                   type="submit"
                   value="Register"
-                  onClick={statusToggler}
+                  onClick={() => [statusChecker(), statusToggler()]}
                 />
               </li>
               <li>

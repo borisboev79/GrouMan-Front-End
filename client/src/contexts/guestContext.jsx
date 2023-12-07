@@ -58,8 +58,6 @@ export const GuestContextProvider = ({ children }) => {
       }else{
         setScrollLocked(true);
       }
-
-      console.log(scrollLocked);
     };
 
 
