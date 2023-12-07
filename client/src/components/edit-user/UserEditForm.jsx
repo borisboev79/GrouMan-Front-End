@@ -1,20 +1,9 @@
 import styles from "./UserEditForm.module.css";
-import { useEffect, useRef, useContext } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-import { useForm } from "../../hooks/useForm";
-import AuthContext from "../../contexts/authContext";
+import * as userService from "../../services/userService";
 import { useValidation } from "../../hooks/useValidation";
-
-const RegisterFormKeys = {
-  FirstName: "firstName",
-  LastName: "lastName",
-  Email: "email",
-  Username: "username",
-  Password: "password",
-  ConfirmPassword: "confirmPassword",
-  Office: "office",
-};
 
 const validationKeys = {
   firstName: "",
@@ -28,36 +17,71 @@ const validationKeys = {
 
 export default function UserEditForm() {
   const { userId } = useParams();
-  const { registerSubmitHandler } = useContext(AuthContext);
-  const { localRegister } = useContext(AuthContext);
   const userNameInputRef = useRef();
   const isMountedRef = useRef(false);
   const navigate = useNavigate();
 
-  const { formValues, changeHandler, onSubmit, resetFormHandler } = useForm(
-    registerSubmitHandler,
-    localRegister,
-    {
-      [RegisterFormKeys.FirstName]: "",
-      [RegisterFormKeys.LastName]: "",
-      [RegisterFormKeys.Email]: "",
-      [RegisterFormKeys.Username]: "",
-      [RegisterFormKeys.Password]: "",
-      [RegisterFormKeys.ConfirmPassword]: "",
-      [RegisterFormKeys.Office]: "",
-    }
-  );
-
   const { validationValues, validate, buttonToggle, setValidationValues } =
     useValidation(validationKeys);
 
-  const onCancelClick = () => {
-    //resetFormHandler();
-    navigate(-1);
-    setValidationValues(validationKeys);
+  const [user, setUser] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    username: "",
+    password: "",
+    confirmPassword: "",
+    office: "",
+  });
 
+  useEffect(() => {
+    userService.getOne(userId).then((result) => {
+      setUser(({...result, confirmPassword: result.password}));
+    });
+  }, [userId]);
+
+  const changeHandler = (e) => {
+    let value = "";
+
+    switch (e.target.type) {
+      case "number":
+        value = Number(e.target.value);
+        break;
+      case "checkbox":
+        value = e.target.checked;
+        break;
+      default:
+        value = e.target.value;
+        break;
+    }
+
+    setUser((state) => ({
+      ...state,
+      [e.target.name]: value,
+    }));
   };
 
+  const editSubmitHandler = async (e) => {
+    e.preventDefault();
+
+    const userData = Object.fromEntries(new FormData(e.currentTarget));
+
+    try {
+      
+      const _id = userId;
+  
+      await userService.edit(userId, {...userData, _id});
+
+      navigate(-1);
+    } catch (error) {
+      console.error("Error editing user =>", error.message);
+    }
+  };
+
+  const onCancelClick = () => { 
+    navigate(-1);
+    setValidationValues(validationKeys);
+  };
 
   useEffect(() => {
     userNameInputRef.current.focus();
@@ -68,14 +92,12 @@ export default function UserEditForm() {
       isMountedRef.current = true;
       return;
     }
-  }, [formValues]);
-
-
+  }, [user]);
 
   return (
     <div className={styles.registerForm}>
       <h3>Modify User Details</h3>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={editSubmitHandler}>
         <div className="row uniform">
           {/* First name */}
           <div className="12u 12u$(xsmall)">
@@ -85,10 +107,10 @@ export default function UserEditForm() {
               type="text"
               name="firstName"
               id="firstName"
-              value={formValues[RegisterFormKeys.FirstName]}
+              value={user.firstName}
               onChange={changeHandler}
               onBlur={() =>
-                validate("firstName", formValues[RegisterFormKeys.FirstName])
+                validate("firstName", user.firstName)
               }
               className={validationValues.firstName && styles.redalert}
               placeholder="First name"
@@ -115,10 +137,10 @@ export default function UserEditForm() {
               type="text"
               name="lastName"
               id="lastName"
-              value={formValues[RegisterFormKeys.LastName]}
+              value={user.lastName}
               onChange={changeHandler}
               onBlur={() =>
-                validate("lastName", formValues[RegisterFormKeys.LastName])
+                validate("lastName", user.lastName)
               }
               className={validationValues.lastName && styles.redalert}
               placeholder="Last name"
@@ -146,10 +168,10 @@ export default function UserEditForm() {
               type="email"
               name="email"
               id="email"
-              value={formValues[RegisterFormKeys.Email]}
+              value={user.email}
               onChange={changeHandler}
               onBlur={() =>
-                validate("email", formValues[RegisterFormKeys.Email])
+                validate("email", user.email)
               }
               className={validationValues.email && styles.redalert}
               placeholder="Email"
@@ -174,10 +196,10 @@ export default function UserEditForm() {
               type="text"
               name="username"
               id="username"
-              value={formValues[RegisterFormKeys.Username]}
+              value={user.username}
               onChange={changeHandler}
               onBlur={() =>
-                validate("username", formValues[RegisterFormKeys.Username])
+                validate("username", user.username)
               }
               className={validationValues.username && styles.redalert}
               placeholder="Username"
@@ -204,10 +226,10 @@ export default function UserEditForm() {
               type="password"
               name="password"
               id="password"
-              value={formValues[RegisterFormKeys.Password]}
+              value={user.password}
               onChange={changeHandler}
               onBlur={() =>
-                validate("password", formValues[RegisterFormKeys.Password])
+                validate("password", user.password)
               }
               className={validationValues.password && styles.redalert}
               placeholder="Password"
@@ -234,13 +256,13 @@ export default function UserEditForm() {
               type="password"
               name="confirmPassword"
               id="confirmPassword"
-              value={formValues[RegisterFormKeys.ConfirmPassword]}
+              value={user.confirmPassword}
               onChange={changeHandler}
               onBlur={() =>
                 validate(
                   "confirmPassword",
-                  formValues[RegisterFormKeys.Password],
-                  formValues[RegisterFormKeys.ConfirmPassword]
+                  user.password,
+                  user.confirmPassword
                 )
               }
               className={validationValues.confirmPassword && styles.redalert}
@@ -269,10 +291,10 @@ export default function UserEditForm() {
               <select
                 name="office"
                 id="office"
-                value={formValues[RegisterFormKeys.Office]}
+                value={user.office}
                 onChange={changeHandler}
                 onBlur={() =>
-                  validate("office", formValues[RegisterFormKeys.Office])
+                  validate("office", user.office)
                 }
                 className={validationValues.office && styles.redalert}
               >
@@ -293,7 +315,11 @@ export default function UserEditForm() {
           <div className="12u$">
             <ul className="actions">
               <li>
-                <input disabled={buttonToggle} type="submit" value="Save Changes" />
+                <input
+                  disabled={buttonToggle}
+                  type="submit"
+                  value="Save Changes"
+                />
               </li>
               <li>
                 <input

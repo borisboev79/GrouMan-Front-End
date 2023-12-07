@@ -1,0 +1,21 @@
+{
+  "35c62d76-8152-4626-8712-eeb96381bea8": {
+    "firstName": "Peter",
+    "lastName": "Ivanov",
+    "email": "peter@abv.bg",
+    "username": "Peter",
+    "password": "123456",
+    "office": "SOFR",
+    "_id": "35c62d76-8152-4626-8712-eeb96381bea8"
+  },
+
+  "847ec027-f659-4086-8032-5173e2f9c93a": {
+    "firstName": "Boris",
+    "lastName": "Boev",
+    "email": "boris.boev@crusit.bg",
+    "username": "boboev",
+    "password": "123456",
+    "office": "HO",
+    "_id": "847ec027-f659-4086-8032-5173e2f9c93a"
+  }
+}
