@@ -49,7 +49,7 @@ function App() {
 
   const closeLoginHandler = () => {
     setShowLogin(false);
-    navigate("/home");
+    navigate(Path.Home);
   };
 
   return (
@@ -67,25 +67,25 @@ function App() {
                 element={<LoginForm close={closeLoginHandler} />}
               />
             )}
-            <Route path="/" element={<Banner />} />
-            <Route path="/users/register" element={<RegisterForm />} />
+            <Route path={Path.Index} element={<Banner />} />
+            <Route path={Path.RegisterUser} element={<RegisterForm />} />
             <Route path={Path.Groups} element={<Groups />} />
-            <Route path="/home" element={<Banner />} />
-            <Route path="/misc" element={<Miscellaneous />} />
-            <Route path="/users" element={<UserList />} />
+            <Route path={Path.Home} element={<Banner />} />
+            {/* <Route path="/misc" element={<Miscellaneous />} /> */}
+            <Route path={Path.Users} element={<UserList />} />
 
             <Route path={Path.GroupDetails} element={<GroupDetailWrapper />} />
 
             <Route element={<AuthGuard />}>
               <Route path={Path.EditGuest} element={<GuestEditForm />} />
-              <Route path="/groups/add" element={<AddGroup />} />
+              <Route path={Path.AddGroup} element={<AddGroup />} />
               <Route path={Path.EditGroup} element={<EditGroup />} />
               <Route path={Path.Logout} element={<Logout />} />
               <Route path={Path.AddGuest} element={<GuestAddForm />} />
               <Route path={Path.DeleteUser} element={<UserDeleteModal />}/>
             </Route>
 
-            <Route path="*" element={<NotFound404 />} />
+            <Route path={Path.NotFound} element={<NotFound404 />} />
           </Routes>
 
           <One />

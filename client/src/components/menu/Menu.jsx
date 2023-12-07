@@ -3,21 +3,13 @@ import { Link } from "react-router-dom";
 import AuthContext from "../../contexts/authContext";
 import { useContext } from "react";
 import Path from "../../paths";
-import * as groupService from "../../services/groupService";
+
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faClose} from "@fortawesome/free-solid-svg-icons";
 
 export default function Menu({ toggle }) {
   const { isAuthenticated, username, userId } = useContext(AuthContext);
-
-  // const onClickHandler = (e) => {
-  //   e.preventDefault();
-
-  //   const result = groupService.getMyGroups(userId);
-
-  //   return result;
-  // };
 
   return (
     <div className={styles.overlay} onClick={toggle}>
@@ -28,7 +20,7 @@ export default function Menu({ toggle }) {
           onClick={toggle}
           style={{ color: "white" }}
         />
-        {/* <FontAwesomeIcon icon={faClose} /> */}
+      
         <ul className={styles.links}>
           <li>
             <Link to="/home">Home</Link>
@@ -36,9 +28,9 @@ export default function Menu({ toggle }) {
           <li>
             <Link to={Path.Groups}>Groups</Link>
           </li>
-          <li>
+          {/* <li>
             <Link to="/misc">Element library</Link>
-          </li>
+          </li> */}
 
           <li>{isAuthenticated && <Link to="/groups/add">Add Group</Link>}</li>
           <li>
