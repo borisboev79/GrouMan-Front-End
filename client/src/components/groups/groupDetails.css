@@ -479,8 +479,8 @@ button.alt,
   color: #727a82 !important;
 }
 
-button.alt.delete:hover,
-.button.alt.delete:hover {
+button.alt.spec:hover,
+.button.alt.spec:hover {
   background: rgb(223, 113, 113) !important;
 }
 

@@ -71,7 +71,7 @@ function App() {
             <Route path={Path.RegisterUser} element={<RegisterForm />} />
             <Route path={Path.Groups} element={<Groups />} />
             <Route path={Path.Home} element={<Banner />} />
-            {/* <Route path="/misc" element={<Miscellaneous />} /> */}
+            <Route path="/misc" element={<Miscellaneous />} />
             <Route path={Path.Users} element={<UserList />} />
 
             <Route path={Path.GroupDetails} element={<GroupDetailWrapper />} />
