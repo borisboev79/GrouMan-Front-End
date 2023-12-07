@@ -30,6 +30,7 @@ export default function UserDeleteModal({
             <li>
               <input
                 type="submit"
+                className="del"
                 onClick={() => [onDelete(_id), close()]}
                 value="Delete"
               />

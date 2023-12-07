@@ -1,3 +1,7 @@
+body {
+  overflow-y: hidden;
+}
+
 .delete-wrapper {
   background: rgb(128, 128, 128, 0.8);
   position: absolute;
@@ -29,6 +33,22 @@
 form {
   margin: 0 0 2em 0;
 }
+
+.delete-heading {
+  font-size: 1.05em;
+  color: #f6755e;
+}
+
+
+input[type="submit"].del {
+  background:  #f6755e;
+}
+
+input[type="submit"].del:hover {
+  background:  #a14d3e;
+}
+
+
 
 label {
   color: #727a82;
