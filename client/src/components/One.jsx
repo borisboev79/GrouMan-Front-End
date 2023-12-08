@@ -1,4 +1,5 @@
 import styles from "./One.module.css";
+import picture from "/src/assets/crusit-pad.jpg" 
 
 export default function One() {
   return (
@@ -23,8 +24,8 @@ export default function One() {
           ].join(" ")}
         >
           <img
-            src="\src\assets\crusit-pad.jpg"
-            alt=""
+            src={picture}
+            alt="crusit-pad"
             width={330}
             height={330}
           />
