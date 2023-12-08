@@ -35,6 +35,9 @@ export default function GroupDetails({
   const { userId } = useContext(AuthContext);
   const { groupId } = useParams();
   const [showGroupDelete, setShowGroupDelete] = useState(false);
+  const [groupOwner, setOwner] = useState({});
+
+
 
   const showDeleteGroupToggler = () => {
     if (showGroupDelete) {
@@ -72,6 +75,13 @@ export default function GroupDetails({
     groupService.getOne(groupId).then(setGroup);
   }, [groupId]);
 
+
+  useEffect(() => {
+    if(group.owner !== undefined){
+       setOwner(group.owner);
+    } 
+  }, [group]);
+
   useEffect(() => {
     guestService.getAllGuests().then((result) => {
       const filtered = result.filter((guest) => guest.groupId === groupId);
@@ -107,7 +117,7 @@ export default function GroupDetails({
                   width={500}
                   height={350}
                 />
-                <p className="author">Group created by: {group._ownerId}</p>
+                <p className="author">Group created by: <b>{groupOwner.username}</b></p>
               </div>
               <ul className="alt">
                 <li>

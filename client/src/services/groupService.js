@@ -3,28 +3,18 @@ import * as request from "../lib/request";
 const baseUrl = "http://localhost:3030/data/groups";
 
 export const getAllGroups = async () => {
+  const query = new URLSearchParams({
+    load: `owner=_ownerId:users`, 
+  });
+
   try {
-    const result = await request.get(baseUrl);
+    const result = await request.get(`${baseUrl}?${query}`);
 
     return result;
   } catch (error) {
     console.error("Couldn't get group list: ", error.message);
   }
 };
-
-// TESTING SOMETHING HERE: -->
-export const getMyGroups = async (userId) => {
-  const query = new URLSearchParams({
-    where: `_ownerId="${userId}"`,
-    load: `owner="_ownerId:users"`,
-  });
-
-  const result = await request.get(`${baseUrl}?${query}`);
-
-  return result;
-};
-
-// ---> END OF TESTING
 
 export const add = async (groupData) => {
   try {
@@ -37,8 +27,12 @@ export const add = async (groupData) => {
 };
 
 export const getOne = async (groupId) => {
+  const query = new URLSearchParams({
+    load: `owner=_ownerId:users`, 
+  });
+
   try {
-    const result = await request.get(`${baseUrl}/${groupId}`);
+    const result = await request.get(`${baseUrl}/${groupId}?${query}`);
 
     return result;
   } catch (error) {
