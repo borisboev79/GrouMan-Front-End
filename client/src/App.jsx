@@ -1,7 +1,7 @@
 import "./App.css";
 
 import { Routes, Route, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, lazy, Suspense } from "react";
 import { AuthProvider } from "./contexts/authContext";
 import { GuestContextProvider } from "./contexts/guestContext";
 
@@ -16,7 +16,7 @@ import Groups from "./components/groups/Groups";
 import GroupDetailWrapper from "./components/guests/GroupDetailWrapper";
 import AddGroup from "./components/add-group/AddGroup";
 import GuestAddForm from "./components/guests/GuestAddForm";
-import UserList from "./components/users/UserList";
+const Users = lazy(() => import("./components/users/UserList"));
 
 import AuthGuard from "./guards/AuthGuard";
 import LoginForm from "./components/login/LoginForm";
@@ -28,8 +28,6 @@ import GuestEditForm from "./components/edit-guest/GuestEditForm";
 
 import Logout from "./components/logout/Logout";
 import Footer from "./components/footer/Footer";
-
-
 
 function App() {
   const [showMenu, setShowMenu] = useState(false);
@@ -54,47 +52,48 @@ function App() {
   };
 
   return (
-  
-      <AuthProvider>
-          <GuestContextProvider>
+    <AuthProvider>
+      <GuestContextProvider>
         <div>
           <Navbar toggle={showMenuHandler} showLogin={showLoginHandler} />
           {showMenu && <Menu toggle={closeMenuHandler} />}
+          <Suspense fallback={<h1>Users are loading...</h1>}>
+            <Routes>
+              {showLogin && (
+                <Route
+                  path={Path.Login}
+                  element={<LoginForm close={closeLoginHandler} />}
+                />
+              )}
+              <Route path={Path.Index} element={<Banner />} />
+              <Route path={Path.RegisterUser} element={<RegisterForm />} />
+              <Route path={Path.Groups} element={<Groups />} />
+              <Route path={Path.Home} element={<Banner />} />
 
-          <Routes>
-            {showLogin && (
               <Route
-                path={Path.Login}
-                element={<LoginForm close={closeLoginHandler} />}
+                path={Path.GroupDetails}
+                element={<GroupDetailWrapper />}
               />
-            )}
-            <Route path={Path.Index} element={<Banner />} />
-            <Route path={Path.RegisterUser} element={<RegisterForm />} />
-            <Route path={Path.Groups} element={<Groups />} />
-            <Route path={Path.Home} element={<Banner />} />
-            <Route path={Path.Users} element={<UserList />} />
 
-            <Route path={Path.GroupDetails} element={<GroupDetailWrapper />} />
+              <Route element={<AuthGuard />}>
+                <Route path={Path.Users} element={<Users />} />
+                <Route path={Path.EditGuest} element={<GuestEditForm />} />
+                <Route path={Path.AddGroup} element={<AddGroup />} />
+                <Route path={Path.EditGroup} element={<EditGroup />} />
+                <Route path={Path.Logout} element={<Logout />} />
+                <Route path={Path.AddGuest} element={<GuestAddForm />} />
+                <Route path={Path.EditUser} element={<UserEditForm />} />
+              </Route>
 
-            <Route element={<AuthGuard />}>
-              <Route path={Path.EditGuest} element={<GuestEditForm />} />
-              <Route path={Path.AddGroup} element={<AddGroup />} />
-              <Route path={Path.EditGroup} element={<EditGroup />} />
-              <Route path={Path.Logout} element={<Logout />} />
-              <Route path={Path.AddGuest} element={<GuestAddForm />} />
-              <Route path={Path.EditUser} element={<UserEditForm />} />
-            </Route>
-
-            <Route path={Path.NotFound} element={<NotFound404 />} />
-          </Routes>
-
+              <Route path={Path.NotFound} element={<NotFound404 />} />
+            </Routes>
+          </Suspense>
           <One />
 
           <Footer />
         </div>
-          </GuestContextProvider>
-      </AuthProvider>
-  
+      </GuestContextProvider>
+    </AuthProvider>
   );
 }
 
