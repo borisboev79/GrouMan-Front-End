@@ -8,7 +8,6 @@ export const GuestContextProvider = ({ children }) => {
   const [showDelete, setShowDelete] = useState(false);
 
   const showDeleteHandler = () => {
-    
     if (showDelete) {
       setShowDelete(false);
     } else {
@@ -28,40 +27,35 @@ export const GuestContextProvider = ({ children }) => {
     }
   };
 
+  const [scrollLocked, setScrollLocked] = useState(false);
 
-
-    const [scrollLocked, setScrollLocked] = useState(false);
-  
-    useEffect(() => {
-      const preventDefaultScroll = (e) => {
-        if (scrollLocked) {
-          e.preventDefault();
-        }
-      };
-
-      window.addEventListener('wheel', preventDefaultScroll, { passive: false });
-      window.addEventListener('touchmove', preventDefaultScroll, { passive: false });
-      window.addEventListener('keydown', preventDefaultScroll);
- 
-
-      return () => {
-        window.removeEventListener('wheel', preventDefaultScroll);
-        window.removeEventListener('touchmove', preventDefaultScroll);
-        window.removeEventListener('keydown', preventDefaultScroll);
-
-      };
-    }, [scrollLocked]);
-  
-    const scrolLockToggler = () => {
-      if(scrollLocked){
-        setScrollLocked(false);
-      }else{
-        setScrollLocked(true);
+  useEffect(() => {
+    const preventDefaultScroll = (e) => {
+      if (scrollLocked) {
+        e.preventDefault();
       }
     };
 
+    window.addEventListener("wheel", preventDefaultScroll, { passive: false });
+    window.addEventListener("touchmove", preventDefaultScroll, {
+      passive: false,
+    });
+    window.addEventListener("keydown", preventDefaultScroll);
 
+    return () => {
+      window.removeEventListener("wheel", preventDefaultScroll);
+      window.removeEventListener("touchmove", preventDefaultScroll);
+      window.removeEventListener("keydown", preventDefaultScroll);
+    };
+  }, [scrollLocked]);
 
+  const scrolLockToggler = () => {
+    if (scrollLocked) {
+      setScrollLocked(false);
+    } else {
+      setScrollLocked(true);
+    }
+  };
 
   const values = {
     showEdit,

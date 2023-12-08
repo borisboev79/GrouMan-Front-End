@@ -24,29 +24,10 @@
   .banner h1 {
     font-size: 3em;
     color: #25a2c3;
-    /* text-shadow: -1px -1px 40px rgba(0, 0, 0, 0.2),
-                    1px -1px 40px rgba(0, 0, 0, 0.2),
-                  -1px 1px 40px rgba(0, 0, 0, 0.2),
-                   1px 1px 40px rgba(0, 0, 0, 0.2); */
     line-height: 1em;
     margin: 0 0 0.5em 0;
     padding: 0;
   }
-
-  /* .textWrapper {
-    background-color: rgba(70, 102, 245, 1);
-    display: flex;
-    border-radius: 5px;
-    
-    flex-direction: column;
-    width: 45vw;
-    margin: 0 auto;
-    padding: 0;
-      
-   
-
-
-  } */
   
   .banner p {
   
