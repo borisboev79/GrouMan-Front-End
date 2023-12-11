@@ -1,6 +1,6 @@
 import * as request from "../lib/request";
 
-const baseUrl = "http://localhost:3030/data/groups";
+const baseUrl = `${import.meta.env.VITE_API_URL}/data/groups`;
 
 export const getAllGroups = async () => {
   const query = new URLSearchParams({

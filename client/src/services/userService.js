@@ -1,7 +1,7 @@
 import * as request from "../lib/request";
 
-const baseUrl = "http://localhost:3030/jsonstore/users";
-const realBaseUrl = "http://localhost:3030/data/users";
+const baseUrl = `${import.meta.env.VITE_API_URL}/jsonstore/users`;
+const realBaseUrl = `${import.meta.env.VITE_API_URL}/data/users`;
 
 export const getAllUsers = async () => {
   try{
