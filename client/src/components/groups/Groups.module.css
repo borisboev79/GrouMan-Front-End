@@ -399,7 +399,14 @@ button:disabled,
 }
 
 @media screen and (max-width: 980px) {
-    .three {
+    .three .inner {
+      
+      margin: 0 auto;
+      display: flex;
+      align-content: center;
+      flex-direction: column;
+      flex-wrap: wrap;
       text-align: center;
     }
+
   }

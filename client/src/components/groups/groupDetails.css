@@ -582,4 +582,27 @@ h3 {
   .wrapper {
     padding: 2em 0 0.1em 0;
   }
+
+  .group-details {
+   
+    display: flex;
+    flex-direction: column;
+  }
+
+  .group-details img {
+    width: 100%;
+    height: auto;
+  }
+
+  .group-details .price {
+    display: block;
+    text-align: center;
+    margin: 1em auto;
+    border-right: 1px solid white;
+  }
+
+  ul.alt .price{
+    border-right: 0;  
+  }
+
 }
