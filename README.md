@@ -20,6 +20,6 @@ Application will run on localhost:5173
 Server is started from /server folder by terminal command:
 node server.js
 
-Front end is also deployed to firebase and can be accessed to https://grouman-73a41.firebaseapp.com/
+App is also deployed to firebase and can be accessed to https://grouman-73a41.firebaseapp.com/
  
 
